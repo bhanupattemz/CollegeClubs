@@ -1,0 +1,47 @@
+const mongoose = require('mongoose');
+
+const letterSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: [true, "letter title is required"],
+        maxlength: 100
+    },
+    content: {
+        type: String,
+        required: [true, "letter content is required"],
+        minlength: 10
+    },
+    images: [
+        {
+            public_id: {
+                type: String,
+                required: true
+            },
+            url: {
+                type: String,
+                required: true
+            }
+        }
+    ],
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    visibility: {
+        type: String,
+        enum: ['public', 'private'],
+        default: 'public'
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Letter = mongoose.model('Letter', letterSchema);
+module.exports = Letter
