@@ -5,38 +5,35 @@ const donationSchema = new mongoose.Schema({
         type: String,
         required: [true, "Donor name is required"],
     },
-    description: {
-        type: String,
-        required: [true, "Description is required"],
-        maxlength: 500
-    },
-    image: {
-        public_id: {
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
-    },
     amount: {
         type: Number,
         required: [true, "Donation amount is required"],
-        min: 0 
+        min: 0
     },
-    date: {
-        type: Date,
-        required: true,
+    mail: {
+        type: String,
+        required: [true, "Please enter a valid email"],
+        match: [/.+\@.+\..+/, "Please enter a valid email"]
+    },
+    mobileNo: {
+        type: Number,
+        length: 10
+    },
+    note:{
+        type:String
+    },
+    club: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Club'
+    },
+    paymentInfo: {
+        paymentId: { type: String, required: true },
+        status: { type: String, required: true },
+        payedAt: { type: Date, required: true, default: Date.now() }
     },
     createdAt: {
         type: Date,
         default: Date.now
-    },
-    club: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Club',
-        required: true
     }
 });
 

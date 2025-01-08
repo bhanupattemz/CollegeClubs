@@ -1,0 +1,15 @@
+const Express = require("express")
+const Router = Express.Router()
+const AnnouncementController = require("../Controllers/AnnouncementController")
+const { isLoggedIn, isOrganizers } = require("../middleware")
+Router.route("/")
+    .get(AnnouncementController.getAllAnnouncements)
+    .post(isLoggedIn, isOrganizers, AnnouncementController.createAnnouncement)
+Router.route("/top")
+    .get(AnnouncementController.getTopAnnouncements)
+Router.route("/:_id")
+    .get(AnnouncementController.getOneAnnouncement)
+    .put(isLoggedIn, isOrganizers, AnnouncementController.updateAnnouncement)
+    .delete(isLoggedIn, isOrganizers, AnnouncementController.deleteAnnouncement)
+
+module.exports = Router

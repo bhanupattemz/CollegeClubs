@@ -1,0 +1,15 @@
+.home>section {
+    width: 100%;
+}
+
+.carousel {
+    height: 60vh;
+}
+.home svg{
+transform: translateY(4px);
+}
+
+/* youtub section  */
+.youtube-section{
+    margin-top: 100px;
+}

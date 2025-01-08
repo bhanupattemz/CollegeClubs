@@ -1,0 +1,118 @@
+.open-library-books-container {
+    background-color: #ecf1f5;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.open-library-search-form>form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.open-library-search-form input {
+    width: 50%;
+    padding: 10px;
+    margin: 0px 10px;
+}
+
+.open-library-search-form button {
+    width: 15%;
+    background-color: #1F509A;
+    font-weight: 700;
+    color: white;
+    border: none;
+    transition: all ease-out 0.5s;
+}
+
+.open-library-search-form>form>button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* books container  */
+.open-library-books-data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+}
+
+
+/* books card  */
+
+.open-library-books-data>.book-card-main {
+    background-color: #D9EAFD;
+    border: 5px solid #bedafb;
+    margin: 20px;
+    width: 17%;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-card-main>div {
+    width: 100%;
+}
+
+.open-libray-card-authors {
+    max-height: 50px;
+    overflow: auto;
+}
+
+.books-card-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.books-card-btns button {
+    width: 49%;
+    padding: 7px 10px;
+    border: none;
+    background-color: #0A5EB0;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: all ease-out 0.5s;
+}
+
+.books-card-btns>button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* img  */
+
+.book-card-img {
+    border: 5px solid white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.book-card-img img {
+    width: 98%;
+    height: 40vh;
+    object-fit: cover;
+    transition: object-fit 0.5s ease, transform 0.5s ease;
+}
+
+.book-card-img>img:hover {
+    object-fit: contain;
+    transform: scale(1.1);
+}
+
+/* open Card loading  */
+.open-card-loading {
+    width: 17%;
+    margin: 20px;
+    padding: 15px 20px;
+    height: 50vh;
+}
+

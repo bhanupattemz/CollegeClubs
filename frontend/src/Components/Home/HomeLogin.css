@@ -1,0 +1,65 @@
+.home-login-main {
+    background-image: url("https://res.cloudinary.com/delc5g3p5/image/upload/v1729762210/cld-sample-3.jpg");
+    height: 80vh;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+}
+
+.home-login-img {
+    width: 50%;
+    height: 80vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.home-login-img img {
+    transform: translateY(80px);
+    width: 430px;
+    height: 430px;
+    border-radius: 100%;
+}
+
+.home-login-body {
+    width: 50%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.home-login-body>div{
+    padding: 10%;
+}
+.home-login-email{
+    border: 20px;
+    border: 2px solid #3FA2F6;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    overflow: hidden;
+    
+}
+.home-login-email input{
+    width: 70%;
+    padding: 13px;
+    border: none;
+    outline: none;
+}
+.home-login-email button{
+    width: 30%;
+    border: none;
+    font-weight: 700;
+    background-color: #3FA2F6;
+    color: white;
+}
+.home-login-email button:hover{
+    background-color: #5da6e5;
+    cursor: pointer;
+
+}

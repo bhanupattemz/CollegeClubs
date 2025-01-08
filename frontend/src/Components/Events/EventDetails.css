@@ -1,0 +1,236 @@
+.event-details-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-details-main>section:not(:nth-of-type(1)) {
+    width: 92%;
+    margin-bottom: 15px;
+}
+
+
+.event-details-section {
+    display: flex;
+    margin: 20px;
+    width: 100%;
+}
+
+.event-details-section h1 {
+    text-align: center;
+    color: #0A5EB0;
+    font-size: xx-large;
+    font-weight: 700;
+}
+.event-registered-svg>svg{
+    font-size: large;
+    transform: translateY(-15px);
+}
+
+.event-details-section p {
+    font-size: larger;
+    color: rgb(74, 74, 74);
+}
+
+.event-details-main h2 {
+    border-left: 5px solid #0A5EB0;
+    padding-left: 10px;
+}
+
+.event-details-left {
+    width: 90%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    height: 400px;
+    padding: 0px 250px 0px 50px;
+    transform: translateY(200px);
+    transition: all ease-in 0.5s;
+    
+}
+.event-details-right {
+    transform: translateY(200px);
+    transition: all ease-in 0.5s;
+
+}
+.event-details-right>div {
+    width: 400px;
+    height: 400px;
+    background-color: #0A5EB0;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-details-right img {
+    width: 80%;
+}
+
+
+
+.event-details-apply-btn {
+    width: 100%;
+    display: flex;
+}
+
+.event-details-apply-btn>button {
+    background-color: #0A5EB0;
+    padding: 15px 30px;
+    width: 50%;
+    color: white;
+    margin: 10px 0px;
+    font-size: large;
+    border: none;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all ease-in 0.5s;
+}
+
+.event-details-apply-btn>button:hover,
+.event-details-club>div>button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    color: rgb(147, 146, 146);
+}
+
+
+
+.event-details-schedule {
+    padding: 10px 10%;
+    background-color: #ecf1f5;
+}
+
+.event-details-schedule>div:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-details-schedule>div>.timer {
+    display: flex;
+    justify-content: center;
+}
+
+.event-details-schedule h3 {
+    font-size: larger;
+}
+
+.event-details-schedule li {
+    font-size: large;
+}
+
+.event-details-schedule svg {
+    transform: translateY(5px);
+    color: #0A5EB0;
+    width: 25px;
+    height: auto;
+    padding-right: 5px;
+}
+
+
+/* clubs */
+
+.event-details-organized-clubs{
+    background-color: #ecf1f5;
+}
+.event-details-clubs-container {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.event-details-club {
+    flex: 0 0 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    margin: 10px 0px;
+}
+
+
+.event-details-club img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+
+}
+
+.event-details-club div {
+    width: 70%;
+}
+
+.event-details-club button {
+    background-color: #0A5EB0;
+    color: white;
+    padding: 5px 7px;
+    border: none;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: all ease-in 0.5s;
+}
+
+.event-details-club-scroll {
+    display: flex;
+    overflow: auto;
+    width: 100%;
+}
+
+.event-details-club-scroll::-webkit-scrollbar {
+    display: none;
+
+}
+
+.event-details-clubs-section>div>button {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    margin: 0px 10px;
+    transition: all ease-in-out 0.5s;
+}
+
+.event-details-clubs-section>div>button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    padding: 1%;
+}
+
+.event-details-clubs-section>div {
+    display: flex;
+}
+
+
+/* prize */
+.event-details-prize {
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+    margin: 30px 0px 10px 0px;
+    background-color: #ecf1f5;
+    padding: 10px 0px;
+}
+
+.event-details-prize>div {
+    display: flex;
+    align-items: center;
+    border: 5px solid #0A5EB0;
+    width: 30%;
+    border-radius: 15px;
+    background-color: antiquewhite;
+}
+
+.event-details-prize h3 {
+    width: 30%;
+    margin: 0px;
+    text-align: center;
+    padding: 20px;
+}
+
+.event-details-prize p {
+    width: 70%;
+    text-align: center;
+    font-weight: 700;
+}

@@ -1,0 +1,38 @@
+.banner-page {
+    background-position: center;
+    background-size: cover;
+    width: 60%;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20%;
+}
+
+.banner-page h1 {
+    font-size: xx-large;
+    font-weight: 700;
+
+}
+
+.banner-page p{
+    font-size: large;
+    font-weight: 700;
+    color: rgb(68, 68, 68);
+    text-align: center;
+}
+
+.banner-btn {
+    padding: 10px 30px;
+    border: none;
+    background-color: #1F509A;
+    color: white;
+    font-weight: 700;
+    transition: all ease-in-out 0.5s;
+}
+
+.banner-btn:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}

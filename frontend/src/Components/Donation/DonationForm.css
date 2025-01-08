@@ -1,0 +1,63 @@
+.donation-form{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #F8FAFC;
+    border-radius: 10px;
+    color: #4C585B;
+    padding: 20px 5%;
+    box-shadow: 1px 1px 3px rgb(179, 179, 179), -1px -1px 3px rgb(179, 179, 179);
+}
+.donation-form button{
+    width: 50%;
+}
+.donation-form>div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.donation-form .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.donation-form>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+    width: 32%;
+}
+.donation-form-amount{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.donation-form-amount .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+    width: 25%;
+}
+
+.donation-form-amount-btns{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 40%;
+    margin: 10px 0px;
+}
+.donation-form-amount-btns>div{
+    width: 20%;
+    background-color: #7E99A3;
+    text-align: center;
+    padding: 15px 10px;
+    font-weight: 700;
+    color: white;
+}
+.donation-form-amount-btns>div:hover{
+    cursor: pointer;
+}
+
+.donation-form-checkBox-div{
+    width: 80%;
+    margin: 20px 0px;
+    justify-content: space-evenly !important;
+}

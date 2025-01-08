@@ -11,18 +11,18 @@ const letterSchema = new mongoose.Schema({
         required: [true, "letter content is required"],
         minlength: 10
     },
-    images: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            }
+    pdf:
+    {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
         }
-    ],
+    }
+    ,
     date: {
         type: Date,
         default: Date.now
@@ -36,10 +36,6 @@ const letterSchema = new mongoose.Schema({
         type: String,
         enum: ['public', 'private'],
         default: 'public'
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
     }
 });
 

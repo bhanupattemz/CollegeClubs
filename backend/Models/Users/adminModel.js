@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 const User = require("./UserModel")
+
+
 const adminSchema = new mongoose.Schema({
     department: {
         type: String,
@@ -16,6 +18,7 @@ const adminSchema = new mongoose.Schema({
         required: true
     }
 });
+
 
 const Admin = User.discriminator('Admin', adminSchema);
 module.exports = Admin

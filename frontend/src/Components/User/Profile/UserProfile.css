@@ -1,0 +1,153 @@
+/* main  */
+.profile-main {
+
+    background-image: url("https://res.cloudinary.com/delc5g3p5/image/upload/v1735668030/Clubs/pcm0ypxj1pcpcbuxxldi.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.profile-main>section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-main>section>section {
+    width: 80%;
+    margin: 20px 0px;
+    background-color: rgba(124, 140, 144, 0.5);
+    box-shadow: 1px 1px 3px rgb(179, 179, 179), -1px -1px 3px rgb(179, 179, 179);
+}
+
+/* img section  */
+.profile-img-section {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0%;
+
+}
+
+.profile-img-section>div:nth-of-type(1) {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(235, 240, 244, 0.8);
+}
+
+.profile-img-section img {
+    width: 90%;
+    object-fit: cover;
+}
+
+
+.profile-img-data {
+    width: 64%;
+    background-color: rgba(231, 231, 231, 0.8);
+    padding: 10px 3%;
+}
+
+.profile-username {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35%;
+}
+
+.profile-username h1 {
+    margin: 5px 0px;
+    color: rgb(63, 63, 63);
+}
+
+.profile-img-data>span {
+    color: #0A5EB0;
+    font-weight: 700;
+}
+
+.profile-img-data>div>p b {
+    color: #525252;
+}
+
+.profile-ad-mail-div {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.profile-ad-mail-div>p {
+    margin-right: 20px;
+}
+
+.profile-img-data svg {
+    font-size: larger;
+    color: #0A5EB0;
+    transform: translateY(4px);
+}
+
+.user-profile-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.user-profile-btns>button {
+    padding: 7px 10px;
+    width: 20%;
+    font-weight: 700;
+    color: #0A5EB0;
+    transition: all ease-in-out 0.5s;
+}
+
+.user-profile-btns>button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.user-profile-btns>button:nth-of-type(4) {
+    background-color: red;
+    color: white;
+    border: 0px;
+}
+
+/* user cerfificate pdf  */
+.user-data-pdf {
+    width: 100% !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    padding: 20px 0px;
+    margin: 0px !important;
+}
+
+.user-data-pdf>button {
+    background-color: red;
+    color: white;
+    font-weight: 700;
+    border: 0px;
+    position: fixed;
+    padding: 5px 7px;
+}
+
+.user-data-pdf>button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+
+
+/* delete user confirmation  */
+.delete-user-confirmation-popup h1 {
+    color: red;
+    font-size: large;
+}
+
+.delete-user-confirmation-popup button:nth-of-type(2){
+    background-color: rgb(213, 213, 213);
+    color: black ;
+    border: 2px solid black ;
+}
+.delete-user-confirmation-popup button:nth-of-type(1) {
+    background-color: rgb(213, 213, 213);
+    color: red ;
+    border: 2px solid red;
+}

@@ -1,0 +1,121 @@
+.update-profile-section {
+    width: 80%;
+    margin: 10vh auto;
+    display: flex;
+    justify-content: center;
+}
+.update-profile-section h2{
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+.update-profile-section>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 20px;
+}
+
+/* personal information  */
+.update-profile-personal>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.update-profile-personal .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    margin: 10px 0px;
+}
+
+.update-profile-personal>div:nth-of-type(1)>div:nth-of-type(3) {
+    width: 20%;
+}
+
+.update-profile-personal>div:nth-of-type(2)>div:nth-of-type(1) {
+    width: 60%;
+}
+
+.update-profile-personal-feilds {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+/* .update-profile-personal-feilds>div {
+    width: 20%;
+} */
+.update-profile-personal-feilds>div:nth-of-type(2) {
+    width: 35%;
+}
+.update-profile-personal-feilds>div:nth-of-type(3){
+    width: 45%;
+    overflow: hidden;
+}
+.update-profile-personal-feilds .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+    width: 100% !important;
+}
+
+.profile-img-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img-picker button {
+    width: 70%;
+    padding: 7px 10px;
+    font-weight: 700;
+}
+
+.profile-img-picker img {
+    width: 50px;
+    height: 40px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.profile-img-picker svg {
+    transform: translateY(5px);
+}
+
+
+/* academic information  */
+.update-profile-academic-information{
+   width: 100%;
+}
+.update-profile-academic-information>div{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.update-profile-academic-information>div>div{
+    width: 23%;
+    margin: 20px;
+}
+
+
+
+/* description  */
+
+.update-profile-description {
+    width: 100%;
+}
+.update-profile-description>div{
+    width: 94%;
+    margin: 10px 3%;
+}
+
+
+
+
+/* submit btn  */
+
+#update-profile-submit-btn{
+    color: #0A5EB0;
+    font-weight: 700;
+    border: 2px solid #0A5EB0;
+    margin-bottom: 20px;
+}

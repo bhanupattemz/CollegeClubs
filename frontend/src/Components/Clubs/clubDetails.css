@@ -1,0 +1,121 @@
+.club-details-main>section:not(:nth-of-type(1),:nth-of-type(2)) {
+    width: 96%;
+    margin: 2%;
+}
+
+/* about section  */
+.club-details-about-heading {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.club-details-about-heading img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+.club-details-about-content {
+    width: 90%;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    background-color: #ecf1f5;
+    margin: 20px 0px;
+}
+
+
+/* skills section*/
+.clubs-details-skills-section h2 {
+    padding: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.clubs-details-skills-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    padding: 20px 5%;
+    justify-content: space-evenly;
+    background-color: #ecf1f5;
+}
+
+.clubs-details-skills-content>div {
+    background-color: #0A5EB0;
+    width: 30%;
+    color: white;
+    font-size: large;
+    text-align: center;
+    padding: 10px;
+    font-weight: 700;
+}
+
+/* club Timings section  */
+
+
+.club-details-timings h2 {
+    padding: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.club-details-timings h3 {
+    font-size: larger;
+    font-weight: 700;
+}
+
+.club-details-timings svg {
+    font-size: 25px;
+    transform: translateY(4px);
+}
+
+.club-details-timings>div {
+    width: 100%;
+    display: flex;
+    background-color: #ecf1f5;
+    justify-content: center;
+}
+
+.club-details-timings>div li {
+    font-size: large;
+}
+
+.club-details-timings>div>div {
+    width: 40%;
+}
+
+/* club buttons section  */
+.club-details-btns-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 7vh;
+    align-items: center;
+    position: absolute;
+    background-color: rgba(0,0,0,0.1);
+    margin: 0px;
+    gap: 30px;
+}
+
+.club-details-btns-section button {
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    font-size: large;
+    color: #0A5EB0;
+    transition: all ease-in-out 0.5s;
+}
+.club-details-btns-section>button:hover{
+    cursor: pointer;
+}
+
+
+/* clubs events  */
+.club-events-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

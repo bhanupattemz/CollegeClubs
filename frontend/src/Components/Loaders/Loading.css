@@ -1,0 +1,78 @@
+.loading-main {
+    min-height: 60vh;
+    margin-top: 30vh;
+}
+
+.loading-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-logo-imgs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.loading-logo-imgs>img {
+    height: 100px;
+    transition: all ease-in-out 0.7s;
+    overflow: hidden;
+}
+
+.loading-move-container {
+    background-color: #0A5EB0;
+    height: 20px;
+    margin-top: 20px;
+    transition: all ease-in-out 0.7s;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.loading-move-container>div {
+    width: 30%;
+    height: 17px;
+    background-color: white;
+    animation-name: slide-bar;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    border-radius: 10px;
+}
+
+@keyframes slide-bar {
+    from {
+        translate: -30vw 0;
+    }
+
+    to {
+        translate: 30vw 0;
+    }
+}
+
+
+/* card loading  */
+.card-loading {
+    background: linear-gradient(45deg, #d3d3d3, #c5e4ff, #d5d2ff, #e6f1ff, #bed2f9);
+    background-size: 500% 500%;
+    animation: color 5s ease-in-out infinite;
+}
+
+@keyframes color {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}

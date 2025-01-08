@@ -2,21 +2,32 @@ const mongoose = require("mongoose")
 const User = require("./UserModel")
 const studentSchema = new mongoose.Schema({
     admissionNo: {
-        type: String
+        type: String,
+        required: true,
+        uniquie: true
     },
     course: {
         type: String,
-        enum: ["b-tech", 'mba', 'mca', 'm-tech']
+        enum: ["b-tech", 'mba', 'mca', 'm-tech'],
+        required: true
     },
     branch: {
         type: String,
-        enum: ["cse", 'ece', 'eee', 'civ', 'mech', 'chem']
+        enum: ["cse", 'ece', 'eee', 'civ', 'mech', 'chem'],
+        required: true
     },
-    registeredClubs: [{
-        type: String
-    }],
+    description: {
+        type: String,
+        minlength:300,
+        maxlength:500
+    },
+    academicYear: {
+        type: Number,
+        required: true
+    }
 
 });
+
 
 const Student = User.discriminator('Student', studentSchema);
 

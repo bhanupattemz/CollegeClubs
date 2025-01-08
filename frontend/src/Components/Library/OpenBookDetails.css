@@ -1,0 +1,128 @@
+.book-details-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.book-details-section {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    background-color: #ecf1f5;
+    padding: 20px;
+    margin: 5vh 0px;
+}
+
+/* img div  */
+.book-details-img {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.book-details-img img {
+    width: 90%;
+}
+
+.book-details-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+.book-details-btns a {
+    width: 100%;
+    padding: 10px 0px;
+    text-align: center;
+    margin-top: 10px;
+    background-color: #0A5EB0;
+    color: white;
+    border: none;
+    font-weight: 700;
+    transition: all ease-in-out 0.5s;
+}
+.book-details-btns>a:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+/* details div */
+.book-details-container {
+    width: 70%;
+}
+
+.book-details-container h1 {
+    padding-left: 20px;
+    border-left: 5px solid #0A5EB0;
+    font-size: xx-large;
+}
+
+.book-details-container p {
+    padding: 10px;
+    font-size: large;
+    color: rgb(84, 84, 84);
+}
+
+.book-details-author{
+    text-align: end;
+}
+
+
+/* rating  */
+.MuiStack-root{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+}
+.MuiStack-root>div>p>span{
+    margin-left: 10px;
+}
+.MuiStack-root>div>p{
+    font-size: large;
+    margin: 0px;
+}
+
+/* description  */
+.book-details-description{
+    margin: 10px 0px;
+    margin-bottom: 20px;
+}
+.book-details-description h3{
+    margin:0px;
+}
+
+.book-details-description p{
+    margin: 5px;
+    max-height: 25vh;
+    overflow: auto;
+}
+
+/* publish details  */
+.book-details-publish{
+    display: flex;
+    justify-content: space-evenly;
+}
+.book-details-publish>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+.book-details-publish h3{
+    margin: 0px;
+}
+.book-details-publish p{
+    margin: 0px;
+}
+.book-details-publish a{
+    color: #0A5EB0;
+}

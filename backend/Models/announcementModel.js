@@ -9,20 +9,18 @@ const announcementSchema = new mongoose.Schema({
     content: {
         type: String,
         required: [true, "Announcement content is required"],
-        minlength: 10
+        minlength: 100
     },
-    images:[
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            }
+    pdf: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
         }
-    ],
+    },
     date: {
         type: Date,
         default: Date.now
@@ -40,4 +38,4 @@ const announcementSchema = new mongoose.Schema({
 });
 
 const Announcement = mongoose.model('Announcement', announcementSchema);
-module.export = Announcement
+module.exports = Announcement

@@ -1,0 +1,152 @@
+.signup-main {
+    width: 100%;
+    margin: 10vh auto;
+    display: flex;
+    justify-content: center;
+}
+
+.signup-main h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.signup-main>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 20px 5%;
+    min-width: 60%;
+}
+
+/* verfication  */
+.verification {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.verification button{
+    width: 20%;
+    margin: 10px 0px;
+}
+.verification>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.verification .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    margin: 10px 0px;
+    width: 70%;
+}
+.verification>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 35%;
+}
+
+/* login credentials */
+.sigup-login-credentials {
+    width: 100%;
+}
+
+.sigup-login-credentials>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.sigup-login-credentials .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    margin: 10px 0%;
+}
+
+/* personal information  */
+.signup-personal {
+    width: 100%;
+}
+
+.signup-personal>div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-personal .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    margin: 10px 0px;
+}
+
+.signup-personal>div:nth-of-type(1)>div:nth-of-type(3) {
+    width: 20%;
+}
+
+.signup-personal>div:nth-of-type(2)>div:nth-of-type(1) {
+    width: 70%;
+}
+
+.signup-personal-feilds {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.signup-personal-feilds .css-10o2lyd-MuiStack-root>.MuiTextField-root{
+    width: 100%;
+    margin: 10px 0px;
+}
+
+
+.signup-img-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-img-picker button {
+    width: 70%;
+    padding: 7px 10px;
+    font-weight: 700;
+}
+
+.signup-img-picker img {
+    width: 50px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.signup-personal-feilds {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.signup-personal-feilds>div {
+    width: 45%;
+}
+
+/* academic information  */
+
+
+.signup-academic-information {
+    width: 100%;
+}
+
+.signup-academic-information>div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.signup-academic-information>div>div {
+    width: 23%;
+    margin: 10px 0px;
+}
+
+
+/* button  */
+
+#signup-submit-btn{
+    width: 60%;
+    margin: 20px 2%;
+    padding: 7px 10px;
+}

@@ -1,0 +1,20 @@
+.timer {
+    display: flex;
+    width: 70%;
+    min-width: 200px;
+    justify-content: left;
+    align-items: center;
+    font-weight: 700;
+}
+
+.timer-data {
+    background: linear-gradient(to bottom right, #33ccff 0%, #3987fc,#3358ff 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    min-width: 50%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}

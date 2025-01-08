@@ -1,0 +1,38 @@
+.youtube-block {
+    width: 96%;
+    margin: 20px 2%;
+
+}
+.youtube-block>h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+    margin-bottom: 15px;
+}
+.youtube-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: #ecf1f5;
+}
+
+.youtube-container>div {
+    width: 40%;
+    padding: 20px;
+}
+
+.youtube-content h3 {
+    font-size: xx-large;
+}
+
+.youtube-content p {
+    height: 20vh;
+    overflow: auto;
+    font-size: large;
+
+}
+
+.youtube-content {
+    margin-bottom: 10px;
+}
+

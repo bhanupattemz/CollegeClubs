@@ -1,0 +1,47 @@
+.annocements-main {
+    background-color: #ecf1f5;
+    min-height: 80vh;
+}
+
+/* annocements section  */
+.annocements-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.annoucement-pdf-viewer-section {
+    min-height: 80vh;
+    position: relative;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 0px;
+    z-index: 1;
+}
+
+.annoucement-pdf-viewer-section>button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 7px 10px;
+    position: fixed;
+}
+
+.annoucement-pdf-viewer-section>button:hover {
+    cursor: pointer;
+}
+
+/* headings */
+.annoucement-heading {
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.annoucement-heading h1 {
+    margin: 0px;
+    text-align: center;
+    font-weight: 700;
+    font-size: xx-large;
+}

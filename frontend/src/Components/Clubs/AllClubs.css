@@ -1,0 +1,187 @@
+.all-clubs-main {
+    background-color: #ecf1f5;
+}
+
+.allclubs-clubs-section>div {
+    width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0px;
+
+}
+
+.allclubs-club-card {
+    width: 60%;
+    background-color: white;
+    border: 5px solid #bedafb;
+
+}
+
+
+
+.allclubs-clubs-container {
+    width: 100%;
+    display: flex;
+    /* color: white; */
+}
+
+.allclubs-club-img {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    background-color: #bedafb;
+
+}
+
+.allclubs-club-img img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.allclubs-club-details {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+.allclubs-club-details h3 {
+    background-color: #bedafb;
+    clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+    padding: 10px;
+}
+
+.allclubs-club-details h4 {
+    width: 50%;
+    background-color: #bedafb;
+    clip-path: polygon(0 0, 100% 0%, 74% 100%, 0% 100%);
+    padding: 10px;
+}
+
+.allclubs-club-details>div:nth-of-type(1) {
+    width: 65%;
+}
+
+.allclubs-club-details>div:nth-of-type(2) {
+    width: 25%;
+}
+
+
+/* all clubs search section  */
+.all-clubs-search-div {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+    width: 100%;
+}
+
+.all-clubs-search-div input {
+    width: 40%;
+    padding: 7px 5px;
+    font-size: large;
+    outline: none;
+    margin-right: 10px;
+}
+
+.all-clubs-search-div button {
+    background-color: #1F509A;
+    color: white;
+    padding: 7px 13px;
+    font-weight: 700;
+    border: none !important;
+    width: 15%;
+    transition: all ease-in-out 0.5s;
+}
+
+.all-clubs-search-div button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* skills */
+
+.allclubs-club-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.allclubs-club-skills div {
+    min-width: 20%;
+    background-color: #bedafb;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
+.allclubs-registration-btn {
+    width: 15%;
+    transition: all ease-in-out 0.5s;
+}
+
+.allclubs-registration-btn button {
+    padding: 10px;
+    width: 100%;
+    transform: translateY(-20px);
+    font-size: large;
+    font-weight: 700;
+    border: none;
+    transition: all ease-in 0.5s;
+}
+
+.allclubs-registration-btn>button:hover {
+    cursor: pointer;
+    background-color: #bedafb;
+}
+
+
+.all-clubs-exp-more button {
+    transform: translateX(100px);
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-weight: 700;
+    padding: 20px;
+    background-color: #bedafb;
+    transition: all ease-in 0.5s;
+}
+
+.all-clubs-exp-more>button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+
+/* buttons */
+.allclubs-btns-section {
+    display: flex;
+    justify-content: center;
+    min-height: 15vh;
+    align-items: center;
+}
+
+.allclubs-btns-section button {
+    border: 2px solid black;
+    padding: 10px 15px;
+    margin: 0px 10px;
+    font-weight: 700;
+    font-size: large;
+    transition: all ease-in-out 0.5s;
+}
+
+.allclubs-btns-section>button:hover {
+    background-color: #1F509A;
+    color: white;
+    border: 2px solid #1F509A;
+    cursor: pointer;
+}

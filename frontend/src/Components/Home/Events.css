@@ -1,0 +1,48 @@
+.events{
+    width: 80%;
+    background-color: #0A5EB0;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.event-img{
+    width: 30%;
+}
+.event-img img{
+    width: 100%;
+}
+.event-body{
+    width: 60%;
+    padding: 20px;
+}
+.event-start-time{
+    position:static;
+    padding: 7px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    font-weight: 700;
+}
+.event-btns button{
+    background-color: #3FA2F6;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 7px 10px;
+    margin: 10px;
+    transition: all ease-in 0.5s;
+}
+
+.event-btns button:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.event-body svg{
+    font-size: medium;
+    transform: translateY(-6px);
+}
+

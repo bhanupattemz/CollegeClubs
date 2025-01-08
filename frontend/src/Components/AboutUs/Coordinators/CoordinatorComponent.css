@@ -1,0 +1,201 @@
+.coordinators-carousel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px;
+    background-color: #ecf1f5;
+}
+
+.coordinators-carousel h2 {
+    font-size: xx-large;
+}
+
+.coordinators-head p{
+    font-size: large;
+
+}
+.coordinators-carousel:not(:nth-of-type(1)) {
+    width: 10%;
+}
+
+.coordinator-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    gap: 20px;
+    padding: 10px;
+}
+
+
+.coordinator-card-naming>p,
+.coordinator-card-naming>h3 {
+    margin: 5px;
+}
+
+
+.coordinator-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+
+}
+
+.coordinator-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.coordinator-container::-webkit-scrollbar-thumb {
+    background: #3FA2F6;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.coordinator-card {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 250px;
+    border: 2px solid white;
+    border-radius: 8px;
+    margin: 0;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 10px;
+}
+
+.coordinator-card>div {
+    width: 100%;
+}
+
+.coordinator-card-text {
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 100% 83%, 31% 84%, 18% 100%, 18% 83%, 0 83%);
+    background-color: #D9EAFD;
+    border-radius: 5px;
+}
+
+.coordinator-card-text>div {
+    height: 200px;
+    overflow: hidden;
+}
+
+.coordinator-card-text>div>p {
+    width: 90%;
+    padding: 0px 10px;
+}
+
+.coordinator-card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.coordinator-card-body>img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.coordinator-card-naming {
+    width: 60%;
+}
+
+
+/* faculty and student coordinators */
+.club-coordinators-heading {
+    width: 100%;
+}
+
+.club-coordinators-heading h3 {
+    padding-left: 20px;
+}
+
+.coordinators-head-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    
+}
+
+.coordinators-head {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+.coordinators-faculty-img {
+    width: 30%;
+}
+
+.coordinators-faculty-img>div {
+    width: 90%;
+    border: 15px solid #bedafb;
+}
+
+.coordinators-faculty-img img {
+    width: 100%;
+    transform: translate(10%, 10%);
+}
+
+.coordinators-head-content {
+    padding: 20px 2%;
+    width: 50%;
+    background-color: #D9EAFD;
+    border: 5px solid #bedafb;
+}
+
+.coordinators-student-img {
+    width: 30%;
+}
+
+.coordinators-student-img>div {
+    width: 90%;
+    border: 15px solid #bedafb;
+}
+
+.coordinators-student-img img {
+    width: 100%;
+    transform: translate(-10%, 10%);
+}
+
+.coordinators-head-container h3 {
+    color: #0A5EB0;
+    font-size: x-large;
+    font-weight: 700;
+    margin: 7px 0px;
+}
+
+.coordinators-head-container h4 {
+    color: gray;
+    font-weight: 700;
+    font-size: large;
+    margin: 7px 0px;
+}
+
+.coordinators-head-container p {
+    font-size: large;
+}
+
+
+/* time period  */
+.coodinators-left-period,
+.coodinators-right-period {
+    background-color: rgba(225, 225, 225, 0.8);
+    transform: translate(10%, -80%);
+    width: 100%;
+    padding: 10px 0px;
+    text-align: center;
+    color: #0A5EB0;
+    font-weight: 700;
+    font-size: large;
+    /* position: absolute; */
+}
+
+.coodinators-right-period {
+    transform: translate(-10%, -80%);
+}

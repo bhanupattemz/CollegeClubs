@@ -1,0 +1,23 @@
+.signin-main{
+    background-color: #ecf1f5;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40%;
+    padding: 20px;
+    background-color: white;
+    
+    min-height: 50vh;
+}
+.signin-form>div{
+    width: 80%;
+    text-align: center;
+}

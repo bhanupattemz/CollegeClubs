@@ -1,0 +1,173 @@
+.aboutus-page-main h2 {
+    padding: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.aboutus-page-main {
+    margin-bottom: 40px;
+}
+
+.aboutus-page-banner-section {
+    background-image: url("https://res.cloudinary.com/delc5g3p5/image/upload/v1734713786/Clubs/pihvq7ghgzulpnqoutmp.png");
+    background-position: center;
+    height: 70vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* introduction */
+.aboutus-page-introduction {
+    width: 96%;
+    margin: 20px 2%;
+}
+
+
+.aboutus-page-introduction>div {
+    width: 90%;
+    padding: 20px 5%;
+    justify-self: center;
+    background-color: #ecf1f5;
+}
+
+.aboutus-page-introduction {
+    font-size: large;
+}
+
+/* administration team  */
+.aboutus-page-administration-team {
+    width: 96%;
+    margin: 30px 2%;
+}
+
+.aboutus-page-administration-team>div>div {
+    background-color: #ecf1f5;
+    padding: 20px 0px;
+}
+
+.past-adminstration-team-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.past-adminstration-team-btn button {
+    background-color: #0A5EB0;
+    color: white;
+    border: 0px;
+    font-weight: 700;
+    font-size: large;
+    padding: 10px 15px;
+    width: 25%;
+    transition: all ease-in-out 0.5s;
+}
+
+.past-adminstration-team-btn button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+
+/* past team  */
+.aboutus-past-team {
+    width: 96%;
+    margin: 30px 2%;
+}
+
+.aboutus-past-team>div {
+    background-color: #ecf1f5;
+    display: flex;
+}
+
+.aboutus-past-team h2 {
+    width: 30%;
+}
+
+.past-administation-go-back-btn {
+    width: 70%;
+    justify-content: flex-end !important;
+}
+
+.past-administation-go-back-btn>button {
+    width: 20% !important;
+    justify-self: flex-end;
+}
+
+/* benifits section  */
+.aboutus-page-benefits-sections {
+    width: 96%;
+    margin: 20px 2%;
+}
+
+.aboutus-page-benefits-sections>div {
+    width: 90%;
+    padding: 10px 5%;
+    background-color: #ecf1f5;
+}
+
+.aboutus-page-benefits-sections ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.aboutus-page-benefits-sections svg {
+    transform: translateY(5px);
+    margin: 10px;
+    font-size: x-large;
+}
+
+.aboutus-page-benefits-sections li {
+    display: flex;
+}
+
+
+
+/* deleveloper section  */
+.aboutus-developer-section {
+    width: 96%;
+    margin: 20px 2%;
+
+}
+
+.aboutus-developer-section h3 {
+    color: #0A5EB0;
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.aboutus-developer-section p {
+    font-weight: 400;
+    font-size: large;
+    color: rgb(46, 46, 46);
+}
+
+.aboutus-developer-main {
+    background-image: url("https://res.cloudinary.com/delc5g3p5/image/upload/v1736247163/Clubs/gsqcjxazyjysgmnrrw4v.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.about-us-devloper-img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.about-us-devloper-img img {
+    width: 50%;
+    object-fit: cover;
+}
+
+.aboutus-developer-content {
+    width: 42%;
+    padding: 20px 4%;
+}
+
+.aboutus-developer-content>div {
+    background-color: rgba(236, 241, 245, 0.5);
+    box-shadow: 2px 2px 3px rgba(179, 179, 179, 0.5), -2px -2px 3px rgba(179, 179, 179, 0.5);
+    border-radius: 20px;
+    padding: 10px 25px;
+}
