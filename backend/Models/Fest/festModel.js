@@ -19,10 +19,6 @@ const FestSchema = new mongoose.Schema({
         required: [true, "fest description is required"],
         maxlength: 500
     },
-    registration: {
-        starting: { type: Date, required: true },
-        ending: { type: Date, required: true }
-    },
     events: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FestEvent'

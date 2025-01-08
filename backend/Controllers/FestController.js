@@ -7,8 +7,9 @@ const sendMail = require("../Utils/sendMail")
 const { eventCertificate } = require("../Utils/certificates")
 const { createPDF } = require("../Utils/CreateFile")
 const FestModel = require("../Models/Fest/festModel")
-
-
+const Razorpay = require("razorpay");
+const crypto = require("crypto")
+const { successFestEventRegistrationOptions } = require("../functionalities")
 module.exports.getAllFests = WrapAsync(async (req, res) => {
     const fests = await FestModel.find({});
     res.status(200).json({
@@ -90,17 +91,22 @@ module.exports.deleteFest = WrapAsync(async (req, res, next) => {
 
 
 // events 
+const mongoose = require("mongoose");
+
 module.exports.getAllEvents = WrapAsync(async (req, res) => {
     const { key } = req.query;
-    const fest = await FestModel.findOne({ isactive: true }).populate("events");
-
-    if (!fest) {
-        throw new ExpressError("No Fest Is Open Yet.", 400);
+    const fest = await FestModel.findOne({ isactive: true });
+    if (!fest || !fest.events || fest.events.length === 0) {
+        throw new ExpressError("No Fest Is Open Yet or No Events Found.", 400);
     }
-    const filteredEvents = fest.events.filter(event => 
-        new RegExp(key, "i").test(event.name)
-    );
-
+    const isValidObjectId = key && mongoose.Types.ObjectId.isValid(key);
+    const filteredEvents = await EventModel.find({
+        _id: { $in: fest.events },
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            ...(isValidObjectId ? [{ _id: key }] : []),
+        ],
+    });
     res.status(200).json({
         success: true,
         data: filteredEvents,
@@ -219,21 +225,60 @@ module.exports.updateEventClubs = WrapAsync(async (req, res) => {
 });
 
 
+module.exports.createRegisterEventOrder = WrapAsync(async (req, res, next) => {
+    const { _id } = req.params
+    const fest = await FestModel.find({ isactive: true, events: { $in: [_id] } })
+    if (!fest || fest.length == 0) {
+        throw new ExpressError("Event fest is not active now.", 400)
+    }
+    const event = await EventModel.findById(_id)
+    const currentTime = Date.now()
+    if (!(new Date(event.registration.starting).getTime() < currentTime && new Date(event.registration.ending).getTime() > currentTime)) {
+        throw new ExpressError("Event not in registration period", 400)
+    }
+    const razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET
+    });
+    const options = {
+        amount: event.amount * 100,
+        currency: "INR",
+        receipt: `order_rcptid_${Date.now()}`,
+        payment_capture: 1
+    };
+    const order = await razorpay.orders.create(options);
+    res.status(200).json({
+        success: true,
+        data: order
+    })
+})
 
 module.exports.registerMember = WrapAsync(async (req, res) => {
+    const { data, member } = req.body
     const { _id } = req.params
-    const data = req.body
+    const fest = await FestModel.find({ isactive: true, events: { $in: [_id] } })
+    if (!fest || fest.length == 0) {
+        throw new ExpressError("Event fest is not active now.", 400)
+    }
     const event = await EventModel.findById(_id)
-
-    if (!event) {
-        throw new ExpressError("event not found", 404);
+    const paymentInfo = {
+        paymentId: data.razorpay_payment_id,
+        status: true
     }
-    if (await event.timings.starting < Date.now()) {
-        throw new ExpressError("unable to register.", 400)
+    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    sha.update(`${data.razorpay_order_id}|${data.razorpay_payment_id}`)
+    const digest = sha.digest('hex')
+    if (digest !== data.razorpay_signature) {
+        throw new ExpressError("Invalid payment signature", 400)
     }
-    const newMember = MembersModel(data);
+    const newMember = MembersModel({ ...member, paymentInfo });
     await newMember.save()
     const updatedEvent = await EventModel.findByIdAndUpdate(_id, { $push: { members: newMember } })
+    const options = await successFestEventRegistrationOptions(event, fest[0], user = newMember)
+    let mailData = await sendMail(options);
+    if (!mailData) {
+        console.error(`Error sending email to ${member.name}:`, mailData);
+    }
     res.status(200).json({
         success: true,
         event: updatedEvent

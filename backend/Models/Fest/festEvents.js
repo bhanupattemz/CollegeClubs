@@ -6,6 +6,10 @@ const eventSchema = new mongoose.Schema({
         required: [true, "event name is required"],
         unique: true
     },
+    amount:{
+        type:Number,
+        required:true
+    },
     description: {
         type: String,
         required: [true, "event description is required"],
@@ -19,6 +23,10 @@ const eventSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
     }],
+    registration: {
+        starting: { type: Date, required: true },
+        ending: { type: Date, required: true }
+    },
     timings: {
         starting: { type: Date, required: true },
         ending: { type: Date, required: true }

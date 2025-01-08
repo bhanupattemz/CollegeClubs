@@ -10,23 +10,38 @@ const studentSchema = new mongoose.Schema({
     },
     mail: {
         type: String,
-        required: [true, ""],
+        required: [true, "Please enter you mail"],
         match: [/.+\@.+\..+/, "Please enter a valid email."]
     },
-    phone: {
+    mobileNo: {
         type: Number,
         required: [true, "Please enter your phone number."],
         length: [10, "Phone Number must be 10 numbers."]
     },
     course: {
         type: String,
+        enum: ["b-tech", 'mba', 'mca', 'm-tech'],
         required: [true, "Please enter department."]
     },
-    year:{
-        type:Number,
-        required:[true,"please enter year of studying."],
-        min:1,
-        max:4
+    branch: {
+        type: String,
+        enum: ["cse", 'ece', 'eee', 'civ', 'mech', 'chem'],
+        required: true
+    },
+    academicYear: {
+        type: Number,
+        required: [true, "please enter year of studying."],
+        min: 1,
+        max: 4
+    },
+    paymentInfo: {
+        paymentId: { type: String, required: true },
+        status: { type: String, required: true },
+        payedAt: { type: Date, default: Date.now() }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 

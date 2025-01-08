@@ -1,29 +1,20 @@
 
-import LoadingButton from '@mui/lab/LoadingButton';
+import Button from '@mui/material/Button';
 import { BACKENDURL } from "../Functionalities/functionalites"
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom"
 import axios from 'axios';
-const axiosInstance = axios.create({
-    baseURL: BACKENDURL,
-    withCredentials: true
-})
-export default function PaymentButton({ formData, amount, anonymous, CaptchaValue }) {
+export default function RegisterButton({ event, formData }) {
+    const axiosInstance = axios.create({
+        baseURL: BACKENDURL,
+        withCredentials: true
+    })
+    const navigate = useNavigate()
     const [razorpayKey, setRazorpayKey] = useState()
     const handlePayment = async () => {
-        if (!CaptchaValue) {
-            alert("Please complete the CAPTCHA");
-            return;
-        }
         try {
-            if(amount<10){
-                throw new Error("amount must be higher than ₹10")
-            }
-            const respounce = await axiosInstance.post("/donars/order", {
-                amount: amount,
-                receipt: `order_rcptid_${Date.now()}`
-            });
-
+            const respounce = await axiosInstance.post(`/fest/events/order/${event._id}`);
             const order = respounce.data.data;
             const options = {
                 key: { razorpayKey },
@@ -34,17 +25,12 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
                 order_id: order.id,
                 handler: async (response) => {
                     try {
-                        let memberData;
-                        if (anonymous) {
-                            memberData = { name: "anonymous", mail: "anonymous@gmail.com", amount, note: formData.note, club: formData.club }
-                        } else {
-                            memberData = { ...formData, amount }
-                        }
-                        const result = await axiosInstance.post("/donars", {
+                        const result = await axiosInstance.post(`/fest/events/register/${event._id}`, {
                             data: response,
-                            donar: memberData
+                            member: formData
                         });
-                        alert('Thank you! Your content is now live for others to enjoy.')
+                        alert(`Successfully register for ${event.name}.`)
+                        navigate(`/fest/${event._id}`)
                     } catch (err) {
                         console.log(err)
                         alert('Oops! Something went wrong with your payment. Please try again.')
@@ -53,8 +39,8 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
                     }
                 },
                 prefill: {
-                    name: formData.name || "anonymous",
-                    email: formData.mail ,
+                    name: formData.name,
+                    email: formData.mail,
                     contact: formData.mobileNo
                 },
                 theme: {
@@ -82,14 +68,6 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
         }
     })
     return (
-        <LoadingButton
-            id="donation-submit-btn"
-            loadingPosition="end"
-            variant="contained"
-            color="success"
-            onClick={handlePayment}
-        >
-            Donate
-        </LoadingButton>
+        <Button onClick={handlePayment}>Pay ₹{event.amount} Now</Button>
     )
 }

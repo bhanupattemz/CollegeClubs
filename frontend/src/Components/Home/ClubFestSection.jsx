@@ -44,11 +44,9 @@ export default function ClubFestSection() {
                         <p>
                             {data.description}
                         </p>
-                        <p>Registration for the event is open from <span>{ConvertTime(data.registration.starting).split(",")[0]}</span> to <span>{ConvertTime(data.registration.ending).split(",")[0]}</span>.</p>
-                        {new Date(data.registration.starting) < Date.now() &&
-                            new Date(data.registration.ending) > Date.now() &&
-                            <button onClick={() => navigate('/fest')}>Register Now</button>
-                        }
+
+                        <button onClick={() => navigate('/fest')}>Explore Now</button>
+
 
                     </div>
                 </div> :

@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 const getFestEvents = (params) => async (dispatch) => {
     try {
         dispatch({ type: GET_FEST_EVENTS_REQUEST })
-        const response = await axiosInstance.get("/fest/events")
+        const response = await axiosInstance.get(`/fest/events?key=${params ? params : ""}`)
         dispatch({
             type: GET_FEST_EVENTS_SUCCESS,
             payload: response.data

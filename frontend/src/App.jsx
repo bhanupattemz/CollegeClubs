@@ -31,7 +31,7 @@ import ProtectedRoute from "./Components/Functionalities/ProtectedRoot"
 import UpdateProfilePassword from "./Components/User/Profile/UpdatePassword"
 import ResetPassword from "./Components/User/Profile/ResetPassword"
 import ForgotPassword from "./Components/User/ForgotPassword"
-
+import FestEventRegistration from "./Components/Fest/EventRegistration"
 import Fest from "./Components/Fest/Fest"
 function App() {
   const dispatch = useDispatch();
@@ -74,6 +74,7 @@ function App() {
         <Route path="/profile/update/password" element={<ProtectedRoute element={<UpdateProfilePassword />} />} />
 
         <Route path="/fest" element={<Fest />} />
+        <Route path="/fest/register/:_id" element={<FestEventRegistration />} />
       </Routes>
       <Footer />
     </Router>

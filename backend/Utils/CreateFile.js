@@ -37,10 +37,6 @@ module.exports.convertObjectToExcel = async (data, heading) => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Records');
     worksheet.columns = heading;
-    // [
-    //     { header: 'Name', key: 'name', width: 20 },
-    //     { header: 'AD', key: 'ad', width: 20 }
-    // ]
     data.forEach(item => {
         worksheet.addRow(item);
     });
