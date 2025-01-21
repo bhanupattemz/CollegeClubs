@@ -7,9 +7,14 @@ const unverifiedAdmin = new mongoose.Schema({
         required: [true, "Please enter a valid email"],
         match: [/.+\@.+\..+/, "Please enter a valid email from jntua.ac.in"]
     },
+    workedAs: {
+        type: String,
+        enum: ["studentCoordinator", 'facultyCoordinator'],
+        required: true
+    },
     dateTime: {
         type: Date,
-        default: Date.now() + 24 * 60 * 60 * 100
+        default: Date.now() +  24 * 60 * 60 * 100
     }
 })
 

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom"
 import axios from 'axios';
-export default function RegisterButton({ event, formData }) {
+export default function RegisterButton({ event, formData, isAccept = false, setOpen }) {
     const axiosInstance = axios.create({
         baseURL: BACKENDURL,
         withCredentials: true
@@ -13,6 +13,7 @@ export default function RegisterButton({ event, formData }) {
     const navigate = useNavigate()
     const [razorpayKey, setRazorpayKey] = useState()
     const handlePayment = async () => {
+        setOpen(false)
         try {
             const respounce = await axiosInstance.post(`/fest/events/order/${event._id}`);
             const order = respounce.data.data;
@@ -30,7 +31,7 @@ export default function RegisterButton({ event, formData }) {
                             member: formData
                         });
                         alert(`Successfully register for ${event.name}.`)
-                        navigate(`/fest/${event._id}`)
+                        navigate(`/fest/events/${event._id}`)
                     } catch (err) {
                         console.log(err)
                         alert('Oops! Something went wrong with your payment. Please try again.')
@@ -44,7 +45,7 @@ export default function RegisterButton({ event, formData }) {
                     contact: formData.mobileNo
                 },
                 theme: {
-                    color: "#3399cc"
+                    color: "#0A5EB0"
                 }
             };
 
@@ -68,6 +69,6 @@ export default function RegisterButton({ event, formData }) {
         }
     })
     return (
-        <Button onClick={handlePayment}>Pay ₹{event.amount} Now</Button>
+        <Button disabled={!isAccept} onClick={handlePayment}>Pay ₹{event.amount} Now</Button>
     )
 }

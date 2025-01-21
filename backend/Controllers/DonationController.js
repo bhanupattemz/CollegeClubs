@@ -4,14 +4,21 @@ const DonationModel = require("../Models/donationModel")
 const Razorpay = require("razorpay");
 const crypto = require("crypto")
 module.exports.getAllDonars = WrapAsync(async (req, res) => {
-    const donars = await DonationModel.find({});
+    const { key } = req.query
+    const donars = await DonationModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { mail: { $regex: new RegExp(key, "i") } },
+            { phone: { $regex: new RegExp(key, "i") } }
+        ]
+    }).populate({ path: "club", select: "name" }).sort({ "createdAt": -1 });
     res.status(200).json({
         success: true,
         data: donars
     })
 })
 module.exports.getTopDonars = WrapAsync(async (req, res) => {
-    const donars = await DonationModel.find({}).select("name amount createdAt club").populate({ path: "club", select: "name" }).sort({ "amount": -1 }).limit(10);
+    const donars = await DonationModel.find({}).select("name amount createdAt club").populate({ path: "club", select: "name" }).sort({ "createdAt": -1 }).limit(10);
     res.status(200).json({
         success: true,
         data: donars

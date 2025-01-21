@@ -1,0 +1,63 @@
+/* main data  */
+.admin-all-gallery-section{
+    width: 100%;
+}
+.admin-all-gallery-search{
+    margin: 20px 0px;
+    width: 100%;
+}
+.admin-all-gallery-search form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.admin-all-gallery-search input{
+    outline: none;
+    width: 60%;
+    padding: 7px 5px;
+    color: #4C585B;
+    border: 2px solid #D9EAFD;
+}
+.admin-all-gallery-search button{
+    background-color: #0A5EB0;
+    border: none;
+    color: white;
+    width: 10%;
+    margin: 0px 2%;
+    cursor: pointer;
+}
+
+/* functions  */
+.admin-all-gallery-edit,
+.admin-all-gallery-delete {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:x-large;
+    color: grey;
+    cursor: pointer;
+}
+.admin-all-gallery-delete{
+    color: red;
+}
+
+/* delete gallery popup  */
+
+.delete-gallery-confirmation-popup h1 {
+    color: red;
+    font-size: large;
+}
+
+.delete-gallery-confirmation-popup button:nth-of-type(2){
+    background-color: rgb(213, 213, 213);
+    color: black ;
+    border: 2px solid black ;
+}
+.delete-gallery-confirmation-popup button:nth-of-type(1) {
+    background-color: rgb(213, 213, 213);
+    color: red ;
+    border: 2px solid red;
+}
+

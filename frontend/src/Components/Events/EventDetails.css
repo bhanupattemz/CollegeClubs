@@ -23,7 +23,8 @@
     font-size: xx-large;
     font-weight: 700;
 }
-.event-registered-svg>svg{
+
+.event-registered-svg>svg {
     font-size: large;
     transform: translateY(-15px);
 }
@@ -31,6 +32,9 @@
 .event-details-section p {
     font-size: larger;
     color: rgb(74, 74, 74);
+    width: 90%;
+    padding: 15px 5%;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .event-details-main h2 {
@@ -40,19 +44,21 @@
 
 .event-details-left {
     width: 90%;
-    background-color: antiquewhite;
-    border-radius: 10px;
-    height: 400px;
+    background-color: #D9EAFD;
+    border: 10px solid #bedafb;
+    height: 380px;
     padding: 0px 250px 0px 50px;
     transform: translateY(200px);
     transition: all ease-in 0.5s;
-    
+
 }
+
 .event-details-right {
     transform: translateY(200px);
     transition: all ease-in 0.5s;
 
 }
+
 .event-details-right>div {
     width: 400px;
     height: 400px;
@@ -128,12 +134,31 @@
     padding-right: 5px;
 }
 
-
+.event-details-page-details {
+    display: flex;
+    width: 96%;
+    padding: 15px 2%;
+    justify-content: space-evenly;
+    
+}
+.event-details-page-details h3{
+    color: #b5aa2e;
+}
+.event-details-page-details>div {
+    width: 35%;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 10px 2%;
+    border-left: 5px solid #b5aa2e;
+}
+.event-details-page-details>div:nth-of-type(2){
+    width: 50%;
+}
 /* clubs */
 
-.event-details-organized-clubs{
+.event-details-organized-clubs {
     background-color: #ecf1f5;
 }
+
 .event-details-clubs-container {
     width: 100%;
     display: flex;
@@ -146,7 +171,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-color: antiquewhite;
+    background-color: #D9EAFD;
     border-radius: 10px;
     margin: 10px 0px;
 }
@@ -219,7 +244,7 @@
     border: 5px solid #0A5EB0;
     width: 30%;
     border-radius: 15px;
-    background-color: antiquewhite;
+    background-color: #D9EAFD;
 }
 
 .event-details-prize h3 {

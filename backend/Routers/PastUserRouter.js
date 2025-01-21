@@ -3,7 +3,7 @@ const router = Express.Router()
 const PastUserController = require("../Controllers/PastUserController")
 const { isLoggedIn, isAdmin } = require("../middleware")
 router.route("/")
-    .get(isLoggedIn, isAdmin, PastUserController.getAllPastUsers)
+    .get(PastUserController.getAllPastUsers)
     .post(isLoggedIn, isAdmin, PastUserController.createPastUser)
 
 router.route("/:_id")

@@ -3,6 +3,9 @@ import {
     ALL_LETTERS_REQUEST,
     ALL_LETTERS_SUCCESS,
     ALL_LETTERS_FAIL,
+    ADMIN_DELETE_LETTER_REQUEST,
+    ADMIN_DELETE_LETTER_SUCCESS,
+    ADMIN_DELETE_LETTER_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -38,6 +41,19 @@ const letterSlice = createSlice({
                 state.lettersCount=action.payload.data.length || 0
             })
             .addCase(ALL_LETTERS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(ADMIN_DELETE_LETTER_REQUEST, (state) => {
+                state.loading = true;
+                state.letters = null
+            })
+            .addCase(ADMIN_DELETE_LETTER_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.letters = action.payload.data;
+                state.lettersCount=action.payload.data.length || 0
+            })
+            .addCase(ADMIN_DELETE_LETTER_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

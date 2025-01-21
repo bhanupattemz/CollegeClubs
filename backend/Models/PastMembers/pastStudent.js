@@ -5,14 +5,15 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    registeredClubs: [{
-        type: String
-    }],
-    managedClubs: [{
-        type: String,
-        required: true
-    }]
-
+    managedClub: [
+        {
+            name: { type: String, required: true},
+            duration: {
+                joined: { type: Date, required: true },
+                left: { type: Date, required: true, default: Date.now() }
+            }
+        }
+    ]
 });
 
 const Student = User.discriminator('PastStudent', studentSchema);

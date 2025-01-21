@@ -68,30 +68,6 @@
 }
 
 
-/* past team  */
-.aboutus-past-team {
-    width: 96%;
-    margin: 30px 2%;
-}
-
-.aboutus-past-team>div {
-    background-color: #ecf1f5;
-    display: flex;
-}
-
-.aboutus-past-team h2 {
-    width: 30%;
-}
-
-.past-administation-go-back-btn {
-    width: 70%;
-    justify-content: flex-end !important;
-}
-
-.past-administation-go-back-btn>button {
-    width: 20% !important;
-    justify-self: flex-end;
-}
 
 /* benifits section  */
 .aboutus-page-benefits-sections {

@@ -45,9 +45,9 @@ router.route("/admin/signup/generate")
     .post(isLoggedIn, isAdmin, UserControllers.Admingenarate)
 
 router.route("/admin/signup/:_id")
-    .post(UserControllers.createAdmin)
+    .post(upload.single('profile'), UserControllers.createAdmin)
 
 router.route("/coordinator/:_id")
-    .put(isLoggedIn, isAdmin, UserControllers.makeCoordinator)
+    .put(isLoggedIn, isAdmin, UserControllers.verifyCoordinator)
 
 module.exports = router

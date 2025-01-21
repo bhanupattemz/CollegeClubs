@@ -11,12 +11,19 @@ const Razorpay = require("razorpay");
 const crypto = require("crypto")
 const { successFestEventRegistrationOptions } = require("../functionalities")
 module.exports.getAllFests = WrapAsync(async (req, res) => {
-    const fests = await FestModel.find({});
+    let { key } = req.query
+    const fests = await FestModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+        ]
+    }).sort({ createdAt: -1 });
     res.status(200).json({
         success: true,
         data: fests
     })
 })
+
 module.exports.getOneFest = WrapAsync(async (req, res) => {
     const { _id } = req.params
     const fest = await FestModel.findById(_id);
@@ -74,7 +81,7 @@ module.exports.deleteFest = WrapAsync(async (req, res, next) => {
         throw new ExpressError("fest not found", 404);
     }
     await FestModel.findByIdAndDelete(_id)
-    const allfests = await FestModel.find()
+    const allfests = await FestModel.find().sort({ createdAt: -1 })
     res.status(200).json({
         success: true,
         data: allfests
@@ -115,7 +122,7 @@ module.exports.getAllEvents = WrapAsync(async (req, res) => {
 
 module.exports.getOneEvent = WrapAsync(async (req, res) => {
     const { _id } = req.params
-    const event = await EventModel.findById(_id)
+    const event = await EventModel.findById(_id).populate({ path: "conductedClub", select: "name" })
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
@@ -168,14 +175,17 @@ module.exports.deleteEvent = WrapAsync(async (req, res) => {
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    if (event.createdBy !== req.user._id && req.user.role !== "admin") {
-        throw new ExpressError("You are not allowed to delete this Event.", 403)
-    }
     await EventModel.findOneAndDelete({ _id })
-    const allEvents = await EventModel.find()
+    const fest = await FestModel.findOneAndUpdate(
+        { events: event._id },
+        { $pull: { events: event._id } },
+        { new: true }
+    ).populate("events");
+
+
     res.status(200).json({
         success: true,
-        data: allEvents
+        data: fest.events
     })
 })
 
@@ -315,7 +325,7 @@ module.exports.eventWinner = WrapAsync(async (req, res) => {
         }
 
         winners.push(user);
-        htmlContent.push(eventCertificate(winners[winners.length - 1], event.name, winners.length, signImages, user.year, event.timings.starting));
+        htmlContent.push(eventCertificate(winners[winners.length - 1], event.name, winners.length, signImages, user.academicYear, event.timings.starting));
     }
 
 

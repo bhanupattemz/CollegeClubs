@@ -41,7 +41,6 @@
 .navbar-item:not(:nth-of-type(10)) {
     border-right: 2px solid #0A5EB0;
 }
-
 .header a {
     text-decoration: none;
     color: inherit;

@@ -2,21 +2,21 @@ import "./Announcements.css"
 import { Link } from "react-router"
 import { MdOutlineOpenInNew } from "react-icons/md";
 import { MdTipsAndUpdates } from "react-icons/md";
-import { getTopAnnoucements } from "../../Actions/annoucementsAction"
+import { getAllAnnouncements } from "../../Actions/announcementsAction"
 import { useDispatch, useSelector } from "react-redux"
 import { Fragment, useEffect } from "react";
-export default function Annoucements() {
+export default function Announcements() {
     const dispatch = useDispatch()
-    const { annoucements } = useSelector(state => state.annoucements)
+    const { announcements } = useSelector(state => state.announcements)
     const { isauthenticate } = useSelector(state => state.user)
     useEffect(() => {
-        dispatch(getTopAnnoucements())
+        dispatch(getAllAnnouncements())
     }, [])
     return (
-        <div className="annoucements">
-            <div className="annoucements-heading"><Link to="/announcements">Announcements <MdTipsAndUpdates /> </Link></div>
-            <marquee className="annoucements-scroll">
-                {annoucements && annoucements.length != 0 ? annoucements.map((item, inx) => {
+        <div className="announcements">
+            <div className="announcements-heading"><Link to="/announcements">Announcements <MdTipsAndUpdates /> </Link></div>
+            <marquee className="announcements-scroll">
+                {announcements && announcements.length != 0 ? announcements.map((item, inx) => {
                     return <div key={inx}><Link to={`/announcements`}><MdOutlineOpenInNew /> {item.title}</Link></div>
                 }) : <div> No announcements declared yet</div>
                 }

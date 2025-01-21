@@ -23,6 +23,7 @@ export default function Events({ event, registration }) {
                         <h2>
                             {event.name} {event.members.includes(user ? user._id : null) && <span style={{ color: "LightGreen" }}> <FaRegRegistered /></span>}
                         </h2>
+                        <h3 className="event-amount-heading">Registration Amount ₹{event.amount}</h3>
                     </div>
                     <div>
                         <Timer time={event.registration.ending} />

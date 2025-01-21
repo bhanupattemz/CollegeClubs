@@ -24,6 +24,11 @@ const studentSchema = new mongoose.Schema({
     academicYear: {
         type: Number,
         required: true
+    },
+    description: {
+        type: String,
+        minlength: 200,
+        maxlength: 500
     }
 
 });

@@ -4,7 +4,10 @@ const ClubModel = require("../Models/Clubs/clubsModel")
 const StudentModel = require("../Models/Users/studentModel")
 const { convertObjectToExcel } = require("../Utils/CreateFile")
 const sendMail = require("../Utils/sendMail")
-
+const UnverifiedCoordinatorModel = require("../Models/Users/unverifiedCoordinatorModel")
+const unverifiedCoordinatorModel = require("../Models/Users/unverifiedCoordinatorModel")
+const PastStudentModel = require("../Models/PastMembers/pastStudent")
+const functionalities = require("../functionalities")
 module.exports.getAllClubs = WrapAsync(async (req, res) => {
     const { key } = req.query
 
@@ -22,7 +25,7 @@ module.exports.getAllClubs = WrapAsync(async (req, res) => {
 
 module.exports.getOneClub = WrapAsync(async (req, res) => {
     const { _id } = req.params
-    const club = await ClubModel.findById(_id).populate({ path: "coordinators", select: "description personalInformation.profile personalInformation.firstname personalInformation.lastname" })
+    const club = await ClubModel.findById(_id).populate({ path: "coordinators.details", select: "description personalInformation.profile personalInformation.firstname personalInformation.lastname" })
     if (!club) {
         throw new ExpressError("club not found", 404);
     }
@@ -97,32 +100,103 @@ module.exports.deleteClub = WrapAsync(async (req, res, next) => {
     })
 })
 
-
-
 module.exports.updateCoordinators = WrapAsync(async (req, res) => {
     const { _id } = req.params;
     const { deleteUsers, addUsers } = req.body;
-    for (let addUser of addUsers) {
-        const user = await StudentModel.findById(addUser);
-        if (user) {
-            await ClubModel.findByIdAndUpdate(_id, { $push: { coordinators: user }, updatedAt: Date.now() })
-        }
-    }
-    const club = await ClubModel.findByIdAndUpdate(_id,
-        {
-            $pull: { coordinators: { $in: deleteUsers } },
-            updatedAt: Date.now()
-        },
-        { new: true }
-    );
+
+    const club = await ClubModel.findById(_id);
     if (!club) {
         throw new ExpressError(`Club with ID ${_id} not found.`, 404);
     }
+
+
+    for (let addUser of addUsers) {
+        const user = await StudentModel.findById(addUser);
+        if (user) {
+            if (user.role === "coordinator") {
+                club.coordinators.forEach((coordinator) => {
+                    if (coordinator.details == addUser) {
+                        throw new ExpressError("Already coordinator for this club", 400);
+                    }
+                });                
+                await ClubModel.findByIdAndUpdate(_id, {
+                    $push: { coordinators: { details: user._id } },
+                    updatedAt: Date.now(),
+                });
+            } else {
+                const unverifiedCoordinator = new unverifiedCoordinatorModel({ user: user._id, club: _id });
+                await unverifiedCoordinator.save();
+
+                const options = await functionalities.sendverifyCoordinatorMailOptions(user, club, unverifiedCoordinator._id);
+                sendMail(options);
+            }
+        }
+    }
+
+    await ClubModel.findByIdAndUpdate(
+        _id,
+        {
+            $pull: { coordinators: { $in: deleteUsers } },
+            updatedAt: Date.now(),
+        },
+        { new: true }
+    );
+
+    for (let item of deleteUsers) {
+        let coordinatorAt = null;
+
+        club.coordinators.forEach((coordinator) => {
+            if (coordinator.details == item) {
+                coordinatorAt = coordinator.coordinatorAt;
+            }
+        });
+
+        const cordinatingClubs = await ClubModel.find({ coordinators: { details: { $in: [item] } } });
+        const user = await StudentModel.findById(item);
+
+        if (!cordinatingClubs || cordinatingClubs.length === 0) {
+            await StudentModel.findByIdAndUpdate(item, { role: "student" });
+        }
+
+        const pastUser = await PastStudentModel.findOne({ admissionNo: user.admissionNo });
+        const managedClubData = {
+            name: club.name,
+            duration: {
+                joined: coordinatorAt,
+                left: Date.now(),
+            },
+        };
+
+        if (!pastUser) {
+            const pastUserData = {
+                name: `${user.personalInformation.firstname} ${user.personalInformation.lastname}`,
+                mail: user.personalInformation.personalMail,
+                mobileNo: user.personalInformation.mobileNo,
+                department: user.role === "admin" ? user.department : user.branch,
+                duration: {
+                    joined: user.createdAt,
+                    left: Date.now(),
+                },
+                workedAs: user.role === "admin" ? user.workedAs : user.role,
+                admissionNo: user.admissionNo,
+                managedClub: [managedClubData],
+            };
+            const pastMember = new PastStudentModel(pastUserData);
+            await pastMember.save();
+        } else {
+            await PastStudentModel.findOneAndUpdate(
+                { admissionNo: user.admissionNo },
+                { $push: { managedClub: managedClubData } }
+            );
+        }
+    }
+
     res.status(200).json({
         success: true,
-        club
+        club,
     });
 });
+
 
 
 module.exports.registerMember = WrapAsync(async (req, res) => {
@@ -180,7 +254,6 @@ module.exports.sendClubMembersToCoordinator = WrapAsync(async (req, res) => {
 
     for (let club of clubs) {
         if (club.members.length <= 0) {
-            console.log("hello")
             continue
         }
         let headers = [

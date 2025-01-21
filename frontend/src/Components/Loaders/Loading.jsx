@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Loading.css";
 import { wait } from "../Functionalities/functionalites";
 
@@ -10,15 +10,21 @@ export default function Loading() {
         async function waitTime() {
             if (logoRef.current && fullFormRef.current && sliderRef.current) {
                 logoRef.current.style.width = "0px";
-                sliderRef.current.style.width="0px"
+                sliderRef.current.style.width = "0px"
                 fullFormRef.current.style.width = "0px";
                 await wait(500);
+            }
+            if (logoRef.current) {
                 logoRef.current.style.width = "100px";
                 logoRef.current.style.transform = "rotate(360deg)";
                 await wait(500);
+            }
+            if (fullFormRef.current) {
                 fullFormRef.current.style.width = "300px";
                 await wait(200);
-                sliderRef.current.style.width="400px"
+            }
+            if (sliderRef.current) {
+                sliderRef.current.style.width = "400px"
             }
         }
         waitTime();

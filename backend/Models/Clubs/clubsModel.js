@@ -68,11 +68,19 @@ const clubSchema = new mongoose.Schema({
         starting: { type: Date, required: true },
         ending: { type: Date, required: true }
     },
-    coordinators: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Student',
-        required: true
-    }],
+    coordinators: [
+        {
+            details: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Student',
+                required: true
+            },
+            coordinatorAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
     createdAt: {
         type: Date,
         default: Date.now
@@ -85,15 +93,20 @@ const clubSchema = new mongoose.Schema({
 
 clubSchema.post("findOneAndDelete", async (club, next) => {
     if (club) {
-        const events = await EventModel.find({
-            conductedClub: { $in: [club._id] }
-        });
-        events.map(async (event) => {
-            await EventModel.findByIdAndUpdate(
-                event._id,
-                { $pull: { conductedClub: mongoose.Types.ObjectId(club._id) } }
-            )
-        })
+        try {
+            const events = await EventModel.find({
+                conductedClub: { $in: [club._id] }
+            });
+            events.map(async (event) => {
+                await EventModel.findByIdAndUpdate(
+                    event._id,
+                    { $pull: { conductedClub: club._id } }
+                )
+            })
+        }
+        catch (err) {
+            next(err)
+        }
     }
     next()
 })

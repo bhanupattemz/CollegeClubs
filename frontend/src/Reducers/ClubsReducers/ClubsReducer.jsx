@@ -6,6 +6,9 @@ import {
     GET_USER_CLUBS_REQUEST,
     GET_USER_CLUBS_SUCCESS,
     GET_USER_CLUBS_FAIL,
+    ADMIN_DELETE_CLUB_REQUEST,
+    ADMIN_DELETE_CLUB_SUCCESS,
+    ADMIN_DELETE_CLUB_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -52,6 +55,18 @@ const clubSlice = createSlice({
                 state.clubs = action.payload.data.length != 0 && action.payload.data;
             })
             .addCase(GET_USER_CLUBS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(ADMIN_DELETE_CLUB_REQUEST, (state) => {
+                state.loading = true;
+                state.clubs = null
+            })
+            .addCase(ADMIN_DELETE_CLUB_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.clubs = action.payload.data.length != 0 && action.payload.data;
+            })
+            .addCase(ADMIN_DELETE_CLUB_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

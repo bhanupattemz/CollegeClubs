@@ -3,6 +3,9 @@ import {
     ALL_GALLERY_PHOTOS_REQUEST,
     ALL_GALLERY_PHOTOS_SUCCESS,
     ALL_GALLERY_PHOTOS_FAIL,
+    ADMIN_DELETE_GALLERY_PHOTOS_REQUEST,
+    ADMIN_DELETE_GALLERY_PHOTOS_SUCCESS,
+    ADMIN_DELETE_GALLERY_PHOTOS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -41,7 +44,19 @@ const gallerySlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(ADMIN_DELETE_GALLERY_PHOTOS_REQUEST, (state) => {
+                state.loading = true;
+                state.gallery = null
+            })
+            .addCase(ADMIN_DELETE_GALLERY_PHOTOS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.gallery = action.payload.data;
+                state.galleryCount = action.payload.data.length || 0
+            })
+            .addCase(ADMIN_DELETE_GALLERY_PHOTOS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

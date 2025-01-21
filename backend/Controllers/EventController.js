@@ -6,14 +6,48 @@ const StudentModel = require("../Models/Users/studentModel")
 const sendMail = require("../Utils/sendMail")
 const { eventCertificate } = require("../Utils/certificates")
 const { createPDF } = require("../Utils/CreateFile")
+
 module.exports.getAllEvents = WrapAsync(async (req, res) => {
-    const { key } = req.query
-    const events = await EventModel.find({
+    let { key } = req.query
+    const filter = {
         $or: [
             { name: { $regex: new RegExp(key, "i") } },
             { _id: key && key.length === 24 ? key : undefined },
-        ]
-    }).sort({ createdAt: 1 });
+        ],
+    };
+    const events = await EventModel.find(filter).sort({ createdAt: 1 });
+    res.status(200).json({
+        success: true,
+        data: events
+    })
+})
+
+module.exports.getActiveEvents = WrapAsync(async (req, res) => {
+    let { key } = req.query
+    const filter = {
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+        ],
+        isactive: true
+    };
+    const events = await EventModel.find(filter).sort({ createdAt: 1 });
+    res.status(200).json({
+        success: true,
+        data: events
+    })
+})
+
+module.exports.getNonActiveEvents = WrapAsync(async (req, res) => {
+    let { key } = req.query
+    const filter = {
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+        ],
+        isactive: false
+    };
+    const events = await EventModel.find(filter).sort({ createdAt: 1 });
     res.status(200).json({
         success: true,
         data: events
@@ -22,7 +56,19 @@ module.exports.getAllEvents = WrapAsync(async (req, res) => {
 
 module.exports.getOneEvent = WrapAsync(async (req, res) => {
     const { _id } = req.params
-    const event = await EventModel.findById(_id).populate({ path: "conductedClub", select: "name logo" })
+    const event = await EventModel.findOne({ _id, isactive: true }).populate({ path: "conductedClub", select: "name logo" })
+    if (!event) {
+        throw new ExpressError("event not found", 404);
+
+    }
+    res.status(200).json({
+        success: true,
+        data: event
+    })
+})
+module.exports.getOneNonActiveEvent = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const event = await EventModel.findOne({ _id, isactive: false }).populate({ path: "conductedClub", select: "name logo" })
     if (!event) {
         throw new ExpressError("event not found", 404);
 
@@ -38,7 +84,7 @@ module.exports.getUserEvents = WrapAsync(async (req, res) => {
     if (req.user._id.toString() != _id && req.user.role != "admin") {
         throw new ExpressError("You do not have permission to access this resource.", 403)
     }
-    const events = await EventModel.find({ members: { $in: _id } })
+    const events = await EventModel.find({ members: { $in: _id }, isactive: true }).sort({ createdAt: 1 })
     if (!events) {
         throw new ExpressError("events not found", 404);
     }
@@ -56,7 +102,7 @@ module.exports.getclubEvents = WrapAsync(async (req, res) => {
         throw new ExpressError("Club not found", 404);
 
     }
-    const events = await EventModel.find({ conductedClub: { $in: [_id] } }).sort({ "timings.starting": - 1 })
+    const events = await EventModel.find({ conductedClub: { $in: [_id] }, isactive: true }).sort({ "timings.starting": - 1 })
     res.status(200).json({
         success: true,
         data: events
@@ -64,10 +110,30 @@ module.exports.getclubEvents = WrapAsync(async (req, res) => {
 })
 
 module.exports.createEvent = WrapAsync(async (req, res, next) => {
-    const event = req.body;
-    const newEvent = EventModel({ ...event })
+    const event = req.body
+    const { club_id } = req.params
+    if (event.conductedClub.includes(club_id)) {
+        throw new ExpressError("created club must include in conducted Club", 400)
+    }
+    const createdClub = await ClubModel.findOne({ _id: club_id, coordinators: { $elemMatch: { details: req.user._id } } })
+    if (!createdClub && req.user.role != "admin") {
+        throw new ExpressError("must be Coordinator of Created Club", 400)
+    }
+    let isactive = req.user.role == "admin" ? true : false
+    const newEvent = EventModel({ ...event, isactive, createdClub: club_id })
     await newEvent.save()
-    const allEvents = await EventModel.find()
+    const allEvents = await EventModel.find({ isactive: true }).sort({ createdAt: 1 })
+    res.status(200).json({
+        success: true,
+        data: allEvents
+    })
+})
+
+module.exports.setEvent = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const { isactive } = req.query
+    const event = await EventModel.findByIdAndUpdate(_id, { isactive })
+    const allEvents = await EventModel.find({ isactive: false }).sort({ createdAt: 1 })
     res.status(200).json({
         success: true,
         data: allEvents
@@ -77,15 +143,35 @@ module.exports.createEvent = WrapAsync(async (req, res, next) => {
 module.exports.updateEvent = WrapAsync(async (req, res, next) => {
     const updatedEvent = req.body;
     const { _id } = req.params;
-    const event = await EventModel.findById(_id);
+    const event = await EventModel.findById({ _id, isactive: true });
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    if (event.createdBy !== req.user._id && req.user.role !== "admin") {
-        throw new ExpressError("You are not allowed to delete this Event.", 403)
+    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
+    if (!userClubs.includes(event.conductedClub) && req.user.role !== "admin") {
+        throw new ExpressError("You are not allowed to edit this Event.", 403)
     }
     await EventModel.findByIdAndUpdate(_id, { ...updatedEvent }, { new: true, runValidators: true })
-    const allEvents = await EventModel.find()
+    const allEvents = await EventModel.find({ isactive: true }).sort({ createdAt: 1 })
+    res.status(200).json({
+        success: true,
+        data: allEvents
+    })
+})
+
+module.exports.updateNonActiveEvent = WrapAsync(async (req, res, next) => {
+    const updatedEvent = req.body;
+    const { _id } = req.params;
+    const event = await EventModel.findById({ _id, isactive: true });
+    if (!event) {
+        throw new ExpressError("event not found", 404);
+    }
+    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
+    if (!userClubs.includes(event.conductedClub) && req.user.role !== "admin") {
+        throw new ExpressError("You are not allowed to edit this Event.", 403)
+    }
+    await EventModel.findByIdAndUpdate(_id, { ...updatedEvent }, { new: true, runValidators: true })
+    const allEvents = await EventModel.find({ isactive: false }).sort({ createdAt: 1 })
     res.status(200).json({
         success: true,
         data: allEvents
@@ -98,18 +184,34 @@ module.exports.deleteEvent = WrapAsync(async (req, res) => {
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    if (event.createdBy !== req.user._id && req.user.role !== "admin") {
+    if (req.user.role !== "admin") {
         throw new ExpressError("You are not allowed to delete this Event.", 403)
     }
     await EventModel.findOneAndDelete({ _id })
-    const allEvents = await EventModel.find()
+    const allEvents = await EventModel.find().sort({ createdAt: 1 })
     res.status(200).json({
         success: true,
         data: allEvents
     })
 })
 
-
+module.exports.deleteNonActiveEvent = WrapAsync(async (req, res) => {
+    const { _id } = req.params;
+    const event = await EventModel.findById({ _id, isactive: false });
+    if (!event) {
+        throw new ExpressError("event not found", 404);
+    }
+    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
+    if (!userClubs.includes(event.conductedClub) && req.user.role !== "admin") {
+        throw new ExpressError("You are not allowed to delete this Event.", 403)
+    }
+    await EventModel.findOneAndDelete({ _id })
+    const allEvents = await EventModel.find({ isactive: false }).sort({ createdAt: 1 })
+    res.status(200).json({
+        success: true,
+        data: allEvents
+    })
+})
 
 
 module.exports.updateEventClubs = WrapAsync(async (req, res) => {
@@ -120,8 +222,9 @@ module.exports.updateEventClubs = WrapAsync(async (req, res) => {
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    if (event.createdBy !== req.user._id && req.user.role !== "admin") {
-        throw new ExpressError("You are not allowed to delete this Event.", 403)
+    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
+    if (!userClubs.includes(event.conductedClub) && req.user.role !== "admin") {
+        throw new ExpressError("You are not allowed to update this Event.", 403)
     }
     if (await event.timings.starting < Date.now()) {
         throw new ExpressError("unable to update.", 400)
@@ -199,7 +302,7 @@ module.exports.eventWinner = WrapAsync(async (req, res) => {
         "https://res.cloudinary.com/delc5g3p5/image/upload/v1729765796/Clubs/izahxydbhnphbak4jbns.png"
     ];
 
-    let event = await EventModel.findById(_id);
+    let event = await EventModel.findOne({ _id, isactive: true });
     if (event.timings.ending > Date.now()) {
         throw new ExpressError("Event not yet Completed", 400)
     }
@@ -280,7 +383,7 @@ module.exports.eventWinner = WrapAsync(async (req, res) => {
     res.status(200).json({
         success: true,
         message: `Winner declared for the event ${event.name}`,
-        event: event
+        data: event
     });
 });
 

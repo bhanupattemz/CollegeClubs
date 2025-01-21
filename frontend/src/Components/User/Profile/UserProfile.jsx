@@ -6,9 +6,17 @@ import { getCurrentUser, resetPaswordToken } from "../../../Actions/userActions"
 import UserProfileOptions from "./UserProfileOptions"
 import Loading from "../../Loaders/Loading"
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import PDFViewer from "../../Annocements/PDFViewer/PDFViewer"
-import { deleteCurrentUser } from "../../../Actions/userActions"
+import PDFViewer from "../../Announcements/PDFViewer/PDFViewer"
+import { deleteCurrentUser, generateAdmin } from "../../../Actions/userActions"
 import { confirmAlert } from 'react-confirm-alert';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 export default function UserProfile() {
     const options = {
         title: 'Are you sure you want to delete your account?',
@@ -46,11 +54,17 @@ export default function UserProfile() {
         keyCodeForClose: [8, 32],
         overlayClassName: "reset-pasword-confirmation-popup"
     };
-    
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user, loading } = useSelector(state => state.user)
     const [pdfUrl, setPdfUrl] = useState(null)
+    const [open, setOpen] = useState(false);
+    const [newAdminMail, setNewAdminMail] = useState()
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const deleteUserHandler = () => {
         confirmAlert(options)
     }
@@ -64,6 +78,46 @@ export default function UserProfile() {
     }
     return (
         <main className="profile-main">
+            {open &&
+                <section>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        PaperProps={{
+                            component: 'form',
+                            onSubmit: (event) => {
+                                event.preventDefault();
+                                dispatch(generateAdmin(newAdminMail))
+                                setOpen(false)
+                            },
+                        }}
+                    >
+                        <DialogTitle>Admin Self-Deletion Confirmation</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Enter the email of the new admin. A registration link will be sent. Once they sign up, your account will be deleted, and they will become the admin.
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                required
+                                margin="dense"
+                                id="name"
+                                name="email"
+                                label="Email Address"
+                                type="email"
+                                fullWidth
+                                variant="standard"
+                                value={newAdminMail}
+                                onChange={(e) => setNewAdminMail(e.target.value)}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => { setOpen(false) }}>Cancel</Button>
+                            <Button type="submit">transfer</Button>
+                        </DialogActions>
+                    </Dialog>
+                </section>
+            }
             <section>
                 {!pdfUrl &&
                     <Fragment>
@@ -85,7 +139,7 @@ export default function UserProfile() {
                                     <button onClick={() => navigate("/profile/update/password")}>Update Password</button>
                                     <button onClick={() => confirmAlert(resetPasswordOptions)}>Reset Password</button>
                                     {user.role != "admin" && <button onClick={deleteUserHandler}>Delete Account</button>}
-                                    {user.role == "admin" && <button>Transfer & Delete</button>}
+                                    {user.role == "admin" && <button onClick={() => setOpen(true)}>Transfer & Delete</button>}
                                 </div>
                             </div>
                         </section>

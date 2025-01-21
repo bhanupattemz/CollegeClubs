@@ -4,7 +4,8 @@ const axios = require("axios")
 const UserModel = require("../Models/Users/UserModel")
 const ClubsModel = require("../Models/Clubs/clubsModel")
 const EventModel = require("../Models/eventModel")
-
+const DonationsModel = require("../Models/donationModel")
+const User = require("../Models/Users/UserModel")
 module.exports.latestYoutubeVideo = WrapAsync(async (req, res) => {
     try {
         const response = await axios.get(
@@ -49,5 +50,80 @@ module.exports.getscajntuaByNumbers = WrapAsync(async (req, res) => {
     res.json({
         success: true,
         data: [clubs.length, members.length, coordinators.length, events.length]
+    });
+})
+
+module.exports.getAdminNumbers = WrapAsync(async (req, res) => {
+    const clubs = await ClubsModel.find()
+    const members = await UserModel.find()
+    const events = await EventModel.find()
+    const donations = await DonationsModel.find()
+    let amount = 0;
+    donations.forEach((item) => {
+        amount += item.amount
+    })
+    res.json({
+        success: true,
+        data: [clubs.length, amount, members.length, events.length]
+    });
+})
+
+module.exports.getAdminMemberData = WrapAsync(async (req, res) => {
+    const general = await UserModel.find({ role: "general" })
+    const student = await UserModel.find({ role: "student" })
+    const coordinator = await UserModel.find({ role: "coordinator" })
+    const admin = await UserModel.find({ role: "admin" })
+    res.json({
+        success: true,
+        data: [general.length, student.length, coordinator.length, admin.length]
+    });
+})
+
+module.exports.adminGetclubsEvents = WrapAsync(async (req, res) => {
+    let data = []
+    const clubs = await ClubsModel.find()
+    for (const item of clubs) {
+        const events = await EventModel.find({ conductedClub: item._id })
+        data.push({ name: item.name, count: events.length })
+    }
+    res.json({
+        success: true,
+        data: data
+    });
+})
+
+module.exports.adminGetDonations = WrapAsync(async (req, res) => {
+    const data = [];
+    const labels = [];
+    const amounts = [];
+    for (let i = 0; i < 6; i++) {
+        const startDate = new Date();
+        startDate.setMonth(startDate.getMonth() - i);
+        startDate.setDate(1); 
+        startDate.setHours(0, 0, 0, 0); 
+        const endDate = new Date(startDate);
+        endDate.setMonth(endDate.getMonth() + 1);
+        endDate.setDate(0); 
+        endDate.setHours(23, 59, 59, 999);
+
+        const donations = await DonationsModel.find({
+            createdAt: {
+                $gte: startDate,
+                $lte: endDate
+            }
+        });
+        const amount = donations.reduce((sum, item) => sum + item.amount, 0);
+        const monthName = startDate.toLocaleString('en-US', { month: 'short' });
+        labels.push(monthName)
+        data.push(donations.length);
+        amounts.push(amount)
+    }
+    res.json({
+        success: true,
+        data: {
+            data: data.reverse(),
+            amounts: amounts.reverse(),
+            labels: labels.reverse()
+        }
     });
 })

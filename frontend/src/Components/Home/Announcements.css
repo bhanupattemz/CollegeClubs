@@ -1,4 +1,4 @@
-.annoucements {
+.announcements {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,11 +9,11 @@
     padding: 10px 0px;
 }
 
-.annoucements svg {
+.announcements svg {
     transform: translateY(4px);
 }
 
-.annoucements-heading {
+.announcements-heading {
     font-size: large;
     font-weight: 700;
     margin: 0px 5px;
@@ -27,12 +27,12 @@
     justify-content: space-evenly;
 }
 
-.annoucements-scroll {
+.announcements-scroll {
     width: 70%;
     padding: 5px 0;
 }
 
-.annoucements-scroll div {
+.announcements-scroll div {
     display: inline-flex;
     margin: 0px 20px;
 }

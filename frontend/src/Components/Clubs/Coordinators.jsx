@@ -45,17 +45,16 @@ export default function Coordinators() {
                                     <Fragment key={inx}>
                                         {inx % 2 == 0 ?
                                             <CoordinatorLeft
-                                                imageUrl={item.personalInformation.profile.url}
+                                                imageUrl={item.details.personalInformation.profile.url}
                                                 typeText={"Club Coordinator"}
-                                                description={item.description}
-                                                name={item.personalInformation.firstname + " " + item.personalInformation.lastname}
+                                                description={item.details.description}
+                                                name={item.details.personalInformation.firstname + " " + item.details.personalInformation.lastname}
                                             /> :
                                             <CoordinatorRight
-                                                imageUrl={item.personalInformation.profile.url}
+                                                imageUrl={item.details.personalInformation.profile.url}
                                                 typeText={"Club Coordinator"}
-                                                description={item.description}
-                                                name={item.personalInformation.firstname + " " + item.personalInformation.lastname}
-
+                                                description={item.details.description}
+                                                name={item.details.personalInformation.firstname + " " + item.details.personalInformation.lastname}
                                             />}
                                     </Fragment>
                                 )

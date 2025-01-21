@@ -69,9 +69,7 @@ export default function EventDetails() {
     }, [currentClub])
 
     useEffect(() => {
-        if (!singleEvent || (singleEvent && singleEvent._id != _id)) {
-            dispatch(getSingleEvent(_id))
-        }
+        dispatch(getSingleEvent(_id))
     }, [_id])
     useEffect(() => {
         setnClubs(singleEvent ? singleEvent.conductedClub.length : 0)
@@ -112,22 +110,25 @@ export default function EventDetails() {
                         <div>
                             <Timer time={singleEvent.timings.starting} />
                         </div>
-                        <div>
-                            <h3><MdDateRange /> Date & Time :</h3>
-                            <ul>
-                                <li><b>Begins :</b>  <span>{ConvertTime(singleEvent.timings.starting)}</span></li>
-                                <li><b>Finishes :</b>  <span>{ConvertTime(singleEvent.timings.ending)}</span></li>
-                            </ul>
+                        <div className="event-details-page-details">
+                            <div>
+                                <h3><MdDateRange /> Date & Time </h3>
+                                <ul>
+                                    <li><b>Begins :</b>  <span>{ConvertTime(singleEvent.timings.starting)}</span></li>
+                                    <li><b>Finishes :</b>  <span>{ConvertTime(singleEvent.timings.ending)}</span></li>
+                                </ul>
 
+                            </div>
+                            <div>
+                                <h3><FaLocationDot /> Venue </h3>
+                                <ul>
+                                    <li><b>Venue Name:</b> {singleEvent.venue.venueName}</li>
+                                    <li><b>Address:</b> JNTUA College of Engineering, Sir Mokshagundam Visvesvaraya Road, Anantapuramu, Andhra Pradesh - 515002</li>
+                                    <li><b>Landmark:</b> {singleEvent.venue.landMark}</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <h3><FaLocationDot /> Venue :</h3>
-                            <ul>
-                                <li><b>Venue Name:</b> {singleEvent.venue.venueName}</li>
-                                <li><b>Address:</b> JNTUA College of Engineering, Sir Mokshagundam Visvesvaraya Road, Anantapuramu, Andhra Pradesh - 515002</li>
-                                <li><b>Landmark:</b> {singleEvent.venue.landMark}</li>
-                            </ul>
-                        </div>
+
 
                     </div>
                 </section>

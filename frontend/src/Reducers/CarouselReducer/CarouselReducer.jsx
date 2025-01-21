@@ -3,6 +3,9 @@ import {
     GET_CAROUSEL_IMGS_REQUEST,
     GET_CAROUSEL_IMGS_SUCCESS,
     GET_CAROUSEL_IMGS_FAIL,
+    DELETE_CAROUSEL_IMGS_REQUEST,
+    DELETE_CAROUSEL_IMGS_SUCCESS,
+    DELETE_CAROUSEL_IMGS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -40,7 +43,18 @@ const carouselImgslice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(DELETE_CAROUSEL_IMGS_REQUEST, (state) => {
+                state.loading = true;
+                state.carouselImgs = null
+            })
+            .addCase(DELETE_CAROUSEL_IMGS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.carouselImgs = action.payload.data
+            })
+            .addCase(DELETE_CAROUSEL_IMGS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

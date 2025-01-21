@@ -1,16 +1,16 @@
-.annocements-main {
+.announcements-main {
     background-color: #ecf1f5;
     min-height: 80vh;
 }
 
-/* annocements section  */
-.annocements-section {
+/* announcements section  */
+.announcements-section {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.annoucement-pdf-viewer-section {
+.announcement-pdf-viewer-section {
     min-height: 80vh;
     position: relative;
     width: 100%;
@@ -19,7 +19,7 @@
     z-index: 1;
 }
 
-.annoucement-pdf-viewer-section>button {
+.announcement-pdf-viewer-section>button {
     background-color: red;
     color: white;
     border: none;
@@ -27,19 +27,19 @@
     position: fixed;
 }
 
-.annoucement-pdf-viewer-section>button:hover {
+.announcement-pdf-viewer-section>button:hover {
     cursor: pointer;
 }
 
 /* headings */
-.annoucement-heading {
+.announcement-heading {
     min-height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.annoucement-heading h1 {
+.announcement-heading h1 {
     margin: 0px;
     text-align: center;
     font-weight: 700;

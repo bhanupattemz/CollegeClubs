@@ -9,6 +9,9 @@ import {
     GET_USER_EVENTS_REQUEST,
     GET_USER_EVENTS_SUCCESS,
     GET_USER_EVENTS_FAIL,
+    ADMIN_DELETE_EVENT_REQUEST,
+    ADMIN_DELETE_EVENT_SUCCESS,
+    ADMIN_DELETE_EVENT_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -70,6 +73,19 @@ const eventSlice = createSlice({
                 state.eventsCount = action.payload.data.length;
             })
             .addCase(GET_USER_EVENTS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(ADMIN_DELETE_EVENT_REQUEST, (state) => {
+                state.loading = true;
+                state.events = null
+            })
+            .addCase(ADMIN_DELETE_EVENT_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.events = action.payload.data.length != 0 && action.payload.data;
+                state.eventsCount = action.payload.data.length;
+            })
+            .addCase(ADMIN_DELETE_EVENT_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

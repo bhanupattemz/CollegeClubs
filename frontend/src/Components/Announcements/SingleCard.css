@@ -1,4 +1,4 @@
-.singe-annoucement-card {
+.singe-announcement-card {
     background-color: #D9EAFD;
     width: 70%;
     border: 5px solid #bedafb;
@@ -6,20 +6,20 @@
     padding: 20px;
 }
 
-.singe-annoucement-card h2 {
+.singe-announcement-card h2 {
     margin: 0px;
 }
 
-.singe-annoucement-card p {
+.singe-announcement-card p {
     font-size: large;
     color: rgb(74, 74, 74);
 }
 
-.single-annocement-btns {
+.single-announcement-btns {
     width: 100%;
 }
 
-.single-annocement-btns button {
+.single-announcement-btns button {
     margin-right: 10px;
     padding: 7px 15px;
     background-color: #0A5EB0;
@@ -29,7 +29,7 @@
     transition: all ease-out 0.5s;
 }
 
-.single-annocement-btns>button:hover {
+.single-announcement-btns>button:hover {
     cursor: pointer;
     opacity: 0.7;
 }

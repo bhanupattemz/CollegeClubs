@@ -3,16 +3,20 @@ const ExpressError = require("../Utils/ExpressError")
 const sendMail = require("../Utils/sendMail")
 require("dotenv").config()
 const { deleteFromClodinary } = require("../functionalities")
+const functionalities = require("../functionalities")
+const unverifiedCoordinatorModel = require("../Models/Users/unverifiedCoordinatorModel")
+const ClubModel = require("../Models/Clubs/clubsModel")
 //models
 const UserModel = require("../Models/Users/UserModel")
 const GenericUserModel = require("../Models/Users/genericUserModel")
 const AdminModel = require("../Models/Users/adminModel")
 const StudentModel = require("../Models/Users/studentModel")
 const UnverifiedUser = require("../Models/Users/unverifiedUserModel")
-const UnverifiedAdmin = require("../Models/Users/unnverifiedAdminModel")
+const UnverifiedAdmin = require("../Models/Users/unverifiedAdminModel")
 var CryptoJS = require("crypto-js");
 const { v4: uuid } = require('uuid')
 const passport = require("passport")
+const unverifiedAdminModel = require("../Models/Users/unverifiedAdminModel")
 
 
 module.exports.currentUser = WrapAsync(async (req, res) => {
@@ -188,7 +192,6 @@ module.exports.updateUser = WrapAsync(async (req, res, next) => {
     if (!user) {
         throw new ExpressError("User not found", 404);
     }
-
     let profile;
     if (req.file) {
         deleteFromClodinary(user.personalInformation.profile)
@@ -210,10 +213,16 @@ module.exports.updateUser = WrapAsync(async (req, res, next) => {
         },
         course: bodyData.course,
         branch: bodyData.branch,
-        academicYear: bodyData.academicYear
+        academicYear: bodyData.academicYear,
+        department: bodyData.department
     }
-
-    await UserModel.findByIdAndUpdate(req.user._id, updateduser, { new: true, runValidators: true })
+    if (["coordinator", "student"].includes(req.user.role)) {
+        await StudentModel.findByIdAndUpdate(req.user._id, updateduser, { new: true, runValidators: true })
+    } else if (user.role == "admin") {
+        await AdminModel.findByIdAndUpdate(req.user._id, updateduser, { new: true, runValidators: true })
+    } else {
+        await UserModel.findByIdAndUpdate(req.user._id, updateduser, { new: true, runValidators: true })
+    }
     const currentUser = await UserModel.findById(req.user._id)
     res.status(200).json({
         success: true,
@@ -281,9 +290,6 @@ module.exports.getOneUser = WrapAsync(async (req, res) => {
 module.exports.adminUpdateUser = WrapAsync(async (req, res, next) => {
     const bodyData = req.body;
     const { _id } = req.params;
-    if (req.user.role != "admin" && _id != req.user._id) {
-        throw new ExpressError("You do not have the necessary permissions to modify this data.", 403)
-    }
     const user = await UserModel.findById(_id);
     if (!user) {
         throw new ExpressError("user not found", 404);
@@ -348,6 +354,9 @@ module.exports.deleteUser = WrapAsync(async (req, res, next) => {
 
 module.exports.deleteCurrentUser = WrapAsync(async (req, res) => {
     const user = req.user
+    if (user.role == "admin") {
+        throw new ExpressError("Admin can't delete directly", 400)
+    }
     await UserModel.findOneAndDelete({ _id: user._id })
     deleteFromClodinary(user.personalInformation.profile)
     req.logOut((err) => {
@@ -364,17 +373,12 @@ module.exports.Admingenarate = WrapAsync(async (req, res) => {
     if (user) {
         throw new ExpressError(`User with mail ${mail}, already exists.`, 400)
     }
-    const unverifiedAdmin = await UnverifiedAdmin({ mail })
-    const options = {
-        mail: mail,
-        subject: "SCA JNTUA CEA Mail verification",
-        text: "SCA JNTUA CEA Mail verification",
-        message: `
-        <p>You have been referred by ${req.user.username} to be made an admin.</p>
-        <p><a href="http://localhost:8000/admin/signup/${unverifiedAdmin._id}">Click Here</a> to Create Account</p>
-    `
-    }
+    const unverifiedAdmin = await unverifiedAdminModel({ mail, workedAs: req.user.workedAs })
+    const options = await functionalities.adminGenerateMailOptions(mail, req.user, unverifiedAdmin._id)
     const data = sendMail(options)
+    if (!data) {
+        throw new ExpressError("Mail Sent Failed", 400)
+    }
     await unverifiedAdmin.save()
     res.status(200).json({
         success: true
@@ -383,42 +387,92 @@ module.exports.Admingenarate = WrapAsync(async (req, res) => {
 
 module.exports.createAdmin = WrapAsync(async (req, res) => {
     const { _id } = req.params
-    const data = req.body
+    const bodyData = req.body;
+
+    let profile;
+    if (req.file) {
+        profile = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        };
+    } else {
+        profile = {
+            public_id: "default",
+            url: "https://res.cloudinary.com/delc5g3p5/image/upload/v1735839043/Clubs/cnc3vuovzqifv10fexyq.png"
+        };
+    }
+
+    const password = bodyData.password;
+    if (password.length < 8) {
+        deleteFromClodinary(profile)
+        throw new ExpressError("Passsword Must be atleast 8 digits", 400)
+    }
     const unverifiedAdmin = await UnverifiedAdmin.findById(_id)
     if (!unverifiedAdmin) {
+        deleteFromClodinary(profile)
         throw new ExpressError("User not found", 404)
     }
-    if (unverifiedAdmin.mail !== data.mail) {
+    if (unverifiedAdmin.mail !== bodyData.mail) {
+        deleteFromClodinary(profile)
         throw new ExpressError("User Mail Not Match", 400)
     }
-    const password = data.password;
-    delete data.password;
-    const admin = await AdminModel({ ...data, role: "admin" })
+    if (unverifiedAdmin.timeDate < Date.now()) {
+        deleteFromClodinary(profile)
+        await unverifiedAdminModel.findByIdAndDelete(_id)
+        throw new ExpressError("Time is Exprired", 400)
+    }
+
+    let data = {
+        mail: bodyData.mail,
+        username: bodyData.username,
+        password: bodyData.password,
+        role: "admin",
+        personalInformation: {
+            firstname: bodyData.firstname,
+            lastname: bodyData.lastname,
+            gender: bodyData.gender,
+            personalMail: bodyData.personalMail,
+            DOB: bodyData.DOB,
+            mobileNo: bodyData.mobileNo,
+            profile
+        },
+        department: bodyData.department,
+        description: bodyData.description,
+        workedAs: unverifiedAdmin.workedAs
+    }
+    const admin = await AdminModel(data)
     const newUser = await UserModel.register(admin, password);
+    await AdminModel.findOneAndDelete({ workedAs: unverifiedAdmin.workedAs })
     await UnverifiedAdmin.findByIdAndDelete(_id)
     req.logIn(newUser, (err) => {
         if (err) return next(err);
         res.status(200).json({
             success: "user register success",
-            user: newUser,
+            data: newUser,
             isauthenticate: true
         });
     });
 })
 
-module.exports.makeCoordinator = WrapAsync(async (req, res) => {
+module.exports.verifyCoordinator = WrapAsync(async (req, res) => {
     const { _id } = req.params
-    const user = await StudentModel.findOne({ _id })
-    if (!user) {
-        throw new ExpressError("User is Not Found", 404)
+    const data = req.body
+    const unverifiedCoordinator = await unverifiedCoordinatorModel.findById(_id).populate("user")
+    if (!unverifiedCoordinator || !data.description || !data.mail) {
+        throw new ExpressError("Bad request", 400)
     }
-    if (user.role === "coordinator") {
-        throw new ExpressError(`${user.username} is already coordinator`)
+    if (unverifiedCoordinator.user.mail != data.mail) {
+        throw new ExpressError("Check you mail", 400)
     }
-    const coordinator = await StudentModel.findByIdAndUpdate(_id, { role: "coordinator" }, { new: true, runValidators: true })
+    if (unverifiedCoordinator.dateTime < Date.now()) {
+        await unverifiedCoordinatorModel.deleteOne({ _id })
+        throw new ExpressError("Time Expried", 400)
+    }
+    await ClubModel.findByIdAndUpdate(unverifiedCoordinator.club, { $push: { coordinators: { details: unverifiedCoordinator.user._id } }, updatedAt: Date.now() })
+    const coordinator = await StudentModel.findByIdAndUpdate(unverifiedCoordinator.user, { role: "coordinator", description: data.description }, { new: true, runValidators: true })
+    await unverifiedCoordinatorModel.deleteOne({ _id })
     res.status(200).json({
-        success: true,
-        coordinator
+        success: true
     })
 })
 

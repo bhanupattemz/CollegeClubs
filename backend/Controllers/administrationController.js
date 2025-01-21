@@ -3,7 +3,14 @@ const WrapAsync = require("../Utils/WrapAsync")
 const AdministrationModel = require("../Models/administrationModel")
 
 module.exports.getAllAdministrators = WrapAsync(async (req, res) => {
-    const administrators = await AdministrationModel.find({});
+    const { key } = req.query
+    const administrators = await AdministrationModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { position: { $regex: new RegExp(key, "i") } }
+        ]
+    });
     const positionOrder = ["Principal", "Vice-Principal", "Faculty-Coordinator", "Student-Coordinator"];
 
     administrators.sort((a, b) => {

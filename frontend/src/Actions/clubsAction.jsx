@@ -11,7 +11,10 @@ import {
     GET_USER_CLUBS_FAIL,
     REGISTER_CLUB_REQUEST,
     REGISTER_CLUB_SUCCESS,
-    REGISTER_CLUB_FAIL
+    REGISTER_CLUB_FAIL,
+    ADMIN_DELETE_CLUB_REQUEST,
+    ADMIN_DELETE_CLUB_SUCCESS,
+    ADMIN_DELETE_CLUB_FAIL
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
 const axiosInstance = axios.create({
@@ -94,5 +97,24 @@ const registerClub = (params) => async (dispatch) => {
 }
 
 
+const adminDeleteClub = (params) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_DELETE_CLUB_REQUEST })
+        const response = await axiosInstance.delete(`/clubs/${params}`)
+        dispatch({
+            type: ADMIN_DELETE_CLUB_SUCCESS,
+            payload: response.data
+        })
 
-export { getAllclubs, getSingleClub, getUserclubs, registerClub }
+    } catch (error) {
+        dispatch({
+            type: ADMIN_DELETE_CLUB_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+export {
+    getAllclubs, getSingleClub, getUserclubs, registerClub,
+    adminDeleteClub
+}

@@ -1,0 +1,90 @@
+.admin-signup-main {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.admin-signup-form h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.admin-signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.admin-signup-form .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+    margin: 5px 0px;
+}
+
+.admin-signup-form>div {
+    width: 96%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-signup-account-information>div:nth-of-type(2) {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-signup-account-information .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(1) {
+    width: 49%;
+}
+
+.admin-signup-account-information>div:nth-of-type(2) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 49%;
+}
+
+.admin-signup-credentials .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.admin-signup-credentials .css-4vvya4-MuiFormControl-root {
+    width: 32%;
+}
+
+/* personal information  */
+.admin-signup-personal-infor-div2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.admin-signup-personal-infor-div3>div {
+    width: 49% !important;
+}
+
+.admin-signup-personal-infor-div3 .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+}
+
+
+
+
+.admin-signup-img-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-signup-img-picker button {
+    width: 70%;
+    padding: 7px 10px;
+    font-weight: 700;
+}
+
+.admin-signup-img-picker img {
+    width: 50px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* description  */
+.admin-signup-description .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+}
+
+
+/* btn  */
+.admmin-signup-btn{ 
+    justify-content: center !important;
+    width: 100% !important;
+}

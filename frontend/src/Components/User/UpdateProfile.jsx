@@ -22,6 +22,7 @@ export default function UpdateProfile() {
     const [personalInformation, setPersonalInformation] = useState(undefined);
     const [academic, setAcademic] = useState({});
     const [description, setDescription] = useState("");
+    const [department, setDepartment] = useState(user.role == "admin" ? user.department : undefined);
     const formSubmitHandler = (e) => {
         e.preventDefault();
         const fd = new FormData();
@@ -40,8 +41,11 @@ export default function UpdateProfile() {
             fd.append('branch', academic.branch);
             fd.append('academicYear', academic.academicYear);
         }
-        if (user.role == "coordinator") {
+        if (["coordinator", "admin"].includes(user.role)) {
             fd.append("description", description)
+        }
+        if (user.role == "admin") {
+            fd.append("department", department)
         }
         dispatch(updateUserProfile(fd))
     };
@@ -167,6 +171,24 @@ export default function UpdateProfile() {
                                         }))
                                     }
                                 />
+                                {user.role == "admin" &&
+                                    <TextField
+                                        required
+                                        select
+                                        label="Department"
+                                        value={department}
+                                        onChange={(e) =>
+                                            setDepartment(e.target.value)
+                                        }
+                                    >
+                                        {branches.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                }
+
                             </div>
                             <div className="update-profile-personal-feilds">
                                 <TextField

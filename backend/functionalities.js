@@ -78,3 +78,46 @@ module.exports.successFestEventRegistrationOptions = async (event, fest, user) =
         ]
     };
 }
+module.exports.sendverifyCoordinatorMailOptions = async (user, club, _id) => {
+    return {
+        mail: user.mail,
+        subject: `Coordinator Verification for ${club.name}`,
+        text: `Dear ${user.personalInformation.firstname},\n\nCongratulations on being selected as a coordinator for ${club.name}!\n\nVerify your role here: ${process.env.FRONTEND_URL}/coordinator/verify/${_id}\n\nBest regards,\nThe Club Management Team`,
+        message: `
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+                <h2 style="color: #2c3e50;">Coordinator Verification for ${club.name}</h2>
+                <p>Dear <strong>${user.personalInformation.firstname}</strong>,</p>
+                <p>Congratulations on being selected as a coordinator for the <strong>${club.name}</strong>!</p>
+                <p>Click the button below to verify your role:</p>
+                <a href="${process.env.FRONTEND_URL}/coordinator/verify/${_id}" 
+                   style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                    Verify Now
+                </a>
+                <p style="margin-top: 20px;">Best regards,<br>The Club Management Team</p>
+            </div>
+        `
+    };
+};
+
+module.exports.adminGenerateMailOptions = async (mail, user, _id) => {
+    return {
+        mail: mail,
+        subject: "SCA JNTUA CEA Mail Verification",
+        text: `SCA JNTUA CEA Mail Verification\n\nYou have been referred by ${user.personalInformation.firstname} for the position of ${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}.\nPlease use the following link to create your account:\nhttp://localhost:8000/admin/signup/${_id}\n\nThis link will expire after 15 days. After verification, you will officially take on the role of ${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}.\n\nBest regards,\nThe SCA JNTUA CEA Team`,
+        message: `
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px; color: #333;">
+                <h2 style="color: #2c3e50;">SCA JNTUA CEA Mail Verification</h2>
+                <p>You have been referred by <strong>${user.personalInformation.firstname} ${user.personalInformation.lastname}</strong> for the position of <strong>${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}</strong>.</p>
+                <p>Please click the link below to complete your account setup:</p>
+                <a href="${process.env.FRONTEND_URL}/admin/signup/${_id}" 
+                   style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; text-align: center; display: inline-block;">
+                   Create Account
+                </a>
+                <p style="margin-top: 20px;">This link will expire after <strong>24 hours</strong>. Once verified, you will officially serve as a <strong>${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}</strong>.</p>
+                <p>Best regards,<br>The SCA JNTUA CEA Team</p>
+            </div>
+        `
+    }
+
+
+}

@@ -19,7 +19,7 @@ export default function UserOptions({ user }) {
         dispatch(userSignout())
 
     }
-    const dashbord = () => { navigate("/admin/dashboard") }
+    const dashboard = () => { navigate(`/${user.role}/dashboard`) }
     const { isauthenticate } = useSelector(state => state.user)
     let actions = [
         { icon: <AccountCircleIcon />, name: "profile", func: account },
@@ -27,7 +27,7 @@ export default function UserOptions({ user }) {
         { icon: <IoMdLogOut />, name: "logout", func: logout },
     ]
     if (user && user.role == "admin") {
-        actions.unshift({ icon: <DashboardCustomizeIcon />, name: "DashBoard", func: dashbord })
+        actions.unshift({ icon: <DashboardCustomizeIcon />, name: "DashBoard", func: dashboard })
     } else if (user) {
         actions = [
             ...actions.slice(0, 1),

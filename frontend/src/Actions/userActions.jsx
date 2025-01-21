@@ -27,6 +27,15 @@ import {
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAIL,
+    GENERATE_ADMIN_REQUEST,
+    GENERATE_ADMIN_SUCCESS,
+    GENERATE_ADMIN_FAIL,
+    ADMIN_SIGNUP_REQUEST,
+    ADMIN_SIGNUP_SUCCESS,
+    ADMIN_SIGNUP_FAIL,
+    ADMIN_GET_ALL_USERS_REQUEST,
+    ADMIN_GET_ALL_USERS_SUCCESS,
+    ADMIN_GET_ALL_USERS_FAIL,
     SET_IS_UPDATE_FALSE
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
@@ -203,9 +212,66 @@ const resetPasword = (token, body) => async (dispatch) => {
         });
     }
 }
+
+const generateAdmin = (mail) => async (dispatch) => {
+    try {
+        dispatch({ type: GENERATE_ADMIN_REQUEST })
+        const response = await axiosInstance.post(`/admin/signup/generate`, { mail })
+
+        dispatch({
+            type: GENERATE_ADMIN_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GENERATE_ADMIN_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+const adminSignup = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_SIGNUP_REQUEST })
+        const response = await axiosInstance.post(`/admin/signup/${_id}`, formData)
+
+        dispatch({
+            type: ADMIN_SIGNUP_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_SIGNUP_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+
+
+const adminGetAllUsers = () => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_GET_ALL_USERS_REQUEST })
+        const response = await axiosInstance.get(`/users`)
+        dispatch({
+            type: ADMIN_GET_ALL_USERS_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_GET_ALL_USERS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
 export {
     signInUser, signUpUser, getCurrentUser,
     userSignout, deleteCurrentUser, updateUserProfile,
     setIsUpdateFalse, updateProfilePassword, resetPaswordToken,
-    resetPasword
+    resetPasword, generateAdmin, adminSignup, adminGetAllUsers
 }

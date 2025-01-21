@@ -6,7 +6,7 @@ import { setPrevLocation } from "../../Actions/prevLocation";
 import Restricted from "./Restricted";
 import { getCurrentUser } from "../../Actions/userActions";
 
-function ProtectedRoute({ isadmin, element }) {
+function ProtectedRoute({ isIn, element }) {
     const { loading, isauthenticate, user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const location = useLocation();
@@ -29,8 +29,8 @@ function ProtectedRoute({ isadmin, element }) {
     }
 
     if (isauthenticate && user) {
-        if (isadmin) {
-            if (user && user.role === "admin") {
+        if (isIn) {
+            if (user && isIn.includes(user.role)) {
                 return element;
             } else {
                 return <Restricted />;
@@ -38,7 +38,7 @@ function ProtectedRoute({ isadmin, element }) {
         }
         return element;
     } else {
-        return  <Navigate to="/signin" />
+        return <Navigate to="/signin" />
 
     }
 }

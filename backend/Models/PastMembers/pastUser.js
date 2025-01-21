@@ -19,15 +19,15 @@ const pastUserSchema = new mongoose.Schema({
         enum: ["cse", 'ece', 'eee', 'civ', 'mech', 'chem'],
         required: true
     },
-    description: {
-        type: String,
-        maxlength: 300
-    },
     duration: {
         joined: { type: Date, required: true },
         left: { type: Date, required: true, default: Date.now() }
+    },
+    workedAs: {
+        type: String,
+        enum: ["studentCoordinator", 'facultyCoordinator', "coordinator"],
+        required: true
     }
-
 });
 
 const pastUser = mongoose.model('pastUser', pastUserSchema);

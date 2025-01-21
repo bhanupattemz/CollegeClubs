@@ -3,7 +3,7 @@ import ClubsReducer from "./Reducers/ClubsReducers/ClubsReducer"
 import SingleClubReducer from "./Reducers/ClubsReducers/SingleClubReducer"
 import EventsReducer from "./Reducers/EventsReducers/EventsReducer"
 import SingleEventReducer from "./Reducers/EventsReducers/SingleEventReducer"
-import AnnoucementsReducer from "./Reducers/Annoucements/AnnoucementsReducer"
+import AnnouncementsReducer from "./Reducers/Announcements/AnnouncementsReducer"
 import LettersReducer from "./Reducers/Letters/Letters"
 import GalleryReducer from "./Reducers/Gallery/GalleryReducer"
 import ClubGallery from "./Reducers/Gallery/ClubGalleryReducer"
@@ -15,13 +15,18 @@ import PrevLocationReducer from "./Reducers/PrevLocation/PrevLocation"
 import ContactReducer from "./Reducers/Contact/AllContact"
 import CarouselImgsReducer from "./Reducers/CarouselReducer/CarouselReducer"
 import FestReducer from "./Reducers/FestReducer/FestEventsReducer"
+import SingleFestEventReducer from "./Reducers/FestReducer/SingleFestEvent"
+import PastMembersReducer from "./Reducers/PastMembersReducer/PastMembersReducer"
+import UsersReducer from "./Reducers/User/usersReducer"
 const store = configureStore({
     reducer: {
         clubs: ClubsReducer,
         singleClub: SingleClubReducer,
         events: EventsReducer,
         singleEvent: SingleEventReducer,
-        annoucements: AnnoucementsReducer,
+        festEvents: FestReducer,
+        singleFestEvent: SingleFestEventReducer,
+        announcements: AnnouncementsReducer,
         letters: LettersReducer,
         gallery: GalleryReducer,
         clubGallery: ClubGallery,
@@ -29,10 +34,11 @@ const store = configureStore({
         donars: DonarsReducer,
         academicBooks: AcademicBooksreducer,
         user: UserReducer,
+        users:UsersReducer,
         contacts: ContactReducer,
         prevLocation: PrevLocationReducer,
         carouselImgs: CarouselImgsReducer,
-        festEvents: FestReducer
+        pastMembers: PastMembersReducer
     }
 })
 export default store

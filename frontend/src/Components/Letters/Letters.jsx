@@ -1,9 +1,9 @@
 import "./Letters.css"
-import SingleCard from "../Annocements/SingleCard"
+import SingleCard from "../Announcements/SingleCard"
 import { useSelector, useDispatch } from "react-redux"
 import { getAllLetters } from "../../Actions/LettersActions"
 import { Fragment, useEffect, useState } from "react"
-import PDFViewer from "../Annocements/PDFViewer/PDFViewer"
+import PDFViewer from "../Announcements/PDFViewer/PDFViewer"
 import Banner from "../Clubs/Banner"
 export default function Annocement() {
     const dispatch = useDispatch()

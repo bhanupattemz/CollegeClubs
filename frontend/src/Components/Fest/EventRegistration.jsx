@@ -23,6 +23,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RegisterButton from "./RegisterButton"
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { CiWarning } from "react-icons/ci";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -94,13 +97,13 @@ export default function EventRegistration() {
             })
         }
     }, [user])
+    const [accept, setAccept] = useState(false)
     const [CaptchaValue, setCaptchaValue] = useState()
     function onChange(value) {
         setCaptchaValue(value)
     }
     const [capLoading, setCapLoading] = useState(false)
     const [recapchaKey, setRecapchaKey] = useState()
-
     useEffect(() => {
         async function getEventDetails() {
             try {
@@ -155,16 +158,18 @@ export default function EventRegistration() {
                                 </TableBody>
                             </Table>
                         </TableContainer>
+                        <p style={{ color: "#FF9D23" }}><CiWarning /> Please double-check all the details carefully. You do not have permission to update them directly.</p>
+                        <FormControlLabel control={<Checkbox onChange={(e) => setAccept(prev => !prev)} />} label="I have read and accept the instructions of event." />
+                        <a href={event?.pdf?.url} target="_blank" style={{ color: "blue" }}>view Insructions</a>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <RegisterButton event={event} formData={formData} />
+                    <RegisterButton event={event} formData={formData} isAccept={accept} setOpen={setOpen}/>
                 </DialogActions>
             </Dialog>
-
+            <h1>Register for {event.name}</h1>
             <form onSubmit={formSubmitHandler} className="fest-event-registration-form">
-                <h1>Register</h1>
                 <div>
                     <TextField
                         required

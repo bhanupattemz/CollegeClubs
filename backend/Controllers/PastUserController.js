@@ -1,10 +1,18 @@
 const ExpressError = require("../Utils/ExpressError")
 const WrapAsync = require("../Utils/WrapAsync")
 const PastUserModel = require("../Models/PastMembers/pastUser")
-
+const PastStudentModel = require("../Models/PastMembers/pastStudent")
 
 module.exports.getAllPastUsers = WrapAsync(async (req, res) => {
-    const pastUsers = await PastUserModel.find({});
+    const { key } = req.query
+    const pastUsers = await PastUserModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { department: { $regex: new RegExp(key, "i") } },
+            { workedAs: { $regex: new RegExp(key, "i") } }
+        ]
+    }).sort({ "duration.left": -1 });
     res.status(200).json({
         success: true,
         data: pastUsers
@@ -26,7 +34,12 @@ module.exports.getOnePastUser = WrapAsync(async (req, res) => {
 
 module.exports.createPastUser = WrapAsync(async (req, res, next) => {
     const pastUser = req.body;
-    const newpastUser = PastUserModel(pastUser)
+    let newpastUser = undefined;
+    if (pastUser.workedAs == "coordinator") {
+        newpastUser = PastStudentModel(pastUser)
+    } else {
+        newpastUser = PastUserModel(pastUser)
+    }
     await newpastUser.save()
     const allpastUsers = await PastUserModel.find()
     res.status(200).json({

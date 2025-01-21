@@ -9,9 +9,6 @@ router.route("/")
 router.route("/all")
     .get(isLoggedIn, isAdmin, FestController.getAllFests)
 
-
-
-
 router.route("/events")
     .get(FestController.getAllEvents)
 
@@ -26,6 +23,7 @@ router.route("/events/update/clubs/:_id")
 
 router.route("/events/order/:_id")
     .post(FestController.createRegisterEventOrder)
+    
 router.route("/events/register/:_id")
     .post(FestController.registerMember)
 

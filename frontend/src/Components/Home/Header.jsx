@@ -1,6 +1,8 @@
 import "./Header.css"
 import { Link } from "react-router"
+import { useSelector } from "react-redux"
 export default function Header() {
+    const { user } = useSelector(state => state.user)
     return (
         <div className="header">
             <nav className="sticky-nav">
@@ -16,13 +18,13 @@ export default function Header() {
                         <li className="navbar-item"><Link to="/donation">Donate</Link></li>
                         <li className="navbar-item"><Link to="/library">Library</Link></li>
                         <li className="navbar-item"><Link to="/announcements">Announcements</Link></li>
-                        <li className="navbar-item"><Link to="/letters">Letters</Link></li>
+                        {user && ["admin", "coordinator"].includes(user.role) && <li className="navbar-item"><Link to="/letters">Letters</Link></li>}
                         <li className="navbar-item"><Link to="/about">About Us</Link></li>
                         <li className="navbar-item"><Link to="/contact">Contact</Link></li>
                     </ul>
                 </div>
             </nav>
-          
+
         </div>
 
     )

@@ -42,7 +42,7 @@ const administrationTeamSchema = new mongoose.Schema({
     },
     isactive: {
         type: Boolean,
-        default: false
+        default: true
     },
     period: {
         starting: { type: Date, default: Date.now },

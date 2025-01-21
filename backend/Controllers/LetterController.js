@@ -3,7 +3,15 @@ const WrapAsync = require("../Utils/WrapAsync")
 const LetterModel = require("../Models/lettersModel")
 
 module.exports.getAllLetters = WrapAsync(async (req, res) => {
-    const letters = await LetterModel.find({}).sort({ date: -1 });
+    const { key } = req.query
+    const letters = await LetterModel.find({
+        $or: [
+            { title: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { content: { $regex: new RegExp(key, "i") } },
+            { visibility: { $regex: new RegExp(key, "i") } }
+        ]
+    }).sort({ date: -1 });
     res.status(200).json({
         success: true,
         data: letters
@@ -27,7 +35,7 @@ module.exports.createLetter = WrapAsync(async (req, res, next) => {
     const letter = req.body;
     const newletter = new LetterModel({ ...letter, createdBy: req.user._id })
     await newletter.save()
-    const allletters = await LetterModel.find()
+    const allletters = await LetterModel.find().sort({ date: -1 })
     res.status(200).json({
         success: true,
         data: allletters
@@ -42,7 +50,7 @@ module.exports.updateLetter = WrapAsync(async (req, res, next) => {
         throw new ExpressError("letter not found", 404);
     }
     await LetterModel.findByIdAndUpdate(_id, { ...updatedletter, updatedAt: Date.now(), createdBy: req.user._id }, { new: true, runValidators: true })
-    const allletters = await LetterModel.find()
+    const allletters = await LetterModel.find().sort({ date: -1 })
     res.status(200).json({
         success: true,
         data: allletters
@@ -57,7 +65,7 @@ module.exports.deleteLetter = WrapAsync(async (req, res, next) => {
         throw new ExpressError("letter not found", 404);
     }
     await LetterModel.findByIdAndDelete(_id)
-    const allletters = await LetterModel.find()
+    const allletters = await LetterModel.find().sort({ date: -1 })
     res.status(200).json({
         success: true,
         data: allletters

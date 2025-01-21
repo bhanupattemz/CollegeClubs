@@ -5,7 +5,8 @@ const AdminGalleryModel = require("../Models/adminsGalleryModel")
 const GalleryModel = require("../Models/galleryModel")
 
 module.exports.getAllClubPhotos = WrapAsync(async (req, res) => {
-    const clubPhotos = await ClubGalleryModel.find({});
+    const clubPhotos = await ClubGalleryModel.find({
+    });
     res.status(200).json({
         success: true,
         data: clubPhotos
@@ -76,9 +77,15 @@ module.exports.deleteClubPhoto = WrapAsync(async (req, res, next) => {
 
 
 //Gallery of admin Photos 
-
 module.exports.getAllAdminPhotos = WrapAsync(async (req, res) => {
-    const adminPhotos = await AdminGalleryModel.find({});
+    const { key } = req.query
+    const adminPhotos = await AdminGalleryModel.find({
+        $or: [
+            { occasion: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { captions: { $regex: new RegExp(key, "i") } }
+        ]
+    });
     res.status(200).json({
         success: true,
         data: adminPhotos
@@ -141,14 +148,7 @@ module.exports.deleteAdminPhoto = WrapAsync(async (req, res, next) => {
 
 
 
-
-
-
-
-
 //Gallery of all Photos
-
-
 module.exports.getAllPhotos = WrapAsync(async (req, res) => {
     const Photos = await GalleryModel.find({ club: undefined }).sort({ date: -1 });
     res.status(200).json({

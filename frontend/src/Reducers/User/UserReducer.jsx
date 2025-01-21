@@ -27,6 +27,12 @@ import {
     RESET_PASSWORD_TOKEN_GENERATE_REQUEST,
     RESET_PASSWORD_TOKEN_GENERATE_SUCCESS,
     RESET_PASSWORD_TOKEN_GENERATE_FAIL,
+    GENERATE_ADMIN_REQUEST,
+    GENERATE_ADMIN_SUCCESS,
+    GENERATE_ADMIN_FAIL,
+    ADMIN_SIGNUP_REQUEST,
+    ADMIN_SIGNUP_SUCCESS,
+    ADMIN_SIGNUP_FAIL,
     SET_IS_UPDATE_FALSE,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
@@ -165,6 +171,28 @@ const userSlice = createSlice({
                 state.isUpdated = true
             })
             .addCase(RESET_PASSWORD_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(GENERATE_ADMIN_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(GENERATE_ADMIN_SUCCESS, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(GENERATE_ADMIN_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(ADMIN_SIGNUP_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(ADMIN_SIGNUP_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.user = action.payload.data;
+                state.isauthenticate = action.payload.isauthenticate
+            })
+            .addCase(ADMIN_SIGNUP_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

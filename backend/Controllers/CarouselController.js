@@ -3,7 +3,13 @@ const WrapAsync = require("../Utils/WrapAsync")
 const CarouselModel = require("../Models/carouselModel")
 
 module.exports.getAllCarousels = WrapAsync(async (req, res) => {
-    const carousels = await CarouselModel.find({});
+    const { key } = req.query
+    const carousels = await CarouselModel.find({
+        $or: [
+            { heading: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+        ]
+    });
     res.status(200).json({
         success: true,
         data: carousels

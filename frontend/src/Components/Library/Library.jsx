@@ -3,7 +3,7 @@ import Banner from "../Clubs/Banner"
 import BookCard from "./BookCard"
 import OpenLibraryBooks from "./OpenLibraryBooks"
 import { Fragment, useEffect, useState } from "react"
-import PDFViewer from "../Annocements/PDFViewer/PDFViewer"
+import PDFViewer from "../Announcements/PDFViewer/PDFViewer"
 import LibraryAcademicForm from "./LibraryAcademicForm"
 import { useSelector } from "react-redux"
 export default function Library() {

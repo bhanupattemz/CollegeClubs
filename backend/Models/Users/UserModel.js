@@ -3,8 +3,8 @@ const passportLocalMongoose = require("passport-local-mongoose")
 const options = { discriminatorKey: '__t', collection: 'users' };
 const ClubsModel = require("../Clubs/clubsModel")
 const EventsModel = require("../eventModel")
-const PastMember = require("../PastMembers/pastMembers")
-const PastAdmin = require("../PastMembers/pastAdmin");
+const PastMember = require("../PastMembers/pastStudent")
+const { deleteFromClodinary } = require("../../functionalities")
 const userSchema = new mongoose.Schema({
     mail: {
         type: String,
@@ -46,79 +46,73 @@ const userSchema = new mongoose.Schema({
     resetPasswordToken: { type: String },
     resetPasswordExpire: { type: Date }
 }, options);
+
+
 userSchema.post("findOneAndDelete", async (user, next) => {
     if (user) {
+        deleteFromClodinary(user.personalInformation.profile)
         try {
-            if (user.role === "student" || user.role === "coordinator") {
-                let registeredClubs = await ClubsModel.find({ members: user._id }).select('name');
-                registeredClubs = registeredClubs.map(club => club.name);
-
-                let managedClubs = await ClubsModel.find({ coordinators: user._id }).select('name');
-                managedClubs = managedClubs.map(club => club.name);
-
-
+            if (user.role === "coordinator") {
+                let managedClubs = await ClubsModel.find({ coordinators: { $elemMatch: { details: user._id } } }).select('name coordinators');
+                managedClubs = managedClubs.map(club => {
+                    let coordinatorAt = null;
+                    club.coordinators.forEach((coordinator) => {
+                        if (coordinator.details.equals(user._id)) {
+                            coordinatorAt = coordinator.coordinatorAt;
+                        }
+                    });
+                    return {
+                        name: club.name,
+                        duration: {
+                            joined: coordinatorAt,
+                            left: Date.now(),
+                        }
+                    }
+                });
                 await ClubsModel.updateMany(
                     { members: user._id },
                     { $pull: { members: user._id } }
                 );
-
-
                 const existedData = await PastMember.findOne({ admissionNo: user.admissionNo });
-
                 if (existedData) {
                     await PastMember.findOneAndUpdate(
                         { admissionNo: user.admissionNo },
                         {
                             $push: {
-                                registeredClubs: { $each: registeredClubs },
                                 managedClubs: { $each: managedClubs }
                             }
                         }
                     );
                 } else {
-
                     const pastmember = {
                         admissionNo: user.admissionNo,
                         name: user.username,
-                        mail: user.personalInformation.personalMail || user.mail,
+                        mail: user.personalInformation.personalMail,
                         mobile: user.personalInformation.mobileNo,
-                        registeredClubs: registeredClubs,
                         managedClubs: managedClubs,
-                        description: user.description,
                         duration: {
                             joined: user.createdAt,
                             left: Date.now()
                         },
-                        department: user.branch
+                        department: user.branch,
+                        workedAs: "coordinator"
                     };
-
-                    if (registeredClubs.length > 0 || managedClubs.length > 0) {
-                        const pastUser = new PastMember(pastmember);
-                        await pastUser.save();
-                    }
+                    const pastUser = new PastMember(pastmember);
+                    await pastUser.save();
                 }
-
-
                 await EventsModel.updateMany(
                     { members: user._id },
                     { $pull: { members: user._id } }
                 );
-
-
-                if (user.role === "coordinator") {
-                    await ClubsModel.updateMany(
-                        { coordinators: user._id },
-                        { $pull: { coordinators: user._id } }
-                    );
-                }
-
+                await ClubsModel.updateMany(
+                    { coordinators: { $elemMatch: { details: user._id } } },
+                    { $pull: { coordinators: { details: user._id } } }
+                );
             } else if (user.role === "admin") {
-
                 const PastUser = {
                     name: user.username,
-                    mail: user.personalInformation.personalMail || user.mail,
+                    mail: user.mail,
                     mobile: user.personalInformation.mobileNo,
-                    description: user.description,
                     duration: {
                         joined: user.createdAt,
                         left: Date.now()
@@ -126,11 +120,7 @@ userSchema.post("findOneAndDelete", async (user, next) => {
                     department: user.department,
                     workedAs: user.workedAs
                 };
-
-                const pastAdmin = new PastAdmin(PastUser);
-                await pastAdmin.save();
             }
-
             next();
         } catch (err) {
             console.error("Error occurred:", err);

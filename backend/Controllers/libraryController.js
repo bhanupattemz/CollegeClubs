@@ -3,8 +3,18 @@ const WrapAsync = require("../Utils/WrapAsync")
 const AcademicBooksModel = require("../Models/Library/academicModel")
 
 module.exports.getAllAcademicBooks = WrapAsync(async (req, res) => {
-    const data = req.query
-    const academicBooks = await AcademicBooksModel.find({ ...data });
+    let data = req.query
+    const key = data.key
+    data = { ...data, key: undefined }
+    const academicBooks = await AcademicBooksModel.find({
+        ...data,
+        $or: [
+            { title: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { subject: { $regex: new RegExp(key, "i") } },
+            { type: { $regex: new RegExp(key, "i") } }
+        ]
+    });
     if (academicBooks.length == 0) {
         throw new ExpressError("No Books Match Your Search", 404)
     }

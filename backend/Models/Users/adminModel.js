@@ -10,7 +10,9 @@ const adminSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        maxlength: 300
+        minlength: 200,
+        maxlength: 500,
+        required: true
     },
     workedAs: {
         type: String,

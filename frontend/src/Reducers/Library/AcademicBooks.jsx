@@ -3,6 +3,9 @@ import {
     GET_ACADEMIC_BOOKS_REQUEST,
     GET_ACADEMIC_BOOKS_SUCCESS,
     GET_ACADEMIC_BOOKS_FAIL,
+    ADMIN_DELETE_ACADEMIC_BOOKS_REQUEST,
+    ADMIN_DELETE_ACADEMIC_BOOKS_SUCCESS,
+    ADMIN_DELETE_ACADEMIC_BOOKS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -38,6 +41,19 @@ const academicBookSlice = createSlice({
                 state.academicBooksCount=action.payload.data.length || 0
             })
             .addCase(GET_ACADEMIC_BOOKS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(ADMIN_DELETE_ACADEMIC_BOOKS_REQUEST, (state) => {
+                state.loading = true;
+                state.academicBooks = null
+            })
+            .addCase(ADMIN_DELETE_ACADEMIC_BOOKS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.academicBooks = action.payload.data;
+                state.academicBooksCount=action.payload.data.length || 0
+            })
+            .addCase(ADMIN_DELETE_ACADEMIC_BOOKS_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

@@ -3,6 +3,9 @@ import {
     GET_FEST_EVENTS_REQUEST,
     GET_FEST_EVENTS_SUCCESS,
     GET_FEST_EVENTS_FAIL,
+    DELETE_FEST_EVENT_REQUEST,
+    DELETE_FEST_EVENT_SUCCESS,
+    DELETE_FEST_EVENT_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -38,6 +41,19 @@ const festEventsSlice = createSlice({
                 state.length = action.payload.length
             })
             .addCase(GET_FEST_EVENTS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(DELETE_FEST_EVENT_REQUEST, (state) => {
+                state.loading = true;
+                state.festEvents = null
+            })
+            .addCase(DELETE_FEST_EVENT_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.festEvents = action.payload.data;
+                state.length = action.payload.length
+            })
+            .addCase(DELETE_FEST_EVENT_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

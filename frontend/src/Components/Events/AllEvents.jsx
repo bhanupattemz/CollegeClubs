@@ -70,17 +70,17 @@ export default function AllEvents() {
             <section className="all-events">
                 {currentState == "all" && (events && events.length != 0 ?
                     events.map((item) => {
-                        return <Event key={item._id} event={item} />;
+                        return item.isactive &&  <Event key={item._id} event={item} />;
                     }) : <NoEvents />)
                 }
                 {currentState == "past" && (pastevents.length > 0 ?
                     pastevents.map((item, inx) => {
-                        return <Event key={inx} event={item} />
+                        return item.isactive && <Event key={inx} event={item} />
                     }) : <NoEvents />)
                 }
                 {currentState == "feature" && (featureEvents.length > 0 ?
                     featureEvents.map((item, inx) => {
-                        return <Event key={inx} event={item} />
+                        return item.isactive && <Event key={inx} event={item} />
                     }) : <NoEvents />)
                 }
             </section>

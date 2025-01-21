@@ -32,6 +32,15 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    createdClub: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Club',
+        required: true
+    },
+    isactive: {
+        type: Boolean,
+        default: false
+    },
     image: {
         public_id: {
             type: String,

@@ -1,19 +1,26 @@
 const mongoose = require('mongoose');
-const MemberModel = require("./members")
+const MemberModel = require("./members");
+const { Certificate } = require('crypto');
 const eventSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "event name is required"],
         unique: true
     },
-    amount:{
-        type:Number,
-        required:true
+    subheading: {
+        type: String,
+        required: [true, "event subheading is required"],
+        maxlength: 100
+    },
+    amount: {
+        type: Number,
+        required: true
     },
     description: {
         type: String,
         required: [true, "event description is required"],
-        maxlength: 500
+        min: 250,
+        maxlength: 800
     },
     members: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -45,10 +52,25 @@ const eventSchema = new mongoose.Schema({
             required: true
         }
     },
+    pdf: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
+    },
     createdAt: {
         type: Date,
         default: Date.now
     },
+    prizes: [{
+        name: { type: String, required: true },
+        amount: { type: Number, required: true },
+        certificate: { type: Boolean, required: true }
+    }],
     winner: [{
         name: {
             type: String,
@@ -72,7 +94,12 @@ const eventSchema = new mongoose.Schema({
             type: String,
             required: [true, "Please enter course."]
         },
-        year: {
+        branch: {
+            type: String,
+            enum: ["cse", 'ece', 'eee', 'civ', 'mech', 'chem'],
+            required: true
+        },
+        academicYear: {
             type: Number,
             required: [true, "please enter year of studying."],
             min: 1,

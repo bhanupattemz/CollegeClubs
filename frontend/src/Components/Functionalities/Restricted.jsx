@@ -1,5 +1,5 @@
 export default function Restricted(){
     return(
-        <h1>Page Restrictec</h1>
+        <h1>Page Restricted</h1>
     )
 }

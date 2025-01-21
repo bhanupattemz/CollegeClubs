@@ -28,7 +28,7 @@ export default function DonationForm() {
     const { loading } = useSelector(state => state.donars)
     const [capLoading, setCapLoading] = useState(false)
     const { clubs } = useSelector(state => state.clubs)
-
+    const { user } = useSelector(state => state.user)
     const [CaptchaValue, setCaptchaValue] = useState()
     function onChange(value) {
         setCaptchaValue(value)
@@ -55,6 +55,15 @@ export default function DonationForm() {
             dispatch(getAllclubs())
         }
     }, [])
+    useEffect(()=>{
+        if(user){
+            setFormData(prev=>({...prev,
+                name:`${user.personalInformation.firstname} ${user.personalInformation.lastname}`,
+                mail:user.mail,
+                mobileNo:user.personalInformation.mobileNo
+            }))
+        }
+    },[user])
     if (loading || capLoading) {
         return <Loading />
     }
@@ -68,11 +77,12 @@ export default function DonationForm() {
                     label="Enter Full Name"
                     variant="outlined"
                     placeholder={`Firstname Lastname`}
+                    value={formData.name}
                     onChange={(e) =>
                         setFormData(prev => ({ ...prev, name: e.target.value }))
                     }
                 />
-                 <TextField
+                <TextField
                     disabled={anonymous}
                     required
                     id="Mail"
@@ -80,6 +90,7 @@ export default function DonationForm() {
                     variant="outlined"
                     type="email"
                     placeholder={`example@gmail.com`}
+                    value={formData.mail}
                     onChange={(e) =>
                         setFormData(prev => ({ ...prev, mail: e.target.value }))
                     }
@@ -90,6 +101,7 @@ export default function DonationForm() {
                     label="Mobile No"
                     variant="outlined"
                     type="number"
+                    value={formData.mobileNo}
                     onChange={(e) =>
                         setFormData(prev => ({ ...prev, mobileNo: e.target.value }))
                     }
