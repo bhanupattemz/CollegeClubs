@@ -110,6 +110,7 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/gallery')}>All Main Photos</div>
                                 <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/gallery/create')}>Create Gallery</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/gallery')}>Update Gallery</div>}
                             </div>
                         }
                     </div>

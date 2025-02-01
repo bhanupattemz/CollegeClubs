@@ -61,6 +61,7 @@ import AdminAllFestsMembers from "./Components/Dashboard/Admin/Fests/Members/Mem
 import AdminUpdateFestMember from "./Components/Dashboard/Admin/Fests/Members/Updatemembers"
 import AdminAllGallery from "./Components/Dashboard/Admin/Gallery/AdminAllGallery"
 import AdminCreateGallery from "./Components/Dashboard/Admin/Gallery/CreateGallery"
+import AdminUpdateGallery from "./Components/Dashboard/Admin/Gallery/UpdateGallery"
 import AdminMessages from "./Components/Dashboard/Admin/Messages/Messages"
 import AdminAllAnnouncements from "./Components/Dashboard/Admin/Announcements_Letters/Announcements"
 import AdminCreateAnnouncement from "./Components/Dashboard/Admin/Announcements_Letters/CreateAnnouncement"
@@ -90,6 +91,7 @@ import CoordinatorClubMembers from "./Components/Dashboard/Coordinnator/Clubs/Cl
 import CoordinatorUpdateClub from "./Components/Dashboard/Coordinnator/Clubs/UpdateClub"
 import CoordinatorClubGallery from "./Components/Dashboard/Coordinnator/Gallery/ClubGallery"
 import CoordinatorCreateGallery from "./Components/Dashboard/Coordinnator/Gallery/CreateGallery"
+import CoordinatorUpdateGallery from "./Components/Dashboard/Coordinnator/Gallery/UpdateGallery"
 import PageNotfound from "./Components/Functionalities/PageNotFound"
 function App() {
   const dispatch = useDispatch();
@@ -158,6 +160,7 @@ function App() {
         <Route path="/admin/fests/members/update/:_id" element={<ProtectedRoute isIn={["admin"]} element={<AdminUpdateFestMember />} />} />
         <Route path="/admin/gallery" element={<ProtectedRoute isIn={["admin"]} element={<AdminAllGallery />} />} />
         <Route path="/admin/gallery/create" element={<ProtectedRoute isIn={["admin"]} element={<AdminCreateGallery />} />} />
+        <Route path="/admin/gallery/update/:_id" element={<ProtectedRoute isIn={["admin"]} element={<AdminUpdateGallery />} />} />
         <Route path="/admin/messages" element={<ProtectedRoute isIn={["admin"]} element={<AdminMessages />} />} />
         <Route path="/admin/announcements" element={<ProtectedRoute isIn={["admin"]} element={<AdminAllAnnouncements />} />} />
         <Route path="/admin/announcements/create" element={<ProtectedRoute isIn={["admin"]} element={<AdminCreateAnnouncement />} />} />
@@ -186,6 +189,7 @@ function App() {
         <Route path="/coordinator/clubs/update/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorUpdateClub />} />} />
         <Route path="/coordinator/gallery" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorClubGallery />} />} />
         <Route path="/coordinator/gallery/create" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorCreateGallery />} />} />
+        <Route path="/coordinator/gallery/update/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorUpdateGallery />} />} />
         <Route path="/*" element={<PageNotfound />} />
       </Routes>
       <Footer />

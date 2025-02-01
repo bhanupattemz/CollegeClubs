@@ -1,4 +1,4 @@
-import "../../Admin/Gallery/CreateGallery.css"
+import "../../Admin/Gallery/UpsertGallery.css"
 import CoordinatorSetup from "../CoordinatorSetup"
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -92,8 +92,8 @@ export default function CreateGallery() {
     }, [allClubs, user])
     if (ClubLoading || loading || createLoading) return <CoordinatorSetup current="gallery" option="Create" element={<Loading />} />
     return <CoordinatorSetup current="gallery" option="Create" element={
-        <form onSubmit={formSubmitHandler} className="create-gallery-form">
-            <section className="create-gallery-section-1">
+        <form onSubmit={formSubmitHandler} className="Upsert-gallery-form">
+            <section className="Upsert-gallery-section-1">
                 <TextField
                     required
                     id="occasion"
@@ -126,7 +126,7 @@ export default function CreateGallery() {
                     ))}
                 </TextField>
             </section>
-            <section className="create-gallery-section-2">
+            <section className="Upsert-gallery-section-2">
                 <TextField
                     required
                     id="captions"
@@ -143,7 +143,7 @@ export default function CreateGallery() {
                     }
                 />
             </section>
-            <section className="create-gallery-section-3">
+            <section className="Upsert-gallery-section-3">
                 <div>
                     <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
                         Upload Images
@@ -155,7 +155,7 @@ export default function CreateGallery() {
                         return (
                             <div>
                                 <img src={image} />
-                                <span className="create-gallery-remove-icon"
+                                <span className="Upsert-gallery-remove-icon"
                                     onClick={() => {
                                         setFormData(prev => {
                                             const index = prev.images.findIndex(img => JSON.stringify(img) === JSON.stringify(image));
@@ -174,7 +174,7 @@ export default function CreateGallery() {
                     })}
                 </div> : <div className="create-club-no-images">No Selected Any Image</div>}
             </section>
-            <Button type="submit" variant="contained" className="create-gallery-submit-btn">Submit</Button>
+            <Button type="submit" variant="contained" className="Upsert-gallery-submit-btn">Submit</Button>
         </form>
     } />
 }

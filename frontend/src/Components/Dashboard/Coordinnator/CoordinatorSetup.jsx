@@ -81,6 +81,7 @@ export default function CoordinatorSetup({ current, element, option }) {
                             <div className="coordinator-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/coordinator/gallery')}>All Main Photos</div>
                                 <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/coordinator/gallery/create')}>Create Gallery</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/coordinator/gallerys')}>Update Gallery</div>}
                             </div>
                         }
                     </div>

@@ -33,7 +33,7 @@ router.route("/")
 
 router.route("/:_id")
     .get(GalleryController.getOnePhoto)
-    .put(isLoggedIn, isAdmin, GalleryController.updatePhoto)
+    .put(upload.array("images"), isLoggedIn, isOrganizers, GalleryController.updatePhoto)
     .delete(isLoggedIn, isAdmin, GalleryController.deletePhoto)
 
 

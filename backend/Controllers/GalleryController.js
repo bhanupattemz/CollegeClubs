@@ -165,28 +165,51 @@ module.exports.getOnePhoto = WrapAsync(async (req, res) => {
     const Photo = await GalleryModel.findById(_id)
     if (!Photo) {
         throw new ExpressError("Photo not found", 404);
-
     }
     res.status(200).json({
         success: true,
         data: Photo
     })
 })
-
 module.exports.updatePhoto = WrapAsync(async (req, res, next) => {
-    const updatedPhoto = req.body;
+    const bodyData = req.body;
     const { _id } = req.params;
+
     const Photo = await GalleryModel.findById(_id);
     if (!Photo) {
         throw new ExpressError("Photo not found", 404);
     }
-    await GalleryModel.findByIdAndUpdate(_id, updatedPhoto, { new: true, runValidators: true })
-    const allPhotos = await GalleryModel.find()
-    res.status(200).json({
-        success: true,
-        data: allPhotos
-    })
-})
+
+    let updatedGallery = {
+        occasion: bodyData.occasion,
+        captions: bodyData.captions,
+        images: req.files.map(f => ({ public_id: f.filename, url: f.path })),
+    };
+
+    const delImages = JSON.parse(bodyData.delImages || "[]");
+    const delPublic_Ids = delImages.map((image) => image.public_id)
+    for (let image of Photo.images) {
+        if (!delPublic_Ids.includes(image.public_id)) {
+            updatedGallery.images.push(image);
+        }
+    }
+
+    if (Photo.club) {
+        const club = await ClubModel.findOne({ _id: Photo.club, "coordinators.details": req.user._id });
+
+        updatedGallery.club = bodyData.club || Photo.club;
+
+        if (!club && req.user.role !== "admin") {
+            throw new ExpressError("Didn't have permission to update the gallery", 400);
+        }
+        await ClubGalleryModel.findByIdAndUpdate(_id, updatedGallery, { runValidators: true });
+    } else {
+        await AdminGalleryModel.findByIdAndUpdate(_id, updatedGallery, { runValidators: true });
+    }
+    delImages.forEach(deleteFromClodinary);
+    res.status(200).json({ success: true });
+});
+
 
 module.exports.deletePhoto = WrapAsync(async (req, res, next) => {
     const { _id } = req.params;
