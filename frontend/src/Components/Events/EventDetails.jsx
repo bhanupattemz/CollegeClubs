@@ -88,7 +88,7 @@ export default function EventDetails() {
                             <div>
                                 <p>{singleEvent.description}</p>
                             </div>
-                            {new Date(singleEvent.timings.starting).getTime() > Date.now() &&
+                            {new Date(singleEvent.registration.ending).getTime() > Date.now() &&
                                 <section className="event-details-apply-btn">
                                     {!singleEvent.members.includes(user ? user._id : null) && <button disabled={loading} onClick={registerEventBtnHandler}>Apply Now</button>}
                                 </section>
@@ -108,7 +108,7 @@ export default function EventDetails() {
                     <h2>Event Timings & Schedule</h2>
                     <div className="event-details-schedule">
                         <div>
-                            <Timer time={singleEvent.timings.starting} />
+                            <Timer time={singleEvent.registration.ending} />
                         </div>
                         <div className="event-details-page-details">
                             <div>

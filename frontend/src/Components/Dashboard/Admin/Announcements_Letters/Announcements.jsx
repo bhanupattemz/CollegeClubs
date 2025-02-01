@@ -21,10 +21,10 @@ export default function AdminAllAnnouncements() {
     const { announcements, loading } = useSelector(state => state.announcements)
     const columns = [
         { field: "id", headerName: "Sl. No" },
-        { field: "name", headerName: "Announcement Name", flex: 0.3 },
-        { field: "content", headerName: "Content", flex: 0.2 },
+        { field: "name", headerName: "Announcement Name", flex: 0.25 },
+        { field: "content", headerName: "Content", flex: 0.4 },
         {
-            field: "visibility", headerName: "Visibility", flex: 0.2,
+            field: "visibility", headerName: "Visibility", flex: 0.1,
             renderCell: (params) => {
                 if (params.value) {
                     return (
@@ -34,20 +34,7 @@ export default function AdminAllAnnouncements() {
                 }
             }
         },
-        { field: "createdAt", headerName: "CreatedAt", flex: 0.2 },
-        {
-            field: "open", headerName: "Open", flex: 0.1,
-            renderCell: (params) => {
-                if (params.value) {
-                    return (
-                        <div className="admin-all-events-link" onClick={() => navigate(`/admin/announcements/${params.value}`)}>
-                            <FaExternalLinkAlt />
-                        </div>
-                    )
-
-                }
-            }
-        },
+        { field: "createdAt", headerName: "CreatedAt", flex: 0.15 },
         {
             field: "edit", headerName: "Edit", flex: 0.1,
             renderCell: (params) => {
@@ -128,7 +115,6 @@ export default function AdminAllAnnouncements() {
                                 delete: Announcement,
                                 id: inx + 1,
                                 createdAt: ConvertTime(Announcement.date).split(",")[0],
-                                open: Announcement._id,
                                 visibility: Announcement.visibility
                             }
 

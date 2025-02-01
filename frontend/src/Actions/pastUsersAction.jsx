@@ -5,7 +5,11 @@ import {
     GET_PAST_MEMBERS_FAIL,
     DELETE_PAST_MEMBER_REQUEST,
     DELETE_PAST_MEMBER_SUCCESS,
-    DELETE_PAST_MEMBER_FAIL
+    DELETE_PAST_MEMBER_FAIL,
+    CREATE_PAST_MEMBER_REQUEST,
+    CREATE_PAST_MEMBER_SUCCESS,
+    CREATE_PAST_MEMBER_FAIL,
+    SET_PAST_MEMBER_SUCCESS_FALSE
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
 const axiosInstance = axios.create({
@@ -46,4 +50,26 @@ const adminDeletePastMember = (_id) => async (dispatch) => {
     }
 }
 
-export { getPastMembers, adminDeletePastMember }
+
+const createPastMember = (formData) => async (dispatch) => {
+    try {
+        dispatch({ type: CREATE_PAST_MEMBER_REQUEST })
+        const response = await axiosInstance.post(`/past_members`, formData)
+        dispatch({
+            type: CREATE_PAST_MEMBER_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CREATE_PAST_MEMBER_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+const setPastMemberFalse = () => async (dispatch) => {
+    dispatch({ type: SET_PAST_MEMBER_SUCCESS_FALSE })
+}
+export { getPastMembers, adminDeletePastMember, createPastMember, setPastMemberFalse }

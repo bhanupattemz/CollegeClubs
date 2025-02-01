@@ -61,3 +61,11 @@
     border: 2px solid red;
 }
 
+/* btns */
+.admin-all-club-download-btns{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0px;
+    gap: 10px;
+}

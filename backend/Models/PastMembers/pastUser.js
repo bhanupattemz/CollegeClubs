@@ -7,7 +7,6 @@ const pastUserSchema = new mongoose.Schema({
     },
     mail: {
         type: String,
-        unique: true,
         required: [true, "Please enter a valid email"],
         match: [/.+\@.+\..+/, "Please enter a valid email from jntua.ac.in"]
     },

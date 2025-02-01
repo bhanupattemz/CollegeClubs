@@ -1,0 +1,235 @@
+.Upsert-fest-event-section-1,
+.Upsert-fest-event-section-2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+.Upsert-fest-event-section-1 > div,
+.Upsert-fest-event-section-2 > div {
+    width: 49%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Section 1*/
+.Upsert-fest-event-basic-details h2,
+.Upsert-fest-event-timings h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.Upsert-fest-event-basic-details > div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Upsert-fest-event-basic-details .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.Upsert-fest-event-basic-details-row-1 {
+    display: flex;
+    gap: 15px;
+}
+
+.Upsert-fest-event-basic-details-row-1 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 48%;
+}
+
+/* Section 1*/
+.Upsert-fest-event-timings > div > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.Upsert-fest-event-timings .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+    width: 48%;
+}
+
+.Upsert-fest-event-timings .css-v0pjtz-MuiStack-root {
+    width: 100%;
+}
+
+/* Section 2 */
+.Upsert-fest-event-venue h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.Upsert-fest-event-venue > div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Upsert-fest-event-venue .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.Upsert-fest-event-img-file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.Upsert-fest-event-img-file img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.Upsert-fest-event-img-file label {
+    width: 100%;
+    text-align: center;
+}
+
+/* Section 3 */
+.Upsert-fest-event-prizes-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.Upsert-fest-event-prizes-section > div:nth-of-type(1) {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.Upsert-fest-event-prizes-section > div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 30%;
+}
+
+.fest-event-prizes {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.fest-event-prizes > div {
+    flex: 0 0 30%;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.fest-event-prizes span > svg {
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #ff4d4d;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.fest-event-prizes h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.fest-event-prizes p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Section 4 */
+.Upsert-fest-event-clubs {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.Upsert-fest-event-club {
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: #555;
+}
+
+.Upsert-fest-event-now-data {
+    color: #888;
+    font-style: italic;
+}
+
+.Upsert-fest-event-search-clubs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.Upsert-fest-event-search-clubs > div:nth-of-type(1) {
+    width: 70%;
+}
+
+.Upsert-fest-event-search-clubs > div:nth-of-type(2) {
+    width: 25%;
+}
+
+.Upsert-fest-event-search-clubs input {
+    width: 80%;
+    padding: 10px;
+    margin-right: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.Upsert-fest-event-search-clubs .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 0;
+}
+
+/* Submit Button */
+.Upsert-fest-event-submit-btn {
+    width: 60%;
+    margin: 20px 20%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0A5EB0;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Upsert-fest-event-submit-btn:hover {
+    background-color: #094a8a;
+}

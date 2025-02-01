@@ -1,0 +1,51 @@
+.Upsert-team-form {
+    width: 60%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px 5%;
+}
+
+.Upsert-team-form>section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+/* section 1 */
+.Upsert-team-section-1 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+}
+
+/* section2 */
+.Upsert-team-section-2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 49%;
+}
+
+
+/* section4  */
+.Upsert-team-section-4>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 49%;
+}
+
+.Upsert-team-section-4 img {
+    width: 80%;
+    height: 200px;
+    object-fit: contain;
+    margin: 10px 0px;
+}
+
+/* btn  */
+.Usert-team-btn {
+    width: 60%;
+    margin: 10px 20%;
+    padding: 8px 20px;
+    font-weight: 700;
+    background-color: #0A5EB0;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+}

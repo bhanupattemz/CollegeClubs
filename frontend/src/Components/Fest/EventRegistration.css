@@ -1,4 +1,4 @@
-.fest-event-registration-main{
+.fest-event-registration-main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,48 +6,63 @@
     min-height: 80vh;
 }
 
-.fest-event-registration-form{
+.fest-event-registration-form {
     width: 60%;
     padding: 20px 2%;
     background-color: aliceblue;
     min-height: 40vh;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     justify-content: space-evenly;
 }
 
-.fest-event-registration-form .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+.fest-event-registration-form .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
     margin: 10px 0px;
 }
-.fest-event-registration-form>div{
+
+.fest-event-registration-form>div {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.fest-event-registration-form>div:nth-of-type(2){
+
+.fest-event-registration-form>div:nth-of-type(2) {
     display: flex;
 }
 
-.fest-event-registration-form>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+.fest-event-registration-form>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
     width: 32%;
 }
-.fest-event-registration-form>div:nth-of-type(2) .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+
+.fest-event-registration-form>div:nth-of-type(2) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
     width: 49%;
 }
 
-.fest-event-registration-select{
+.event-registration-row-1-sub {
+    display: flex;
+    justify-content: space-between;
+    width: 33%;
+}
+
+.event-registration-row-1-sub .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 49% !important;
+}
+
+
+.fest-event-registration-select {
     display: flex;
     width: 49%;
     justify-content: space-between;
 }
+
 .fest-event-registration-select>div {
     width: 32% !important;
 }
 
 
 /* user details  */
-.fest-event-registration-details{
+.fest-event-registration-details {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -56,15 +71,18 @@
     padding: 0px 10%;
     background-color: aliceblue;
 }
-.fest-event-registration-details>div{
+
+.fest-event-registration-details>div {
     display: flex;
     /* width: 40%; */
 }
-.fest-event-registration-details>div>div:nth-of-type(1){
+
+.fest-event-registration-details>div>div:nth-of-type(1) {
     width: 30%;
 }
 
-.fest-event-recaptcha{
+
+.fest-event-recaptcha {
     width: 100%;
     display: flex;
     justify-content: center !important;

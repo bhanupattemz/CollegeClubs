@@ -6,6 +6,12 @@ import {
     DELETE_ADMINISTRATION_TEAM_REQUEST,
     DELETE_ADMINISTRATION_TEAM_SUCCESS,
     DELETE_ADMINISTRATION_TEAM_FAIL,
+    CREATE_ADMINISTRATION_TEAM_REQUEST,
+    CREATE_ADMINISTRATION_TEAM_SUCCESS,
+    CREATE_ADMINISTRATION_TEAM_FAIL,
+    UPDATE_ADMINISTRATION_TEAM_REQUEST,
+    UPDATE_ADMINISTRATION_TEAM_SUCCESS,
+    UPDATE_ADMINISTRATION_TEAM_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -57,7 +63,32 @@ const administrationTeamSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(CREATE_ADMINISTRATION_TEAM_REQUEST, (state) => {
+                state.loading = true;
+                state.administrationTeam = null
+            })
+            .addCase(CREATE_ADMINISTRATION_TEAM_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.administrationTeam = action.payload.data;
+                state.administrationTeamsCount = action.payload.data.length || 0
+                state.success = true
+            })
+            .addCase(CREATE_ADMINISTRATION_TEAM_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(UPDATE_ADMINISTRATION_TEAM_REQUEST, (state) => {
+                state.loading = true;
+                state.administrationTeam = null
+            })
+            .addCase(UPDATE_ADMINISTRATION_TEAM_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.success = true
+            })
+            .addCase(UPDATE_ADMINISTRATION_TEAM_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

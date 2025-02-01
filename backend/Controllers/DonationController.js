@@ -77,6 +77,21 @@ module.exports.createDonar = WrapAsync(async (req, res, next) => {
     })
 })
 
+
+module.exports.adminCreateDonar = WrapAsync(async (req, res, next) => {
+    const bodyData = req.body
+    const paymentInfo = {
+        paymentId: bodyData.paymentId,
+        status: true,
+        payedAt: bodyData.payedAt
+    }
+    const newdonar = DonationModel({ ...bodyData, paymentInfo })
+    await newdonar.save()
+    res.status(200).json({
+        success: true
+    })
+})
+
 module.exports.updateDonar = WrapAsync(async (req, res, next) => {
     const updateddonar = req.body;
     const { _id } = req.params;

@@ -1,0 +1,124 @@
+.coordinator-dashboard-main {
+    display: flex;
+    height: 85vh;
+    overflow: hidden;
+}
+
+.coordinator-setup-aside {
+    width: 20%;
+    height: 85vh;
+    border-right: 5px solid #0A5EB0;
+    transition: all ease 0.5s;
+    overflow: auto;
+}
+
+.coordinator-setup-aside>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.coordinator-setup-aside>div:not(:nth-of-type(1)) {
+    margin-bottom: 10px;
+}
+
+.coordinator-setup-aside h2 {
+    width: 80%;
+    padding: 10px 5%;
+    margin: 0px;
+    color: #0A5EB0;
+    font-size: larger;
+    border-radius: 6px;
+    transition: all ease-in 0.7s;
+}
+
+.coordinator-setup-aside h2:hover {
+    background: linear-gradient(90deg, #0A5EB0, #327fcc, #659cd3, #8ebae6);
+    color: white;
+    cursor: pointer;
+}
+
+.coordinator-setup-logo {
+    width: 80%;
+    padding: 10px 18% 10px 2%;
+    background-color: rgba(144, 196, 248, 0.21);
+    position: sticky;
+    top: 0;
+}
+
+/* section */
+.coordinator-setup-section {
+    width: 78%;
+    height: 85vh;
+    overflow: auto;
+    padding: 0px 1%;
+    background-color: #ecf1f5;
+}
+
+/* close btn  */
+.coordinator-close-btn,
+.coordinator-open-btn {
+    position: sticky;
+    z-index: 1;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: start !important;
+}
+
+.coordinator-close-btn button,
+.coordinator-open-btn button {
+    position: fixed;
+    cursor: pointer;
+    transition: all ease-in-out 0.5s;
+}
+
+.coordinator-close-btn button:hover,
+.coordinator-open-btn button:hover {
+    background-color: #0A5EB0;
+    border: 2px solid #0A5EB0;
+    color: white;
+}
+
+/* setup options  */
+.coordinator-setup-item-options {
+    width: 90%;
+    background-color: #ecf1f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0px;
+    animation-name: options;
+    animation-duration: 0.5s;
+    animation-direction: normal;
+    overflow: hidden;
+    transition: all ease-in 0.5s;
+}
+
+.coordinator-setup-item-options>div {
+    font-size: medium;
+    font-weight: 700;
+    width: 80%;
+    margin: 5px 0px;
+    cursor: pointer;
+    transition: all ease-in-out 0.5s;
+}
+
+.coordinator-setup-item-options>div:hover {
+    color: #0A5EB0;
+    opacity: 0.7;
+}
+
+@keyframes options {
+    from {
+        height: 0px;
+        padding: 0px;
+    }
+
+    to {
+        min-height: 60px;
+        padding: 10px 0px;
+    }
+}

@@ -17,10 +17,9 @@ module.exports.deleteFromClodinary = WrapAsync(async (image) => {
 module.exports.successFestEventRegistrationOptions = async (event, fest, user) => {
     let pdfBuffer = await createPDF(`<div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; width: 100%; max-width: 600px; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <div style="text-align: center; background-color: #2c3e50; color: white; padding: 15px; border-radius: 8px;">
-            <h2 style="font-size: 24px; margin: 0;">Event Ticket</h2>
+            <h2 style="font-size: 24px; margin: 0;">Event Receipt</h2>
             <p style="font-size: 16px;">For <strong>${user.name}</strong></p>
         </div>
-    
         <div style="margin-top: 20px;">
             <p style="font-size: 16px; color: #333; line-height: 1.6;">🎉 <strong>${event.name}</strong> - <strong>${fest.name}</strong></p>
             <p style="font-size: 16px; color: #555;">Event Date: <strong>${event.timings.starting}</strong></p>
@@ -118,6 +117,75 @@ module.exports.adminGenerateMailOptions = async (mail, user, _id) => {
             </div>
         `
     }
+}
 
 
+module.exports.setUserBlockStatusMail = async (user, adminMessage) => {
+    return {
+        mail: user.mail,
+        subject: `Account ${user.isBlocked ? "Blocked" : "Unblocked"} Notification`,
+        text: `Dear ${user.personalInformation.firstname},\n\nYour account has been ${user.isBlocked ? "blocked" : "unblocked"} by the admin.\n\nReason: ${adminMessage}\n\n${user.isBlocked ? "If you believe this is a mistake, please contact us." : "You now have full access to your account."}\n\nBest regards,\nSCA JNTUA CEA Team`,
+        message: `
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; border-radius: 8px; color: #333; border: 1px solid #ddd;">
+                <h2 style="color: ${user.isBlocked ? "#d9534f" : "#5cb85c"}; text-align: center;">
+                    Your Account Has Been ${user.isBlocked ? "Blocked ❌" : "Unblocked ✅"}
+                </h2>
+                <p style="font-size: 16px; color: #444; text-align: center;">
+                    Dear <strong>${user.personalInformation.firstname} ${user.personalInformation.lastname}</strong>,
+                </p>
+                <p style="font-size: 16px; color: #444; text-align: center;">
+                    ${user.isBlocked ? "Unfortunately, your account has been blocked due to the following reason:" : "Good news! Your account has been unblocked, and you now have full access."}
+                </p>
+                <blockquote style="font-style: italic; font-size: 14px; color: #555; background: #f8f8f8; padding: 10px; border-left: 4px solid #d9534f; margin: 20px 10px;">
+                    ${adminMessage}
+                </blockquote>
+                ${user.isBlocked ? `
+                    <p style="text-align: center;">
+                        If you believe this action was taken in error, please contact our support team.
+                    </p>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="${process.env.FRONTEND_URL}/contact" 
+                           style="background-color: #d9534f; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                           Contact Support
+                        </a>
+                    </div>
+                ` : ""}
+                <p style="font-size: 14px; color: #777; text-align: center; margin-top: 20px;">
+                    Best regards,<br>
+                    <strong>SCA JNTUA CEA Team</strong>
+                </p>
+            </div>
+        `
+    }
+}
+
+
+
+module.exports.adminDeleteUserOptions = async (user, adminMessage) => {
+    return {
+        mail: user.mail,
+        subject: "Account Deletion Notification",
+        text: `Dear ${user.personalInformation.firstname},\n\nYour account has been deleted by the admin.\n\nReason: ${adminMessage}\n\nPlease note that your account and all associated data are permanently deleted and cannot be recovered.\n\nBest regards,\nSCA JNTUA CEA Team`,
+        message: `
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; border-radius: 8px; color: #333; border: 1px solid #ddd;">
+                <h2 style="color: #d9534f; text-align: center;">Account Deletion Notification</h2>
+                <p style="font-size: 16px; color: #444; text-align: center;">
+                    Dear <strong>${user.personalInformation.firstname} ${user.personalInformation.lastname}</strong>,
+                </p>
+                <p style="font-size: 16px; color: #444; text-align: center;">
+                    We regret to inform you that your account has been deleted by the admin due to the following reason:
+                </p>
+                <blockquote style="font-style: italic; font-size: 14px; color: #555; background: #f8f8f8; padding: 10px; border-left: 4px solid #d9534f; margin: 20px 10px;">
+                    ${adminMessage}
+                </blockquote>
+                <p style="font-size: 16px; color: #444; text-align: center;">
+                    Please note that once deleted, your account and all associated data are permanently removed and cannot be recovered.
+                </p>
+                <p style="font-size: 14px; color: #777; text-align: center; margin-top: 20px;">
+                    Best regards,<br>
+                    <strong>SCA JNTUA CEA Team</strong>
+                </p>
+            </div>
+        `
+    }
 }

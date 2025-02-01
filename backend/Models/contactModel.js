@@ -18,8 +18,12 @@ const CarouselSchema = new mongoose.Schema({
         required: [true, "Subject is required. Please specify the purpose of your message."]
     },
     message: {
-        type: String, 
+        type: String,
         required: [true, "Message is required. Please enter the details of your query."]
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
     }
 });
 

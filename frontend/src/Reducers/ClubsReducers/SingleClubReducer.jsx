@@ -6,6 +6,13 @@ import {
     REGISTER_CLUB_REQUEST,
     REGISTER_CLUB_SUCCESS,
     REGISTER_CLUB_FAIL,
+    CREATE_CLUB_REQUEST,
+    CREATE_CLUB_SUCCESS,
+    CREATE_CLUB_FAIL,
+    UPDATE_CLUB_REQUEST,
+    UPDATE_CLUB_SUCCESS,
+    UPDATE_CLUB_FAIL,
+    SET_CLUB_SUCCESS_FALSE,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -52,6 +59,34 @@ const singleClubSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
+            .addCase(CREATE_CLUB_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(CREATE_CLUB_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.singleClub = action.payload.data;
+                state.success = true;
+            })
+            .addCase(CREATE_CLUB_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(UPDATE_CLUB_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(UPDATE_CLUB_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.singleClub = action.payload.data;
+                state.success = true;
+            })
+            .addCase(UPDATE_CLUB_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(SET_CLUB_SUCCESS_FALSE, (state, action) => {
+                state.success = false
+            })
+            
     },
 });
 

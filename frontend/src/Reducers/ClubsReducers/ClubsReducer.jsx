@@ -9,6 +9,9 @@ import {
     ADMIN_DELETE_CLUB_REQUEST,
     ADMIN_DELETE_CLUB_SUCCESS,
     ADMIN_DELETE_CLUB_FAIL,
+    GET_COORDINATOR_CLUBS_REQUEST,
+    GET_COORDINATOR_CLUBS_SUCCESS,
+    GET_COORDINATOR_CLUBS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -70,7 +73,18 @@ const clubSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(GET_COORDINATOR_CLUBS_REQUEST, (state) => {
+                state.loading = true;
+                state.clubs = null
+            })
+            .addCase(GET_COORDINATOR_CLUBS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.clubs = action.payload.data.length != 0 && action.payload.data;
+            })
+            .addCase(GET_COORDINATOR_CLUBS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

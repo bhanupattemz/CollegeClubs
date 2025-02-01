@@ -6,6 +6,13 @@ import {
     REGISTER_EVENT_REQUEST,
     REGISTER_EVENT_SUCCESS,
     REGISTER_EVENT_FAIL,
+    CREATE_EVENT_REQUEST,
+    CREATE_EVENT_SUCCESS,
+    CREATE_EVENT_FAIL,
+    UPDATE_EVENT_REQUEST,
+    UPDATE_EVENT_SUCCESS,
+    UPDATE_EVENT_FAIL,
+    SET_EVENT_SUCCESS_FALSE,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -52,6 +59,34 @@ const singleEventlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
+            .addCase(CREATE_EVENT_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(CREATE_EVENT_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.singleEvent = action.payload.data;
+                state.success = true
+            })
+            .addCase(CREATE_EVENT_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(UPDATE_EVENT_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(UPDATE_EVENT_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.singleEvent = action.payload.data;
+                state.success = true
+            })
+            .addCase(UPDATE_EVENT_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(SET_EVENT_SUCCESS_FALSE, (state, action) => {
+                state.success = false
+            })
+
 
     },
 });

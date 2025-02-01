@@ -3,7 +3,15 @@ const WrapAsync = require("../Utils/WrapAsync")
 const ContactModel = require("../Models/contactModel")
 
 module.exports.getAllContactMsgs = WrapAsync(async (req, res) => {
-    const ContactMsgs = await ContactModel.find({});
+    const { key } = req.query
+    const ContactMsgs = await ContactModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { mail: { $regex: new RegExp(key, "i") } },
+            { message: { $regex: new RegExp(key, "i") } },
+            { subject: { $regex: new RegExp(key, "i") } }
+        ]
+    }).sort({ createdAt: -1 });
     res.status(200).json({
         success: true,
         data: ContactMsgs

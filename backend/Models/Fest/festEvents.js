@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const MemberModel = require("./members");
-const { Certificate } = require('crypto');
 const eventSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "event name is required"],
-        unique: true
+        required: [true, "event name is required"]
     },
     subheading: {
         type: String,
@@ -85,7 +83,7 @@ const eventSchema = new mongoose.Schema({
             required: [true, ""],
             match: [/.+\@.+\..+/, "Please enter a valid email."]
         },
-        phone: {
+        mobileNo: {
             type: Number,
             required: [true, "Please enter your phone number."],
             length: [10, "Phone Number must be 10 numbers."]
@@ -104,6 +102,11 @@ const eventSchema = new mongoose.Schema({
             required: [true, "please enter year of studying."],
             min: 1,
             max: 4
+        },
+        gender: {
+            type: String,
+            enum: ["male", 'female', 'others'],
+            required: true
         }
     }]
 });

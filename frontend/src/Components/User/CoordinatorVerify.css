@@ -1,0 +1,29 @@
+.coordinator-verify-main{
+    width: 100%;
+    min-height: 85vh;
+    background-color: #ecf1f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.coordinator-verify-main form{
+    width: 60%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly ;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.coordinator-verify-main .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+    margin: 10px 20px;
+    width: 90%;
+}
+
+.coordinator-verify-main button{
+    width: 60%;
+    margin-bottom: 10px;
+}

@@ -10,7 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { ConvertTime } from "../../../Functionalities/functionalites"
 import { confirmAlert } from 'react-confirm-alert';
-
+import XlsxButton from "../../../Functionalities/XlsxButton"
 export default function AdminAlldonations() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -21,7 +21,7 @@ export default function AdminAlldonations() {
     const columns = [
         { field: "id", headerName: "Payment Id" },
         { field: "name", headerName: "Name", flex: 0.2 },
-        { field: "note", headerName: "Note", flex: 0.2 },
+        { field: "note", headerName: "Note", flex: 0.3 },
         { field: "mail", headerName: "Mail", flex: 0.3 },
         { field: "phone", headerName: "Mobile No", flex: 0.2 },
         { field: "club", headerName: "Club", flex: 0.2 },
@@ -102,7 +102,7 @@ export default function AdminAlldonations() {
                         rows={donars && donars.map((donation, inx) => {
                             return {
                                 name: donation.name,
-                                note: donation.Note ? donation.Note : "No Note",
+                                note: donation.note ? donation.note : "No Note",
                                 edit: donation._id,
                                 delete: donation,
                                 id: donation.paymentInfo ? donation.paymentInfo.paymentId : inx + 1,
@@ -116,6 +116,23 @@ export default function AdminAlldonations() {
                         })}
                         sx={{ minHeight: "60vh", backgroundColor: "" }}
                     />
+                    <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
+                        <XlsxButton filename={"Donations"}
+                            data={donars && donars.map((donation, inx) => {
+                                return {
+                                    Id: donation.paymentInfo?.paymentId,
+                                    Name: donation.name,
+                                    Note: donation.note ? donation.note : "No Note",
+                                    Amount: `₹${donation.amount}`,
+                                    Club: donation.club ? donation.club.name : "General",
+                                    Phone: donation.phone ? donation.phone : "Anonymous",
+                                    Mail: donation.mail,
+                                    Created_At: ConvertTime(donation.createdAt),
+                                }
+
+                            })}
+                        />
+                    </div>
                 </div>
             </section>}
         />

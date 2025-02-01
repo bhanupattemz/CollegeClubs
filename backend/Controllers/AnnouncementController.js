@@ -1,7 +1,7 @@
 const ExpressError = require("../Utils/ExpressError")
 const WrapAsync = require("../Utils/WrapAsync")
 const AnnouncementModel = require("../Models/announcementModel")
-
+const { deleteFromClodinary } = require("../functionalities")
 
 module.exports.getAllAnnouncements = WrapAsync(async (req, res) => {
     let Announcements;
@@ -62,7 +62,20 @@ module.exports.getOneAnnouncement = WrapAsync(async (req, res) => {
 
 
 module.exports.createAnnouncement = WrapAsync(async (req, res, next) => {
-    const announcement = req.body;
+    const bodydata = req.body;
+    let pdf;
+    if (req.file) {
+        pdf = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        };
+    }
+    let announcement = {
+        title: bodydata.title,
+        content: bodydata.content,
+        pdf: pdf,
+        visibility: bodydata.visibility
+    }
     const newannouncement = AnnouncementModel({ ...announcement, createdBy: req.user })
     await newannouncement.save()
     const allAnnouncements = await AnnouncementModel.find().sort({ date: -1 })
@@ -73,14 +86,27 @@ module.exports.createAnnouncement = WrapAsync(async (req, res, next) => {
 })
 
 module.exports.updateAnnouncement = WrapAsync(async (req, res, next) => {
-    const updatedAnnouncement = req.body;
+    const bodydata = req.body;
     const { _id } = req.params;
     const Announcement = await AnnouncementModel.findById(_id)
     if (!Announcement) {
         throw new ExpressError("Announcements not found", 404);
     }
-    if (Announcement.createdBy !== req.user && req.user.role !== "admin") {
-        throw new ExpressError("You are not allowed to Update this announcement.", 403)
+    let pdf;
+    if (req.file) {
+        deleteFromClodinary(Announcement.pdf)
+        pdf = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        };
+    } else {
+        pdf = Announcement.pdf
+    }
+    let updatedAnnouncement = {
+        title: bodydata.title,
+        content: bodydata.content,
+        pdf: pdf,
+        visibility: bodydata.visibility
     }
     await AnnouncementModel.findByIdAndUpdate(_id, updatedAnnouncement, { new: true, runValidators: true })
     const allAnnouncements = await AnnouncementModel.find().sort({ date: -1 })

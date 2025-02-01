@@ -4,7 +4,7 @@ const studentSchema = new mongoose.Schema({
     admissionNo: {
         type: String,
         required: true,
-        uniquie: true
+        unique: true
     },
     course: {
         type: String,
@@ -24,11 +24,6 @@ const studentSchema = new mongoose.Schema({
     academicYear: {
         type: Number,
         required: true
-    },
-    description: {
-        type: String,
-        minlength: 200,
-        maxlength: 500
     }
 
 });

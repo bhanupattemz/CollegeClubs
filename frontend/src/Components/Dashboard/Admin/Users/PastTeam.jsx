@@ -12,6 +12,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { ConvertTime } from "../../../Functionalities/functionalites"
 import { confirmAlert } from 'react-confirm-alert';
+import XlsxButton from "../../../Functionalities/XlsxButton"
 export default function AdminAllpastMembers() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -172,11 +173,11 @@ export default function AdminAllpastMembers() {
     const facultyMembers = pastMembers?.filter(member => member.workedAs === "facultyCoordinator") || [];
     const coordinators = pastMembers?.filter(member => member.workedAs === "coordinator") || [];
     if (loading) {
-        return <AdminSetUp current={"past_team"} option={"all"} element={<Loading />} />
+        return <AdminSetUp current={"users"} option={"past-all"} element={<Loading />} />
     }
 
     return (
-        <AdminSetUp current={"past_team"} option={"all"} element={
+        <AdminSetUp current={"users"} option={"past-all"} element={
             <section className="admin-all-pastMembers-section">
                 <div className="admin-all-pastMembers-search">
                     <form onSubmit={(e) => {
@@ -250,7 +251,49 @@ export default function AdminAllpastMembers() {
                             </div>
                         </Box>
                     }
+                    <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
+                        {["student", "faculty"].includes(current) &&
+                            <XlsxButton filename={`Past_${current}_Coordinators`}
+                                data={current == "student" ? studentMembers.map((item, inx) => ({
+                                    id: inx + 1,
+                                    Name: item.name,
+                                    Mail: item.mail,
+                                    Mobile_No: item.mobileNo,
+                                    Department: item.department,
+                                    WorkedAs: item.workedAs,
+                                    From: ConvertTime(item.duration.joined).split(",")[0],
+                                    To: ConvertTime(item.duration.left).split(",")[0],
+                                })) :
+                                    facultyMembers.map((item, inx) => ({
+                                        id: inx + 1,
+                                        Name: item.name,
+                                        Mail: item.mail,
+                                        Mobile_No: item.mobileNo,
+                                        Department: item.department,
+                                        WorkedAs: item.workedAs,
+                                        From: ConvertTime(item.duration.joined).split(",")[0],
+                                        To: ConvertTime(item.duration.left).split(",")[0],
 
+                                    }))}
+                            />
+                        }
+                        {current == "coordinator" &&
+                            <XlsxButton filename={`Past_Coordinators`}
+                                data={coordinators.map((item, inx) => {
+                                    return {
+                                        Admission_No: item.admissionNo,
+                                        Name: item.name,
+                                        Mail: item.mail,
+                                        Mobile_No: item.mobileNo,
+                                        Department: item.department,
+                                        Managed_Clubs: item.managedClub.map((club) => `${club.name} from ${ConvertTime(club.duration.joined).split(",")[0]} to ${ConvertTime(item.duration.left).split(",")[0]}`).join(", "),
+                                        From: ConvertTime(item.duration.joined).split(",")[0],
+                                        To: ConvertTime(item.duration.left).split(",")[0],
+                                    }
+                                })}
+                            />
+                        }
+                    </div>
                 </section>
             </section>}
         />

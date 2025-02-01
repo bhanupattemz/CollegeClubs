@@ -23,9 +23,24 @@ module.exports.getAllClubs = WrapAsync(async (req, res) => {
     })
 })
 
+module.exports.getCoordinatorClubs = WrapAsync(async (req, res) => {
+    const { key } = req.query
+    const clubs = await ClubModel.find({
+        "coordinators.details": req.user._id,
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+        ]
+    }).sort({ createdAt: 1 });
+    res.status(200).json({
+        success: true,
+        data: clubs
+    })
+})
+
 module.exports.getOneClub = WrapAsync(async (req, res) => {
     const { _id } = req.params
-    const club = await ClubModel.findById(_id).populate({ path: "coordinators.details", select: "description personalInformation.profile personalInformation.firstname personalInformation.lastname" })
+    const club = await ClubModel.findById(_id).populate({ path: "coordinators.details", select: "admissionNo description personalInformation.profile personalInformation.firstname personalInformation.lastname" })
     if (!club) {
         throw new ExpressError("club not found", 404);
     }
@@ -34,6 +49,26 @@ module.exports.getOneClub = WrapAsync(async (req, res) => {
         data: club
     })
 })
+
+module.exports.getClubMembers = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const club = await ClubModel.findById(_id).populate({
+        path: "members",
+        select: "personalInformation.firstname personalInformation.lastname personalInformation.gender personalInformation.mobileNo personalInformation.personalMail admissionNo branch course academicYear"
+    })
+    if (!club) {
+        throw new ExpressError("club not found", 404);
+    }
+    let coordinators = club.coordinators.map((item) => { return item.details.toString() })
+    if (!coordinators.includes(req.user._id.toString()) && req.user.role != "admin") {
+        throw new ExpressError("Not have permision for that", 400)
+    }
+    res.status(200).json({
+        success: true,
+        data: club.members
+    })
+})
+
 
 module.exports.getUserClubs = WrapAsync(async (req, res) => {
     const { _id } = req.params
@@ -49,40 +84,143 @@ module.exports.getUserClubs = WrapAsync(async (req, res) => {
         data: club
     })
 })
-
 module.exports.createClub = WrapAsync(async (req, res, next) => {
-    const data = req.body
-    for (let coordinator of data.coordinators) {
-        coordinator = await StudentModel.findById(coordinator)
-        if (!coordinator) {
-            throw new ExpressError(`coordinator not found`, 404)
-        }
+    const bodyData = req.body;
+    let bannerImage, logo;
+
+    if (req.files?.["bannerImage"]) {
+        bannerImage = {
+            public_id: req.files["bannerImage"][0].filename,
+            url: req.files["bannerImage"][0].path,
+        };
+    }
+    if (req.files?.["logo"]) {
+        logo = {
+            public_id: req.files["logo"][0].filename,
+            url: req.files["logo"][0].path,
+        };
+    }
+
+    if (!bannerImage) {
+        if (logo) await functionalities.deleteFromClodinary(logo);
+        throw new ExpressError("bannerImage is required.", 400);
+    }
+    if (!logo) {
+        if (bannerImage) await functionalities.deleteFromClodinary(bannerImage);
+        throw new ExpressError("logo is required.", 400);
+    }
+
+    let clubData = {
+        name: bodyData.name,
+        type: bodyData.type,
+        venue: {
+            landMark: bodyData.landMark,
+            venueName: bodyData.venueName
+        },
+        description: bodyData.description,
+        bannerImage,
+        logo,
+        registrationTiming: bodyData.registrationTiming ? JSON.parse(bodyData.registrationTiming) : null,
+        skills: bodyData.skills ? JSON.parse(bodyData.skills) : [],
+        timings: bodyData.timings ? JSON.parse(bodyData.timings) : [],
+        coordinators: []
+    };
+
+    let club = new ClubModel(clubData);
+    let coordinators = bodyData.coordinators ? JSON.parse(bodyData.coordinators) : [];
+
+    for (let coordinatorId of coordinators) {
+        let coordinator = await StudentModel.findById(coordinatorId);
+        if (!coordinator) throw new ExpressError(`Coordinator not found`, 404);
+
         if (coordinator.role !== "coordinator") {
-            throw new ExpressError(`${coordinator.username} is not in  the role of coordinator`, 403)
+            const unverifiedCoordinator = new unverifiedCoordinatorModel({ user: coordinator._id, club: club._id });
+            await unverifiedCoordinator.save();
+            const options = await functionalities.sendverifyCoordinatorMailOptions(coordinator, club, unverifiedCoordinator._id);
+            await sendMail(options);
+        } else {
+            club.coordinators.push({ details: coordinator._id });
         }
     }
-    const club = new ClubModel(req.body)
-    await club.save()
-    const allClubs = await ClubModel.find();
-    res.status(200).json({
-        success: true,
-        data: allClubs
-    });
+
+    await club.save();
+    res.status(200).json({ success: true, data: club });
 });
 
 
 module.exports.updateClub = WrapAsync(async (req, res, next) => {
-    const updatedclub = req.body;
-    const { _id } = req.params;
-    const club = await ClubModel.findById(_id);
-    if (!club) {
-        throw new ExpressError("club not found", 404);
+    const bodyData = req.body;
+    let bannerImage, logo;
+    const { _id } = req.params
+    const club = await ClubModel.findById(_id)
+    let iscoordinators = club.coordinators.map((item) => { return item.details.toString() })
+    if (!iscoordinators.includes(req.user._id.toString()) && req.user.role != "admin") {
+        throw new ExpressError("Not have permision for Update", 400)
     }
-    await ClubModel.findByIdAndUpdate(_id, { ...updatedclub, updatedAt: Date.now() }, { new: true, runValidators: true })
-    const allclubs = await ClubModel.find()
+    if (req.files?.["bannerImage"]) {
+        functionalities.deleteFromClodinary(club.bannerImage)
+        bannerImage = {
+            public_id: req.files["bannerImage"][0].filename,
+            url: req.files["bannerImage"][0].path,
+        };
+    } else {
+        bannerImage = club && club.bannerImage
+    }
+    if (req.files?.["logo"]) {
+        functionalities.deleteFromClodinary(club.logo)
+        logo = {
+            public_id: req.files["logo"][0].filename,
+            url: req.files["logo"][0].path,
+        };
+    } else {
+        logo = club && club.logo
+    }
+    if (!club) {
+        if (logo) functionalities.deleteFromClodinary(logo);
+        if (bannerImage) functionalities.deleteFromClodinary(bannerImage);
+        throw new ExpressError("club Not Found", 404)
+    }
+    let clubData = {
+        name: bodyData.name ? bodyData.name : club.name,
+        type: bodyData.type ? bodyData.type : club.type,
+        venue: {
+            landMark: bodyData.landMark,
+            venueName: bodyData.venueName
+        },
+        description: bodyData.description,
+        bannerImage,
+        logo,
+        registrationTiming: (bodyData.registrationTiming && bodyData.registrationTiming != "undefined") ? JSON.parse(bodyData.registrationTiming) : club.registrationTiming,
+        skills: (bodyData.skills && bodyData.skills != "undefined") ? JSON.parse(bodyData.skills) : club.skills,
+        timings: (bodyData.timings && bodyData.timings != "undefined") ? JSON.parse(bodyData.timings) : club.timings,
+    };
+    if (bodyData.coordinators && bodyData.coordinators != "undefined") {
+        clubData.coordinators = []
+        let coordinators = JSON.parse(bodyData.coordinators);
+        for (let coordinatorId of coordinators) {
+            let coordinator = await StudentModel.findById(coordinatorId);
+            if (!coordinator) throw new ExpressError(`Coordinator not found`, 404);
+            if (coordinator.role !== "coordinator") {
+                const unverifiedCoordinator = new unverifiedCoordinatorModel({ user: coordinator._id, club: club._id });
+                await unverifiedCoordinator.save();
+                const options = await functionalities.sendverifyCoordinatorMailOptions(coordinator, club, unverifiedCoordinator._id);
+                await sendMail(options);
+            } else {
+                let pastcoor;
+                for (let item of club.coordinators) {
+                    if (item.details == coordinatorId) {
+                        pastcoor = item.coordinatorAt
+                    }
+                }
+                clubData.coordinators.push({ details: coordinator._id, coordinatorAt: pastcoor ? pastcoor : Date.now() });
+            }
+        }
+    }
+
+    const updatedClub = await ClubModel.findByIdAndUpdate(_id, clubData, { new: true, runValidators: true })
     res.status(200).json({
         success: true,
-        data: allclubs
+        data: updatedClub
     })
 })
 
@@ -118,7 +256,7 @@ module.exports.updateCoordinators = WrapAsync(async (req, res) => {
                     if (coordinator.details == addUser) {
                         throw new ExpressError("Already coordinator for this club", 400);
                     }
-                });                
+                });
                 await ClubModel.findByIdAndUpdate(_id, {
                     $push: { coordinators: { details: user._id } },
                     updatedAt: Date.now(),
@@ -208,20 +346,46 @@ module.exports.registerMember = WrapAsync(async (req, res) => {
     if (!club) {
         throw new ExpressError("club not found", 404);
     }
-    if (club.timings.starting > Date.now()) {
+    if (club.registrationTiming.starting > Date.now()) {
         throw new ExpressError("Club registration has not started yet.", 400);
     }
-    if (club.timings.ending < Date.now()) {
+    if (club.registrationTiming.ending < Date.now()) {
         throw new ExpressError("Club registration has already ended.", 400);
     }
     if (club.members.includes(req.user._id.toString())) {
         throw new ExpressError("Member already exists", 400);
     }
-
-    const UpdatedClub = await ClubModel.findByIdAndUpdate(_id, { $push: { members: req.user } }, { new: true })
+    const UpdatedClub = await ClubModel.findByIdAndUpdate(_id, { $push: { members: req.user._id } }, { new: true })
     res.status(200).json({
         success: true,
         data: UpdatedClub
+    })
+})
+
+
+
+module.exports.unregisterMember = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const { member } = req.body
+    const club = await ClubModel.findById(_id);
+    if (!club) {
+        throw new ExpressError("club not found", 404);
+    }
+    if (!club.members.includes(member)) {
+        throw new ExpressError("Not A Member in clubs", 400);
+    }
+    let coordinators = club.coordinators.map((item) => { return item.details.toString() })
+    if (!coordinators.includes(req.user._id.toString()) && req.user.role != "admin") {
+        throw new ExpressError("Not have permision for that", 400)
+    }
+    await ClubModel.findByIdAndUpdate(_id, { $pull: { members: member } }, { new: true })
+    const UpdatedClub = await ClubModel.findById(_id).populate({
+        path: "members",
+        select: "personalInformation.firstname personalInformation.lastname personalInformation.gender personalInformation.mobileNo personalInformation.personalMail admissionNo branch course academicYear"
+    })
+    res.status(200).json({
+        success: true,
+        data: UpdatedClub.members
     })
 })
 
@@ -250,7 +414,7 @@ module.exports.updateAllRegistrationTime = WrapAsync(async (req, res) => {
 })
 
 module.exports.sendClubMembersToCoordinator = WrapAsync(async (req, res) => {
-    let clubs = await ClubModel.find().populate("members").populate("coordinators")
+    let clubs = await ClubModel.find().populate("members").populate("coordinators.details")
 
     for (let club of clubs) {
         if (club.members.length <= 0) {
@@ -279,13 +443,16 @@ module.exports.sendClubMembersToCoordinator = WrapAsync(async (req, res) => {
         let databuffer = await convertObjectToExcel(content, headers)
 
         for (let coordinator of club.coordinators) {
+            if (!coordinator.details) {
+                continue
+            }
             const options = {
-                mail: coordinator.mail,
+                mail: coordinator.details.mail,
                 subject: `${club.name} members`,
                 text: `${club.name} members`,
                 message: `
                     <div style="font-family: Arial, sans-serif; line-height: 1.5; padding: 20px; background-color: #f9f9f9; border-radius: 5px;">
-                        <h2 style="font-size: 20px; color: #333333; margin-bottom: 10px;">Hello, ${coordinator.personalInformation.firstname},</h2>
+                        <h2 style="font-size: 20px; color: #333333; margin-bottom: 10px;">Hello, ${coordinator.details.personalInformation.firstname},</h2>
                         <p style="font-size: 16px; color: #555555;">
                             We hope this message finds you well! We are excited to share the member list of your club, <strong>${club.name}</strong>.
                         </p>

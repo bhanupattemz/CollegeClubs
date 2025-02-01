@@ -6,6 +6,9 @@ import {
     DELETE_FEST_EVENT_REQUEST,
     DELETE_FEST_EVENT_SUCCESS,
     DELETE_FEST_EVENT_FAIL,
+    ADMIN_GET_ALL_FEST_EVENTS_REQUEST,
+    ADMIN_GET_ALL_FEST_EVENTS_SUCCESS,
+    ADMIN_GET_ALL_FEST_EVENTS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -57,7 +60,19 @@ const festEventsSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(ADMIN_GET_ALL_FEST_EVENTS_REQUEST, (state) => {
+                state.loading = true;
+                state.festEvents = null
+            })
+            .addCase(ADMIN_GET_ALL_FEST_EVENTS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.festEvents = action.payload.data;
+                state.length = action.payload.length
+            })
+            .addCase(ADMIN_GET_ALL_FEST_EVENTS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

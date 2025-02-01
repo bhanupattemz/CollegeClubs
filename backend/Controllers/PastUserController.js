@@ -41,7 +41,7 @@ module.exports.createPastUser = WrapAsync(async (req, res, next) => {
         newpastUser = PastUserModel(pastUser)
     }
     await newpastUser.save()
-    const allpastUsers = await PastUserModel.find()
+    const allpastUsers = await PastUserModel.find().sort({ "duration.left": -1 })
     res.status(200).json({
         success: true,
         data: allpastUsers

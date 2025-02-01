@@ -83,20 +83,21 @@ export default function FestEventDetails() {
                     })}
                 </div>
             </section>
-            <section>
-                <h2>Prizes</h2>
-                <div className="fest-event-prizes">
-                    {singleFestEvent.prizes.map((item, inx) => {
-                        return (
-                            <div key={inx}>
-                                <h3>{item.name}</h3>
-                                {item.certificate && <p><LiaCertificateSolid/> Certificate</p>}
-                                {item.amount>0 && <p><RiMoneyRupeeCircleLine/> ₹{item.amount}</p>}
-                            </div>
-                        )
-                    })}
-                </div>
-            </section>
+            {singleFestEvent.prizes &&
+                <section>
+                    <h2>Prizes</h2>
+                    <div className="fest-event-prizes">
+                        {singleFestEvent.prizes.map((item, inx) => {
+                            return (
+                                <div key={inx}>
+                                    <h3>{item.name}</h3>
+                                    {item.certificate && <p><LiaCertificateSolid /> Certificate</p>}
+                                    {item.amount > 0 && <p><RiMoneyRupeeCircleLine /> ₹{item.amount}</p>}
+                                </div>
+                            )
+                        })}
+                    </div>
+                </section>}
             {singleFestEvent.winner.length > 0 &&
                 <section>
                     <h2>Winners</h2>
@@ -104,7 +105,7 @@ export default function FestEventDetails() {
                         {singleFestEvent.winner.map((item, inx) => {
                             return (
                                 <div key={inx}>
-                                    <h3>{item.name} -{inx+1} Prize</h3> 
+                                    <h3>{item.name} -{inx + 1} Prize</h3>
                                     <div><b>College :</b> {item.college}</div>
                                 </div>
                             )

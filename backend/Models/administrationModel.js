@@ -31,6 +31,16 @@ const administrationTeamSchema = new mongoose.Schema({
             required: true
         }
     },
+    mobileNo: {
+        type: Number,
+        required: [true, "mobile number is required."]
+    },
+    mail:{
+        type: String,
+        unique: true,
+        required: [true, "Please enter a valid email"],
+        match: [/.+\@.+\..+/, "Please enter a valid email"]
+    },
     position: {
         type: String,
         required: true,
@@ -43,10 +53,6 @@ const administrationTeamSchema = new mongoose.Schema({
     isactive: {
         type: Boolean,
         default: true
-    },
-    period: {
-        starting: { type: Date, default: Date.now },
-        ending: { type: Date }
     }
 });
 

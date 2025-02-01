@@ -3,7 +3,8 @@ const WrapAsync = require("../Utils/WrapAsync")
 const ClubGalleryModel = require("../Models/Clubs/clubGalleryModel")
 const AdminGalleryModel = require("../Models/adminsGalleryModel")
 const GalleryModel = require("../Models/galleryModel")
-
+const ClubModel = require("../Models/Clubs/clubsModel")
+const { deleteFromClodinary } = require("../functionalities")
 module.exports.getAllClubPhotos = WrapAsync(async (req, res) => {
     const clubPhotos = await ClubGalleryModel.find({
     });
@@ -27,16 +28,24 @@ module.exports.getOneClubPhoto = WrapAsync(async (req, res) => {
 
 
 module.exports.createClubPhoto = WrapAsync(async (req, res, next) => {
-    const clubPhoto = req.body;
-    if (!req.user.managedClubs.includes(clubPhoto.club)) {
-        throw new ExpressError("Not Allow To Add photo", 400)
+    const bodyData = req.body;
+    let clubPhoto = {
+        occasion: bodyData.occasion,
+        captions: bodyData.captions,
+        images: req.files.map(f => ({ public_id: f.filename, url: f.path })),
+        club: bodyData.club
+    }
+    const club = await ClubModel.find({ _id: bodyData.club, "coordinator.details": req.user._id })
+    if (!club) {
+        throw ExpressError("Club Not Found", 400)
+    }
+    if (!req.files || req.files.length === 0) {
+        throw new ExpressError("At least one image is required", 400);
     }
     const newclubPhoto = new ClubGalleryModel({ ...clubPhoto })
     await newclubPhoto.save()
-    const allclubPhotos = await ClubGalleryModel.find()
     res.status(200).json({
-        success: true,
-        data: allclubPhotos
+        success: true
     })
 })
 
@@ -47,9 +56,9 @@ module.exports.updateClubPhoto = WrapAsync(async (req, res, next) => {
     if (!clubPhoto) {
         throw new ExpressError("clubPhoto not found", 404);
     }
-    if (!req.user.managedClubs.includes(clubPhoto.club)) {
-        throw new ExpressError("Not Allow To Add photo", 400)
-    }
+    // if (!req.user.managedClubs.includes(clubPhoto.club)) {
+    //     throw new ExpressError("Not Allow To Add photo", 400)
+    // }
     await ClubGalleryModel.findByIdAndUpdate(_id, { ...updatedclubPhoto, createdBy: req.user._id, club: req.user.managedClub }, { new: true, runValidators: true })
     const allclubPhotos = await ClubGalleryModel.find()
     res.status(200).json({
@@ -64,11 +73,19 @@ module.exports.deleteClubPhoto = WrapAsync(async (req, res, next) => {
     if (!clubPhoto) {
         throw new ExpressError("clubPhoto not found", 404);
     }
-    if (clubPhoto.createdBy !== req.user._id && req.user.role !== "admin") {
-        throw new ExpressError("Not Allowed Delete", 400)
+    const club = await ClubModel.find({ _id: clubPhoto.club, "coordinator.details": req.user._id })
+    if (!club) {
+        throw ExpressError("Club Not Found", 400)
     }
+    clubPhoto.images.map((image) => {
+        deleteFromClodinary(image)
+    })
     await ClubGalleryModel.findByIdAndDelete(_id)
-    const allclubPhotos = await ClubGalleryModel.find()
+    let clubs = await ClubModel.find({ "coordinators.details": req.user._id })
+    clubs = clubs.map((club) => club._id)
+    const allclubPhotos = await ClubGalleryModel.find({
+        club: { $in: clubs }
+    }).populate({ path: "club", select: "name" });
     res.status(200).json({
         success: true,
         data: allclubPhotos
@@ -77,20 +94,6 @@ module.exports.deleteClubPhoto = WrapAsync(async (req, res, next) => {
 
 
 //Gallery of admin Photos 
-module.exports.getAllAdminPhotos = WrapAsync(async (req, res) => {
-    const { key } = req.query
-    const adminPhotos = await AdminGalleryModel.find({
-        $or: [
-            { occasion: { $regex: new RegExp(key, "i") } },
-            { _id: key && key.length === 24 ? key : undefined },
-            { captions: { $regex: new RegExp(key, "i") } }
-        ]
-    });
-    res.status(200).json({
-        success: true,
-        data: adminPhotos
-    })
-})
 
 module.exports.getOneAdminPhoto = WrapAsync(async (req, res) => {
     const { _id } = req.params
@@ -106,51 +109,51 @@ module.exports.getOneAdminPhoto = WrapAsync(async (req, res) => {
 
 
 module.exports.createAdminPhoto = WrapAsync(async (req, res, next) => {
-    const adminPhoto = req.body;
-    const newadminPhoto = new AdminGalleryModel({ ...adminPhoto })
-    await newadminPhoto.save()
-    const alladminPhotos = await AdminGalleryModel.find()
-    res.status(200).json({
-        success: true,
-        data: alladminPhotos
-    })
-})
-
-module.exports.updateAdminPhoto = WrapAsync(async (req, res, next) => {
-    const updatedadminPhoto = req.body;
-    const { _id } = req.params;
-    const adminPhoto = await AdminGalleryModel.findById(_id);
-    if (!adminPhoto) {
-        throw new ExpressError("adminPhoto not found", 404);
+    const bodyData = req.body;
+    let adminPhoto = {
+        occasion: bodyData.occasion,
+        captions: bodyData.captions,
+        images: req.files.map(f => ({ public_id: f.filename, url: f.path }))
     }
-    await AdminGalleryModel.findByIdAndUpdate(_id, { ...updatedadminPhoto }, { new: true, runValidators: true })
-    const alladminPhotos = await AdminGalleryModel.find()
-    res.status(200).json({
-        success: true,
-        data: alladminPhotos
-    })
-})
-
-module.exports.deleteAdminPhoto = WrapAsync(async (req, res, next) => {
-    const { _id } = req.params;
-    const adminPhoto = await AdminGalleryModel.findById(_id);
-    if (!adminPhoto) {
-        throw new ExpressError("adminPhoto not found", 404);
+    if (!req.files || req.files.length === 0) {
+        throw new ExpressError("At least one image is required", 400);
     }
-    await AdminGalleryModel.findByIdAndDelete(_id)
-    const alladminPhotos = await AdminGalleryModel.find()
+    let newGallery;
+    if (bodyData.type == "club") {
+        const club = await ClubModel.findById(bodyData.club)
+
+        if (!club) {
+            adminPhoto.images.map((image) => {
+                deleteFromClodinary(image)
+            })
+            throw new ExpressError("Club is not Found", 400)
+        }
+
+        newGallery = new ClubGalleryModel({ ...adminPhoto, club: bodyData.club })
+    } else {
+        adminPhoto.createdBy = req.user.role
+        newGallery = new AdminGalleryModel(adminPhoto)
+    }
+    await newGallery.save()
+    const allphotos = await GalleryModel.find()
     res.status(200).json({
         success: true,
-        data: alladminPhotos
+        data: allphotos
     })
 })
-
 
 
 
 //Gallery of all Photos
 module.exports.getAllPhotos = WrapAsync(async (req, res) => {
-    const Photos = await GalleryModel.find({ club: undefined }).sort({ date: -1 });
+    const { key } = req.query
+    const Photos = await GalleryModel.find({
+        $or: [
+            { occasion: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { captions: { $regex: new RegExp(key, "i") } }
+        ]
+    }).sort({ date: -1 }).populate({ path: "club", select: "name" });
     res.status(200).json({
         success: true,
         data: Photos
@@ -191,10 +194,33 @@ module.exports.deletePhoto = WrapAsync(async (req, res, next) => {
     if (!Photo) {
         throw new ExpressError("Photo not found", 404);
     }
+    Photo.images.map((image) => {
+        deleteFromClodinary(image)
+    })
     await GalleryModel.findByIdAndDelete(_id)
-    const allPhotos = await GalleryModel.find()
+    const allPhotos = await GalleryModel.find().populate({ path: "club", select: "name" }).sort({ date: -1 })
     res.status(200).json({
         success: true,
         data: allPhotos
+    })
+})
+
+
+// coordinator 
+module.exports.getCoordinatorGallery = WrapAsync(async (req, res) => {
+    const { key } = req.query
+    let clubs = await ClubModel.find({ "coordinators.details": req.user._id })
+    clubs = clubs.map((club) => club._id)
+    const Photos = await ClubGalleryModel.find({
+        club: { $in: clubs },
+        $or: [
+            { occasion: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+            { captions: { $regex: new RegExp(key, "i") } }
+        ]
+    }).sort({ date: -1 }).populate({ path: "club", select: "name" });
+    res.status(200).json({
+        success: true,
+        data: Photos
     })
 })

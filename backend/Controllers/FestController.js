@@ -3,6 +3,7 @@ const WrapAsync = require("../Utils/WrapAsync")
 const EventModel = require("../Models/Fest/festEvents")
 const MembersModel = require("../Models/Fest/members")
 const ClubModel = require("../Models/Clubs/clubsModel")
+const AdministrationModel = require("../Models/administrationModel")
 const sendMail = require("../Utils/sendMail")
 const { eventCertificate } = require("../Utils/certificates")
 const { createPDF } = require("../Utils/CreateFile")
@@ -10,6 +11,11 @@ const FestModel = require("../Models/Fest/festModel")
 const Razorpay = require("razorpay");
 const crypto = require("crypto")
 const { successFestEventRegistrationOptions } = require("../functionalities")
+const { deleteFromClodinary } = require('../functionalities')
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+});
 module.exports.getAllFests = WrapAsync(async (req, res) => {
     let { key } = req.query
     const fests = await FestModel.find({
@@ -49,28 +55,59 @@ module.exports.getCurrentFests = WrapAsync(async (req, res) => {
 
 
 module.exports.createFest = WrapAsync(async (req, res, next) => {
-    const fest = req.body;
+    const bodyData = req.body;
+    let fest = {
+        name: bodyData.name,
+        description: bodyData.description,
+        isactive: bodyData.isActive,
+        image: {
+            public_id: "default",
+            url: "https://res.cloudinary.com/delc5g3p5/image/upload/v1736265076/s15xnqniqrijpszt4c6k.png"
+        }
+    }
+    if (req.file) {
+        fest.image = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        }
+    }
+    if (fest.isactive) {
+        await FestModel.updateMany({ isactive: false })
+    }
     const newfest = FestModel(fest)
     await newfest.save()
-    const allfests = await FestModel.find()
     res.status(200).json({
-        success: true,
-        data: allfests
+        success: true
     })
 })
 
 module.exports.updateFest = WrapAsync(async (req, res, next) => {
-    const updatedfest = req.body;
+    const bodyData = req.body;
     const { _id } = req.params;
     const fest = await FestModel.findById(_id);
     if (!fest) {
         throw new ExpressError("fest not found", 404);
     }
-    const updatedFest = await FestModel.findByIdAndUpdate(_id, updatedfest, { new: true, runValidators: true })
+    let festData = {
+        name: bodyData.name,
+        description: bodyData.description,
+        isactive: bodyData.isActive,
+        image: fest.image
+    }
+    if (req.file) {
+        fest.image = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        }
+        deleteFromClodinary(fest.image)
+    }
+    if (festData.isactive) {
+        await FestModel.updateMany({ isactive: false })
+    }
+    const updatedFest = await FestModel.findByIdAndUpdate(_id, festData, { new: true, runValidators: true })
 
     res.status(200).json({
-        success: true,
-        data: updatedFest
+        success: true
     })
 })
 
@@ -80,6 +117,7 @@ module.exports.deleteFest = WrapAsync(async (req, res, next) => {
     if (!fest) {
         throw new ExpressError("fest not found", 404);
     }
+    deleteFromClodinary(fest.image)
     await FestModel.findByIdAndDelete(_id)
     const allfests = await FestModel.find().sort({ createdAt: -1 })
     res.status(200).json({
@@ -87,11 +125,6 @@ module.exports.deleteFest = WrapAsync(async (req, res, next) => {
         data: allfests
     })
 })
-
-
-
-
-
 
 
 
@@ -120,6 +153,22 @@ module.exports.getAllEvents = WrapAsync(async (req, res) => {
     });
 });
 
+module.exports.AdminGetAllEvents = WrapAsync(async (req, res) => {
+    const { key } = req.query;
+    const isValidObjectId = key && mongoose.Types.ObjectId.isValid(key);
+    const filteredEvents = await EventModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            ...(isValidObjectId ? [{ _id: key }] : []),
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        data: filteredEvents,
+    });
+});
+
+
 module.exports.getOneEvent = WrapAsync(async (req, res) => {
     const { _id } = req.params
     const event = await EventModel.findById(_id).populate({ path: "conductedClub", select: "name" })
@@ -132,14 +181,64 @@ module.exports.getOneEvent = WrapAsync(async (req, res) => {
     })
 })
 
+module.exports.adminGetOneEvent = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const event = await EventModel.findById(_id).populate({ path: "conductedClub", select: "name" }).populate("members")
+    if (!event) {
+        throw new ExpressError("event not found", 404);
+    }
+    res.status(200).json({
+        success: true,
+        data: event
+    })
+})
 
 module.exports.createEvent = WrapAsync(async (req, res, next) => {
-    const event = req.body;
+    const bodyData = req.body;
     const { _id } = req.params
     const fest = await FestModel.findOne({ _id });
     if (!fest) {
         throw new ExpressError("Fest Not Found", 404);
     }
+    let image, pdf;
+    if (req.files?.["pdf"]) {
+        pdf = {
+            public_id: req.files["pdf"][0].filename,
+            url: req.files["pdf"][0].path,
+        };
+    }
+    if (req.files?.["image"]) {
+        image = {
+            public_id: req.files["image"][0].filename,
+            url: req.files["image"][0].path,
+        };
+    } else {
+        image = {
+            public_id: "public",
+            url: "https://res.cloudinary.com/delc5g3p5/image/upload/v1729762210/cld-sample-3.jpg"
+        }
+    }
+    if (!pdf) {
+        deleteFromClodinary(image)
+        throw new ExpressError("Instructions PDF is required", 400)
+    }
+
+    let event = {
+        name: bodyData.name,
+        venue: {
+            landMark: bodyData.landMark,
+            venueName: bodyData.venueName
+        },
+        amount: bodyData.amount,
+        subheading: bodyData.subheading,
+        description: bodyData.description,
+        timings: JSON.parse(bodyData.timings),
+        registration: JSON.parse(bodyData.registration),
+        conductedClub: bodyData.conductedClub && JSON.parse(bodyData.conductedClub),
+        image: image,
+        pdf: pdf,
+        prizes: JSON.parse(bodyData.prizes)
+    };
     const newEvent = new EventModel({ ...event });
     fest.events.push(newEvent);
     await newEvent.save();
@@ -152,20 +251,60 @@ module.exports.createEvent = WrapAsync(async (req, res, next) => {
 
 
 module.exports.updateEvent = WrapAsync(async (req, res, next) => {
-    const updatedEvent = req.body;
+    const bodyData = req.body;
     const { _id } = req.params;
     const event = await EventModel.findById(_id);
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    if (event.createdBy !== req.user._id && req.user.role !== "admin") {
-        throw new ExpressError("You are not allowed to delete this Event.", 403)
+    if (bodyData.fest) {
+        const fest = await FestModel.findById(bodyData.fest)
+        if (!fest) {
+            throw new ExpressError("Fest Not Found", 404);
+        }
     }
+    let image, pdf;
+    if (req.files?.["pdf"]) {
+        deleteFromClodinary(event.pdf)
+        pdf = {
+            public_id: req.files["pdf"][0].filename,
+            url: req.files["pdf"][0].path,
+        };
+    } else {
+        pdf = event.pdf
+    }
+    if (req.files?.["image"]) {
+        deleteFromClodinary(event.image)
+        image = {
+            public_id: req.files["image"][0].filename,
+            url: req.files["image"][0].path,
+        };
+    } else {
+        image = event.image
+    }
+    let updatedEvent = {
+        name: bodyData.name,
+        venue: {
+            landMark: bodyData.landMark,
+            venueName: bodyData.venueName
+        },
+        amount: bodyData.amount,
+        subheading: bodyData.subheading,
+        description: bodyData.description,
+        timings: JSON.parse(bodyData.timings),
+        registration: JSON.parse(bodyData.registration),
+        conductedClub: bodyData.conductedClub && JSON.parse(bodyData.conductedClub),
+        image: image,
+        pdf: pdf,
+        prizes: JSON.parse(bodyData.prizes)
+    };
     await EventModel.findByIdAndUpdate(_id, { ...updatedEvent }, { new: true, runValidators: true })
-    const allEvents = await EventModel.find()
+    if (bodyData.fest) {
+        await FestModel.findOneAndUpdate({ events: _id }, { $pull: { events: _id } });
+        await FestModel.findByIdAndUpdate(bodyData.fest, { $push: { events: _id } });
+    }
     res.status(200).json({
-        success: true,
-        data: allEvents
+        success: true
     })
 })
 
@@ -181,8 +320,6 @@ module.exports.deleteEvent = WrapAsync(async (req, res) => {
         { $pull: { events: event._id } },
         { new: true }
     ).populate("events");
-
-
     res.status(200).json({
         success: true,
         data: fest.events
@@ -237,19 +374,23 @@ module.exports.updateEventClubs = WrapAsync(async (req, res) => {
 
 module.exports.createRegisterEventOrder = WrapAsync(async (req, res, next) => {
     const { _id } = req.params
-    const fest = await FestModel.find({ isactive: true, events: { $in: [_id] } })
+    const { mail } = req.body
+    const fest = await FestModel.find({ events: { $in: [_id] } })
     if (!fest || fest.length == 0) {
         throw new ExpressError("Event fest is not active now.", 400)
+    }
+    if (!mail) {
+        throw new ExpressError("mail is required", 400)
+    }
+    const member = await MembersModel.find({ mail: mail })
+    if (member && member.length != 0) {
+        throw new ExpressError("Mail is already used", 400)
     }
     const event = await EventModel.findById(_id)
     const currentTime = Date.now()
     if (!(new Date(event.registration.starting).getTime() < currentTime && new Date(event.registration.ending).getTime() > currentTime)) {
         throw new ExpressError("Event not in registration period", 400)
     }
-    const razorpay = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID,
-        key_secret: process.env.RAZORPAY_KEY_SECRET
-    });
     const options = {
         amount: event.amount * 100,
         currency: "INR",
@@ -273,7 +414,8 @@ module.exports.registerMember = WrapAsync(async (req, res) => {
     const event = await EventModel.findById(_id)
     const paymentInfo = {
         paymentId: data.razorpay_payment_id,
-        status: true
+        status: true,
+        amount: event.amount
     }
     const sha = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
     sha.update(`${data.razorpay_order_id}|${data.razorpay_payment_id}`)
@@ -296,14 +438,58 @@ module.exports.registerMember = WrapAsync(async (req, res) => {
 })
 
 
+
+
+module.exports.unregisterMember = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const { member } = req.body
+    const student = await MembersModel.findById(member)
+    if (!student) {
+        throw new ExpressError("member is not found", 400)
+    }
+    if (!student.paymentInfo || !student.paymentInfo.paymentId) {
+        throw new ExpressError("Payment details not found for this member.", 400);
+    }
+    const event = await EventModel.findById(_id).populate("conductedClub");
+    if (!event) {
+        throw new ExpressError("event not found", 404);
+    }
+    if (!event.members.includes(member)) {
+        throw new ExpressError("Not A Member in events", 400);
+    }
+    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
+    const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
+    if (!isCoordinator && req.user.role !== "admin") {
+        throw new ExpressError("You are not allowed to edit this Event.", 403)
+    }
+    const refund = await razorpay.payments.refund(student.paymentInfo.paymentId, {
+        amount: student.paymentInfo.amount * 100,
+        speed: "optimum"
+    });
+    student.paymentInfo.status = "refunded";
+    await student.save()
+    await EventModel.findByIdAndUpdate(_id, { $pull: { members: member } }, { new: true })
+    const UpdatedClub = await EventModel.findById(_id).populate({ path: "members" })
+    res.status(200).json({
+        success: true,
+        data: UpdatedClub.members,
+        refundDetails: refund
+    })
+})
+
+
 module.exports.eventWinner = WrapAsync(async (req, res) => {
     let data = req.body;
     const { _id } = req.params;
-    let signImages = [
-        "https://res.cloudinary.com/delc5g3p5/image/upload/v1729765796/Clubs/izahxydbhnphbak4jbns.png",
-        "https://res.cloudinary.com/delc5g3p5/image/upload/v1729765796/Clubs/izahxydbhnphbak4jbns.png",
-        "https://res.cloudinary.com/delc5g3p5/image/upload/v1729765796/Clubs/izahxydbhnphbak4jbns.png"
-    ];
+    const positions = ["Principal", "Faculty-Coordinator", "Student-Coordinator"]
+    let signImages = []
+    for (let item of positions) {
+        const administrator = await AdministrationModel.findOne({ position: item })
+        if (administrator.signature) signImages.push(administrator.signature)
+    }
+    if (signImages.length != 3) {
+        throw new ExpressError("Signature Error", 400)
+    }
 
     let event = await EventModel.findById(_id);
     if (event.timings.ending > Date.now()) {
@@ -316,14 +502,13 @@ module.exports.eventWinner = WrapAsync(async (req, res) => {
     const htmlContent = [];
 
     for (let userId of data) {
-        const user = await MembersModel.findById(userId);
+        const user = await MembersModel.findById(userId._id);
         if (!user) {
-            throw new ExpressError("User not found", 404);
+            throw new ExpressError("Member not found", 404);
         }
-        if (!event.members.includes(userId)) {
-            throw new ExpressError(`User is not participating in the event`, 400);
+        if (!event.members.includes(user._id)) {
+            throw new ExpressError(`Member is not participating in the event`, 400);
         }
-
         winners.push(user);
         htmlContent.push(eventCertificate(winners[winners.length - 1], event.name, winners.length, signImages, user.academicYear, event.timings.starting));
     }
@@ -384,3 +569,74 @@ module.exports.eventWinner = WrapAsync(async (req, res) => {
 });
 
 
+
+
+// Members 
+
+
+module.exports.festmembers = WrapAsync(async (req, res) => {
+    let { key } = req.query
+    const members = await MembersModel.find({
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { college: { $regex: new RegExp(key, "i") } },
+            { mail: { $regex: new RegExp(key, "i") } },
+        ]
+    }).sort({ createdAt: -1 });
+    res.status(200).json({
+        success: true,
+        data: members,
+    })
+})
+
+module.exports.festmemberDetails = WrapAsync(async (req, res) => {
+    let { _id } = req.params
+    const member = await MembersModel.findById(_id)
+    res.status(200).json({
+        success: true,
+        data: member,
+    })
+})
+
+module.exports.festmemberUpdate = WrapAsync(async (req, res) => {
+    let { _id } = req.params
+    const bodyData = req.body
+    const member = await MembersModel.findById(_id)
+    if (!member) {
+        throw new ExpressError("Member Not Found", 400)
+    }
+    await MembersModel.findByIdAndUpdate(_id, bodyData, { new: true, runValidators: true })
+    res.status(200).json({
+        success: true,
+    })
+})
+
+module.exports.deleteFestMember = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const events = await EventModel.find({ members: _id });
+    for (const event of events) {
+        event.members.pull(_id);
+        await event.save();
+    }
+    const member = await MembersModel.findOneAndDelete(_id)
+    if (!member) {
+        throw new ExpressError("Member Not Found", 400)
+    }
+    const members = await MembersModel.find({}).sort({ createdAt: -1 });
+    res.status(200).json({
+        success: true,
+        data: members,
+    })
+})
+
+
+// fest details 
+
+module.exports.festDetails = WrapAsync(async (req, res) => {
+    const { _id } = req.params
+    const fest = await FestModel.findById(_id).populate("events")
+    res.status(200).json({
+        success: true,
+        data: fest,
+    })
+})

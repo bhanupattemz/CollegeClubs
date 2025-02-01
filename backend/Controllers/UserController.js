@@ -320,29 +320,36 @@ module.exports.adminUpdateUser = WrapAsync(async (req, res, next) => {
         branch: bodyData.branch,
         academicYear: bodyData.academicYear
     }
-
-    await UserModel.findByIdAndUpdate(_id, updateduser, { new: true, runValidators: true })
-    if (req.user.role == "admin") {
-        const allusers = await UserModel.find()
-        res.status(200).json({
-            success: true,
-            data: allusers
-        })
+    if (["coordinator", "student"].includes(user.role)) {
+        await StudentModel.findByIdAndUpdate(user._id, updateduser, { new: true, runValidators: true })
+    } else if (user.role == "admin") {
+        await AdminModel.findByIdAndUpdate(user._id, updateduser, { new: true, runValidators: true })
     } else {
-        res.status(200).json({
-            success: true,
-            data: req.user
-        })
+        await UserModel.findByIdAndUpdate(user._id, updateduser, { new: true, runValidators: true })
     }
+    const currentUsers = await UserModel.find({})
+    res.status(200).json({
+        success: true,
+        data: currentUsers
+    })
 
 })
 
 
 module.exports.deleteUser = WrapAsync(async (req, res, next) => {
     const { _id } = req.params;
+    const data = req.query
     const user = await UserModel.findById(_id);
     if (!user) {
         throw new ExpressError("user not found", 404);
+    }
+    if (user.role == "admin") {
+        throw new ExpressError("You don't have access for delete admin.", 400)
+    }
+    const options = await functionalities.adminDeleteUserOptions(user, adminMessage = data.message)
+    const respounce = await sendMail(options)
+    if (!respounce) {
+        throw new ExpressError("Failed to Send Mail to User", 500)
     }
     await UserModel.findOneAndDelete({ _id })
     const allusers = await UserModel.find()
@@ -582,6 +589,32 @@ module.exports.updatePassword = WrapAsync(async (req, res, next) => {
         }
     })
 })
+
+
+
+module.exports.setUserBlockStatus = WrapAsync(async (req, res, next) => {
+    const { _id } = req.params
+    const { isBlocked, message } = req.body
+    let user = await UserModel.findById(_id)
+    if (!user) {
+        throw new ExpressError("User not found", 404)
+    }
+    if (user.role == "admin") {
+        throw new ExpressError("you don't have permition to change the status of admin.", 400)
+    }
+    user = await UserModel.findByIdAndUpdate(_id, { isBlocked }, { runValidators: true, new: true })
+    const options = await functionalities.setUserBlockStatusMail(user, adminMessage = message)
+    const respounce = await sendMail(options)
+    if (!respounce) {
+        throw new ExpressError("Failed to Send Mail to User", 500)
+    }
+    const data = await UserModel.find({})
+    res.status(200).json({
+        success: true,
+        data: data
+    })
+})
+
 
 
 module.exports.authenticateUser = WrapAsync(async (req, res, next) => {

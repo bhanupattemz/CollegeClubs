@@ -29,7 +29,7 @@ export default function AdminAllAdministrationTeams() {
             renderCell: (params) => {
                 if (params.value) {
                     return (
-                        <div className="admin-all-AdministrationTeams-edit" onClick={() => navigate(`/admin/AdministrationTeams/update/${params.value}`)}>
+                        <div className="admin-all-AdministrationTeams-edit" onClick={() => navigate(`/admin/administration_team/update/${params.value}`)}>
                             <FaEdit />
                         </div>
                     )

@@ -6,6 +6,12 @@ import {
     DELETE_CAROUSEL_IMGS_REQUEST,
     DELETE_CAROUSEL_IMGS_SUCCESS,
     DELETE_CAROUSEL_IMGS_FAIL,
+    CREATE_CAROUSEL_IMGS_REQUEST,
+    CREATE_CAROUSEL_IMGS_SUCCESS,
+    CREATE_CAROUSEL_IMGS_FAIL,
+    UPDATE_CAROUSEL_IMGS_REQUEST,
+    UPDATE_CAROUSEL_IMGS_SUCCESS,
+    UPDATE_CAROUSEL_IMGS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -52,6 +58,30 @@ const carouselImgslice = createSlice({
                 state.carouselImgs = action.payload.data
             })
             .addCase(DELETE_CAROUSEL_IMGS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(CREATE_CAROUSEL_IMGS_REQUEST, (state) => {
+                state.loading = true;
+                state.carouselImgs = null
+            })
+            .addCase(CREATE_CAROUSEL_IMGS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.success = true
+            })
+            .addCase(CREATE_CAROUSEL_IMGS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(UPDATE_CAROUSEL_IMGS_REQUEST, (state) => {
+                state.loading = true;
+                state.carouselImgs = null
+            })
+            .addCase(UPDATE_CAROUSEL_IMGS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.success = true
+            })
+            .addCase(UPDATE_CAROUSEL_IMGS_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

@@ -15,5 +15,7 @@ router.route("/:_id")
     .get(DonationController.getOneDonar)
     .put(isLoggedIn, isAdmin, DonationController.updateDonar)
     .delete(isLoggedIn, isAdmin, DonationController.deleteDonar)
-
+    
+router.route("/admin")
+    .post(isLoggedIn, isAdmin, DonationController.adminCreateDonar)
 module.exports = router

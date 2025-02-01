@@ -32,6 +32,10 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    registration: {
+        starting: { type: Date, required: true },
+        ending: { type: Date, required: true }
+    },
     createdClub: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Club',

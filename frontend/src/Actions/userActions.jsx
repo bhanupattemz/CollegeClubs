@@ -36,6 +36,18 @@ import {
     ADMIN_GET_ALL_USERS_REQUEST,
     ADMIN_GET_ALL_USERS_SUCCESS,
     ADMIN_GET_ALL_USERS_FAIL,
+    COORDINATOR_VERIFY_REQUEST,
+    COORDINATOR_VERIFY_SUCCESS,
+    COORDINATOR_VERIFY_FAIL,
+    ADMIN_SET_BLOCK_STATUS_REQUEST,
+    ADMIN_SET_BLOCK_STATUS_SUCCESS,
+    ADMIN_SET_BLOCK_STATUS_FAIL,
+    ADMIN_DELETE_USER_REQUEST,
+    ADMIN_DELETE_USER_SUCCESS,
+    ADMIN_DELETE_USER_FAIL,
+    ADMIN_UPDATE_USER_REQUEST,
+    ADMIN_UPDATE_USER_SUCCESS,
+    ADMIN_UPDATE_USER_FAIL,
     SET_IS_UPDATE_FALSE
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
@@ -253,10 +265,10 @@ const adminSignup = (formData, _id) => async (dispatch) => {
 
 
 
-const adminGetAllUsers = () => async (dispatch) => {
+const adminGetAllUsers = (key) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_GET_ALL_USERS_REQUEST })
-        const response = await axiosInstance.get(`/users`)
+        const response = await axiosInstance.get(`/users?key=${key ? key : ""}`)
         dispatch({
             type: ADMIN_GET_ALL_USERS_SUCCESS,
             payload: response.data
@@ -269,9 +281,82 @@ const adminGetAllUsers = () => async (dispatch) => {
         });
     }
 }
+
+
+
+const verfyCoordinator = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: COORDINATOR_VERIFY_REQUEST })
+        const response = await axiosInstance.put(`/coordinator/${_id}`, formData)
+        dispatch({
+            type: COORDINATOR_VERIFY_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: COORDINATOR_VERIFY_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+const adminSetBlockStatus = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_SET_BLOCK_STATUS_REQUEST })
+        const response = await axiosInstance.put(`/users/blockstatus/${_id}`, formData)
+        dispatch({
+            type: ADMIN_SET_BLOCK_STATUS_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_SET_BLOCK_STATUS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+const admindeleteUser = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_DELETE_USER_REQUEST })
+        const response = await axiosInstance.delete(`/users/${_id}?message=${formData.message}`)
+        dispatch({
+            type: ADMIN_DELETE_USER_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_DELETE_USER_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+const adminUpdateUser = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_UPDATE_USER_REQUEST })
+        const response = await axiosInstance.put(`/users/${_id}`, formData)
+        dispatch({
+            type: ADMIN_UPDATE_USER_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_UPDATE_USER_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
 export {
     signInUser, signUpUser, getCurrentUser,
     userSignout, deleteCurrentUser, updateUserProfile,
     setIsUpdateFalse, updateProfilePassword, resetPaswordToken,
-    resetPasword, generateAdmin, adminSignup, adminGetAllUsers
+    resetPasword, generateAdmin, adminSignup, adminGetAllUsers, verfyCoordinator,
+    adminSetBlockStatus, admindeleteUser, adminUpdateUser
 }

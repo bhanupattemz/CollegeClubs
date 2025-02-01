@@ -18,9 +18,9 @@ export default function PDFViewer({ url }) {
         error={<p>Failed to load PDF. Please check the file URL.</p>}
       />
       <div className='pdf-viewer-btn'>
-        <button onClick={() => setPage(page - 1)} disabled={page === 1}><FaChevronLeft /></button>
+        <button type='button' onClick={() => setPage(page - 1)} disabled={page === 1}><FaChevronLeft /></button>
         <p>Page {page} / {numPages}</p>
-        <button onClick={() => setPage(page + 1)} disabled={page === numPages}><FaChevronRight /></button>
+        <button type='button' onClick={() => setPage(page + 1)} disabled={page === numPages}><FaChevronRight /></button>
       </div>
     </div>
   );

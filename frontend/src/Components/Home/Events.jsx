@@ -54,11 +54,11 @@ export default function Events({ event }) {
                         </h2>
                     </div>
                     <div>
-                        <Timer time={event.timings.starting} />
+                        <Timer time={event.registration.ending} />
                         <p>{event.description}</p>
                         <div className="event-btns">
                             <button onClick={e => navigate(`/events/${event._id}`)}>Explore More</button>
-                            {new Date(event.timings.starting).getTime() > Date.now() &&
+                            {new Date(event.registration.starting).getTime() < Date.now() && new Date(event.registration.ending).getTime() > Date.now() && 
                                 (!event.members.includes(user ? user._id : null) &&
                                     <button disabled={loading} onClick={registerEvent}>Register Now</button>)}
                         </div>

@@ -5,7 +5,13 @@ import {
     GET_CAROUSEL_IMGS_FAIL,
     DELETE_CAROUSEL_IMGS_REQUEST,
     DELETE_CAROUSEL_IMGS_SUCCESS,
-    DELETE_CAROUSEL_IMGS_FAIL
+    DELETE_CAROUSEL_IMGS_FAIL,
+    CREATE_CAROUSEL_IMGS_REQUEST,
+    CREATE_CAROUSEL_IMGS_SUCCESS,
+    CREATE_CAROUSEL_IMGS_FAIL,
+    UPDATE_CAROUSEL_IMGS_REQUEST,
+    UPDATE_CAROUSEL_IMGS_SUCCESS,
+    UPDATE_CAROUSEL_IMGS_FAIL
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
 const axiosInstance = axios.create({
@@ -44,5 +50,39 @@ const deleteCarouselImg = (_id) => async (dispatch) => {
     }
 }
 
+const adminCreateCarousel = (formData) => async (dispatch) => {
+    try {
+        dispatch({ type: CREATE_CAROUSEL_IMGS_REQUEST })
+        const response = await axiosInstance.post(`/carousel`, formData)
+        dispatch({
+            type: CREATE_CAROUSEL_IMGS_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: CREATE_CAROUSEL_IMGS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
 
-export { getCarouselImgs, deleteCarouselImg }
+const adminUpdateCarousel = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_CAROUSEL_IMGS_REQUEST })
+        const response = await axiosInstance.put(`/carousel/${_id}`, formData)
+        dispatch({
+            type: UPDATE_CAROUSEL_IMGS_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_CAROUSEL_IMGS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+
+
+export { getCarouselImgs, deleteCarouselImg, adminCreateCarousel, adminUpdateCarousel }

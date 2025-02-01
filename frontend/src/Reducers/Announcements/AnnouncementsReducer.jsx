@@ -9,6 +9,13 @@ import {
     ADMIN_DELETE_ANNOUNCEMENT_REQUEST,
     ADMIN_DELETE_ANNOUNCEMENT_SUCCESS,
     ADMIN_DELETE_ANNOUNCEMENT_FAIL,
+    CREATE_ANNOUNCEMENTS_REQUEST,
+    CREATE_ANNOUNCEMENTS_SUCCESS,
+    CREATE_ANNOUNCEMENTS_FAIL,
+    UPDATE_ANNOUNCEMENTS_REQUEST,
+    UPDATE_ANNOUNCEMENTS_SUCCESS,
+    UPDATE_ANNOUNCEMENTS_FAIL,
+    SET_ANNOUNCEMENT_SUCCESS_FALSE,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -73,7 +80,37 @@ const announcementSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(CREATE_ANNOUNCEMENTS_REQUEST, (state) => {
+                state.loading = true;
+                state.announcements = null
+            })
+            .addCase(CREATE_ANNOUNCEMENTS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.announcements = action.payload.data;
+                state.announcementsCount = action.payload.data.length || 0
+                state.success = true
+            })
+            .addCase(CREATE_ANNOUNCEMENTS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(UPDATE_ANNOUNCEMENTS_REQUEST, (state) => {
+                state.loading = true;
+                state.announcements = null
+            })
+            .addCase(UPDATE_ANNOUNCEMENTS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.announcements = action.payload.data;
+                state.announcementsCount = action.payload.data.length || 0
+                state.success = true
+            })
+            .addCase(UPDATE_ANNOUNCEMENTS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(SET_ANNOUNCEMENT_SUCCESS_FALSE, (state, action) => {
+                state.success = false
+            })
     },
 });
 

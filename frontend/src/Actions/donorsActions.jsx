@@ -9,6 +9,12 @@ import {
     ADMIN_DELETE_DONAR_REQUEST,
     ADMIN_DELETE_DONAR_SUCCESS,
     ADMIN_DELETE_DONAR_FAIL,
+    ADMIN_CREATE_DONAR_REQUEST,
+    ADMIN_CREATE_DONAR_SUCCESS,
+    ADMIN_CREATE_DONAR_FAIL,
+    ADMIN_UPDATE_DONAR_REQUEST,
+    ADMIN_UPDATE_DONAR_SUCCESS,
+    ADMIN_UPDATE_DONAR_FAIL,
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
 const axiosInstance = axios.create({
@@ -65,4 +71,40 @@ const adminDeleteDonar = (_id) => async (dispatch) => {
         });
     }
 }
-export { getTopDonors, getAllDonors, adminDeleteDonar }
+
+const adminCreateDonation = (formData) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_CREATE_DONAR_REQUEST })
+        const response = await axiosInstance.post(`/donars/admin`, formData)
+        dispatch({
+            type: ADMIN_CREATE_DONAR_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_CREATE_DONAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+
+const adminUpdateDonation = (formData,_id) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_UPDATE_DONAR_REQUEST })
+        const response = await axiosInstance.put(`/donars/${_id}`, formData)
+        dispatch({
+            type: ADMIN_UPDATE_DONAR_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_UPDATE_DONAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+export { getTopDonors, getAllDonors, adminDeleteDonar, adminCreateDonation ,adminUpdateDonation}

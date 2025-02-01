@@ -1,31 +1,128 @@
+import * as React from "react";
 import "./Header.css"
-import { Link } from "react-router"
-import { useSelector } from "react-redux"
-export default function Header() {
-    const { user } = useSelector(state => state.user)
+import {
+    AppBar,
+    Box,
+    Toolbar,
+    IconButton,
+    Typography,
+    Menu,
+    Container,
+    Button,
+    MenuItem,
+} from "@mui/material";
+import UserOptions from "../User/UserOptions"
+import MenuIcon from "@mui/icons-material/Menu";
+import { FaEnvelope } from "react-icons/fa";
+import {
+    FaHome,
+    FaUsers,
+    FaCalendarAlt,
+    FaImages,
+    FaDonate,
+    FaBook,
+    FaBullhorn,
+    FaInfoCircle,
+    FaPhoneAlt,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+function ResponsiveAppBar() {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const navigate = useNavigate();
+    const { user } = useSelector((state) => state.user);
+
+    const pages = [
+        { text: "Home", link: "/", icon: <FaHome /> },
+        { text: "Clubs", link: "/clubs", icon: <FaUsers /> },
+        { text: "Events", link: "/events", icon: <FaCalendarAlt /> },
+        { text: "Gallery", link: "/gallery", icon: <FaImages /> },
+        { text: "Donate", link: "/donation", icon: <FaDonate /> },
+        { text: "Library", link: "/library", icon: <FaBook /> },
+        { text: "Announcements", link: "/announcements", icon: <FaBullhorn /> },
+        { text: "About Us", link: "/about", icon: <FaInfoCircle /> },
+        { text: "Contact", link: "/contact", icon: <FaPhoneAlt /> },
+    ];
+
+    if (user && ["admin", "coordinator"].includes(user.role)) {
+        pages.splice(7, 0, { text: "Letters", link: "/letters", icon: <FaEnvelope /> });
+    }
+    const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+    const handleCloseNavMenu = (page) => {
+        setAnchorElNav(null);
+        navigate(page.link);
+    };
     return (
-        <div className="header">
-            <nav className="sticky-nav">
-                <div className="navbar-logo">
-                    <img src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734089521/Clubs/eoqzicmtr9gzhkzfqsxj.png" alt="logo" />
-                </div>
-                <div className="navbar-items">
-                    <ul>
-                        <li className="navbar-item"><Link to="/">Home</Link></li>
-                        <li className="navbar-item"><Link to="/clubs">Clubs</Link></li>
-                        <li className="navbar-item"><Link to="/events">Events</Link></li>
-                        <li className="navbar-item"><Link to="/gallery">Gallery</Link></li>
-                        <li className="navbar-item"><Link to="/donation">Donate</Link></li>
-                        <li className="navbar-item"><Link to="/library">Library</Link></li>
-                        <li className="navbar-item"><Link to="/announcements">Announcements</Link></li>
-                        {user && ["admin", "coordinator"].includes(user.role) && <li className="navbar-item"><Link to="/letters">Letters</Link></li>}
-                        <li className="navbar-item"><Link to="/about">About Us</Link></li>
-                        <li className="navbar-item"><Link to="/contact">Contact</Link></li>
-                    </ul>
-                </div>
-            </nav>
-
-        </div>
-
-    )
+        <AppBar position="static" className="main-navbar">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters sx={{ margin: "10px 0px" }}>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <img
+                            src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734195440/Clubs/lnczlvkkzy3cinwdxum5.png"
+                            alt="logo"
+                            style={{ width: "250px", maxWidth: "100%" }}
+                        />
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{ display: { xs: 'block', md: 'none' } }}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                                    <Typography sx={{ textAlign: 'center' }}>{page.icon} {page.text}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                        <Box sx={{ margin: "10px auto" }}>
+                            <img
+                                src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734195440/Clubs/lnczlvkkzy3cinwdxum5.png"
+                                alt="logo"
+                                style={{ width: "250px", maxWidth: "80%" }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page.text}
+                                onClick={() => handleCloseNavMenu(page)}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                {page.text}
+                            </Button>
+                        ))}
+                    </Box>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <UserOptions />
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
 }
+
+export default ResponsiveAppBar;

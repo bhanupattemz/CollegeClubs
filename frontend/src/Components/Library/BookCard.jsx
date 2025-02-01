@@ -1,9 +1,13 @@
 import "./BooksCard.css"
+import ReactPDF from 'react-pdf-js';
 export default function BookCard({ setPdfUrl, data }) {
     return (
         <div className="book-card-main">
             <div className="book-card-img">
-                <img src="https://res.cloudinary.com/dmvxvzb5n/image/upload/v1734875456/iu3pm3dde8qgmu3pha5t.jpg" alt="pdf-cover-page" />
+                <ReactPDF
+                    file={data.pdf.url}
+                    error={<img src="https://res.cloudinary.com/dmvxvzb5n/image/upload/v1734875456/iu3pm3dde8qgmu3pha5t.jpg" alt="pdf-cover-page" />}
+                />
             </div>
             <div>
                 <h3>{data.title}</h3>

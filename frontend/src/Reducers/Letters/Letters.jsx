@@ -6,6 +6,12 @@ import {
     ADMIN_DELETE_LETTER_REQUEST,
     ADMIN_DELETE_LETTER_SUCCESS,
     ADMIN_DELETE_LETTER_FAIL,
+    ADMIN_CREATE_LETTER_REQUEST,
+    ADMIN_CREATE_LETTER_SUCCESS,
+    ADMIN_CREATE_LETTER_FAIL,
+    UPDATE_LETTER_REQUEST,
+    UPDATE_LETTER_SUCCESS,
+    UPDATE_LETTER_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -38,7 +44,7 @@ const letterSlice = createSlice({
             .addCase(ALL_LETTERS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.letters = action.payload.data;
-                state.lettersCount=action.payload.data.length || 0
+                state.lettersCount = action.payload.data.length || 0
             })
             .addCase(ALL_LETTERS_FAIL, (state, action) => {
                 state.loading = false;
@@ -51,13 +57,40 @@ const letterSlice = createSlice({
             .addCase(ADMIN_DELETE_LETTER_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.letters = action.payload.data;
-                state.lettersCount=action.payload.data.length || 0
+                state.lettersCount = action.payload.data.length || 0
             })
             .addCase(ADMIN_DELETE_LETTER_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(ADMIN_CREATE_LETTER_REQUEST, (state) => {
+                state.loading = true;
+                state.letters = null
+            })
+            .addCase(ADMIN_CREATE_LETTER_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.letters = action.payload.data;
+                state.lettersCount = action.payload.data.length || 0
+                state.success = true
+            })
+            .addCase(ADMIN_CREATE_LETTER_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(UPDATE_LETTER_REQUEST, (state) => {
+                state.loading = true;
+                state.letters = null
+            })
+            .addCase(UPDATE_LETTER_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.letters = action.payload.data;
+                state.lettersCount = action.payload.data.length || 0
+                state.success = true
+            })
+            .addCase(UPDATE_LETTER_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

@@ -28,7 +28,7 @@ export default function AdminAllCarouselImgs() {
             renderCell: (params) => {
                 if (params.value) {
                     return (
-                        <div className="admin-all-carouselImgs-edit" onClick={() => navigate(`/admin/carouselImgs/update/${params.value}`)}>
+                        <div className="admin-all-carouselImgs-edit" onClick={() => navigate(`/admin/carousel/update/${params.value}`)}>
                             <FaEdit />
                         </div>
                     )

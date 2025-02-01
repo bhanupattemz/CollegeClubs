@@ -2,7 +2,7 @@ import "./AdminAllEvents.css"
 import AdminSetUp from "../AdminSetUp"
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux"
-import { adminGetAllEvents, adminDeleteEvent } from "../../../../Actions/EventAction"
+import { adminGetAllEvents, adminDeleteEvent, registerEvents } from "../../../../Actions/EventAction"
 import { useEffect, useState } from "react";
 import Loading from "../../../Loaders/Loading"
 import { useNavigate, useLocation } from "react-router-dom"
@@ -11,6 +11,7 @@ import { MdDelete } from "react-icons/md";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { ConvertTime } from "../../../Functionalities/functionalites"
 import { confirmAlert } from 'react-confirm-alert';
+import XlsxButton from "../../../Functionalities/XlsxButton"
 export default function AdminAllEvents() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -18,28 +19,41 @@ export default function AdminAllEvents() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { events, loading } = useSelector(state => state.events)
+    console.log(events)
     const columns = [
         { field: "id", headerName: "Sl. No" },
-        { field: "name", headerName: "Event Name", flex: 0.3 },
-        { field: "members", headerName: "Number of members", flex: 0.1 },
+        { field: "name", headerName: "Event Name", flex: 0.2 },
+        { field: "members", headerName: "Number of members", flex: 0.15 },
         {
-            field: "isActive", headerName: "Is Active", flex: 0.2,
+            field: "isActive", headerName: "Is Active", flex: 0.1,
             renderCell: (params) => {
                 if (params) {
                     return (
-                        <div style={params.value ? { color: "green" } : { color: "red" }}>{params.value?"True":"False"}</div>
+                        <div style={params.value ? { color: "green" } : { color: "red" }}>{params.value ? "True" : "False"}</div>
                     )
                 }
             }
         },
-        { field: "conductedClub", headerName: "Conducted Clubs", flex: 0.2 },
+        { field: "conductedClub", headerName: "Conducted Clubs", flex: 0.1 },
         { field: "createdAt", headerName: "CreatedAt", flex: 0.2 },
+        {
+            field: "allMembers", headerName: "Members", flex: 0.1,
+            renderCell: (params) => {
+                if (params.value) {
+                    return (
+                        <div className="admin-all-events-link" onClick={() => navigate(`/admin/events/members/${params.value}`)}>
+                            <FaExternalLinkAlt />
+                        </div>
+                    )
+                }
+            }
+        },
         {
             field: "open", headerName: "Open", flex: 0.1,
             renderCell: (params) => {
                 if (params.value) {
                     return (
-                        <div className="admin-all-events-link" onClick={() => navigate(`/admin/events/${params.value}`)}>
+                        <div className="admin-all-events-link" onClick={() => navigate(`/events/${params.value}`)}>
                             <FaExternalLinkAlt />
                         </div>
                     )
@@ -47,6 +61,7 @@ export default function AdminAllEvents() {
                 }
             }
         },
+
         {
             field: "edit", headerName: "Edit", flex: 0.1,
             renderCell: (params) => {
@@ -129,12 +144,30 @@ export default function AdminAllEvents() {
                                 id: inx + 1,
                                 createdAt: ConvertTime(event.createdAt).split(",")[0],
                                 isActive: event.isactive,
-                                open: event._id
+                                open: event._id,
+                                allMembers: event._id
                             }
 
                         })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
+                        sx={{ height: "65vh", backgroundColor: "white" }}
                     />
+                    <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
+                        <XlsxButton filename={"Events"}
+                            data={events && events.map((event, inx) => {
+                                return {
+                                    id: inx + 1,
+                                    Name: event.name,
+                                    Conducted_Clubs: event.conductedClub.length,
+                                    Members: event.members.length,
+                                    Registeration: `${ConvertTime(event.registration.starting)} to ${ConvertTime(event.registration.ending)}`,
+                                    Timings: `${ConvertTime(event.timings.starting)} to ${ConvertTime(event.timings.ending)}`,
+                                    isActive: event.isactive,
+                                    createdAt: ConvertTime(event.createdAt).split(",")[0],
+                                }
+
+                            })}
+                        />
+                    </div>
                 </div>
             </section>}
         />

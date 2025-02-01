@@ -3,25 +3,29 @@ const router = Express.Router()
 const GalleryController = require("../Controllers/GalleryController")
 const { isAdmin, isCoordinator, isOrganizers, isLoggedIn } = require("../middleware")
 
+const { storage } = require("../config/cloudinary")
+const multer = require("multer")
+const upload = multer({ storage });
+
 //club gallery Routers
 router.route("/clubs")
     .get(GalleryController.getAllClubPhotos)
-    .post(isLoggedIn, isCoordinator, GalleryController.createClubPhoto)
+    .post(upload.array("images"), isLoggedIn, isCoordinator, GalleryController.createClubPhoto)
 
 router.route("/clubs/:_id")
     .get(GalleryController.getOneClubPhoto)
     .put(isLoggedIn, isOrganizers, GalleryController.updateClubPhoto)
-    .delete(isLoggedIn, isOrganizers, GalleryController.deleteClubPhoto)
+    .delete(isLoggedIn, isCoordinator, GalleryController.deleteClubPhoto)
+
+router.route("/coordinator")
+    .get(isLoggedIn, isCoordinator, GalleryController.getCoordinatorGallery)
 
 //Admin gallery Routers
 router.route("/admins")
-    .get(GalleryController.getAllAdminPhotos)
-    .post(isLoggedIn, isAdmin, GalleryController.createAdminPhoto)
+    .post(upload.array("images"), isLoggedIn, isAdmin, GalleryController.createAdminPhoto)
 
 router.route("/admins/:_id")
     .get(GalleryController.getOneAdminPhoto)
-    .put(isLoggedIn, isAdmin, GalleryController.updateAdminPhoto)
-    .delete(isLoggedIn, isAdmin, GalleryController.deleteAdminPhoto)
 
 //All gallery Router
 router.route("/")

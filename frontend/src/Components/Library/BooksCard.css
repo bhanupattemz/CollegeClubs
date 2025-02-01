@@ -47,14 +47,16 @@
     overflow: hidden;
 }
 
-.book-card-img img {
+.book-card-img img,
+.book-card-img canvas {
     width: 98%;
-    height: 40vh;
+    height: 40vh !important;
     object-fit: cover;
     transition: object-fit 0.5s ease, transform 0.5s ease;
 }
 
-.book-card-img>img:hover {
+.book-card-img>img:hover,
+.book-card-img>canvas:hover {
     object-fit: contain;
     transform: scale(1.1);
 }

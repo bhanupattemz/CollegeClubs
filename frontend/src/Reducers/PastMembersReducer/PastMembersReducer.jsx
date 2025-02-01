@@ -6,6 +6,10 @@ import {
     DELETE_PAST_MEMBER_REQUEST,
     DELETE_PAST_MEMBER_SUCCESS,
     DELETE_PAST_MEMBER_FAIL,
+    CREATE_PAST_MEMBER_REQUEST,
+    CREATE_PAST_MEMBER_SUCCESS,
+    CREATE_PAST_MEMBER_FAIL,
+    SET_PAST_MEMBER_SUCCESS_FALSE,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -38,7 +42,7 @@ const pastMemberSlice = createSlice({
             .addCase(GET_PAST_MEMBERS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.pastMembers = action.payload.data;
-                state.pastMembersCount=action.payload.data.length || 0
+                state.pastMembersCount = action.payload.data.length || 0
             })
             .addCase(GET_PAST_MEMBERS_FAIL, (state, action) => {
                 state.loading = false;
@@ -51,11 +55,28 @@ const pastMemberSlice = createSlice({
             .addCase(DELETE_PAST_MEMBER_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.pastMembers = action.payload.data;
-                state.pastMembersCount=action.payload.data.length || 0
+                state.pastMembersCount = action.payload.data.length || 0
             })
             .addCase(DELETE_PAST_MEMBER_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+            .addCase(CREATE_PAST_MEMBER_REQUEST, (state) => {
+                state.loading = true;
+                state.pastMembers = null
+            })
+            .addCase(CREATE_PAST_MEMBER_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.pastMembers = action.payload.data;
+                state.pastMembersCount = action.payload.data.length || 0
+                state.success = true
+            })
+            .addCase(CREATE_PAST_MEMBER_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(SET_PAST_MEMBER_SUCCESS_FALSE, (state, action) => {
+                state.success = false
             })
 
     },

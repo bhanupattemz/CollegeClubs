@@ -33,6 +33,9 @@ router.route("/users/:_id")
     .put(upload.single('profile'), isLoggedIn, isAdmin, UserControllers.adminUpdateUser)
     .delete(isLoggedIn, isAdmin, UserControllers.deleteUser)
 
+router.route("/users/blockstatus/:_id")
+    .put(isLoggedIn, isAdmin, UserControllers.setUserBlockStatus)
+    
 router.route("/users")
     .get(isLoggedIn, isAdmin, UserControllers.getAllUsers)
     .delete(isLoggedIn, UserControllers.deleteCurrentUser)

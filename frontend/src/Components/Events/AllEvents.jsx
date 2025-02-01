@@ -34,15 +34,14 @@ export default function AllEvents() {
             setPastEvents([])
             setfeatureEvents([])
             events.map((item) => {
-                const eventTime = new Date(item.timings.starting).getTime();
-                if (eventTime < Date.now()) {
-                    setPastEvents(prev => [...prev, item])
-                } else if (eventTime > Date.now()) {
+                if (new Date(item.registration.starting).getTime() < Date.now() && new Date(item.registration.ending).getTime() > Date.now()) {
                     setfeatureEvents(prev => [...prev, item])
+                } 
+                if(new Date(item.timings.ending).getTime() < Date.now()) {
+                    setPastEvents(prev => [...prev, item])
                 }
             })
         }
-
     }, [events])
     if (loading) {
         return <Loading />;
@@ -70,7 +69,7 @@ export default function AllEvents() {
             <section className="all-events">
                 {currentState == "all" && (events && events.length != 0 ?
                     events.map((item) => {
-                        return item.isactive &&  <Event key={item._id} event={item} />;
+                        return item.isactive && <Event key={item._id} event={item} />;
                     }) : <NoEvents />)
                 }
                 {currentState == "past" && (pastevents.length > 0 ?

@@ -1,7 +1,7 @@
 const ExpressError = require("../Utils/ExpressError")
 const WrapAsync = require("../Utils/WrapAsync")
 const LetterModel = require("../Models/lettersModel")
-
+const { deleteFromClodinary } = require("../functionalities")
 module.exports.getAllLetters = WrapAsync(async (req, res) => {
     const { key } = req.query
     const letters = await LetterModel.find({
@@ -32,8 +32,21 @@ module.exports.getOneLetter = WrapAsync(async (req, res) => {
 
 
 module.exports.createLetter = WrapAsync(async (req, res, next) => {
-    const letter = req.body;
-    const newletter = new LetterModel({ ...letter, createdBy: req.user._id })
+    const bodydata = req.body;
+    let pdf;
+    if (req.file) {
+        pdf = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        };
+    }
+    let letter = {
+        title: bodydata.title,
+        content: bodydata.content,
+        pdf: pdf,
+        visibility: bodydata.visibility
+    }
+    const newletter = new LetterModel(letter)
     await newletter.save()
     const allletters = await LetterModel.find().sort({ date: -1 })
     res.status(200).json({
@@ -43,13 +56,29 @@ module.exports.createLetter = WrapAsync(async (req, res, next) => {
 })
 
 module.exports.updateLetter = WrapAsync(async (req, res, next) => {
-    const updatedletter = req.body;
+    const bodydata = req.body;
     const { _id } = req.params;
     const letter = await LetterModel.findById(_id);
     if (!letter) {
         throw new ExpressError("letter not found", 404);
     }
-    await LetterModel.findByIdAndUpdate(_id, { ...updatedletter, updatedAt: Date.now(), createdBy: req.user._id }, { new: true, runValidators: true })
+    let pdf;
+    if (req.file) {
+        deleteFromClodinary(letter.pdf)
+        pdf = {
+            public_id: req.file.filename,
+            url: req.file.path,
+        };
+    } else {
+        pdf = letter.pdf
+    }
+    let updatedletter = {
+        title: bodydata.title,
+        content: bodydata.content,
+        pdf: pdf,
+        visibility: bodydata.visibility
+    }
+    await LetterModel.findByIdAndUpdate(_id, { ...updatedletter, updatedAt: Date.now() }, { new: true, runValidators: true })
     const allletters = await LetterModel.find().sort({ date: -1 })
     res.status(200).json({
         success: true,

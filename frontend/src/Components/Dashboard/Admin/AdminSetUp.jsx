@@ -14,12 +14,13 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { MdViewCarousel } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi";
 import { wait } from "../../Functionalities/functionalites"
+import { FaFacebookMessenger, FaMessage } from "react-icons/fa6";
+import { MdMessage } from "react-icons/md";
 export default function AdminSetUp({ current, element, option }) {
     const sideBarRef = useRef(null)
     const mainRef = useRef(null)
     const [open, setopen] = useState(false)
     const navigate = useNavigate()
-
     const closeBtnClickHandle = () => {
         if (mainRef.current && sideBarRef.current) {
             sideBarRef.current.style.width = "0%"
@@ -42,8 +43,6 @@ export default function AdminSetUp({ current, element, option }) {
     const optionStyles = {
         color: "#0A5EB0"
     }
-
-
     return (
         <Fragment>
             <main className="admin-dashboard-main">
@@ -65,6 +64,8 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/clubs')}>All Clubs</div>
                                 <div style={option == "create" ? optionStyles : null} onClick={() => navigate('/admin/clubs/create')}>Create Club</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/clubs')}>Update Club</div>}
+                                {option == "members" && <div style={optionStyles} onClick={() => navigate('/admin/clubs')}>Club Members</div>}
                             </div>
                         }
                     </div>
@@ -77,6 +78,8 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/events')}>All Events</div>
                                 <div style={option == "create" ? optionStyles : null} onClick={() => navigate('/admin/events/create')}>Create Event</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/events')}>Update Event</div>}
+                                {option == "members" && <div style={optionStyles} onClick={() => navigate('/admin/events')}>Event Members</div>}
                             </div>
                         }
                     </div>
@@ -89,8 +92,12 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/fests')}>All fests</div>
                                 <div style={option == "create" ? optionStyles : null} onClick={() => navigate('/admin/fests/create')}>Create fest</div>
+                                {option == "update-fest" && <div style={optionStyles} onClick={() => navigate('/admin/fests')}>Update Fest</div>}
                                 <div style={option == "all-events" ? optionStyles : null} onClick={() => navigate('/admin/fests/events')}>Fest Events</div>
                                 <div style={option == "events-create" ? optionStyles : null} onClick={() => navigate('/admin/fests/events/create')}>Create Events</div>
+                                {option == "update-event" && <div style={optionStyles} onClick={() => navigate('/admin/fests/events')}>Update Event</div>}
+                                {option == "members" && <div style={optionStyles} onClick={() => navigate('/admin/fests/events')}>Event Members</div>}
+                                <div style={option == "all-members" ? optionStyles : null} onClick={() => navigate('/admin/fests/members')}>Fest Members</div>
                             </div>
                         }
                     </div>
@@ -101,10 +108,16 @@ export default function AdminSetUp({ current, element, option }) {
                             <RiGalleryLine /> Gallery</h2>
                         {current == "gallery" &&
                             <div className="admin-setup-item-options" >
-                                <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/clubs')}>All Main Photos</div>
-                                <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/clubs/create')}>Create Gallery</div>
+                                <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/gallery')}>All Main Photos</div>
+                                <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/gallery/create')}>Create Gallery</div>
                             </div>
                         }
+                    </div>
+                    <div>
+                        <h2
+                            style={current == "messages" ? currentStyles : null}
+                            onClick={() => navigate('/admin/messages')}>
+                            <MdMessage /> Messages And Feedbacks</h2>
                     </div>
                     <div>
                         <h2
@@ -116,8 +129,10 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "announcements" ? optionStyles : null} onClick={() => navigate('/admin/announcements')}>Announcements</div>
                                 <div style={option == "a_Create" ? optionStyles : null} onClick={() => navigate('/admin/announcements/create')}>Create  Announcement</div>
+                                {option == "a_Update" && <div style={optionStyles} onClick={() => navigate('/admin/announcements')}>Update Announcement</div>}
                                 <div style={option == "letters" ? optionStyles : null} onClick={() => navigate('/admin/letters')}>Letters</div>
                                 <div style={option == "l_Create" ? optionStyles : null} onClick={() => navigate('/admin/letters/create')}>Create Letter</div>
+                                {option == "l_Update" && <div style={optionStyles} onClick={() => navigate('/admin/letters')}>Update Letter</div>}
                             </div>
                         }
                     </div>
@@ -131,6 +146,7 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/donations')}>All Donations</div>
                                 <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/donations/create')}>Create Donation</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/letters')}>Update Donation</div>}
                             </div>
                         }
                     </div>
@@ -143,7 +159,8 @@ export default function AdminSetUp({ current, element, option }) {
                         {current == "library" &&
                             <div className="admin-setup-item-options" >
                                 <div style={option == "academicBooks" ? optionStyles : null} onClick={() => navigate('/admin/library')}>Academic Books</div>
-                                <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/library/create')}>Create Academic Books</div>
+                                <div style={option == "create" ? optionStyles : null} onClick={() => navigate('/admin/library/create')}>Create Academic Books</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/letters')}>Update Book</div>}
                             </div>
                         }
                     </div>
@@ -156,6 +173,7 @@ export default function AdminSetUp({ current, element, option }) {
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/carousel')}>Carousel Imgs</div>
                                 <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/carousel/create')}>Create Carousel Img</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/carousel')}>Update Carousel</div>}
                             </div>
                         }
                     </div>
@@ -167,21 +185,23 @@ export default function AdminSetUp({ current, element, option }) {
                         {current == "adminTeam" &&
                             <div className="admin-setup-item-options" >
                                 <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/administration_team')}>All Administration Team Members</div>
-                                <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/administration_team/create')}>Create</div>
+                                <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/administration_team/create')}>Create Member</div>
+                                {option == "update" && <div style={optionStyles} onClick={() => navigate('/admin/administration_team')}>Update Member</div>}
                             </div>}
                     </div>
                     <div className="">
                         <h2
-                            style={current == "past_team" ? currentStyles : null}
-                            onClick={() => navigate('/admin/past_team')}>
-                            <HiUserGroup /> Past Team</h2>
-                        {current == "past_team" &&
+                            style={current == "users" ? currentStyles : null}
+                            onClick={() => navigate('/admin/users')}>
+                            <HiUserGroup />Users</h2>
+                        {current == "users" &&
                             <div className="admin-setup-item-options" >
-                                <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/past_team')}>All Past Members</div>
-                                <div style={option == "Create" ? optionStyles : null} onClick={() => navigate('/admin/past_team/create')}>Create Member</div>
+                                <div style={option == "all" ? optionStyles : null} onClick={() => navigate('/admin/users')}>All Users</div>
+                                {option == "update-user" && <div style={optionStyles} onClick={() => navigate('/admin/users')}>Update User</div>}
+                                <div style={option == "past-all" ? optionStyles : null} onClick={() => navigate('/admin/past_team')}>All Past Members</div>
+                                <div style={option == "past-create" ? optionStyles : null} onClick={() => navigate('/admin/past_team/create')}>Create Past Member</div>
                             </div>}
                     </div>
-
 
                 </aside>
                 <section className="admin-setup-section" ref={mainRef}>

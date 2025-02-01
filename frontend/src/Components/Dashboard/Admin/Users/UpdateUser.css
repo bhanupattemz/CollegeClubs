@@ -1,0 +1,92 @@
+.admin-update-user {
+    padding: 20px 5%;
+    margin: 20px 15%;
+    margin: 0 auto;
+    width: 60%;
+    background-color: white;
+}
+.admin-update-user .css-1xp5r68-MuiFormControl-root-MuiTextField-root{
+    margin: 10px 0px;
+}
+
+.admin-update-user form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.admin-update-user .profile-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-update-user .profile-fields,
+.admin-update-user .contact-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.admin-update-user .profile-img-picker {
+    width: 50% !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-update-user .profile-img-picker img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.admin-update-user .profile-img-picker input {
+    font-size: 1rem;
+}
+
+.admin-update-user .academic-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-update-user .academic-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.admin-update-user .description-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-update-user .description-section TextField {
+    margin-top: 10px;
+}
+
+.admin-update-user .MuiLoadingButton-root {
+    margin-top: 20px;
+    align-self: flex-start;
+}
+
+.admin-update-user-row-3 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+@media (max-width: 768px) {
+
+    .admin-update-user .profile-fields,
+    .admin-update-user .contact-fields,
+    .admin-update-user .academic-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-update-user .profile-img-picker {
+        flex-direction: column;
+        align-items: center;
+    }
+}

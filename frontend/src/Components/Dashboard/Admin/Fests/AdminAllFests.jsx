@@ -11,6 +11,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { ConvertTime, BACKENDURL } from "../../../Functionalities/functionalites"
 import { confirmAlert } from 'react-confirm-alert';
 import axios from "axios"
+import XlsxButton from "../../../Functionalities/XlsxButton"
 export default function AdminAllFests() {
     const axiosInstance = axios.create({
         baseURL: BACKENDURL,
@@ -33,18 +34,18 @@ export default function AdminAllFests() {
             renderCell: (params) => {
                 if (params) {
                     return (
-                        <div style={params.value ? { color: "green" } : { color: "red" }}>{params.value?"True":"False"}</div>
+                        <div style={params.value ? { color: "green" } : { color: "red" }}>{params.value ? "True" : "False"}</div>
                     )
                 }
             }
         },
-        { field: "createdAt", headerName: "CreatedAt", flex: 0.2 },
+        { field: "createdAt", headerName: "CreatedAt", flex: 0.15 },
         {
             field: "open", headerName: "Open", flex: 0.1,
             renderCell: (params) => {
                 if (params.value) {
                     return (
-                        <div className="admin-all-fests-link" onClick={() => navigate(`/admin/fests/${params.value}`)}>
+                        <div className="admin-all-fests-edit" onClick={() => navigate(`/admin/fests/${params.value}`)}>
                             <FaExternalLinkAlt />
                         </div>
                     )
@@ -114,7 +115,6 @@ export default function AdminAllFests() {
             try {
                 setNextLoading(true)
                 const response = await axiosInstance.get(`/fest/all?key=${key}`)
-                console.log(response.data.data)
                 setFests(response.data.data)
             }
             catch (err) {
@@ -167,6 +167,19 @@ export default function AdminAllFests() {
                         loading={loading}
                         sx={{ minHeight: "60vh", backgroundColor: "" }}
                     />
+                    <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
+                        <XlsxButton filename={"Fests"}
+                            data={fests && fests.map((fest, inx) => {
+                                return {
+                                    Sl_No: inx + 1,
+                                    Name: fest.name,
+                                    Events: fest.events.length,
+                                    IsActive: fest.isactive,
+                                    CreatedAt: ConvertTime(fest.createdAt),
+                                }
+                            })}
+                        />
+                    </div>
                 </div>
             </section>}
         />

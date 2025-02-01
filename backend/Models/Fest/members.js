@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const EventModel = require("./festEvents")
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -11,7 +12,8 @@ const studentSchema = new mongoose.Schema({
     mail: {
         type: String,
         required: [true, "Please enter you mail"],
-        match: [/.+\@.+\..+/, "Please enter a valid email."]
+        match: [/.+\@.+\..+/, "Please enter a valid email."],
+        unique: true,
     },
     mobileNo: {
         type: Number,
@@ -34,10 +36,12 @@ const studentSchema = new mongoose.Schema({
         min: 1,
         max: 4
     },
+    gender: { type: String, enum: ["male", 'female', 'others'], required: true },
     paymentInfo: {
         paymentId: { type: String, required: true },
         status: { type: String, required: true },
-        payedAt: { type: Date, default: Date.now() }
+        payedAt: { type: Date, default: Date.now() },
+        amount: { type: Number, required: true }
     },
     createdAt: {
         type: Date,
@@ -46,6 +50,9 @@ const studentSchema = new mongoose.Schema({
 });
 
 
+
 const Student = mongoose.model('FestMembers', studentSchema);
+
+
 
 module.exports = Student

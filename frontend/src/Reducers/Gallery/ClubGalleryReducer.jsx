@@ -3,6 +3,12 @@ import {
     ALL_CLUB_GALLERY_REQUEST,
     ALL_CLUB_GALLERY_SUCCESS,
     ALL_CLUB_GALLERY_FAIL,
+    GET_COORDINATOR_GALLERY_REQUEST,
+    GET_COORDINATOR_GALLERY_SUCCESS,
+    GET_COORDINATOR_GALLERY_FAIL,
+    COORDINATOR_DELETE_GALLERY_REQUEST,
+    COORDINATOR_DELETE_GALLERY_SUCCESS,
+    COORDINATOR_DELETE_GALLERY_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -38,6 +44,32 @@ const clubGallerySlice = createSlice({
                 state.clubGalleryCount = action.payload.data.length || 0
             })
             .addCase(ALL_CLUB_GALLERY_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(GET_COORDINATOR_GALLERY_REQUEST, (state) => {
+                state.loading = true;
+                state.clubGallery = null
+            })
+            .addCase(GET_COORDINATOR_GALLERY_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.clubGallery = action.payload.data;
+                state.clubGalleryCount = action.payload.data.length || 0
+            })
+            .addCase(GET_COORDINATOR_GALLERY_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(COORDINATOR_DELETE_GALLERY_REQUEST, (state) => {
+                state.loading = true;
+                state.clubGallery = null
+            })
+            .addCase(COORDINATOR_DELETE_GALLERY_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.clubGallery = action.payload.data;
+                state.clubGalleryCount = action.payload.data.length || 0
+            })
+            .addCase(COORDINATOR_DELETE_GALLERY_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

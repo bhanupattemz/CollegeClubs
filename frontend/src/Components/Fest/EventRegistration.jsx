@@ -63,7 +63,11 @@ export default function EventRegistration() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    const genders = [
+        { value: "male", label: "Male" },
+        { value: "female", label: "Female" },
+        { value: "others", label: "Others" }
+    ];
     const branches = [
         { value: "cse", label: "CSE" },
         { value: "ece", label: "ECE" },
@@ -159,13 +163,13 @@ export default function EventRegistration() {
                             </Table>
                         </TableContainer>
                         <p style={{ color: "#FF9D23" }}><CiWarning /> Please double-check all the details carefully. You do not have permission to update them directly.</p>
-                        <FormControlLabel control={<Checkbox onChange={(e) => setAccept(prev => !prev)} />} label="I have read and accept the instructions of event." />
-                        <a href={event?.pdf?.url} target="_blank" style={{ color: "blue" }}>view Insructions</a>
+                        <FormControlLabel control={<Checkbox checked={accept} onChange={(e) => setAccept(prev => e.target.checked)} />} label="I have read and accept the instructions of event." />
+                        <a href={event?.pdf?.url} target="_blank" style={{ color: "blue" }}>view Instructions</a>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <RegisterButton event={event} formData={formData} isAccept={accept} setOpen={setOpen}/>
+                    <RegisterButton event={event} formData={formData} isAccept={accept} setOpen={setOpen} setLoading={setLoading}/>
                 </DialogActions>
             </Dialog>
             <h1>Register for {event.name}</h1>
@@ -194,16 +198,37 @@ export default function EventRegistration() {
                             setFormData(prev => ({ ...prev, mail: e.target.value }))
                         }
                     />
-                    <TextField
-                        id="mobile-no"
-                        label="Mobile No"
-                        variant="outlined"
-                        type="number"
-                        value={formData.mobileNo}
-                        onChange={(e) =>
-                            setFormData(prev => ({ ...prev, mobileNo: e.target.value }))
-                        }
-                    />
+                    <div className="event-registration-row-1-sub">
+                        <TextField
+                            id="mobile-no"
+                            label="Mobile No"
+                            variant="outlined"
+                            type="number"
+                            value={formData.mobileNo}
+                            onChange={(e) =>
+                                setFormData(prev => ({ ...prev, mobileNo: e.target.value }))
+                            }
+                        />
+                        <TextField
+                            required
+                            select
+                            label="Gener"
+                            value={formData.gender}
+                            onChange={(e) =>
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    gender: e.target.value,
+                                }))
+                            }
+                        >
+                            {genders.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </div>
+
                 </div>
                 <div>
                     <TextField

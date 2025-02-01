@@ -10,7 +10,7 @@ import { PiCertificateBold } from "react-icons/pi";
 import { FaUserEdit } from "react-icons/fa";
 import "./UserOptions.css"
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-export default function UserOptions({ user }) {
+export default function UserOptions() {
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
@@ -19,19 +19,24 @@ export default function UserOptions({ user }) {
         dispatch(userSignout())
 
     }
+    const authenticationSettings = [
+        { icon: <AccountCircleIcon />, name: "SignIn", func: () => navigate("/signin") },
+        { icon: <FaUserEdit />, name: "SignUp", func: () => navigate("/signup") },
+    ];
     const dashboard = () => { navigate(`/${user.role}/dashboard`) }
-    const { isauthenticate } = useSelector(state => state.user)
+    const { isauthenticate, user } = useSelector(state => state.user)
     let actions = [
         { icon: <AccountCircleIcon />, name: "profile", func: account },
-        { icon: <FaUserEdit />, name: "Edit Profile", func: ()=>{navigate("/profile/update")} },
+        { icon: <FaUserEdit />, name: "Edit Profile", func: () => { navigate("/profile/update") } },
         { icon: <IoMdLogOut />, name: "logout", func: logout },
     ]
-    if (user && user.role == "admin") {
+    if (user && ["admin", "coordinator"].includes(user.role)) {
         actions.unshift({ icon: <DashboardCustomizeIcon />, name: "DashBoard", func: dashboard })
-    } else if (user) {
+    }
+    else if (user) {
         actions = [
             ...actions.slice(0, 1),
-            { icon: <PiCertificateBold />, name: "certificates", func: ()=>{navigate("/profile?type=achi")} },
+            { icon: <PiCertificateBold />, name: "certificates", func: () => { navigate("/profile?type=achi") } },
             ...actions.slice(1),
         ];
     }
@@ -42,10 +47,18 @@ export default function UserOptions({ user }) {
                 icon={<img src={user && user.personalInformation?.profile?.url ? user.personalInformation.profile.url : "https://res.cloudinary.com/dmvxvzb5n/image/upload/v1721047699/Epic%20Essentials/pjlmvwy41tdhblpskhnj.png"} className='img-icon' />}
                 direction='down'
                 sx={{
-                    position: 'absolute', top: 105, right: 25, zIndex: 11, '& .MuiFab-primary': { width: 40, height: 40 },
+                    position: 'absolute', top: 25, right: 25, zIndex: 11, '& .MuiFab-primary': { width: 40, height: 40 },
                     '& .MuiSpeedDialAction-staticTooltipLabel': { fontSize: '0.75rem' },
                 }}>
-                {actions.map((action) => (
+                {user ? actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                        tooltipOpen
+                        onClick={action.func}
+                    />
+                )) : authenticationSettings.map((action) => (
                     <SpeedDialAction
                         key={action.name}
                         icon={action.icon}

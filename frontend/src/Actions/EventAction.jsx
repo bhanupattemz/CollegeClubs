@@ -17,7 +17,14 @@ import {
     REGISTER_EVENT_FAIL,
     ADMIN_DELETE_EVENT_REQUEST,
     ADMIN_DELETE_EVENT_SUCCESS,
-    ADMIN_DELETE_EVENT_FAIL
+    ADMIN_DELETE_EVENT_FAIL,
+    CREATE_EVENT_REQUEST,
+    CREATE_EVENT_SUCCESS,
+    CREATE_EVENT_FAIL,
+    UPDATE_EVENT_REQUEST,
+    UPDATE_EVENT_SUCCESS,
+    UPDATE_EVENT_FAIL,
+    SET_EVENT_SUCCESS_FALSE
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
 const axiosInstance = axios.create({
@@ -25,7 +32,7 @@ const axiosInstance = axios.create({
     withCredentials: true
 })
 
-const getAllEvents = (params, isactive) => async (dispatch) => {
+const getAllEvents = (params) => async (dispatch) => {
     try {
         dispatch({ type: ALL_EVENTS_REQUEST })
         const response = await axiosInstance.get(`/events?key=${params ? params : ""}`)
@@ -83,6 +90,22 @@ const getSingleEvent = (params) => async (dispatch) => {
     try {
         dispatch({ type: GET_SINGLE_EVENT_REQUEST })
         const response = await axiosInstance.get(`/events/${params}`)
+        dispatch({
+            type: GET_SINGLE_EVENT_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_SINGLE_EVENT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+const adminGetSingleEvent = (params) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_SINGLE_EVENT_REQUEST })
+        const response = await axiosInstance.get(`/events/admin/${params}`)
         dispatch({
             type: GET_SINGLE_EVENT_SUCCESS,
             payload: response.data
@@ -151,7 +174,50 @@ const adminDeleteEvent = (params) => async (dispatch) => {
         });
     }
 }
+
+
+const createEvent = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: CREATE_EVENT_REQUEST })
+        const response = await axiosInstance.post(`/events/create/${_id}`, formData)
+        dispatch({
+            type: CREATE_EVENT_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CREATE_EVENT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
+
+const updateEvent = (formData, _id) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_EVENT_REQUEST })
+        const response = await axiosInstance.put(`/events/${_id}`, formData)
+        dispatch({
+            type: UPDATE_EVENT_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_EVENT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+const setEventSuccessFalse = (formData, _id) => async (dispatch) => {
+    dispatch({
+        type: SET_EVENT_SUCCESS_FALSE
+    })
+}
 export {
     getAllEvents, getSingleEvent, getClubEvents, getUserEvents, registerEvents,
-    adminDeleteEvent, adminGetAllEvents
+    adminDeleteEvent, adminGetAllEvents, createEvent, setEventSuccessFalse, updateEvent,
+    adminGetSingleEvent
 }

@@ -14,8 +14,7 @@ export default function Carousel() {
     const rightbtn = useRef(null);
     const carouselRef = useRef(null);
     const { carouselImgs } = useSelector(state => state.carouselImgs);
-    const [len, setLen] = useState(0); 
-
+    const [len, setLen] = useState(0);
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -101,7 +100,7 @@ export default function Carousel() {
                         <div
                             onClick={() => {
                                 if (carouselImgs[imgNo]?.link) {
-                                    navigate(carouselImgs[imgNo].link);
+                                    navigate(carouselImgs[imgNo].link!="undefined" ? carouselImgs[imgNo].link : "/");
                                 }
                             }}
                             className="middle-carousel-anch"

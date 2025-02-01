@@ -33,6 +33,9 @@ import {
     ADMIN_SIGNUP_REQUEST,
     ADMIN_SIGNUP_SUCCESS,
     ADMIN_SIGNUP_FAIL,
+    COORDINATOR_VERIFY_REQUEST,
+    COORDINATOR_VERIFY_SUCCESS,
+    COORDINATOR_VERIFY_FAIL,
     SET_IS_UPDATE_FALSE,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
@@ -193,6 +196,17 @@ const userSlice = createSlice({
                 state.isauthenticate = action.payload.isauthenticate
             })
             .addCase(ADMIN_SIGNUP_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(COORDINATOR_VERIFY_REQUEST, (state) => {
+                state.loading = true;
+            })
+            .addCase(COORDINATOR_VERIFY_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.isUpdated = true
+            })
+            .addCase(COORDINATOR_VERIFY_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

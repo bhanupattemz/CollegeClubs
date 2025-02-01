@@ -1,0 +1,12 @@
+.club-members{
+    width: 100%;
+    margin: 20px 0px;
+}
+
+/* btns */
+.club_members_download_btns{
+    width: 100%;
+    margin: 20px 0px;
+    display: flex;
+    justify-content: flex-end;
+}
