@@ -21,6 +21,7 @@ const initialadministrationTeamState = {
     error: null,
     success: null,
     administrationTeamsCount: 0,
+    msg: null,
 };
 
 // administrationTeam Slice
@@ -33,6 +34,9 @@ const administrationTeamSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -58,6 +62,7 @@ const administrationTeamSlice = createSlice({
                 state.loading = false;
                 state.administrationTeam = action.payload.data;
                 state.administrationTeamsCount = action.payload.data.length || 0
+                state.msg = "Person removed from the administration team successfully!";
             })
             .addCase(DELETE_ADMINISTRATION_TEAM_FAIL, (state, action) => {
                 state.loading = false;
@@ -72,6 +77,7 @@ const administrationTeamSlice = createSlice({
                 state.administrationTeam = action.payload.data;
                 state.administrationTeamsCount = action.payload.data.length || 0
                 state.success = true
+                state.msg = "Person added to the administration team successfully!";
             })
             .addCase(CREATE_ADMINISTRATION_TEAM_FAIL, (state, action) => {
                 state.loading = false;
@@ -84,6 +90,7 @@ const administrationTeamSlice = createSlice({
             .addCase(UPDATE_ADMINISTRATION_TEAM_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Administration team member updated successfully!";
             })
             .addCase(UPDATE_ADMINISTRATION_TEAM_FAIL, (state, action) => {
                 state.loading = false;
@@ -93,7 +100,7 @@ const administrationTeamSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = administrationTeamSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = administrationTeamSlice.actions;
 
 export default administrationTeamSlice.reducer;
 

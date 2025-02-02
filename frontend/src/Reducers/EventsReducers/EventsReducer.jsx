@@ -12,6 +12,9 @@ import {
     ADMIN_DELETE_EVENT_REQUEST,
     ADMIN_DELETE_EVENT_SUCCESS,
     ADMIN_DELETE_EVENT_FAIL,
+    GET_COORDINATOR_EVENTS_REQUEST,
+    GET_COORDINATOR_EVENTS_SUCCESS,
+    GET_COORDINATOR_EVENTS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -21,6 +24,7 @@ const initialeventsState = {
     error: null,
     success: null,
     eventsCount: 0,
+    msg: null
 };
 
 // event Slice
@@ -33,6 +37,9 @@ const eventSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -84,8 +91,22 @@ const eventSlice = createSlice({
                 state.loading = false;
                 state.events = action.payload.data.length != 0 && action.payload.data;
                 state.eventsCount = action.payload.data.length;
+                state.msg = "Event deleted successfully!";
             })
             .addCase(ADMIN_DELETE_EVENT_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(GET_COORDINATOR_EVENTS_REQUEST, (state) => {
+                state.loading = true;
+                state.events = null
+            })
+            .addCase(GET_COORDINATOR_EVENTS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.events = action.payload.data.length != 0 && action.payload.data;
+                state.eventsCount = action.payload.data.length;
+            })
+            .addCase(GET_COORDINATOR_EVENTS_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
@@ -94,7 +115,7 @@ const eventSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = eventSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = eventSlice.actions;
 
 export default eventSlice.reducer;
 

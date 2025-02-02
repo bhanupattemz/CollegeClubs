@@ -21,6 +21,7 @@ const initialcarouselImgsState = {
     error: null,
     success: null,
     carouselImgsCount: 0,
+    msg: null
 };
 
 // carousel imgs Slice
@@ -33,6 +34,9 @@ const carouselImgslice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -56,6 +60,7 @@ const carouselImgslice = createSlice({
             .addCase(DELETE_CAROUSEL_IMGS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.carouselImgs = action.payload.data
+                state.msg = "Image removed from carousel successfully!";
             })
             .addCase(DELETE_CAROUSEL_IMGS_FAIL, (state, action) => {
                 state.loading = false;
@@ -68,6 +73,7 @@ const carouselImgslice = createSlice({
             .addCase(CREATE_CAROUSEL_IMGS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Image added to carousel successfully!";
             })
             .addCase(CREATE_CAROUSEL_IMGS_FAIL, (state, action) => {
                 state.loading = false;
@@ -80,6 +86,7 @@ const carouselImgslice = createSlice({
             .addCase(UPDATE_CAROUSEL_IMGS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Carousel image updated successfully!";
             })
             .addCase(UPDATE_CAROUSEL_IMGS_FAIL, (state, action) => {
                 state.loading = false;
@@ -89,7 +96,7 @@ const carouselImgslice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = carouselImgslice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = carouselImgslice.actions;
 
 export default carouselImgslice.reducer;
 

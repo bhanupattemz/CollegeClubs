@@ -4,11 +4,13 @@
     background-position: center;
     background-size: cover;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .home-login-img {
     width: 50%;
-    height: 80vh;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
@@ -17,49 +19,67 @@
 }
 
 .home-login-img img {
-    transform: translateY(80px);
     width: 430px;
     height: 430px;
     border-radius: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.home-login-img img:hover {
+    transform: scale(1.05);
 }
 
 .home-login-body {
     width: 50%;
+    height: 100%;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
-.home-login-body>div{
+.home-login-body > div {
     padding: 10%;
+    text-align: center;
 }
-.home-login-email{
-    border: 20px;
-    border: 2px solid #3FA2F6;
+
+.home-login-body h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.home-login-email {
     display: flex;
     flex-direction: row;
+    border: 2px solid #3FA2F6;
     border-radius: 25px;
     overflow: hidden;
-    
+    background-color: white;
 }
-.home-login-email input{
+
+.home-login-email input {
     width: 70%;
     padding: 13px;
     border: none;
     outline: none;
+    font-size: 1rem;
+    color: #333;
 }
-.home-login-email button{
+
+.home-login-email button {
     width: 30%;
     border: none;
     font-weight: 700;
     background-color: #3FA2F6;
     color: white;
-}
-.home-login-email button:hover{
-    background-color: #5da6e5;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.home-login-email button:hover {
+    background-color: #5da6e5;
 }

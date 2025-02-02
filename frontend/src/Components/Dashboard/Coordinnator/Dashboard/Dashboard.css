@@ -1,0 +1,122 @@
+
+
+.coordinator-dashboard>div {
+    margin: 10px 0px;
+    width: 100%;
+}
+
+.coordinator-dashboard-numbers {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* card  */
+.coordinator-dashboard-numbers-card {
+    width: 22%;
+    height: 12vh;
+    display: flex;
+    background-color: white;
+    border-left: 5px solid #E1FFBB;
+    padding: 10px 1%;
+    cursor: pointer;
+    margin: 10px;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coordinator-dashboard-numbers-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.coordinator-dashboard-numbers-card h2 {
+    margin: 0px;
+    font-size: large;
+}
+
+.coordinator-dashboard-numbers-card p {
+    margin: 4px 0px;
+}
+
+
+.coordinator-dashboard-numbers-card>div:nth-of-type(1) {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+
+.coordinator-dashboard-numbers-card>div:nth-of-type(2) {
+    width: 68%;
+    padding: 0px 6%;
+}
+
+/* charts  */
+.coordinator-dashboard-charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.coordinator-dashboard-charts>div {
+    background-color: white;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* donations chart */
+
+
+.coordinator-dashboard-donations-chart {
+    width: 65%;
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* top Donations  */
+.coordinator-dashboard-top-donations-chart {
+    width: 33%;
+    overflow: auto;
+}
+
+
+/* club events  */
+.coordinator-dashboard-club-events {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+/* members Data  */
+.coordinator-dashboard-members-data {
+    width: 38%;
+    display: flex;
+    justify-content: center;
+}
+
+/* charts  */
+.coordinator-dashboard-chart {
+    width: 100%;
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+/* headings  */
+.coordinator-dashboard-heading {
+    width: 100%;
+    border-bottom: 5px solid #E1FFBB;
+}
+
+.coordinator-dashboard-charts h2 {
+    color: grey;
+    padding-left: 15px;
+    margin: 7px 0px;
+}

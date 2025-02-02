@@ -21,6 +21,7 @@ const initialsingleEventState = {
     loading: false,
     error: null,
     success: null,
+    msg: null
 };
 
 // singleEvent Slice
@@ -33,6 +34,9 @@ const singleEventlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -54,6 +58,7 @@ const singleEventlice = createSlice({
             .addCase(REGISTER_EVENT_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.singleEvent = action.payload.data;
+                state.msg = "Successfully registered for the event!";
             })
             .addCase(REGISTER_EVENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -66,6 +71,7 @@ const singleEventlice = createSlice({
                 state.loading = false;
                 state.singleEvent = action.payload.data;
                 state.success = true
+                state.msg = "Event created successfully!";
             })
             .addCase(CREATE_EVENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -78,6 +84,7 @@ const singleEventlice = createSlice({
                 state.loading = false;
                 state.singleEvent = action.payload.data;
                 state.success = true
+                state.msg = "Event updated successfully!";
             })
             .addCase(UPDATE_EVENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -92,7 +99,7 @@ const singleEventlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = singleEventlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = singleEventlice.actions;
 
 export default singleEventlice.reducer;
 

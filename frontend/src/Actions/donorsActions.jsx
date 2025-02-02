@@ -15,6 +15,12 @@ import {
     ADMIN_UPDATE_DONAR_REQUEST,
     ADMIN_UPDATE_DONAR_SUCCESS,
     ADMIN_UPDATE_DONAR_FAIL,
+    GET_TOP_COORDINATOR_DONARS_REQUEST,
+    GET_TOP_COORDINATOR_DONARS_SUCCESS,
+    GET_TOP_COORDINATOR_DONARS_FAIL,
+    GET_COORDINATOR_DONARS_REQUEST,
+    GET_COORDINATOR_DONARS_SUCCESS,
+    GET_COORDINATOR_DONARS_FAIL,
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
 const axiosInstance = axios.create({
@@ -91,7 +97,7 @@ const adminCreateDonation = (formData) => async (dispatch) => {
 
 
 
-const adminUpdateDonation = (formData,_id) => async (dispatch) => {
+const adminUpdateDonation = (formData, _id) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPDATE_DONAR_REQUEST })
         const response = await axiosInstance.put(`/donars/${_id}`, formData)
@@ -107,4 +113,42 @@ const adminUpdateDonation = (formData,_id) => async (dispatch) => {
         });
     }
 }
-export { getTopDonors, getAllDonors, adminDeleteDonar, adminCreateDonation ,adminUpdateDonation}
+
+const getTopCoordinatorDonars = (params) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_TOP_COORDINATOR_DONARS_REQUEST })
+        const response = await axiosInstance.get("/coordinator/donations/top")
+        dispatch({
+            type: GET_TOP_COORDINATOR_DONARS_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GET_TOP_COORDINATOR_DONARS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+const getCoordinatorDonars = (key) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_COORDINATOR_DONARS_REQUEST })
+        const response = await axiosInstance.get(`/donars/coordinator?key=${key ? key : ""}`)
+        dispatch({
+            type: GET_COORDINATOR_DONARS_SUCCESS,
+            payload: response.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GET_COORDINATOR_DONARS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+export {
+    getTopDonors, getAllDonors, adminDeleteDonar,
+    adminCreateDonation, adminUpdateDonation, getTopCoordinatorDonars,
+    getCoordinatorDonars
+}

@@ -3,6 +3,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { BACKENDURL } from "../Functionalities/functionalites"
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { toast } from "react-toastify";
 import axios from 'axios';
 const axiosInstance = axios.create({
     baseURL: BACKENDURL,
@@ -16,7 +17,7 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
             return;
         }
         try {
-            if(amount<10){
+            if (amount < 10) {
                 throw new Error("amount must be higher than ₹10")
             }
             const respounce = await axiosInstance.post("/donars/order", {
@@ -44,17 +45,17 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
                             data: response,
                             donar: memberData
                         });
-                        alert('Thank you! Your content is now live for others to enjoy.')
+                        toast.success("Donation successful! Thank you for your support.")
                     } catch (err) {
                         console.log(err)
-                        alert('Oops! Something went wrong with your payment. Please try again.')
+                        toast.error("Something went wrong with your payment. Please try again.")
                     } finally {
                         console.log("completed")
                     }
                 },
                 prefill: {
                     name: formData.name || "anonymous",
-                    email: formData.mail ,
+                    email: formData.mail,
                     contact: formData.mobileNo
                 },
                 theme: {

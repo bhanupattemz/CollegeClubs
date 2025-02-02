@@ -116,7 +116,7 @@ export default function CreateEvent() {
             navigate(`/events/${singleEvent._id}`)
         }
     }, [success])
-    if (loading) { <AdminSetup current={"events"} option={"create"} element={<Loading />} /> }
+    if (loading) { return <AdminSetup current={"events"} option={"create"} element={<Loading />} /> }
     return (
         <AdminSetup current={"events"} option={"create"} element={
             <section>

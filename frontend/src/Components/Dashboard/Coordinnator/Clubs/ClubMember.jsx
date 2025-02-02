@@ -2,6 +2,8 @@ import "../../Admin/Clubs/ClubMembers.css"
 import CoordinatorSetUp from "../CoordinatorSetUp"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+
+import { toast } from "react-toastify";
 import axios from "axios"
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 import { DataGrid } from "@mui/x-data-grid";
@@ -27,9 +29,10 @@ export default function ClubMembers() {
                         try {
                             setLoading(true)
                             const response = await axiosInstance.put(`/clubs/unregister/${_id}`, { member: member._id })
+                            toast.success("Member removed from the club successfully!")
                             setMembers(response.data.data)
                         } catch (err) {
-                            console.log(err)
+                            toast.error(err)
                         }
                         setLoading(false)
                     }
@@ -98,9 +101,9 @@ export default function ClubMembers() {
                         mail: member.personalInformation.personalMail,
                         mobileNo: member.personalInformation.mobileNo,
                         gender: member.personalInformation.gender.toUpperCase(),
-                        academicYear:member.academicYear,
-                        course:member.course.toUpperCase(),
-                        branch:member.branch.toUpperCase(),
+                        academicYear: member.academicYear,
+                        course: member.course.toUpperCase(),
+                        branch: member.branch.toUpperCase(),
                     }
                 })}
                 sx={{ minHeight: "60vh", backgroundColor: "" }}
@@ -111,9 +114,9 @@ export default function ClubMembers() {
                         return {
                             AdmissionNo: member.admissionNo.toUpperCase(),
                             Name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
-                            Degree:member.course.toUpperCase(),
-                            Branch:member.branch.toUpperCase(),
-                            Academic_Year:member.academicYear,
+                            Degree: member.course.toUpperCase(),
+                            Branch: member.branch.toUpperCase(),
+                            Academic_Year: member.academicYear,
                             Gender: member.personalInformation.gender.toUpperCase(),
                             Mail: member.personalInformation.personalMail,
                             MobileNo: member.personalInformation.mobileNo

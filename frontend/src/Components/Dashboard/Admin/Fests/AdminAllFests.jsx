@@ -11,7 +11,10 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { ConvertTime, BACKENDURL } from "../../../Functionalities/functionalites"
 import { confirmAlert } from 'react-confirm-alert';
 import axios from "axios"
+
+import { toast } from "react-toastify";
 import XlsxButton from "../../../Functionalities/XlsxButton"
+
 export default function AdminAllFests() {
     const axiosInstance = axios.create({
         baseURL: BACKENDURL,
@@ -91,9 +94,10 @@ export default function AdminAllFests() {
                         setLoading(true)
                         try {
                             const response = await axiosInstance.delete(`/fest/${fest._id}`)
+                            toast.success("Fest deleted successfully!")
                             setFests(response.data.data)
                         } catch (err) {
-                            console.log(err)
+                            toast.error(err)
                         }
                         setLoading(false)
                     }

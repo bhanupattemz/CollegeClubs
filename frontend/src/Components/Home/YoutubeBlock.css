@@ -24,18 +24,23 @@
 }
 
 .youtube-content h3 {
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .youtube-content p {
-    max-height: 20vh;
+    max-height: 200px;
     overflow: auto;
-    font-size: large;
-
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 15px;
 }
 
 .youtube-content {
-    margin: 10px 0px;
-    background-color: rgba(210, 210, 210, 0.714);
-    box-shadow: 1px 1px 3px rgb(179, 179, 179), -1px -1px 3px rgb(179, 179, 179);
+    margin: 20px 0;
+    background-color: rgba(210, 210, 210, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(179, 179, 179, 0.7);
 }

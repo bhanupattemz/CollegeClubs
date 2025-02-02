@@ -21,6 +21,7 @@ const initialsingleClubState = {
     loading: false,
     error: null,
     success: null,
+    msg: null
 };
 
 // singleClub Slice
@@ -33,6 +34,9 @@ const singleClubSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -54,6 +58,7 @@ const singleClubSlice = createSlice({
             .addCase(REGISTER_CLUB_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.singleClub = action.payload.data;
+                state.msg = "You have successfully registered your club!";
             })
             .addCase(REGISTER_CLUB_FAIL, (state, action) => {
                 state.loading = false;
@@ -66,6 +71,7 @@ const singleClubSlice = createSlice({
                 state.loading = false;
                 state.singleClub = action.payload.data;
                 state.success = true;
+                state.msg = "Club created successfully!";
             })
             .addCase(CREATE_CLUB_FAIL, (state, action) => {
                 state.loading = false;
@@ -78,6 +84,7 @@ const singleClubSlice = createSlice({
                 state.loading = false;
                 state.singleClub = action.payload.data;
                 state.success = true;
+                state.msg = "Club details updated successfully!";
             })
             .addCase(UPDATE_CLUB_FAIL, (state, action) => {
                 state.loading = false;
@@ -86,12 +93,12 @@ const singleClubSlice = createSlice({
             .addCase(SET_CLUB_SUCCESS_FALSE, (state, action) => {
                 state.success = false
             })
-            
+
     },
 });
 
 
-export const { clearErrors, clearSuccess } = singleClubSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = singleClubSlice.actions;
 
 export default singleClubSlice.reducer;
 

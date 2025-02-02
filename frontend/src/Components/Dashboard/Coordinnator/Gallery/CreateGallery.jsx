@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { CiBookmarkRemove } from "react-icons/ci";
 import Loading from "../../../Loaders/Loading"
 import { useNavigate } from "react-router";
+
+import { toast } from "react-toastify";
 import axios from "axios";
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 export default function CreateGallery() {
@@ -56,7 +58,7 @@ export default function CreateGallery() {
     const formSubmitHandler = async (e) => {
         e.preventDefault();
         const fd = new FormData();
-        if (!formData.images || formData.images.length ==0) {
+        if (!formData.images || formData.images.length == 0) {
             alert("Atleast one Images is required.")
         } else {
             fd.append('occasion', formData.occasion);
@@ -68,9 +70,10 @@ export default function CreateGallery() {
             try {
                 setCreateLoading(true)
                 const respounce = await axiosInstance.post('/gallery/clubs', fd)
+                toast.success("Club gallery created successfully!")
                 navigate('/coordinator/gallery')
             } catch (err) {
-                console.log(err)
+                toast.error(err)
             }
             setCreateLoading(false)
         }

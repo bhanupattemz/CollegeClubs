@@ -18,6 +18,7 @@ const initialclubGalleryState = {
     error: null,
     success: null,
     clubGalleryCount: 0,
+    msg: null
 };
 
 // clubGallery Slice
@@ -30,6 +31,9 @@ const clubGallerySlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -68,6 +72,7 @@ const clubGallerySlice = createSlice({
                 state.loading = false;
                 state.clubGallery = action.payload.data;
                 state.clubGalleryCount = action.payload.data.length || 0
+                state.msg = "Gallery album deleted successfully!";
             })
             .addCase(COORDINATOR_DELETE_GALLERY_FAIL, (state, action) => {
                 state.loading = false;
@@ -78,7 +83,7 @@ const clubGallerySlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = clubGallerySlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = clubGallerySlice.actions;
 
 export default clubGallerySlice.reducer;
 

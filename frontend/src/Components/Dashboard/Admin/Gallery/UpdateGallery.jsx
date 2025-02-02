@@ -13,6 +13,8 @@ import { CiBookmarkRemove } from "react-icons/ci";
 import Loading from "../../../Loaders/Loading"
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+
+import { toast } from "react-toastify";
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 export default function CreateGallery() {
     const axiosInstance = axios.create({
@@ -70,9 +72,10 @@ export default function CreateGallery() {
         try {
             setLoading(true)
             const respounce = await axiosInstance.put(`/gallery/${_id}`, fd)
+            toast.success("Gallery album updated successfully!")
             navigate('/admin/gallery')
         } catch (err) {
-            console.log(err)
+            toast.error(err)
         }
         setLoading(false)
     }

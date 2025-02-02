@@ -23,6 +23,25 @@ module.exports.getAllEvents = WrapAsync(async (req, res) => {
     })
 })
 
+module.exports.getCoordinatorEvents = WrapAsync(async (req, res) => {
+    let { key } = req.query
+    let clubs = await ClubModel.find({ "coordinators.details": req.user._id })
+    clubs = clubs.map((club) => club._id)
+    const filter = {
+        conductedClub: { $in: clubs },
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { _id: key && key.length === 24 ? key : undefined },
+        ],
+    };
+    const events = await EventModel.find(filter).sort({ createdAt: 1 });
+    res.status(200).json({
+        success: true,
+        data: events
+    })
+})
+
+
 module.exports.getActiveEvents = WrapAsync(async (req, res) => {
     let { key } = req.query
     const filter = {
@@ -44,10 +63,11 @@ module.exports.getOneEvent = WrapAsync(async (req, res) => {
     const { _id } = req.params
     let event = await EventModel.findOne({ _id }).populate({ path: "conductedClub" })
     if (!event.isactive && req.user.role !== "admin") {
-        const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
-        const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
+        let userClubs = await ClubModel.find({ "coordinators.details": req.user._id }).select("_id");
+        userClubs = userClubs.map(club => club._id.toString());
+        let isCoordinator = event.conductedClub.some(clubId => userClubs.includes(clubId._id.toString()));
         if (!isCoordinator) {
-            throw new ExpressError("You are not allowed to edit this Event.", 403)
+            throw new ExpressError("You are not allowed to get this.", 403)
         }
     }
     event = await EventModel.findOne({ _id }).populate({ path: "conductedClub", select: "name logo" })
@@ -172,8 +192,9 @@ module.exports.updateEvent = WrapAsync(async (req, res, next) => {
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
-    const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
+    let userClubs = await ClubModel.find({ "coordinators.details": req.user._id }).select("_id");
+    userClubs = userClubs.map(club => club._id.toString());
+    let isCoordinator = event.conductedClub.some(clubId => userClubs.includes(clubId._id.toString()));
     if (!isCoordinator && req.user.role !== "admin") {
         throw new ExpressError("You are not allowed to edit this Event.", 403)
     }
@@ -205,7 +226,7 @@ module.exports.updateEvent = WrapAsync(async (req, res, next) => {
         conductedClub: bodyData.conductedClub && JSON.parse(bodyData.conductedClub),
         image: image,
         isactive: req.user.role == "admin" ? bodyData.isactive ?? event.isactive : false,
-        createdClub: bodyData.createdClub ? bodyData.createdClub : event.createdClub
+        createdClub: req.user.role == "admin" ? bodyData.createdClub ? bodyData.createdClub : event.createdClub : event.createdClub
     };
 
     const updatedData = await EventModel.findByIdAndUpdate(_id, { ...updatedEvent }, { new: true, runValidators: true }).populate({ path: "conductedClub", select: "name logo" })
@@ -223,13 +244,21 @@ module.exports.deleteEvent = WrapAsync(async (req, res) => {
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
-    const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
-    if (!isCoordinator && req.user.role !== "admin") {
-        throw new ExpressError("You are not allowed to edit this Event.", 403)
+
+    let userClubs = await ClubModel.find({ "coordinators.details": req.user._id }).select("_id");
+    userClubs = userClubs.map(club => club._id.toString());
+
+    let isCoordinator = event.conductedClub.some(clubId => userClubs.includes(clubId.toString()));
+
+    if ((!isCoordinator || event.isactive) && req.user.role !== "admin") {
+        throw new ExpressError("You are not allowed to delete this event.", 403);
     }
     await EventModel.findOneAndDelete({ _id })
-    const allEvents = await EventModel.find().sort({ createdAt: 1 })
+    deleteFromClodinary(event.image)
+    let allEvents = req.user.role === "coordinator"
+        ? await EventModel.find({ conductedClub: { $in: userClubs } }).sort({ createdAt: 1 })
+        : await EventModel.find().sort({ createdAt: 1 });
+
     res.status(200).json({
         success: true,
         data: allEvents
@@ -245,8 +274,9 @@ module.exports.updateEventClubs = WrapAsync(async (req, res) => {
     if (!event) {
         throw new ExpressError("event not found", 404);
     }
-    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
-    const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
+    let userClubs = await ClubModel.find({ "coordinators.details": req.user._id }).select("_id");
+    userClubs = userClubs.map(club => club._id.toString());
+    let isCoordinator = event.conductedClub.some(clubId => userClubs.includes(clubId._id.toString()));
     if (!isCoordinator && req.user.role !== "admin") {
         throw new ExpressError("You are not allowed to edit this Event.", 403)
     }
@@ -329,8 +359,9 @@ module.exports.unregisterMember = WrapAsync(async (req, res) => {
     if (!event.members.includes(member)) {
         throw new ExpressError("Not A Member in events", 400);
     }
-    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
-    const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
+    let userClubs = await ClubModel.find({ "coordinators.details": req.user._id }).select("_id");
+    userClubs = userClubs.map(club => club._id.toString());
+    let isCoordinator = event.conductedClub.some(clubId => userClubs.includes(clubId._id.toString()));
     if (!isCoordinator && req.user.role !== "admin") {
         throw new ExpressError("You are not allowed to edit this Event.", 403)
     }
@@ -356,8 +387,9 @@ module.exports.getEventMembers = WrapAsync(async (req, res) => {
         throw new ExpressError("event not found", 404);
     }
 
-    const userClubs = await ClubModel.find({ coordinators: { details: req.user._id } })
-    const isCoordinator = userClubs.some(club => club._id.toString() === event.conductedClub.toString());
+    let userClubs = await ClubModel.find({ "coordinators.details": req.user._id }).select("_id");
+    userClubs = userClubs.map(club => club._id.toString());
+    let isCoordinator = event.conductedClub.some(clubId => userClubs.includes(clubId._id.toString()));
     if (!isCoordinator && req.user.role !== "admin") {
         throw new ExpressError("You are not allowed to edit this Event.", 403)
     }

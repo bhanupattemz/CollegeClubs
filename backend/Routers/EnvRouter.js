@@ -1,7 +1,7 @@
 const Express = require("express")
 const router = Express.Router()
 const EnvController = require("../Controllers/EnvController")
-const { isAdmin, isLoggedIn } = require("../middleware")
+const { isAdmin, isLoggedIn, isCoordinator } = require("../middleware")
 router.route("/youtube/latest")
     .get(EnvController.latestYoutubeVideo)
 
@@ -30,5 +30,21 @@ router.route("/admin/club_events/numbers")
 
 router.route("/admin/donations/numbers")
     .get(isLoggedIn, isAdmin, EnvController.adminGetDonations)
+
+router.route("/coordinator/numbers")
+    .get(isLoggedIn, isCoordinator, EnvController.getCoordinatorNumbers)
+
+router.route("/coordinator/donations/numbers")
+    .get(isLoggedIn, isCoordinator, EnvController.getCoordinatorDonations)
+
+router.route("/coordinator/donations/top")
+    .get(isLoggedIn, isCoordinator, EnvController.getCoordinatorTopDonations)
+
+router.route("/coordinator/members/numbers")
+    .get(isLoggedIn, isCoordinator, EnvController.getCoordinatorMemberData)
+
+router.route("/coordinator/club_events/numbers")
+    .get(isLoggedIn, isCoordinator, EnvController.coordinatorGetclubsEvents)
+
 module.exports = router
 

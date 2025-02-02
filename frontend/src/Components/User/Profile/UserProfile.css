@@ -1,10 +1,10 @@
-/* main  */
-.profile-main {
 
-    background-image: url("https://res.cloudinary.com/delc5g3p5/image/upload/v1735668030/Clubs/pcm0ypxj1pcpcbuxxldi.png");
+.profile-main {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .profile-main>section {
@@ -15,108 +15,131 @@
 }
 
 .profile-main>section>section {
-    width: 80%;
+    width: 90%;
+    max-width: 1200px;
     margin: 20px 0px;
-    background-color: rgba(124, 140, 144, 0.5);
-    box-shadow: 1px 1px 3px rgb(179, 179, 179), -1px -1px 3px rgb(179, 179, 179);
+    background-color: rgba(124, 140, 144, 0.7);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 /* img section  */
 .profile-img-section {
     display: flex;
     justify-content: space-evenly;
-    padding: 20px 0%;
-
+    padding: 30px 0%;
+    align-items: center;
 }
 
 .profile-img-section>div:nth-of-type(1) {
-    width: 20%;
+    width: 200px;
+    height: 200px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgba(235, 240, 244, 0.8);
+    background-color: rgba(235, 240, 244, 0.9);
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .profile-img-section img {
-    width: 90%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-
 .profile-img-data {
-    width: 64%;
-    background-color: rgba(231, 231, 231, 0.8);
-    padding: 10px 3%;
+    width: 60%;
+    background-color: rgba(231, 231, 231, 0.9);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .profile-username {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 35%;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .profile-username h1 {
-    margin: 5px 0px;
-    color: rgb(63, 63, 63);
+    margin: 0;
+    color: #333;
+    font-size: 24px;
 }
 
 .profile-img-data>span {
     color: #0A5EB0;
     font-weight: 700;
+    font-size: 18px;
 }
 
 .profile-img-data>div>p b {
     color: #525252;
+    font-size: 16px;
 }
 
 .profile-ad-mail-div {
     display: flex;
     flex-wrap: wrap;
-
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .profile-ad-mail-div>p {
-    margin-right: 20px;
+    margin: 0;
+    font-size: 16px;
 }
 
 .profile-img-data svg {
-    font-size: larger;
+    font-size: 24px;
     color: #0A5EB0;
-    transform: translateY(4px);
+    margin-left: 10px;
 }
 
 .user-profile-btns {
     display: flex;
     justify-content: space-evenly;
+    margin-top: 20px;
+    gap: 10px;
 }
 
 .user-profile-btns>button {
-    padding: 7px 10px;
-    width: 20%;
+    padding: 10px 15px;
+    width: 22%;
     font-weight: 700;
     color: #0A5EB0;
-    transition: all ease-in-out 0.5s;
+    border: 2px solid #0A5EB0;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease;
 }
 
 .user-profile-btns>button:hover {
-    opacity: 0.7;
+    background-color: #0A5EB0;
+    color: white;
     cursor: pointer;
 }
 
 .user-profile-btns>button:nth-of-type(4) {
     background-color: red;
     color: white;
-    border: 0px;
+    border: 2px solid red;
 }
 
-/* user cerfificate pdf  */
+.user-profile-btns>button:nth-of-type(4):hover {
+    background-color: darkred;
+    border-color: darkred;
+}
+
+/* user certificate pdf  */
 .user-data-pdf {
     width: 100% !important;
-    background-color: rgba(0, 0, 0, 0.8) !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
     padding: 20px 0px;
     margin: 0px !important;
+    border-radius: 10px;
 }
 
 .user-data-pdf>button {
@@ -125,29 +148,47 @@
     font-weight: 700;
     border: 0px;
     position: fixed;
-    padding: 5px 7px;
+    padding: 10px 15px;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 .user-data-pdf>button:hover {
     cursor: pointer;
-    opacity: 0.7;
+    opacity: 0.8;
 }
-
-
 
 /* delete user confirmation  */
 .delete-user-confirmation-popup h1 {
     color: red;
-    font-size: large;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-.delete-user-confirmation-popup button:nth-of-type(2){
-    background-color: rgb(213, 213, 213);
-    color: black ;
-    border: 2px solid black ;
+.delete-user-confirmation-popup button:nth-of-type(2) {
+    background-color: #f5f5f5;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
+
+.delete-user-confirmation-popup button:nth-of-type(2):hover {
+    background-color: #ddd;
+}
+
 .delete-user-confirmation-popup button:nth-of-type(1) {
-    background-color: rgb(213, 213, 213);
-    color: red ;
+    background-color: #f5f5f5;
+    color: red;
     border: 2px solid red;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.delete-user-confirmation-popup button:nth-of-type(1):hover {
+    background-color: #ffcccc;
 }

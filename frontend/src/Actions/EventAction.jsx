@@ -24,6 +24,9 @@ import {
     UPDATE_EVENT_REQUEST,
     UPDATE_EVENT_SUCCESS,
     UPDATE_EVENT_FAIL,
+    GET_COORDINATOR_EVENTS_REQUEST,
+    GET_COORDINATOR_EVENTS_SUCCESS,
+    GET_COORDINATOR_EVENTS_FAIL,
     SET_EVENT_SUCCESS_FALSE
 } from "../Constants/Constants"
 import { BACKENDURL } from "../Components/Functionalities/functionalites"
@@ -211,6 +214,25 @@ const updateEvent = (formData, _id) => async (dispatch) => {
     }
 }
 
+
+
+const getCoordinatorEvents = (key) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_COORDINATOR_EVENTS_REQUEST })
+        const response = await axiosInstance.get(`/events/coordinator?key=${key ? key : ""}`,)
+        dispatch({
+            type: GET_COORDINATOR_EVENTS_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_COORDINATOR_EVENTS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+}
+
+
 const setEventSuccessFalse = (formData, _id) => async (dispatch) => {
     dispatch({
         type: SET_EVENT_SUCCESS_FALSE
@@ -219,5 +241,5 @@ const setEventSuccessFalse = (formData, _id) => async (dispatch) => {
 export {
     getAllEvents, getSingleEvent, getClubEvents, getUserEvents, registerEvents,
     adminDeleteEvent, adminGetAllEvents, createEvent, setEventSuccessFalse, updateEvent,
-    adminGetSingleEvent
+    adminGetSingleEvent, getCoordinatorEvents
 }

@@ -2,7 +2,7 @@ import "./SignUp.css"
 import { useState, useEffect, Fragment } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-
+import { toast } from "react-toastify";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -58,19 +58,21 @@ export default function SignUp() {
                         setAcademic(prev => ({ ...prev, admissionNo: data[0] }))
                         setCLoading(true)
                         const respounce = await axiosInstance.post("/signup/generate", { mail, role })
+                        toast.success("OTP sent to your email successfully!")
                         setStep(2)
                     }
                 } catch (err) {
-                    console.log(err)
+                    toast.error(err)
                 }
                 setCLoading(false)
             } else if (step == 2) {
                 try {
                     setCLoading(true)
                     const respounce = await axiosInstance.post("/signup/verify", { mail, otp })
+                    toast.success("OTP verified successfully!")
                     setStep(3)
                 } catch (err) {
-                    console.log(err)
+                    toast.error(err)
                 }
                 setCLoading(false)
             } else if (step == 3) {

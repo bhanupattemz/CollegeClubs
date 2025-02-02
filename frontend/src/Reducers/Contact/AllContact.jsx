@@ -12,6 +12,7 @@ const initialcontactMsgsState = {
     error: null,
     success: null,
     contactMsgsCount: 0,
+    msg: null,
 };
 
 // contactMsg Slice
@@ -24,6 +25,9 @@ const contactMsgSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -34,6 +38,7 @@ const contactMsgSlice = createSlice({
             })
             .addCase(SEND_CONTACT_MSG_SUCCESS, (state, action) => {
                 state.loading = false;
+                state.msg = "Your message has been sent successfully!";
             })
             .addCase(SEND_CONTACT_MSG_FAIL, (state, action) => {
                 state.loading = false;
@@ -44,7 +49,7 @@ const contactMsgSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = contactMsgSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = contactMsgSlice.actions;
 
 export default contactMsgSlice.reducer;
 

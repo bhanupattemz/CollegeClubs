@@ -1,6 +1,7 @@
 const ExpressError = require("../Utils/ExpressError")
 const WrapAsync = require("../Utils/WrapAsync")
 const DonationModel = require("../Models/donationModel")
+const ClubModel = require("../Models/Clubs/clubsModel")
 const Razorpay = require("razorpay");
 const crypto = require("crypto")
 module.exports.getAllDonars = WrapAsync(async (req, res) => {
@@ -17,6 +18,25 @@ module.exports.getAllDonars = WrapAsync(async (req, res) => {
         data: donars
     })
 })
+
+module.exports.getCoordinatorDonations = WrapAsync(async (req, res) => {
+    const { key } = req.query
+    let clubs = await ClubModel.find({ "coordinators.details": req.user._id })
+    clubs = clubs.map((club) => club._id)
+    const donars = await DonationModel.find({
+        club: { $in: clubs },
+        $or: [
+            { name: { $regex: new RegExp(key, "i") } },
+            { mail: { $regex: new RegExp(key, "i") } },
+            { phone: { $regex: new RegExp(key, "i") } }
+        ]
+    }).populate({ path: "club", select: "name" }).sort({ "createdAt": -1 });
+    res.status(200).json({
+        success: true,
+        data: donars
+    })
+})
+
 module.exports.getTopDonars = WrapAsync(async (req, res) => {
     const donars = await DonationModel.find({}).select("name amount createdAt club").populate({ path: "club", select: "name" }).sort({ "createdAt": -1 }).limit(10);
     res.status(200).json({

@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import { useEffect, useState } from "react"
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate, useParams } from "react-router-dom"
+
+import { toast } from "react-toastify";
 import axios from "axios";
 import { BACKENDURL } from "../../../../Functionalities/functionalites"
 export default function UpdateMember() {
@@ -48,9 +50,10 @@ export default function UpdateMember() {
         try {
             setLoading(true)
             const respounce = await axiosInstance.put(`/fest/members/${_id}`, formData)
+            toast.success("Member updated successfully!")
             navigate('/admin/fests/members')
         } catch (err) {
-            console.log(err)
+            toast.error(err)
         }
         setLoading(false)
     }

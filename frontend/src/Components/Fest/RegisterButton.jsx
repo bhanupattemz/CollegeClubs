@@ -4,6 +4,7 @@ import { BACKENDURL } from "../Functionalities/functionalites"
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
 import axios from 'axios';
 export default function RegisterButton({ event, formData, isAccept = false, setOpen, setLoading }) {
     const axiosInstance = axios.create({
@@ -32,12 +33,12 @@ export default function RegisterButton({ event, formData, isAccept = false, setO
                             data: response,
                             member: formData
                         });
-                        alert(`Successfully register for ${event.name}.`)
+                        toast.success(`Successfully register for ${event.name}.`)
                         setLoading(false)
                         navigate(`/fest/events/${event._id}`)
                     } catch (err) {
                         console.log(err)
-                        alert('Oops! Something went wrong with your payment. Please try again.')
+                        toast.error("Something went wrong with your payment. Please try again.")
                     } finally {
                         console.log("completed")
                         setLoading(false)

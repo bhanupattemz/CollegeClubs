@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { adminGetFestEventDetails } from "../../../../../Actions/festActions"
 import axios from "axios"
+import { toast } from "react-toastify";
 import { BACKENDURL, ConvertTime } from "../../../../Functionalities/functionalites"
 import { DataGrid } from "@mui/x-data-grid";
 import { confirmAlert } from 'react-confirm-alert';
@@ -32,8 +33,9 @@ export default function EventMembers() {
                             setLoading(true)
                             const response = await axiosInstance.put(`/fest/events/unregister/${_id}`, { member: member._id })
                             setMembers(response.data.data)
+                            toast.success("Club member removed successfully!")
                         } catch (err) {
-                            console.log(err)
+                            toast.error(err)
                         }
                         setLoading(false)
                     }

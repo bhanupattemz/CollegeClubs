@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { adminGetFestEventDetails } from "../../../../../Actions/festActions"
 import Loading from "../../../../Loaders/Loading"
+import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import dayjs from "dayjs"
 import axios from "axios";
@@ -56,9 +57,10 @@ export default function CreateEvent() {
         setDataLoading(true)
         try {
             const respounce = await axiosInstance.put(`/fest/events/winner/${_id}`, winners)
+            toast.success("Event winner declared successfully!")
             navigate('/admin/fests/events')
         } catch (err) {
-            console.log(err)
+            toast.error(err)
         }
         setDataLoading(false)
     }

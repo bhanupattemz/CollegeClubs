@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { getAllclubs } from "../../../../Actions/clubsAction"
-import { adminCreateGallery, setMainGalleryFalse } from "../../../../Actions/GalleryAction"
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
@@ -12,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { CiBookmarkRemove } from "react-icons/ci";
 import Loading from "../../../Loaders/Loading"
 import { useNavigate, useParams } from "react-router";
+
+import { toast } from "react-toastify";
 import axios from "axios";
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 export default function CreateGallery() {
@@ -72,9 +73,10 @@ export default function CreateGallery() {
         try {
             setLoading(true)
             const respounce = await axiosInstance.put(`/gallery/${_id}`, fd)
+            toast.success("Club gallery updated successfully!")
             navigate('/coordinator/gallery')
         } catch (err) {
-            console.log(err)
+            toast.error(err)
         }
         setLoading(false)
     }

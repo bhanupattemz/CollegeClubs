@@ -21,6 +21,7 @@ const initiallettersState = {
     error: null,
     success: null,
     lettersCount: 0,
+    msg: null
 };
 
 // letter Slice
@@ -33,6 +34,9 @@ const letterSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -58,6 +62,7 @@ const letterSlice = createSlice({
                 state.loading = false;
                 state.letters = action.payload.data;
                 state.lettersCount = action.payload.data.length || 0
+                state.msg = "Letter deleted successfully!";
             })
             .addCase(ADMIN_DELETE_LETTER_FAIL, (state, action) => {
                 state.loading = false;
@@ -66,12 +71,15 @@ const letterSlice = createSlice({
             .addCase(ADMIN_CREATE_LETTER_REQUEST, (state) => {
                 state.loading = true;
                 state.letters = null
+                
             })
             .addCase(ADMIN_CREATE_LETTER_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.letters = action.payload.data;
                 state.lettersCount = action.payload.data.length || 0
                 state.success = true
+                state.msg = "Letter created successfully!";
+
             })
             .addCase(ADMIN_CREATE_LETTER_FAIL, (state, action) => {
                 state.loading = false;
@@ -86,6 +94,7 @@ const letterSlice = createSlice({
                 state.letters = action.payload.data;
                 state.lettersCount = action.payload.data.length || 0
                 state.success = true
+                state.msg = "Letter updated successfully!";
             })
             .addCase(UPDATE_LETTER_FAIL, (state, action) => {
                 state.loading = false;
@@ -95,7 +104,7 @@ const letterSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = letterSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = letterSlice.actions;
 
 export default letterSlice.reducer;
 

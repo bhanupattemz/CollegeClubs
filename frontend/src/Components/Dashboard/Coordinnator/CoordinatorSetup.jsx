@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react"
 import "./CoordinatorSetup.css"
 import { useNavigate } from "react-router"
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaDonate } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { RiGalleryLine } from "react-icons/ri";
 import { VscOrganization } from "react-icons/vsc";
@@ -84,6 +84,12 @@ export default function CoordinatorSetup({ current, element, option }) {
                                 {option == "update" && <div style={optionStyles} onClick={() => navigate('/coordinator/gallerys')}>Update Gallery</div>}
                             </div>
                         }
+                    </div>
+                    <div>
+                        <h2
+                            style={current == "donations" ? currentStyles : null}
+                            onClick={() => navigate('/coordinator/donations')}>
+                            <FaDonate /> Donations</h2>
                     </div>
                 </aside>
                 <section className="coordinator-setup-section" ref={mainRef}>

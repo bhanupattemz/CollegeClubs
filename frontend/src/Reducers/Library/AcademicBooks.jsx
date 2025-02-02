@@ -21,6 +21,7 @@ const initialacademicBooksState = {
     error: null,
     success: null,
     academicBooksCount: 0,
+    msg: null
 };
 
 // academicBook Slice
@@ -33,6 +34,9 @@ const academicBookSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -58,6 +62,7 @@ const academicBookSlice = createSlice({
                 state.loading = false;
                 state.academicBooks = action.payload.data;
                 state.academicBooksCount = action.payload.data.length || 0
+                state.msg = "Book removal successful."
             })
             .addCase(ADMIN_DELETE_ACADEMIC_BOOKS_FAIL, (state, action) => {
                 state.loading = false;
@@ -70,6 +75,7 @@ const academicBookSlice = createSlice({
             .addCase(ADMIN_CREATE_ACADEMIC_BOOKS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "New book added to the collection successfully!"
             })
             .addCase(ADMIN_CREATE_ACADEMIC_BOOKS_FAIL, (state, action) => {
                 state.loading = false;
@@ -82,6 +88,7 @@ const academicBookSlice = createSlice({
             .addCase(ADMIN_UPDATE_ACADEMIC_BOOKS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Book details updated successfully!"
             })
             .addCase(ADMIN_UPDATE_ACADEMIC_BOOKS_FAIL, (state, action) => {
                 state.loading = false;
@@ -92,7 +99,7 @@ const academicBookSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = academicBookSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = academicBookSlice.actions;
 
 export default academicBookSlice.reducer;
 

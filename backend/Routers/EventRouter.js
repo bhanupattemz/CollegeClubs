@@ -1,6 +1,6 @@
 const Express = require("express")
 const router = Express.Router()
-const { isLoggedIn, isOrganizers, isAdmin } = require("../middleware")
+const { isLoggedIn, isOrganizers, isAdmin, isCoordinator } = require("../middleware")
 const EventController = require("../Controllers/EventController")
 const { storage } = require("../config/cloudinary")
 const multer = require("multer")
@@ -11,6 +11,9 @@ router.route("/")
 
 router.route("/admin")
     .get(isLoggedIn, isAdmin, EventController.getAllEvents)
+
+router.route("/coordinator")
+    .get(isLoggedIn, isCoordinator, EventController.getCoordinatorEvents)
 
 // router.route("/admin/non-active")
 //     .get(isLoggedIn, isAdmin, EventController.getNonActiveEvents)
@@ -35,7 +38,7 @@ router.route("/register/:_id")
     .put(isLoggedIn, EventController.registerMember)
 
 router.route("/unregister/:_id")
-    .put(isLoggedIn, isAdmin, EventController.unregisterMember)
+    .put(isLoggedIn, isOrganizers, EventController.unregisterMember)
 
 router.route("/members/:_id")
     .get(isLoggedIn, isOrganizers, EventController.getEventMembers)

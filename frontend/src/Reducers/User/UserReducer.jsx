@@ -46,7 +46,8 @@ const initialuserState = {
     error: null,
     success: null,
     isauthenticate: false,
-    isUpdated: false
+    isUpdated: false,
+    msg: null
 };
 
 // user Slice
@@ -59,6 +60,9 @@ const userSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -71,6 +75,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isauthenticate = action.payload.isauthenticate
+                state.msg = "Sign-in successful! Welcome aboard!"
             })
             .addCase(SIGN_IN_USER_FAIL, (state, action) => {
                 state.loading = false;
@@ -84,6 +89,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isauthenticate = action.payload.isauthenticate
+                state.msg = "Sign-out successful. You have been logged out successfully"
             })
             .addCase(SIGNOUT_USER_FAIL, (state, action) => {
                 state.loading = false;
@@ -97,6 +103,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isauthenticate = action.payload.isauthenticate
+                state.msg = "Account deletion successful. Your account has been removed."
             })
             .addCase(DELETE_CURRENT_USER_FAIL, (state, action) => {
                 state.loading = false;
@@ -122,6 +129,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isauthenticate = action.payload.isauthenticate
+                state.msg = "Sign-up successful! Welcome to our platform."
             })
             .addCase(SIGN_UP_USER_FAIL, (state, action) => {
                 state.loading = false;
@@ -134,6 +142,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isUpdated = true
+                state.msg = "Profile updated successfully. Your changes have been saved."
             })
             .addCase(UPDATE_USER_PROFILE_FAIL, (state, action) => {
                 state.loading = false;
@@ -150,6 +159,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isUpdated = true
+                state.msg = "Password updated successfully. Your changes have been applied."
             })
             .addCase(UPDATE_PROFILE_PASSWORD_FAIL, (state, action) => {
                 state.loading = false;
@@ -161,6 +171,7 @@ const userSlice = createSlice({
             .addCase(RESET_PASSWORD_TOKEN_GENERATE_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.isUpdated = true
+                state.msg = "Password reset request successful. Please check your email for further instructions."
             })
             .addCase(RESET_PASSWORD_TOKEN_GENERATE_FAIL, (state, action) => {
                 state.loading = false;
@@ -172,6 +183,7 @@ const userSlice = createSlice({
             .addCase(RESET_PASSWORD_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.isUpdated = true
+                state.msg = "Password reset successful. You can now log in with your new password."
             })
             .addCase(RESET_PASSWORD_FAIL, (state, action) => {
                 state.loading = false;
@@ -182,6 +194,7 @@ const userSlice = createSlice({
             })
             .addCase(GENERATE_ADMIN_SUCCESS, (state, action) => {
                 state.loading = false;
+                state.msg = "Admin transfer successful. Email sent. Account will be deleted after sign-up."
             })
             .addCase(GENERATE_ADMIN_FAIL, (state, action) => {
                 state.loading = false;
@@ -194,6 +207,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.data;
                 state.isauthenticate = action.payload.isauthenticate
+                state.msg = "Admin sign-up successful. Welcome aboard!"
             })
             .addCase(ADMIN_SIGNUP_FAIL, (state, action) => {
                 state.loading = false;
@@ -205,16 +219,18 @@ const userSlice = createSlice({
             .addCase(COORDINATOR_VERIFY_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.isUpdated = true
+                state.msg = "Coordinator verification request successful."
             })
             .addCase(COORDINATOR_VERIFY_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+
             })
     },
 });
 
 
-export const { clearErrors, clearSuccess } = userSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = userSlice.actions;
 
 export default userSlice.reducer;
 

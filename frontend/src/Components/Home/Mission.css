@@ -1,66 +1,116 @@
-.mission-vission-main-div{
+.mission-vission-main-div {
     width: 96%;
     margin: 20px 2%;
 }
-.mission-vission-main-div h2{
+
+.mission-vission-main-div h2 {
     padding-left: 10px;
-    border-left:5px solid #0A5EB0;
+    border-left: 5px solid #0A5EB0;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
 }
+
 .mission-container-left,
 .mission-container-right {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     background-color: #ecf1f5;
-    margin: 20px 0px;
-    padding: 15px 0px;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
+.mission-container-right {
+    flex-direction: row-reverse;
+}
 
 .mission-img-left,
 .mission-img-right {
-    width: 30%;
-
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.mission-img-left>img {
+.mission-img-left {
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+}
+
+.mission-img-right {
+    right: 0;
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.mission-img-left img,
+.mission-img-right img {
     width: 100%;
-    transform: translateX(40%);
-}
-.mission-img-right>img {
-    width: 100%;
-    transform: translateX(-40%);
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
+.mission-img-left img:hover,
+.mission-img-right img:hover {
+    transform: scale(1.1);
+}
 
-.mission-body-left ,.mission-body-right{
-    width: 50%;
+.mission-body-left,
+.mission-body-right {
+    width: 60%;
     background-color: #D9EAFD;
     border: 5px solid #bedafb;
-    padding: 20px 40px;
-
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1;
 }
 
-.mission-content-left {
-    margin-left: 20%;
+.mission-body-left {
+    margin-left: 40%;
 }
+
+.mission-body-right {
+    margin-right: 40%;
+}
+
+.mission-content-left,
 .mission-content-right {
-    margin-right: 20%;
+    color: #333;
 }
 
+.mission-content-left h3,
+.mission-content-right h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #0A5EB0;
+}
 
+.mission-content-left p,
+.mission-content-right p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
 
 .mission-btn {
-    padding: 8px;
+    padding: 10px 20px;
     border: none;
     background-color: #3FA2F6;
     color: #FEF9F2;
     font-weight: 700;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .mission-btn:hover {
-    cursor: pointer;
     background-color: #5faef4;
 }

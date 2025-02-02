@@ -21,6 +21,7 @@ const initialclubsState = {
     error: null,
     success: null,
     clubsCount: 0,
+    msg: null
 };
 
 // club Slice
@@ -33,6 +34,9 @@ const clubSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -68,6 +72,7 @@ const clubSlice = createSlice({
             .addCase(ADMIN_DELETE_CLUB_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.clubs = action.payload.data.length != 0 && action.payload.data;
+                state.msg = "Club deleted successfully!";
             })
             .addCase(ADMIN_DELETE_CLUB_FAIL, (state, action) => {
                 state.loading = false;
@@ -89,7 +94,7 @@ const clubSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = clubSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = clubSlice.actions;
 
 export default clubSlice.reducer;
 

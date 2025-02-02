@@ -15,6 +15,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FaReply } from "react-icons/fa";
 
+import { toast } from "react-toastify";
 export default function Messages() {
     const axiosInstance = axios.create({
         baseURL: BACKENDURL,
@@ -32,9 +33,10 @@ export default function Messages() {
         try {
             setLoading(true);
             const response = await axiosInstance.delete(`/contact/${_id}`);
+            toast.success("Message deleted successfully!")
             setMessages(response.data.data);
         } catch (err) {
-            console.log(err);
+            toast.error(err)
         }
         setLoading(false);
     };

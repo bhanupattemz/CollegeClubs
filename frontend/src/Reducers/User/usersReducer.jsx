@@ -20,7 +20,8 @@ const initialuserState = {
     loading: false,
     error: null,
     success: null,
-    usersCount: 0
+    usersCount: 0,
+    msg: null
 };
 
 // user Slice
@@ -33,6 +34,9 @@ const userSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -54,6 +58,7 @@ const userSlice = createSlice({
             .addCase(ADMIN_SET_BLOCK_STATUS_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.users = action.payload.data;
+                state.msg = "User block status updated successfully."
             })
             .addCase(ADMIN_SET_BLOCK_STATUS_FAIL, (state, action) => {
                 state.loading = false;
@@ -65,6 +70,7 @@ const userSlice = createSlice({
             .addCase(ADMIN_DELETE_USER_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.users = action.payload.data;
+                state.msg = "User deleted successfully."
             })
             .addCase(ADMIN_DELETE_USER_FAIL, (state, action) => {
                 state.loading = false;
@@ -77,6 +83,7 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.success = true
                 state.users = action.payload.data;
+                state.msg = "User updated successfully."
             })
             .addCase(ADMIN_UPDATE_USER_FAIL, (state, action) => {
                 state.loading = false;
@@ -87,7 +94,7 @@ const userSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = userSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = userSlice.actions;
 
 export default userSlice.reducer;
 

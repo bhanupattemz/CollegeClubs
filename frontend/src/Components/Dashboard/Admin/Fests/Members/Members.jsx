@@ -10,6 +10,7 @@ import { MdDelete } from "react-icons/md";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { ConvertTime, BACKENDURL } from "../../../../Functionalities/functionalites"
 import { confirmAlert } from 'react-confirm-alert';
+import { toast } from "react-toastify";
 import axios from "axios"
 export default function AdminAllMembers() {
     const axiosInstance = axios.create({
@@ -72,8 +73,10 @@ export default function AdminAllMembers() {
                         setLoading(true)
                         try {
                             const response = await axiosInstance.delete(`/fest/members/${member._id}`)
+                            toast.success("Member deleted successfully!")
                             setMembers(response.data.data)
                         } catch (err) {
+                            toast.error(err)
                             console.log(err)
                         }
                         setLoading(false)

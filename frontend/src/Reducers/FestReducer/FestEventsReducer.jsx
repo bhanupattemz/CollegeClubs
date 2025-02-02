@@ -17,7 +17,8 @@ const initialFestEventsState = {
     loading: false,
     error: null,
     success: null,
-    length: null
+    length: null,
+    msg: null
 };
 
 // fest Slice
@@ -30,6 +31,9 @@ const festEventsSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -55,6 +59,7 @@ const festEventsSlice = createSlice({
                 state.loading = false;
                 state.festEvents = action.payload.data;
                 state.length = action.payload.length
+                state.msg = "Fest event deleted successfully!";
             })
             .addCase(DELETE_FEST_EVENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -77,7 +82,7 @@ const festEventsSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = festEventsSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = festEventsSlice.actions;
 
 export default festEventsSlice.reducer;
 

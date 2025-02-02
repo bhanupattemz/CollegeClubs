@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react"
 import "./EventRegistration.css"
 import { useLocation, useParams } from "react-router-dom"
+import { toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import LoadingButton from '@mui/lab/LoadingButton';
 import TextField from "@mui/material/TextField";
@@ -112,7 +113,6 @@ export default function EventRegistration() {
         async function getEventDetails() {
             try {
                 const respounce = await axiosInstance.get(`/fest/events/${_id}`)
-                console.log(respounce.data.data)
                 setEvent(respounce.data.data)
             } catch (err) {
                 alert(err)

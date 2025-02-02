@@ -18,6 +18,7 @@ const initialsingleFestEventState = {
     loading: false,
     error: null,
     success: null,
+    msg: null
 };
 
 // singleFestEvent Slice
@@ -30,6 +31,9 @@ const singleFestEventSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -52,6 +56,7 @@ const singleFestEventSlice = createSlice({
                 state.loading = false;
                 state.singleFestEvent = action.payload.data;
                 state.success = true
+                state.msg = "Gallery album deleted successfully!";
             })
             .addCase(CREATE_FEST_EVENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -63,6 +68,7 @@ const singleFestEventSlice = createSlice({
             .addCase(UPDATE_FEST_EVENT_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Fest event updated successfully!";
             })
             .addCase(UPDATE_FEST_EVENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -75,7 +81,7 @@ const singleFestEventSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = singleFestEventSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = singleFestEventSlice.actions;
 
 export default singleFestEventSlice.reducer;
 

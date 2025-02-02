@@ -25,6 +25,7 @@ const initialannouncementsState = {
     error: null,
     success: null,
     announcementsCount: 0,
+    msg: null,
 };
 
 // announcement Slice
@@ -37,6 +38,9 @@ const announcementSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -75,6 +79,7 @@ const announcementSlice = createSlice({
                 state.loading = false;
                 state.announcements = action.payload.data;
                 state.announcementsCount = action.payload.data.length || 0
+                state.msg = "Announcement deleted successfully!";
             })
             .addCase(ADMIN_DELETE_ANNOUNCEMENT_FAIL, (state, action) => {
                 state.loading = false;
@@ -89,6 +94,7 @@ const announcementSlice = createSlice({
                 state.announcements = action.payload.data;
                 state.announcementsCount = action.payload.data.length || 0
                 state.success = true
+                state.msg = "Announcement created successfully!";
             })
             .addCase(CREATE_ANNOUNCEMENTS_FAIL, (state, action) => {
                 state.loading = false;
@@ -107,6 +113,7 @@ const announcementSlice = createSlice({
             .addCase(UPDATE_ANNOUNCEMENTS_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                state.msg = "Announcement updated successfully!";
             })
             .addCase(SET_ANNOUNCEMENT_SUCCESS_FALSE, (state, action) => {
                 state.success = false
@@ -115,7 +122,7 @@ const announcementSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = announcementSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = announcementSlice.actions;
 
 export default announcementSlice.reducer;
 

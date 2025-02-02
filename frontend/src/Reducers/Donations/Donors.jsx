@@ -15,6 +15,12 @@ import {
     ADMIN_UPDATE_DONAR_REQUEST,
     ADMIN_UPDATE_DONAR_SUCCESS,
     ADMIN_UPDATE_DONAR_FAIL,
+    GET_TOP_COORDINATOR_DONARS_REQUEST,
+    GET_TOP_COORDINATOR_DONARS_SUCCESS,
+    GET_TOP_COORDINATOR_DONARS_FAIL,
+    GET_COORDINATOR_DONARS_REQUEST,
+    GET_COORDINATOR_DONARS_SUCCESS,
+    GET_COORDINATOR_DONARS_FAIL,
     CLEAR_ERRORS
 } from '../../Constants/Constants';
 
@@ -24,6 +30,7 @@ const initialdonarsState = {
     error: null,
     success: null,
     donarsCount: 0,
+    msg: null
 };
 
 // donar Slice
@@ -36,6 +43,9 @@ const donarSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -74,6 +84,7 @@ const donarSlice = createSlice({
                 state.loading = false;
                 state.donars = action.payload.data;
                 state.donarsCount = action.payload.data.length || 0
+                state.msg = "Donation has been successfully removed from the records.";
             })
             .addCase(ADMIN_DELETE_DONAR_FAIL, (state, action) => {
                 state.loading = false;
@@ -86,6 +97,7 @@ const donarSlice = createSlice({
             .addCase(ADMIN_CREATE_DONAR_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Successfully created the donation record!";
             })
             .addCase(ADMIN_CREATE_DONAR_FAIL, (state, action) => {
                 state.loading = false;
@@ -98,17 +110,44 @@ const donarSlice = createSlice({
             .addCase(ADMIN_UPDATE_DONAR_SUCCESS, (state, action) => {
                 state.loading = false;
                 state.success = true
+                state.msg = "Successfully updated the donation record!";
+
             })
             .addCase(ADMIN_UPDATE_DONAR_FAIL, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
-
+            .addCase(GET_TOP_COORDINATOR_DONARS_REQUEST, (state) => {
+                state.loading = true;
+                state.donars = null
+            })
+            .addCase(GET_TOP_COORDINATOR_DONARS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.donars = action.payload.data;
+                state.donarsCount = action.payload.data.length || 0
+            })
+            .addCase(GET_TOP_COORDINATOR_DONARS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(GET_COORDINATOR_DONARS_REQUEST, (state) => {
+                state.loading = true;
+                state.donars = null
+            })
+            .addCase(GET_COORDINATOR_DONARS_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.donars = action.payload.data;
+                state.donarsCount = action.payload.data.length || 0
+            })
+            .addCase(GET_COORDINATOR_DONARS_FAIL, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 
 
-export const { clearErrors, clearSuccess } = donarSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = donarSlice.actions;
 
 export default donarSlice.reducer;
 

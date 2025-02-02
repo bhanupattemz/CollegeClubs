@@ -11,6 +11,8 @@ import axios from "axios"
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 import { styled } from '@mui/material/styles';
 import Loading from "../../../Loaders/Loading";
+
+import { toast } from "react-toastify";
 export default function CreateFest() {
     const axiosInstance = axios.create({
         baseURL: BACKENDURL,
@@ -46,9 +48,10 @@ export default function CreateFest() {
         try {
             setLoading(true)
             const response = await axiosInstance.put(`/fest/${_id}`, fd)
+            toast.success("Fest updated successfully!")
             navigate("/admin/fests")
         } catch (err) {
-            alert(err)
+            toast.error(err)
         }
         setLoading(false)
     }

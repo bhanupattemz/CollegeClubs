@@ -99,11 +99,11 @@ module.exports.adminGetDonations = WrapAsync(async (req, res) => {
     for (let i = 0; i < 6; i++) {
         const startDate = new Date();
         startDate.setMonth(startDate.getMonth() - i);
-        startDate.setDate(1); 
-        startDate.setHours(0, 0, 0, 0); 
+        startDate.setDate(1);
+        startDate.setHours(0, 0, 0, 0);
         const endDate = new Date(startDate);
         endDate.setMonth(endDate.getMonth() + 1);
-        endDate.setDate(0); 
+        endDate.setDate(0);
         endDate.setHours(23, 59, 59, 999);
 
         const donations = await DonationsModel.find({
@@ -125,5 +125,112 @@ module.exports.adminGetDonations = WrapAsync(async (req, res) => {
             amounts: amounts.reverse(),
             labels: labels.reverse()
         }
+    });
+})
+
+
+// coordinator 
+
+module.exports.getCoordinatorNumbers = WrapAsync(async (req, res) => {
+    const clubs = await ClubsModel.find({ "coordinators.details": req.user._id })
+    let userClubs = []
+    let clubMembers = new Set()
+    for (let club of clubs) {
+        userClubs.push(club._id)
+        club.members.forEach((member) => clubMembers.add(member))
+    }
+    const events = await EventModel.find({ conductedClub: { $in: userClubs } })
+    const donations = await DonationsModel.find({ club: { $in: userClubs } })
+    let amount = 0;
+    donations.forEach((item) => {
+        amount += item.amount
+    })
+    res.json({
+        success: true,
+        data: [clubs.length, amount, clubMembers.size, events.length]
+    });
+})
+
+
+
+module.exports.getCoordinatorDonations = WrapAsync(async (req, res) => {
+    const clubs = await ClubsModel.find({ "coordinators.details": req.user._id })
+    const data = [];
+    const labels = [];
+    const amounts = [];
+    for (let club of clubs) {
+        labels.push(club.name)
+        const donations = await DonationsModel.find({ club: club._id })
+        data.push(donations.length)
+        let amount = 0;
+        donations.forEach((donation) => amount += donation.amount)
+        amounts.push(amount)
+    }
+    res.json({
+        success: true,
+        data: {
+            data: data.reverse(),
+            amounts: amounts.reverse(),
+            labels: labels.reverse()
+        }
+    });
+})
+
+
+module.exports.getCoordinatorTopDonations = WrapAsync(async (req, res) => {
+    const clubs = await ClubsModel.find({ "coordinators.details": req.user._id })
+    const userClubs = clubs.map((club) => club._id)
+    const donations = await DonationsModel.find({ club: { $in: userClubs } }).select("name amount createdAt club").populate({ path: "club", select: "name" }).sort({ "createdAt": -1 }).limit(10);
+    res.json({
+        success: true,
+        data: donations
+    });
+})
+
+
+module.exports.getCoordinatorMemberData = WrapAsync(async (req, res) => {
+    const clubs = await ClubsModel.find({ "coordinators.details": req.user._id })
+    const data = [];
+    const labels = [];
+    for (let club of clubs) {
+        labels.push(club.name)
+        data.push(club.members.length)
+    }
+    res.json({
+        success: true,
+        data: {
+            data: data,
+            labels: labels
+        }
+    });
+})
+
+module.exports.getCoordinatorMemberData = WrapAsync(async (req, res) => {
+    const clubs = await ClubsModel.find({ "coordinators.details": req.user._id })
+    const data = [];
+    const labels = [];
+    for (let club of clubs) {
+        labels.push(club.name)
+        data.push(club.members.length)
+    }
+    res.json({
+        success: true,
+        data: {
+            data: data,
+            labels: labels
+        }
+    });
+})
+
+module.exports.coordinatorGetclubsEvents = WrapAsync(async (req, res) => {
+    let data = []
+    const clubs = await ClubsModel.find({ "coordinators.details": req.user._id })
+    for (const item of clubs) {
+        const events = await EventModel.find({ conductedClub: item._id })
+        data.push({ name: item.name, count: events.length })
+    }
+    res.json({
+        success: true,
+        data: data
     });
 })

@@ -2,6 +2,7 @@ import "./ClubMembers.css"
 import AdminSetUp from "../AdminSetUp"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { toast } from "react-toastify";
 import axios from "axios"
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 import { DataGrid } from "@mui/x-data-grid";
@@ -28,8 +29,9 @@ export default function ClubMembers() {
                             setLoading(true)
                             const response = await axiosInstance.put(`/clubs/unregister/${_id}`, { member: member._id })
                             setMembers(response.data.data)
+                            toast.success("Club member removed successfully!")
                         } catch (err) {
-                            console.log(err)
+                            toast.error(err)
                         }
                         setLoading(false)
                     }

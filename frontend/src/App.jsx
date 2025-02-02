@@ -3,6 +3,8 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentUser } from "./Actions/userActions"
 import { useEffect } from "react"
+import { ToastContainer } from 'react-toastify';
+
 import Header from "./Components/Home/Header"
 import Footer from "./Components/Home/Footer"
 import Home from "./Components/Home/Home"
@@ -86,13 +88,21 @@ import AdminUpdateUser from "./Components/Dashboard/Admin/Users/UpdateUser"
 import AdminAllPastMembers from "./Components/Dashboard/Admin/Users/PastTeam"
 import AdminCreatePastMember from "./Components/Dashboard/Admin/Users/CreatePastMember"
 
+
+import CoordinatorDashboard from "./Components/Dashboard/Coordinnator/Dashboard/Dashboard"
 import CoordinatorClubs from "./Components/Dashboard/Coordinnator/Clubs/CoordinatorClubs"
 import CoordinatorClubMembers from "./Components/Dashboard/Coordinnator/Clubs/ClubMember"
+import CoordinatorEvents from "./Components/Dashboard/Coordinnator/Events/CoordinatorEvents"
+import CoordinatorCreateEvent from "./Components/Dashboard/Coordinnator/Events/CreateEvent"
+import CooordinatorUpdateEvent from "./Components/Dashboard/Coordinnator/Events/UpdateEvents"
+import CoordinatorEventMembers from "./Components/Dashboard/Coordinnator/Events/EventMembers"
 import CoordinatorUpdateClub from "./Components/Dashboard/Coordinnator/Clubs/UpdateClub"
 import CoordinatorClubGallery from "./Components/Dashboard/Coordinnator/Gallery/ClubGallery"
 import CoordinatorCreateGallery from "./Components/Dashboard/Coordinnator/Gallery/CreateGallery"
 import CoordinatorUpdateGallery from "./Components/Dashboard/Coordinnator/Gallery/UpdateGallery"
+import CoordinatorDonations from "./Components/Dashboard/Coordinnator/Donations/Donation"
 import PageNotfound from "./Components/Functionalities/PageNotFound"
+import Alert from "./Alert"
 function App() {
   const dispatch = useDispatch();
   const { user, isauthenticate, Loading } = useSelector(state => state.user)
@@ -184,15 +194,23 @@ function App() {
         <Route path="/admin/users/update/:_id" element={<ProtectedRoute isIn={["admin"]} element={<AdminUpdateUser />} />} />
         <Route path="/admin/past_team" element={<ProtectedRoute isIn={["admin"]} element={<AdminAllPastMembers />} />} />
         <Route path="/admin/past_team/create" element={<ProtectedRoute isIn={["admin"]} element={<AdminCreatePastMember />} />} />
+        <Route path="/coordinator/dashboard" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorDashboard />} />} />
         <Route path="/coordinator/clubs" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorClubs />} />} />
         <Route path="/coordinator/clubs/members/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorClubMembers />} />} />
         <Route path="/coordinator/clubs/update/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorUpdateClub />} />} />
+        <Route path="/coordinator/events" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorEvents />} />} />
+        <Route path="/coordinator/events/create" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorCreateEvent />} />} />
+        <Route path="/coordinator/events/update/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CooordinatorUpdateEvent />} />} />
+        <Route path="/coordinator/events/members/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorEventMembers />} />} />
         <Route path="/coordinator/gallery" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorClubGallery />} />} />
         <Route path="/coordinator/gallery/create" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorCreateGallery />} />} />
         <Route path="/coordinator/gallery/update/:_id" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorUpdateGallery />} />} />
+        <Route path="/coordinator/donations" element={<ProtectedRoute isIn={["coordinator"]} element={<CoordinatorDonations />} />} />
         <Route path="/*" element={<PageNotfound />} />
       </Routes>
       <Footer />
+      <ToastContainer />
+      <Alert />
     </Router>
   )
 }

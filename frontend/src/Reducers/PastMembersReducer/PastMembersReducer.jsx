@@ -19,6 +19,7 @@ const initialpastMembersState = {
     error: null,
     success: null,
     pastMembersCount: 0,
+    msg: null
 };
 
 // pastMember Slice
@@ -31,6 +32,9 @@ const pastMemberSlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -56,6 +60,7 @@ const pastMemberSlice = createSlice({
                 state.loading = false;
                 state.pastMembers = action.payload.data;
                 state.pastMembersCount = action.payload.data.length || 0
+                state.msg = "Past member deleted successfully."
             })
             .addCase(DELETE_PAST_MEMBER_FAIL, (state, action) => {
                 state.loading = false;
@@ -70,6 +75,7 @@ const pastMemberSlice = createSlice({
                 state.pastMembers = action.payload.data;
                 state.pastMembersCount = action.payload.data.length || 0
                 state.success = true
+                state.msg = "Past member created successfully"
             })
             .addCase(CREATE_PAST_MEMBER_FAIL, (state, action) => {
                 state.loading = false;
@@ -83,7 +89,7 @@ const pastMemberSlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = pastMemberSlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = pastMemberSlice.actions;
 
 export default pastMemberSlice.reducer;
 

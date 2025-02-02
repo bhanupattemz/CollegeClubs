@@ -19,6 +19,7 @@ const initialgalleryState = {
     error: null,
     success: null,
     galleryCount: 0,
+    msg: null
 };
 
 // gallery Slice
@@ -31,6 +32,9 @@ const gallerySlice = createSlice({
         },
         clearSuccess: (state) => {
             state.success = null;
+        },
+        clearSuccessMsg: (state) => {
+            state.msg = null
         }
     },
     extraReducers: (builder) => {
@@ -56,6 +60,7 @@ const gallerySlice = createSlice({
                 state.loading = false;
                 state.gallery = action.payload.data;
                 state.galleryCount = action.payload.data.length || 0
+                state.msg = "Gallery album deleted successfully!";
             })
             .addCase(ADMIN_DELETE_GALLERY_PHOTOS_FAIL, (state, action) => {
                 state.loading = false;
@@ -70,6 +75,7 @@ const gallerySlice = createSlice({
                 state.gallery = action.payload.data;
                 state.galleryCount = action.payload.data.length || 0
                 state.success = true
+                state.msg = "Gallery album created successfully!";
             })
             .addCase(ADMIN_CREATE_GALLERY_FAIL, (state, action) => {
                 state.loading = false;
@@ -82,7 +88,7 @@ const gallerySlice = createSlice({
 });
 
 
-export const { clearErrors, clearSuccess } = gallerySlice.actions;
+export const { clearErrors, clearSuccess, clearSuccessMsg } = gallerySlice.actions;
 
 export default gallerySlice.reducer;
 
