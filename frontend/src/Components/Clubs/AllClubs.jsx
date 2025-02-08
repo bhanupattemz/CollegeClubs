@@ -103,6 +103,7 @@ export default function AllClubs() {
                                     <div className="allclubs-clubs-container">
                                         <div className="allclubs-club-img">
                                             <img src={item.logo.url} alt="club-log" />
+                                            <h3 className="all-clubs-name-mid">{item.name} {item.members.includes(user ? user._id : null) && <span style={{ color: "Green" }}><FaRegRegistered /></span>}</h3>
                                         </div>
                                         <div className="allclubs-club-details">
                                             <div>

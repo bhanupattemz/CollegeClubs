@@ -1,9 +1,9 @@
-.club-details-main>section:not(:nth-of-type(1),:nth-of-type(2)) {
+.club-details-main>section:not(:nth-of-type(1), :nth-of-type(2)) {
     width: 96%;
     margin: 2%;
 }
 
-/* about section  */
+/* about section */
 .club-details-about-heading {
     display: flex;
     align-items: center;
@@ -15,6 +15,7 @@
     width: 100px;
     height: 100px;
     border-radius: 100%;
+    border: 2px solid #0A5EB0;
 }
 
 .club-details-about-content {
@@ -23,12 +24,12 @@
     display: flex;
     justify-content: center;
     font-size: larger;
-    background-color: #ecf1f5;
+    background-color: #E6F0FA;
     margin: 20px 0px;
+    border-radius: 10px;
 }
 
-
-/* skills section*/
+/* skills section */
 .clubs-details-skills-section h2 {
     padding: 10px;
     border-left: 5px solid #0A5EB0;
@@ -40,7 +41,8 @@
     width: 90%;
     padding: 20px 5%;
     justify-content: space-evenly;
-    background-color: #ecf1f5;
+    background-color: #E6F0FA;
+    border-radius: 10px;
 }
 
 .clubs-details-skills-content>div {
@@ -51,11 +53,11 @@
     text-align: center;
     padding: 10px;
     font-weight: 700;
+    border-radius: 5px;
+    margin: 10px 0;
 }
 
-/* club Timings section  */
-
-
+/* club timings section */
 .club-details-timings h2 {
     padding: 10px;
     border-left: 5px solid #0A5EB0;
@@ -64,29 +66,34 @@
 .club-details-timings h3 {
     font-size: larger;
     font-weight: 700;
+    color: #0A5EB0;
 }
 
 .club-details-timings svg {
     font-size: 25px;
     transform: translateY(4px);
+    color: #0A5EB0;
 }
 
 .club-details-timings>div {
     width: 100%;
     display: flex;
-    background-color: #ecf1f5;
-    justify-content: center;
+    background-color: #E6F0FA;
+    justify-content: space-evenly;
+    border-radius: 10px;
 }
 
 .club-details-timings>div li {
     font-size: large;
+    color: #333;
 }
 
 .club-details-timings>div>div {
     width: 40%;
+    padding: 20px;
 }
 
-/* club buttons section  */
+/* club buttons section */
 .club-details-btns-section {
     width: 100%;
     display: flex;
@@ -94,7 +101,7 @@
     height: 7vh;
     align-items: center;
     position: absolute;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(10, 94, 176, 0.1);
     margin: 0px;
     gap: 30px;
 }
@@ -105,17 +112,44 @@
     font-weight: 700;
     font-size: large;
     color: #0A5EB0;
-    transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.3s;
 }
-.club-details-btns-section>button:hover{
+
+.club-details-btns-section>button:hover {
     cursor: pointer;
+    transform: scale(1.1);
 }
 
-
-/* clubs events  */
-.club-events-section{
+/* clubs events */
+.club-events-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+
+/* club details dev  */
+
+.club-details-page-details {
+    display: flex;
+    width: 96%;
+    padding: 15px 2%;
+    justify-content: space-evenly;
+
+}
+
+.club-details-page-details h3 {
+    color: #0A5EB0;
+}
+
+.club-details-page-details>div {
+    width: 35%;
+    background-color: rgba(224, 223, 223, 0.388);
+    padding: 10px 2%;
+    border-left: 5px solid #0A5EB0;
+}
+
+.club-details-page-details>div:nth-of-type(2) {
+    width: 40%;
 }

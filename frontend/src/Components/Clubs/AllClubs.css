@@ -4,184 +4,316 @@
 
 .allclubs-clubs-section>div {
     width: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0px;
+    margin: 20px 0;
+}
 
+/* fonts  */
+.all-clubs-main h3,
+.all-clubs-main h4 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.all-clubs-main h3 {
+    font-size: 1.2rem;
+}
+
+.all-clubs-main h4 {
+    font-size: 1rem;
+}
+
+.allclubs-club-skills {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
 }
 
 .allclubs-club-card {
-    width: 60%;
+    width: 90%;
+    max-width: 1000px;
     background-color: white;
     border: 5px solid #bedafb;
-
+    border-radius: 8px;
 }
-
-
 
 .allclubs-clubs-container {
     width: 100%;
     display: flex;
-    /* color: white; */
+    flex-wrap: wrap;
 }
 
 .allclubs-club-img {
-    width: 20%;
+    width: 200px;
+    min-width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
     background-color: #bedafb;
-
+    padding: 15px;
 }
 
 .allclubs-club-img img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .allclubs-club-details {
-    width: 80%;
+    flex: 1;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
 }
 
 .allclubs-club-details h3 {
     background-color: #bedafb;
-    clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
-    padding: 10px;
+    clip-path: polygon(0 0, 100% 0%, 95% 100%, 0% 100%);
+    padding: 10px 20px;
+    margin: 0;
 }
 
 .allclubs-club-details h4 {
-    width: 50%;
     background-color: #bedafb;
-    clip-path: polygon(0 0, 100% 0%, 74% 100%, 0% 100%);
-    padding: 10px;
+    clip-path: polygon(0 0, 100% 0%, 90% 100%, 0% 100%);
+    padding: 10px 20px;
+    margin: 15px 0;
+    width: fit-content;
 }
 
-.allclubs-club-details>div:nth-of-type(1) {
-    width: 65%;
-}
-
-.allclubs-club-details>div:nth-of-type(2) {
-    width: 25%;
-}
-
-
-/* all clubs search section  */
 .all-clubs-search-div {
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin: 20px 0px;
-    width: 100%;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 0 20px;
 }
 
 .all-clubs-search-div input {
-    width: 40%;
-    padding: 7px 5px;
-    font-size: large;
+    width: 70%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #bedafb;
+    border-radius: 4px;
     outline: none;
-    margin-right: 10px;
 }
 
 .all-clubs-search-div button {
     background-color: #1F509A;
     color: white;
-    padding: 7px 13px;
+    padding: 12px 24px;
     font-weight: 700;
-    border: none !important;
-    width: 15%;
-    transition: all ease-in-out 0.5s;
+    border: none;
+    border-radius: 4px;
+    min-width: 120px;
+    transition: all 0.3s ease;
 }
 
 .all-clubs-search-div button:hover {
-    cursor: pointer;
-    opacity: 0.7;
+    background-color: #163b73;
 }
 
-/* skills */
 
 .allclubs-club-skills {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin: 15px 0;
 }
 
 .allclubs-club-skills div {
-    min-width: 20%;
     background-color: #bedafb;
-    text-align: center;
-    padding: 10px 10px;
-    border-radius: 5px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
 }
 
 .allclubs-registration-btn {
-    width: 15%;
-    transition: all ease-in-out 0.5s;
+    width: 90%;
+    max-width: 200px;
+    margin: -10px auto 20px;
 }
 
 .allclubs-registration-btn button {
-    padding: 10px;
     width: 100%;
-    transform: translateY(-20px);
-    font-size: large;
+    padding: 12px;
+    font-size: 16px;
     font-weight: 700;
     border: none;
-    transition: all ease-in 0.5s;
+    border-radius: 4px;
+    background-color: #1F509A;
+    color: white;
+    transition: all 0.3s ease;
 }
 
-.allclubs-registration-btn>button:hover {
-    cursor: pointer;
-    background-color: #bedafb;
+.allclubs-registration-btn button:hover {
+    background-color: #163b73;
 }
-
 
 .all-clubs-exp-more button {
-    transform: translateX(100px);
-    border: none;
-    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: large;
+    gap: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
     font-weight: 700;
-    padding: 20px;
     background-color: #bedafb;
-    transition: all ease-in 0.5s;
-}
-
-.all-clubs-exp-more>button:hover {
+    border: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
     cursor: pointer;
-    opacity: 0.9;
 }
 
+.all-clubs-exp-more button:hover {
+    background-color: #a1c4f7;
+}
 
-/* buttons */
 .allclubs-btns-section {
     display: flex;
     justify-content: center;
-    min-height: 15vh;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 30px 20px;
 }
 
 .allclubs-btns-section button {
-    border: 2px solid black;
-    padding: 10px 15px;
-    margin: 0px 10px;
+    padding: 12px 24px;
+    font-size: 16px;
     font-weight: 700;
-    font-size: large;
-    transition: all ease-in-out 0.5s;
+    border: 2px solid #1F509A;
+    border-radius: 4px;
+    background: transparent;
+    transition: all 0.3s ease;
 }
 
-.allclubs-btns-section>button:hover {
+.allclubs-btns-section button:hover {
     background-color: #1F509A;
     color: white;
-    border: 2px solid #1F509A;
-    cursor: pointer;
+}
+
+.all-clubs-name-mid {
+    display: none;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width: 1000px) {
+    .allclubs-club-card {
+        width: 95%;
+    }
+
+    .all-clubs-main h3 {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .all-clubs-main h4 {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .allclubs-club-skills {
+        font-size: 0.9rem;
+    }
+
+    .all-clubs-exp-more button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .all-clubs-search-div {
+        margin: 10px 0;
+        padding: 0 10px;
+    }
+
+    .all-clubs-search-div input {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+    .allclubs-club-card {
+        width: 95%;
+    }
+
+    .allclubs-club-img {
+        width: 100%;
+        clip-path: none;
+        padding: 0px;
+    }
+
+    .allclubs-club-img img {
+        width: 80px;
+        height: 80px;
+        margin: 10px 0px;
+    }
+
+    .allclubs-club-details {
+        width: 92%;
+        padding: 4%;
+    }
+
+    .allclubs-club-details>div:nth-of-type(1),
+    .allclubs-club-details>div:nth-of-type(2) {
+        width: 100%;
+    }
+
+    .all-clubs-exp-more button {
+        transform: none;
+    }
+
+    .all-clubs-name-mid {
+        display: block;
+        width: 96%;
+        padding: 10px 2%;
+        font-size: 0.9rem;
+    }
+
+    .allclubs-club-details h3 {
+        display: none;
+    }
+
+    .all-clubs-main h4 {
+        font-size: 0.8rem;
+        clip-path: none;
+    }
+
+    .allclubs-club-skills {
+        font-size: 0.8rem;
+    }
+
+    .all-clubs-exp-more button {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+    }
+
+    .allclubs-btns-section button {
+        font-size: 0.8rem;
+        padding: 7px 14px;
+    }
+
+    .allclubs-btns-section {
+        padding: 10px 0px;
+        margin-top: 10px;
+    }
+    .all-clubs-search-div input {
+        font-size: 0.8rem;
+    }
+    .all-clubs-search-div button{
+        padding: 7px 14px;
+        min-width: 0px;
+    }
 }

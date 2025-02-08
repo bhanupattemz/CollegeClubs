@@ -9,24 +9,18 @@
     color: white;
 }
 
-.numbers-main svg{
+.numbers-main svg {
     font-size: 50px;
 }
-.numbers-main h3{
-    margin: 5px;
-}
-.numbers-main p{
+
+
+.numbers-main p {
     margin: 0px;
     margin-top: 5px;
     font-weight: 700;
-    font-size: larger
-}
-.numbers-heading {
-    padding: 0% 2%;
-    border-left: 5px solid #3FA2F6;
 }
 
-.numbers-items{
+.numbers-items {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -34,9 +28,47 @@
     margin-top: 7vh;
 }
 
-.numbers-items>div{
+.numbers-items>div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 1024px),
+(max-device-width:1024px) {
+    .numbers-main svg{
+        font-size: 30px;
+    }
+    .numbers-items {
+        margin-top: 30px !important;
+    }
+
+    .numbers-main {
+        min-height: 30vh !important;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width:480px) {
+    .numbers-main h2{
+        font-size: 1rem;
+    }
+    .numbers-main svg{
+        font-size: 25px;
+    }
+    .numbers-items>div{
+        width: 24%;
+        text-align: center;
+    }
+    .numbers-main h3{
+        font-size: 0.7rem;
+    }
+    .numbers-items {
+        margin-top: 30px !important;
+    }
+
+    .numbers-main {
+        min-height: 25vh !important;
+    }
 }

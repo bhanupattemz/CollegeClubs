@@ -5,11 +5,89 @@
 .carousel {
     height: 60vh;
 }
-.home svg{
-transform: translateY(4px);
+
+.home svg {
+    transform: translateY(4px);
 }
 
 /* youtub section  */
-.youtube-section{
+.youtube-section {
     margin-top: 100px;
+}
+
+
+
+.home h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.home h3,
+.home h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.home p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .carousel {
+        height: 40vh;
+    }
+
+    .youtube-section {
+        margin-top: 10px;
+    }
+
+    .home h2 {
+        font-size: 1.5rem;
+    }
+
+    .home h3,
+    .home h4 {
+        font-size: 1.2rem;
+    }
+    .home p {
+        font-size: 0.9rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .carousel {
+        height: 35vh;
+    }
+
+    .youtube-section {
+        margin-top: 10px;
+    }
+
+    .home h2 {
+        font-size: 1.2rem;
+    }
+
+    .home h3 {
+        font-size: 1rem;
+    }
+    .home p {
+        font-size: 0.8rem;
+    }
 }

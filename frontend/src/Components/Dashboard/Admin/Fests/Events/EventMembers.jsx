@@ -112,7 +112,7 @@ export default function EventMembers() {
                 sx={{ minHeight: "60vh", backgroundColor: "" }}
             />
             <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
-                <XlsxButton filename={`${singleFestEvent.name}_Members`}
+                <XlsxButton filename={`${singleFestEvent?.name}_Members`}
                     data={members && members.map((member, inx) => {
                         return {
                             PaymentId: member.paymentInfo.paymentId,

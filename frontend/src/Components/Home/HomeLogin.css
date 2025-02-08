@@ -40,13 +40,12 @@
     align-items: center;
 }
 
-.home-login-body > div {
+.home-login-body>div {
     padding: 10%;
     text-align: center;
 }
 
 .home-login-body h2 {
-    font-size: 2rem;
     margin-bottom: 20px;
     color: #fff;
 }
@@ -82,4 +81,49 @@
 
 .home-login-email button:hover {
     background-color: #5da6e5;
+}
+
+
+
+@media only screen and (max-width: 1024px),
+(max-device-width:1024px) {
+    .home-login-main {
+        height: 60vh;
+    }
+    .home-login-img img {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width:480px) {
+    .home-login-main {
+        height: 65vh;
+    }
+
+    .home-login-img img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .home-login-main {
+        flex-direction: column;
+    }
+
+    .home-login-body,
+    .home-login-img {
+        width: 100%;
+    }
+    .home-login-body>div{
+        padding: 10px;
+    }
+   
+    .home-login-email input{
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    .home-login-email button{
+        font-size: 0.9rem;
+    }
 }

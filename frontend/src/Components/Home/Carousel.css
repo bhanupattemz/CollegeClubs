@@ -15,14 +15,14 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-.home-img-item > img {
+.home-img-item>img {
     width: 100%;
     height: 70vh;
     object-fit: cover;
 }
 
 .home-page-carousel-btn {
-    position:absolute;
+    position: absolute;
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -30,7 +30,7 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.home-page-carousel-btn > div {
+.home-page-carousel-btn>div {
     width: 10%;
     height: 70vh;
     display: flex;
@@ -40,10 +40,12 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.home-page-carousel-btn > div>svg{
+
+.home-page-carousel-btn>div>svg {
     font-size: 40px;
 }
-.home-page-carousel-btn > div:hover {
+
+.home-page-carousel-btn>div:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -61,7 +63,7 @@
     bottom: 10px;
 }
 
-.home-img-item-indi > div {
+.home-img-item-indi>div {
     width: 10px;
     height: 10px;
     margin: 5px;
@@ -70,22 +72,44 @@
     transition: background-color 0.3s ease;
 }
 
-.home-img-item-indi > div.active {
+.home-img-item-indi>div.active {
     background-color: #0A5EB0;
 }
-.middle-carousel-anch{
+
+.middle-carousel-anch {
     width: 80% !important;
 }
 
-@media only screen and (max-width: 600px),
-(max-device-width:600px) {
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .home-img-item>img {
+        height: 40vh;
+    }
+
     .home-page-carousel {
-        height: 25vh !important;
+        height: 40vh !important;
     }
-    .home-img-item > img {
-        height: 25vh !important;
+
+    .home-img-item>img {
+        height: 40vh !important;
     }
-    .home-page-carousel-btn > div{
-        height: 25vh !important;
+
+    .home-page-carousel-btn>div {
+        height: 40vh !important;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width:480px) {
+    .home-page-carousel {
+        height: 35vh !important;
+    }
+
+    .home-img-item>img {
+        height: 35vh !important;
+    }
+
+    .home-page-carousel-btn>div {
+        height: 35vh !important;
     }
 }

@@ -5,10 +5,10 @@
 }
 
 .open-library-search-form>form {
-    width: 100%;
+    width: 98%;
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 1%;
 }
 
 .open-library-search-form input {
@@ -116,3 +116,35 @@
     height: 50vh;
 }
 
+
+
+@media only screen and (max-width:1000px),
+(max-device-width:1000px) {
+    .open-library-books-data>.book-card-main {
+        width: 96% !important;
+        margin: 10px 2%;
+    }
+    .open-card-loading {
+        width: 96% !important;
+        margin: 10px 2%;
+        height: 25vh;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+    .resource-page-academic-form>form {
+        flex-wrap: wrap;
+    }
+
+    .resource-page-academic-form div {
+        width: 49%;
+    }
+    .open-library-search-form input{
+        width: 65%;
+        padding: 5px;
+    }
+    .open-library-search-form button{
+        width: 30%;
+    }
+}

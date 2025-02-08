@@ -19,8 +19,9 @@ const donationSchema = new mongoose.Schema({
         type: Number,
         length: 10
     },
-    note:{
-        type:String
+    note: {
+        type: String,
+        max: 200
     },
     club: {
         type: mongoose.Schema.Types.ObjectId,

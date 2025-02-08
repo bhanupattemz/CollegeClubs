@@ -382,10 +382,7 @@ module.exports.createRegisterEventOrder = WrapAsync(async (req, res, next) => {
     if (!mail) {
         throw new ExpressError("mail is required", 400)
     }
-    const member = await MembersModel.find({ mail: mail })
-    if (member && member.length != 0) {
-        throw new ExpressError("Mail is already used", 400)
-    }
+  
     const event = await EventModel.findById(_id)
     const currentTime = Date.now()
     if (!(new Date(event.registration.starting).getTime() < currentTime && new Date(event.registration.ending).getTime() > currentTime)) {

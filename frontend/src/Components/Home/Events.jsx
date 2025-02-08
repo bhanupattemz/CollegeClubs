@@ -1,7 +1,7 @@
 import "./Events.css"
 import Timer from "./Timer"
 import { useNavigate } from "react-router-dom"
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { ConvertTime } from "../Functionalities/functionalites"
 import { useDispatch, useSelector } from "react-redux"
 import { confirmAlert } from 'react-confirm-alert';
@@ -32,6 +32,7 @@ export default function Events({ event }) {
     const navigate = useNavigate()
     const { user } = useSelector(state => state.user)
     const { loading, singleEvent } = useSelector(state => state.singleEvent)
+    const [text, setText] = useState("")
     const registerEvent = async (e) => {
         if (!user) {
             console.log("must and should login To Register Event")
@@ -40,6 +41,11 @@ export default function Events({ event }) {
             confirmAlert(options)
         }
     }
+    useEffect(() => {
+        let description = event.description.split(" ")
+        setText(`${description.length > 30 ? description.slice(0, 30).join(' ') : event.description}${description.length > 30 && '....'}`)
+
+    }, [event])
     return (
         <Fragment>
             {event && <div className="events">
@@ -49,16 +55,16 @@ export default function Events({ event }) {
                 </div>
                 <div className="event-body">
                     <div>
-                        <h2>
-                            {event.name} {event.members.includes(user ? user._id : null) && <span  style={{ color: "LightGreen" }}> <FaRegRegistered /></span>}
-                        </h2>
+                        <h3>
+                            {event.name} {event.members.includes(user ? user._id : null) && <span style={{ color: "LightGreen" }}> <FaRegRegistered /></span>}
+                        </h3>
                     </div>
                     <div>
                         <Timer time={event.registration.ending} />
-                        <p>{event.description}</p>
+                        <p>{text}</p>
                         <div className="event-btns">
                             <button onClick={e => navigate(`/events/${event._id}`)}>Explore More</button>
-                            {new Date(event.registration.starting).getTime() < Date.now() && new Date(event.registration.ending).getTime() > Date.now() && 
+                            {new Date(event.registration.starting).getTime() < Date.now() && new Date(event.registration.ending).getTime() > Date.now() &&
                                 (!event.members.includes(user ? user._id : null) &&
                                     <button disabled={loading} onClick={registerEvent}>Register Now</button>)}
                         </div>

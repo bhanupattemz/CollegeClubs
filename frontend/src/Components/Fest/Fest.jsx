@@ -97,7 +97,7 @@ export default function Fest() {
                                     })}
                                 </Fragment> :
                                 <div>
-                                    not found
+                                    Not found
                                 </div>)}
                             {currentState == "register" && (registrationEvents && registrationEvents.length > 0 ?
                                 <Fragment>

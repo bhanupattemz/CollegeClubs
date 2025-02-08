@@ -53,7 +53,7 @@ export default function SignUp() {
                 try {
                     const data = mail.split("@");
                     if (role == "student" && data[1] != "jntua.ac.in") {
-                        console.log("Students must use their college email (e.g., name@jntua.ac.in) to register for this role.")
+                        toast.error("Students must use their college email (e.g., name@jntua.ac.in) to register for this role.")
                     } else {
                         setAcademic(prev => ({ ...prev, admissionNo: data[0] }))
                         setCLoading(true)

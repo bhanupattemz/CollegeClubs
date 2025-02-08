@@ -73,7 +73,7 @@ export default function Numbers() {
                         <p>
                             {startCount ? <CountUp start={0} end={data[1]} duration={3} /> : 0}
                         </p>
-                        <h3>Registered Members</h3>
+                        <h3>Members</h3>
                     </div>
                     <div>
                         <FaUserTie />

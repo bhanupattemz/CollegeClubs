@@ -80,11 +80,13 @@ export default function AboutUs() {
                 <h2>Meet the Developer</h2>
                 <div className="aboutus-developer-main">
                     <div className="aboutus-developer-content">
-                        <h3>Hi, I'm Bhanu Prakash Pattem,</h3>
+                        <h3>Pattem Bhanu Prakash</h3>
                         <div>
-                            <p> a CSE student at JNTUACEA and the proud developer of this website.
-                                With a keen interest in full-stack development and a love for solving problems
-                                through code, I've built this platform to bring our student community together.</p>
+                            <p>  a CSE student at JNTUACEA with a passion for building 
+                                innovative web applications. With experience in both front-end 
+                                and back-end development, Bhanu aims to create impactful digital 
+                                solutions. This website is one of many projects where Bhanu combines 
+                                technical skills with creativity to enhance the student community's online experience.</p>
                             <p>Feel free to explore, and don't hesitate to reach out if you have any suggestions or feedback!</p>
                         </div>
                         <h4>Let's build a stronger community. 😊</h4>

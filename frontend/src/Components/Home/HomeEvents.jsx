@@ -69,6 +69,18 @@ export default function HomeEvents() {
                     }}><FaChevronRight /></button>
                 </div>
             </div>}
+            <div className="home-event-scroll-btns-mid">
+                <div className="home-event-scroll-btns ">
+                    <button onClick={e => {
+                        setEventNo(a => (a - 1 + len) % len)
+                    }}><FaChevronLeft /></button>
+                </div>
+                <div className="home-event-scroll-btns">
+                    <button onClick={e => {
+                        setEventNo(a => (a + 1 + len) % len)
+                    }}><FaChevronRight /></button>
+                </div>
+            </div>
         </Fragment>
     )
 }

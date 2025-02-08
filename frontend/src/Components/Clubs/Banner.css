@@ -11,13 +11,16 @@
 }
 
 .banner-page h1 {
-    font-size: xx-large;
+    font-size: 1.9rem;
     font-weight: 700;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 
 }
 
-.banner-page p{
-    font-size: large;
+.banner-page p {
+    font-size: 1.2rem;
     font-weight: 700;
     color: rgb(68, 68, 68);
     text-align: center;
@@ -35,4 +38,38 @@
 .banner-btn:hover {
     cursor: pointer;
     opacity: 0.6;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width: 1000px) {
+    .banner-page h1 {
+        font-size: 1.6rem;
+    }
+
+    .banner-page p {
+        font-size: 0.9rem;
+    }
+
+    .banner-page {
+        width: 80%;
+        padding: 0px 10%;
+    }
+}
+
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+
+    .banner-page h1 {
+        font-size: 1.2rem;
+    }
+
+    .banner-page p {
+        font-size: 0.8rem;
+    }
+
+    .banner-page {
+        width: 94%;
+        padding: 0px 3%;
+    }
 }

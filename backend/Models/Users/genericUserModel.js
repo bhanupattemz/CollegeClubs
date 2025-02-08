@@ -8,3 +8,5 @@ const genericUserSchema = new mongoose.Schema({
 });
 
 const GenericUser = User.discriminator('GenericUser', genericUserSchema);
+
+module.exports = GenericUser

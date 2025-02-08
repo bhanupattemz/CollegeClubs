@@ -1,4 +1,4 @@
-.library-main h2{
+.library-main h2 {
     padding-left: 10px;
     border-left: 5px solid #0A5EB0;
 }
@@ -22,6 +22,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 10px;
 }
 
 /* academic form  */
@@ -91,6 +92,8 @@
 .academic-loading-div {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .academic-books-loading {
@@ -98,4 +101,103 @@
     height: 50vh;
     padding: 15px 10px;
     margin: 20px;
+}
+
+
+.library-main h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.library-main h3,
+.library-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.library-main p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+
+@media only screen and (max-width:1000px),
+(max-device-width:1000px) {
+
+    .library-main h2 {
+        font-size: 1.5rem;
+    }
+
+    .library-main h3,
+    .library-main h4 {
+        font-size: 1.2rem;
+    }
+
+    .library-main p {
+        font-size: 0.9rem;
+    }
+
+    .resources-academic-content>div {
+        width: 100%;
+    }
+    .resources-acedamic-result-filter select{
+        width: 45%;
+    }
+
+    .academic-books-loading {
+        width: 100% !important;
+        height: 25vh !important;
+        margin: 0px;
+    }
+    .resources-acedamic-result-filter h3{
+        width: 55%;
+    }
+    .resources-acedamic-result-filter>div{
+        width: 43%;
+    }
+
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+    .library-main h2 {
+        font-size: 1.2rem;
+    }
+
+    .library-main h3 {
+        font-size: 1rem;
+    }
+
+    .library-main p {
+        font-size: 0.8rem;
+    }
+
+    .resource-page-academic-form>form {
+        flex-wrap: wrap;
+    }
+
+    .resource-page-academic-form div {
+        width: 100% !important;
+        padding: 7px 0px;
+    }
+
+    .resources-acedamic-result-filter{
+        flex-direction: column;
+    }
+    .resources-acedamic-result-filter h3,
+    .resources-acedamic-result-filter>div{
+        width: 100%;
+    }
 }

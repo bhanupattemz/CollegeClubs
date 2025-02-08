@@ -13,7 +13,7 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
     const [razorpayKey, setRazorpayKey] = useState()
     const handlePayment = async () => {
         if (!CaptchaValue) {
-            alert("Please complete the CAPTCHA");
+            toast.warning("Please complete the CAPTCHA")
             return;
         }
         try {

@@ -11,9 +11,9 @@ export default function HomeGallery() {
     const { gallery } = useSelector(state => state.gallery)
     const breakpointColumnsObj = {
         default: 4,
-        1100: 3,
-        700: 2,
-        500: 1,
+        1100: 4,
+        700: 3,
+        500: 2,
     };
     useEffect(() => {
         if (!gallery) {

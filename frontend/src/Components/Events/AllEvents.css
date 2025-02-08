@@ -33,9 +33,6 @@
 }
 
 
-/* search section  */
-
-/* all events search section  */
 .all-events-search-div {
     display: flex;
     justify-content: center;
@@ -64,4 +61,30 @@
 .all-events-search-div button:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+    .all-events-search-div input {
+        width: 70%;
+        font-size: 0.8rem;
+    }
+
+    .all-events-search-div button {
+        width: auto;
+    }
+
+    .all-events-btns {
+        width: 96%;
+        padding: 0px 2%;
+        margin: 10px 0px;
+        gap: 10px;
+    }
+
+    .all-events-btns button {
+        font-size: 0.8rem;
+        margin: 0px;
+        padding: 7px 14px;
+    }
 }

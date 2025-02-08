@@ -3,10 +3,7 @@
     margin: 20px 2%;
 }
 
-.donation-page-main h2 {
-    padding-left: 10px;
-    border-left: 5px solid #0A5EB0;
-}
+
 
 
 .donation-page-why-contant {
@@ -14,9 +11,7 @@
     background-color: #ecf1f5;
 }
 
-.donation-page-why-contant p {
-    font-size: large;
-}
+
 
 .donation-page-why-example {
     display: flex;
@@ -44,7 +39,7 @@
 .donars-content-section>marquee {
     background-color: #ecf1f5;
     padding: 20px 0px;
-    
+
 }
 
 .donars-content {
@@ -62,6 +57,84 @@
     padding: 20px;
 }
 
-.donars-content h3 {
-    margin: 5px;
+
+.donation-page-main h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.donation-page-main h3,
+.donation-page-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.donation-page-main p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+.donation-page-why-contant>div:nth-of-type(1) {
+    text-align: justify;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width: 1000px) {
+    .donation-page-why-example>div {
+        width: 28%;
+    }
+
+    .donation-page-main h2 {
+        font-size: 1.5rem;
+    }
+
+    .donation-page-main h3,
+    .donation-page-main h4 {
+        font-size: 1.2rem;
+    }
+
+    .donation-page-main p {
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+    .donation-page-why-example {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .donation-page-why-example>div {
+        width: 90%;
+    }
+
+    .donatioon-make-payment-form {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .donation-page-main h2 {
+        font-size: 1.2rem;
+    }
+
+    .donation-page-main h3 {
+        font-size: 1rem;
+    }
+
+    .donation-page-main p {
+        font-size: 0.8rem;
+    }
 }

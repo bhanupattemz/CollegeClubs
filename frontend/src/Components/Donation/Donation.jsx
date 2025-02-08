@@ -26,15 +26,15 @@ export default function Donation() {
                     </div>
                     <div className="donation-page-why-example">
                         <div>
-                            <h3>₹100</h3>
+                            <h3>₹1000</h3>
                             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores</p>
                         </div>
                         <div>
-                            <h3>₹500</h3>
+                            <h3>₹2000</h3>
                             <p> Maiores sapiente nemo harum, optio consectetur adipisicing elit. Maiores</p>
                         </div>
                         <div>
-                            <h3>₹1000</h3>
+                            <h3>₹5000</h3>
                             <p> adipisicing elit. Maiores sapiente nemo harum, optio ar consectetur adipisicing elit. Maiores</p>
                         </div>
                     </div>

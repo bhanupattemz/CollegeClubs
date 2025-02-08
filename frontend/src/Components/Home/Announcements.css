@@ -3,7 +3,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 98%;
+    padding: 10px 1% !important;
     background-color: #3FA2F6;
     color: white;
     padding: 10px 0px;
@@ -17,7 +18,7 @@
     font-size: large;
     font-weight: 700;
     margin: 0px 5px;
-    color: #F9D689;
+    color: #D4EBF8;
 }
 
 .login-btn {
@@ -41,6 +42,7 @@
 .login-btn button {
     padding: 8px 15px;
     border-radius: 25px;
+    margin: 5px;
     background-color: transparent;
     font-weight: 700;
     border: 2px solid;
@@ -69,4 +71,38 @@
     border-color: #0A5EB0;
     color: #0A5EB0;
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+@media only screen and (max-width: 1024px),
+(max-device-width:1024px) {
+    .announcements-scroll {
+        width: 60%;
+        font-size: 0.9rem;
+    }
+    .announcements-heading{
+        font-size: 1rem;
+    }
+    .login-btn button{
+        font-size: 0.6rem;
+    }
+    .login-btn {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width:480px) {
+    .announcements {
+        flex-direction: column;
+    }
+    .announcements-scroll {
+        width: 90%;
+        margin: 10px 0px;
+        font-size: 0.8rem;
+    }
+    
+    .login-btn {
+        width: 90%;
+    }
 }

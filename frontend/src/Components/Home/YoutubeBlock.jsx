@@ -9,7 +9,7 @@ export default function YoutubeBlock() {
     const [error, setError] = useState(false);
 
     const opts = {
-        height: "300px",
+        height: "100%",
         width: "100%",
         playerVars: {
             autoplay: 1,
@@ -40,13 +40,15 @@ export default function YoutubeBlock() {
                 <div className="youtube-container">
                     <div className="youtube-content">
                         <h3>{video ? video.snippet.title : "JNTUA CEA | Highlights of Student Club Activities - Club AVs Compilation"}</h3>
-                        <div>
+                        <div className="youtube-description-p">
                             <h4>Description :</h4>
                             <p>{video ? video.snippet.description : "Explore the vibrant and dynamic student life at JNTUA CEA through this exciting compilation of Club AVs! Each video offers a unique glimpse into the diverse activities, events, and initiatives organized by the various student clubs at JNTUA College of Engineering Anantapur."}</p>
                         </div>
                     </div>
                     <div>
-                        <YouTube videoId={video ? video.id.videoId : "vqzFFK962aw"} opts={opts} />
+                        <div className="youtube-video-container">
+                            <YouTube videoId={video ? video.id.videoId : "vqzFFK962aw"} opts={opts} />
+                        </div>
                     </div>
 
                 </div>

@@ -1,6 +1,5 @@
-.events{
+.events {
     width: 80%;
-
     background-color: #0A5EB0;
     display: flex;
     flex-direction: row;
@@ -9,22 +8,28 @@
     align-items: center;
     margin: 10px;
 }
-.event-img{
+
+
+.event-img {
     width: 30%;
-  
+    margin: 10px 0px;
+
 }
-.event-img img{
+
+.event-img img {
     width: 100%;
     height: 30vh;
     object-fit: contain;
     background-color: white;
 }
-.event-body{
+
+.event-body {
     width: 60%;
     padding: 20px;
 }
-.event-start-time{
-    position:static;
+
+.event-start-time {
+    position: static;
     padding: 7px;
     margin-top: 10px;
     text-align: center;
@@ -32,23 +37,109 @@
     color: black;
     font-weight: 700;
 }
-.event-btns button{
+
+.event-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.event-btns button {
     background-color: #3FA2F6;
     border: none;
     color: white;
     font-weight: 700;
     padding: 7px 10px;
-    margin: 10px;
+    margin: 10px 0px;
     transition: all ease-in 0.5s;
 }
 
-.event-btns button:hover{
+.event-btns button:hover {
     opacity: 0.5;
     cursor: pointer;
 }
 
-.event-body svg{
+.event-body svg {
     font-size: medium;
     transform: translateY(-6px);
 }
 
+.events h2 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.5rem;
+    margin: 10px 0px;
+}
+
+.events h3 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.1rem;
+    margin: 10px 0px;
+}
+
+.events p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 8px 0px;
+    text-align: justify;
+}
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .events {
+        width: 98%;
+    }
+    .events h2 {
+        font-size: 1.2rem;
+    }
+    .events h3 {
+        font-size: 1rem;
+    }
+
+    .events p {
+        font-size: 0.9rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 480px),
+(max-device-width:480px) {
+    .events {
+        flex-direction: column;
+        padding: 15px 0px;
+    }
+
+    .event-img {
+        width: 90%;
+    }
+
+    .event-img img {
+        height: 20vh;
+    }
+
+    .event-body {
+        width: 92%;
+        padding: 4%;
+    }
+    .events h2 {
+        font-size: 1.2rem;
+    }
+
+
+    .events h3 {
+        font-size: 0.9rem;
+    }
+
+    .events p {
+        font-size: 0.8rem;
+    }
+}

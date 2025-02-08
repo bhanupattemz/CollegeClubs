@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react"
 import "./Header.css"
 import {
     AppBar,
@@ -27,12 +28,20 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import axios from "axios";
+import { BACKENDURL } from "../Functionalities/functionalites"
+import { MdEmojiEvents } from "react-icons/md";
 function ResponsiveAppBar() {
+    const axiosInstance = axios.create({
+        baseURL: BACKENDURL,
+        withCredentials: true
+    })
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.user);
-
+    const [fest, setFest] = React.useState()
+    const [loading, setLoading] = React.useState(false)
     const pages = [
         { text: "Home", link: "/", icon: <FaHome /> },
         { text: "Clubs", link: "/clubs", icon: <FaUsers /> },
@@ -44,15 +53,33 @@ function ResponsiveAppBar() {
         { text: "About Us", link: "/about", icon: <FaInfoCircle /> },
         { text: "Contact", link: "/contact", icon: <FaPhoneAlt /> },
     ];
-
     if (user && ["admin", "coordinator"].includes(user.role)) {
         pages.splice(7, 0, { text: "Letters", link: "/letters", icon: <FaEnvelope /> });
+    }
+    if (fest) {
+        pages.splice(3, 0, { text: "Fest", link: "/fest", icon: <MdEmojiEvents /> });
     }
     const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
     const handleCloseNavMenu = (page) => {
         setAnchorElNav(null);
         navigate(page.link);
     };
+    useEffect(() => {
+        if (!fest) {
+            async function getCurrentFest() {
+                try {
+                    setLoading(true)
+                    const response = await axiosInstance.get("/fest")
+                    setFest(response.data.data)
+                }
+                catch (err) {
+                    console.log(err)
+                }
+                setLoading(false)
+            }
+            getCurrentFest()
+        }
+    }, [])
     return (
         <AppBar position="static" className="main-navbar">
             <Container maxWidth="xl">

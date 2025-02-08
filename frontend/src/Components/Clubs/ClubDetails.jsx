@@ -91,7 +91,7 @@ export default function ClubDetails() {
                     </section>
                     <section className="club-details-timings">
                         <h2>Club Timings & Schedule</h2>
-                        <div>
+                        <div className="club-details-page-details">
                             <div>
                                 <h3><MdDateRange /> Weekly Club Timings</h3>
                                 <ul>

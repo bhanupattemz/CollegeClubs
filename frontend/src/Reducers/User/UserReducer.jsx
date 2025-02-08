@@ -120,7 +120,6 @@ const userSlice = createSlice({
             })
             .addCase(GET_CURRENT_USER_FAIL, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
             }).addCase(SIGN_UP_USER_REQUEST, (state) => {
                 state.loading = true;
                 state.user = null

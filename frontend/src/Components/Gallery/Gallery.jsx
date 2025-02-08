@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getMainGallery } from "../../Actions/GalleryAction"
 import GalleryContainer from "./GalleryContainer"
 import Banner from "../Clubs/Banner"
+import Loading from "../Loaders/Loading"
 export default function Gallery() {
     const dispatch = useDispatch()
     const { gallery, loading } = useSelector(state => state.gallery)
@@ -12,7 +13,7 @@ export default function Gallery() {
     }, [])
     return (
         <Fragment>
-            {loading ? <div>Loading...</div> :
+            {loading ? <Loading /> :
                 <main>
                     <section>
                         <Banner discription={"Explore our vibrant gallery filled with memories and milestones."} heading={"Main Gallery"} link={"https://res.cloudinary.com/dmvxvzb5n/image/upload/v1719822528/samples/cup-on-a-table.jpg"} />

@@ -80,3 +80,43 @@
    width: 40%;
    height: auto;
 }
+
+.footer-about-mid{
+    display: none;
+}
+.footer-about-link-mid{
+    display: none;
+}
+.footer-follow-mid{
+    display: none;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .footer-about{
+        display: none;
+    }
+    .footer-about-mid{
+        display: flex;
+    }
+    .footer-content{
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-content>div{
+        width: 80%;
+    }
+    .footer-follow-mid{
+        display: flex;
+    }
+    .footer-contact-list{
+        width: 90%;
+    }
+    .footer-links-list{
+        flex-direction: row;
+        flex-wrap: wrap ;
+        justify-content: space-between;
+    }
+  
+}
+
