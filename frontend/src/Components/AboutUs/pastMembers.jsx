@@ -44,6 +44,7 @@ export default function PastMembers() {
                             display="flex"
                             flexDirection="column"
                             padding={1}
+                            sx={{ overflow: "auto" }}
                         >
                             {params.value.map((club, index) => (
                                 <Box
@@ -54,6 +55,7 @@ export default function PastMembers() {
                                     padding={1}
                                     bgcolor={index % 2 === 0 ? "#dedede" : "#f0f0f0"}
                                     borderRadius="4px"
+                                    sx={{ overflow: "auto", minWidth: "350px" }}
                                 >
                                     <Typography variant="body2" color="text.secondary">
                                         {club.name}:
@@ -103,8 +105,8 @@ export default function PastMembers() {
                 </div>
             </section>
             <section className="past-member-btns">
-                <button onClick={() => setCurrent("faculty")} style={current == "faculty" ? currentbtnOptions : null}>Past Faculty Coordinators</button>
-                <button onClick={() => setCurrent("student")} style={current == "student" ? currentbtnOptions : null}>Past Student Coordinators</button>
+                <button onClick={() => setCurrent("faculty")} style={current == "faculty" ? currentbtnOptions : null}>Faculty Coordinators</button>
+                <button onClick={() => setCurrent("student")} style={current == "student" ? currentbtnOptions : null}>Student Coordinators</button>
                 <button onClick={() => setCurrent("coordinator")} style={current == "coordinator" ? currentbtnOptions : null}>Club Coordinators</button>
             </section>
             <section>

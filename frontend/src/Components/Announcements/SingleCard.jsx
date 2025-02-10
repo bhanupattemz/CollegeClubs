@@ -15,7 +15,7 @@ export default function SingleAnnounce({ data, setPdfUrl }) {
                     <div>
                         <p>{data.content} </p>
                         {data.pdf && <div className="single-announcement-btns">
-                            <button onClick={() => setPdfUrl(data.pdf.url)}>View Announcement</button>
+                            <button onClick={() => setPdfUrl(data.pdf.url)}>View PDF</button>
                             <button><a href={data.pdf.url} target="_blank">Download</a></button>
                         </div>}
                     </div>

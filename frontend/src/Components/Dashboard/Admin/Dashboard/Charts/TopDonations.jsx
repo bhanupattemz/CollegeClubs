@@ -34,8 +34,8 @@ export default function TopDonations() {
                 {donars && donars.length > 0 ? donars.map((item, inx) => {
                     return (
                         <div key={inx} className="top-donations-item">
-                            <div>{item.name == "anonymous" ? <FaUserSecret /> : <FaUserTie />} {item.name}</div>
-                            <div>₹{item.amount}</div>
+                            <div>{item.name == "anonymous" ? <FaUserSecret /> : <FaUserTie />} <p>{item.name}</p></div>
+                            <div><p>₹{item.amount}</p></div>
                         </div>
                     )
                 }

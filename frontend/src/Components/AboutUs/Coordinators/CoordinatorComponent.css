@@ -4,20 +4,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 0px;
+    margin: 20px 0;
     background-color: #ecf1f5;
-}
-
-.coordinators-carousel h2 {
-    font-size: xx-large;
-}
-
-.coordinators-head p{
-    font-size: large;
-
-}
-.coordinators-carousel:not(:nth-of-type(1)) {
-    width: 10%;
 }
 
 .coordinator-container {
@@ -29,29 +17,19 @@
 }
 
 
-.coordinator-card-naming>p,
-.coordinator-card-naming>h3 {
-    margin: 5px;
-}
-
-
 .coordinator-container::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-
 }
 
 .coordinator-container::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
-    cursor: pointer;
 }
-
 
 .coordinator-container::-webkit-scrollbar-thumb {
     background: #3FA2F6;
     border-radius: 10px;
-    cursor: pointer;
 }
 
 .coordinator-card {
@@ -83,7 +61,7 @@
 
 .coordinator-card-text>div>p {
     width: 90%;
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 .coordinator-card-body {
@@ -104,8 +82,6 @@
     width: 60%;
 }
 
-
-/* faculty and student coordinators */
 .club-coordinators-heading {
     width: 100%;
 }
@@ -117,15 +93,14 @@
 .coordinators-head-container {
     display: flex;
     flex-direction: column;
-    margin: 20px 0px;
-    
+    margin: 20px 0;
 }
 
 .coordinators-head {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 20px 0px;
+    margin: 20px 0;
 }
 
 .coordinators-faculty-img {
@@ -143,6 +118,12 @@
     background-color: #bedafb;
     object-fit: contain;
     transform: translate(10%, 10%);
+    transition: all ease-in 0.3s;
+}
+
+.coordinators-head img:hover {
+    transform: scale(1.02);
+
 }
 
 .coordinators-head-content {
@@ -164,41 +145,121 @@
 .coordinators-student-img img {
     width: 100%;
     transform: translate(-10%, 10%);
+    transition: all ease-in 0.3s;
 }
 
 .coordinators-head-container h3 {
     color: #0A5EB0;
-    font-size: x-large;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin: 7px 0px;
+    margin: 7px 0;
 }
 
 .coordinators-head-container h4 {
     color: gray;
     font-weight: 700;
-    font-size: large;
-    margin: 7px 0px;
+    font-size: 1rem;
+    margin: 7px 0;
 }
 
 .coordinators-head-container p {
-    font-size: large;
+    font-size: 1rem;
 }
 
-
-/* time period  */
 .coodinators-left-period,
 .coodinators-right-period {
     background-color: rgba(225, 225, 225, 0.8);
     transform: translate(10%, -80%);
     width: 100%;
-    padding: 10px 0px;
+    padding: 10px 0;
     text-align: center;
     color: #0A5EB0;
     font-weight: 700;
     font-size: large;
-    /* position: absolute; */
 }
 
 .coodinators-right-period {
     transform: translate(-10%, -80%);
+}
+
+.coordinators-head h3,
+.coordinators-head h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    margin: 10px 0;
+    font-size: 1.3rem;
+}
+
+.coordinators-head h4 {
+    font-size: 1rem;
+}
+
+.coordinators-head p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .coordinators-head h3 {
+        font-size: 1.2rem;
+    }
+
+    .coordinators-head p,
+    .coordinators-head h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .coordinators-head-content {
+        width: 58%;
+    }
+
+    .coordinators-faculty-img img,
+    .coordinators-student-img img {
+        transform: translate(0px);
+    }
+
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .coordinators-head h3 {
+        font-size: 1rem;
+    }
+
+    .coordinators-head p,
+    .coordinators-head h4 {
+        font-size: 0.8rem !important;
+    }
+
+    .coordinators-head {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .coordinators-head-content {
+        width: 94%;
+    }
+
+    .coordinators-faculty-img,
+    .coordinators-student-img {
+        width: 94%;
+    }
+
+    .coordinator-student-head {
+        flex-direction: column-reverse;
+    }
+
+    .coordinators-faculty-img img,
+    .coordinators-student-img img {
+        width: 90%;
+        margin: 0px 5%;
+        transform: translateY(25px);
+    }
+
 }

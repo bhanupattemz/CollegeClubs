@@ -164,3 +164,107 @@
     height: 40vh;
     margin: 15px auto;
 }
+
+
+
+.user-data-section h2 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.4rem;
+}
+
+.user-data-section h3,
+.user-data-section h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+
+.user-data-section p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .user-data-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .user-data-section h3,
+    .user-data-section h4,
+    .user-data-options>span {
+        font-size: 1rem;
+    }
+
+    .user-data-section p {
+        font-size: 0.9rem;
+    }
+
+    .user-data-section>section>section {
+        width: 98%;
+    }
+
+    .user-data-clubs .allclubs-club-card{
+        width: 95%;
+        margin: 10px 2%;
+    }
+    .user-data-events .events{
+        width: 96%;
+    }
+
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .user-data-section h2,
+    .user-data-section h1 {
+        font-size: 1.2rem;
+    }
+
+    .user-data-section h3,
+    .user-data-options>span {
+        font-size: 0.8rem;
+    }
+
+    .user-data-section p {
+        font-size: 0.8rem;
+    }
+
+    .user-data-options {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .user-data-options>span {
+        font-size: 0.8rem !important;
+        width: 40%;
+        text-align: center;
+        padding: 10px 2%;
+
+    }
+
+    .user-data-personal-information>div {
+        width: 94%;
+        padding: 10px 2% !important;
+    }
+
+    .user-data-personal-information>div>div {
+        width: 100%;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .about-data-heading {
+        width: 35%;
+    }
+}

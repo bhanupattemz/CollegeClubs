@@ -82,7 +82,7 @@ export default function AboutUs() {
                     <div className="aboutus-developer-content">
                         <h3>Pattem Bhanu Prakash</h3>
                         <div>
-                            <p>  a CSE student at JNTUACEA with a passion for building 
+                            <p>  A CSE student at JNTUACEA with a passion for building 
                                 innovative web applications. With experience in both front-end 
                                 and back-end development, Bhanu aims to create impactful digital 
                                 solutions. This website is one of many projects where Bhanu combines 

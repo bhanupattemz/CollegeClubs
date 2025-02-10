@@ -90,4 +90,12 @@
     .home p {
         font-size: 0.8rem;
     }
+    .react-confirm-alert,
+    .react-confirm-alert-body{
+        width: 90% !important;
+        padding: 15px 4% !important;
+    }
+    .react-confirm-alert h1{
+        font-size: 1.2rem;
+    }
 }

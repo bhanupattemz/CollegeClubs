@@ -1,4 +1,3 @@
-
 .profile-main {
     background-repeat: no-repeat;
     background-position: center;
@@ -32,20 +31,21 @@
 }
 
 .profile-img-section>div:nth-of-type(1) {
-    width: 200px;
-    height: 200px;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(235, 240, 244, 0.9);
-    border-radius: 50%;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .profile-img-section img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-height: 30vh;
+    object-fit: contain;
+    background-color: rgba(231, 231, 231, 0.9);
+
 }
 
 .profile-img-data {
@@ -191,4 +191,106 @@
 
 .delete-user-confirmation-popup button:nth-of-type(1):hover {
     background-color: #ffcccc;
+}
+
+
+
+
+.profile-main h2,
+.profile-main h1 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.profile-main h3,
+.profile-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.profile-main p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+
+    .profile-main h2,
+    .profile-main h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-main h3,
+    .profile-main h4,
+    .user-data-options>span {
+        font-size: 1.2rem;
+    }
+
+    .profile-main p {
+        font-size: 0.9rem;
+    }
+
+    .profile-main>section>section {
+        width: 98%;
+    }
+
+    .profile-img-section img {
+        max-height: 25vh !important;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .profile-main h2,
+    .profile-main h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-main h3,
+    .user-data-options>span {
+        font-size: 1rem;
+    }
+
+    .profile-main p {
+        font-size: 0.8rem;
+    }
+
+    .profile-main {
+        padding: 10px;
+    }
+
+    .profile-img-section {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0px;
+    }
+
+    .profile-img-section>div:nth-of-type(1) {
+        width: 92%;
+    }
+
+    .profile-img-data {
+        width: 86%;
+        padding: 10px 3%;
+    }
+    .user-profile-btns{
+        flex-wrap: wrap;
+    }
+    .user-profile-btns>button{
+        width: 48%;
+        padding: 7px 14px;
+        font-size: 0.8rem;
+    }
 }

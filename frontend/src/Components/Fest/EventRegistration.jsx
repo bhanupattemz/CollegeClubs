@@ -27,6 +27,7 @@ import RegisterButton from "./RegisterButton"
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { CiWarning } from "react-icons/ci";
+import Banner from "../Clubs/Banner";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -169,10 +170,14 @@ export default function EventRegistration() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <RegisterButton event={event} formData={formData} isAccept={accept} setOpen={setOpen} setLoading={setLoading}/>
+                    <RegisterButton event={event} formData={formData} isAccept={accept} setOpen={setOpen} setLoading={setLoading} />
                 </DialogActions>
             </Dialog>
-            <h1>Register for {event.name}</h1>
+            <Banner
+                link={"https://res.cloudinary.com/dmvxvzb5n/image/upload/v1719822528/samples/cup-on-a-table.jpg"}
+                heading={`Register for ${event.name}`}
+                discription={event.subheading}
+                 />
             <form onSubmit={formSubmitHandler} className="fest-event-registration-form">
                 <div>
                     <TextField

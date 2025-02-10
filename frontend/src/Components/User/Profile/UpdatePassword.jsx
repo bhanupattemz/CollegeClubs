@@ -1,128 +1,101 @@
-import { useEffect, useState } from "react"
-import "./UpdatePassword.css"
-import { useSelector, useDispatch } from "react-redux"
-import { getCurrentUser } from "../../../Actions/userActions"
-import { useNavigate } from "react-router-dom"
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import LoadingButton from '@mui/lab/LoadingButton';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import { setIsUpdateFalse, updateProfilePassword } from "../../../Actions/userActions"
-import Loading from "../../Loaders/Loading"
-export default function updatePassword() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [showPassword, setShowPassword] = useState(false)
-    const [showPasswordCon, setShowPasswordCon] = useState(false)
-    const [showOldPassword, setShowOldPassword] = useState(false)
-    const { user, loading, isUpdated } = useSelector(state => state.user)
-    const [passwords, setPasswords] = useState()
-    const formSubmitHandler = (e) => {
-        e.preventDefault();
-        if (passwords.newpassword == passwords.confirmpassword) {
-            dispatch(updateProfilePassword(passwords))
-        } else {
-            console.log("new password and confirm password not matched")
+import { useEffect } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import "./UpdatePassword.css";
+import { useSelector, useDispatch } from "react-redux";
+import { getCurrentUser, updateProfilePassword, setIsUpdateFalse } from "../../../Actions/userActions";
+import { useNavigate } from "react-router-dom";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import LoadingButton from "@mui/lab/LoadingButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Loading from "../../Loaders/Loading";
+
+export default function UpdatePassword() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { user, loading, isUpdated } = useSelector((state) => state.user);
+    
+    const formik = useFormik({
+        initialValues: {
+            oldpassword: "",
+            newpassword: "",
+            confirmpassword: ""
+        },
+        validationSchema: Yup.object({
+            oldpassword: Yup.string().required("Old password is required"),
+            newpassword: Yup.string().min(6, "Password must be at least 6 characters").required("New password is required"),
+            confirmpassword: Yup.string()
+                .oneOf([Yup.ref("newpassword"), null], "Passwords must match")
+                .required("Confirm password is required")
+        }),
+        onSubmit: (values) => {
+            dispatch(updateProfilePassword(values));
         }
-    }
+    });
+
     useEffect(() => {
         if (isUpdated) {
-            dispatch(setIsUpdateFalse())
-            navigate("/profile")
+            dispatch(setIsUpdateFalse());
+            navigate("/profile");
         }
-    }, [user])
+    }, [isUpdated, dispatch, navigate]);
+
     useEffect(() => {
         if (!user) {
-            dispatch(getCurrentUser())
+            dispatch(getCurrentUser());
         }
-    }, [])
+    }, [user, dispatch]);
+
     if (loading) {
-        return <Loading />
+        return <Loading />;
     }
+
     return (
-        <main className="update-password-main">
-            <form onSubmit={formSubmitHandler}>
+        <main className="update-password-main" style={{
+            backgroundImage: "url('https://res.cloudinary.com/dmvxvzb5n/image/upload/v1719822532/cld-sample-3.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+        }}>
+            <form onSubmit={formik.handleSubmit}>
                 <h1>Update Password</h1>
                 <div>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            required
-                            type={showOldPassword ? 'text' : 'password'}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label={
-                                            showOldPassword ? 'hide the password' : 'display the password'
-                                        }
-                                        onClick={() => setShowOldPassword((show) => !show)}
-                                        edge="end"
-                                    >
-                                        {showOldPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            onChange={(e) =>
-                                setPasswords(prev => ({ ...passwords, oldpassword: e.target.value }))
-                            }
-                            label="Old Password"
-                        />
-                    </FormControl>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
-                        <OutlinedInput
-                            required
-                            id="outlined-adornment-password"
-                            type={showPassword ? 'text' : 'password'}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label={
-                                            showPassword ? 'hide the password' : 'display the password'
-                                        }
-                                        onClick={() => setShowPassword((show) => !show)}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            onChange={(e) =>
-                                setPasswords(prev => ({ ...prev, newpassword: e.target.value }))
-                            }
-                            label="Password"
-                        />
-                    </FormControl>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                        <OutlinedInput
-                            required
-                            id="outlined-adornment-password"
-                            type={showPasswordCon ? 'text' : 'password'}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label={
-                                            showPasswordCon ? 'hide the password' : 'display the password'
-                                        }
-                                        onClick={() => setShowPasswordCon((show) => !show)}
-                                        edge="end"
-                                    >
-                                        {showPasswordCon ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            onChange={(e) =>
-                                setPasswords(prev => ({ ...prev, confirmpassword: e.target.value }))
-                            }
-                            label="confirm Password"
-                        />
-                    </FormControl>
+                    {["oldpassword", "newpassword", "confirmpassword"].map((field, index) => {
+                        const label = field === "oldpassword" ? "Old Password" : field === "newpassword" ? "New Password" : "Confirm Password";
+                        return (
+                            <FormControl key={index} sx={{ m: 1, width: "25ch" }} variant="outlined">
+                                <InputLabel htmlFor={field}>{label}</InputLabel>
+                                <OutlinedInput
+                                    id={field}
+                                    name={field}
+                                    type={formik.values[field].show ? "text" : "password"}
+                                    value={formik.values[field]}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={() =>
+                                                    formik.setFieldValue(field + "Show", !formik.values[field + "Show"])
+                                                }
+                                                edge="end"
+                                            >
+                                                {formik.values[field + "Show"] ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label={label}
+                                />
+                                {formik.touched[field] && formik.errors[field] && (
+                                    <p className="error-text">{formik.errors[field]}</p>
+                                )}
+                            </FormControl>
+                        );
+                    })}
                 </div>
                 <LoadingButton
                     id="update-password"
@@ -135,5 +108,5 @@ export default function updatePassword() {
                 </LoadingButton>
             </form>
         </main>
-    )
+    );
 }

@@ -1,121 +1,143 @@
 .update-profile-section {
-    width: 80%;
-    margin: 10vh auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 4rem auto;
     display: flex;
     justify-content: center;
 }
-.update-profile-section h2{
-    padding-left: 10px;
-    border-left: 5px solid #0A5EB0;
-}
-.update-profile-section>form {
+
+.update-profile-section > form {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    background-color: aliceblue;
-    padding: 20px;
+    gap: 2.5rem;
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* personal information  */
-.update-profile-personal>div {
+.update-profile-personal > div {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .update-profile-personal .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    margin: 10px 0px;
+    margin: 0.75rem 0;
+    flex: 1;
 }
 
-.update-profile-personal>div:nth-of-type(1)>div:nth-of-type(3) {
-    width: 20%;
-}
-
-.update-profile-personal>div:nth-of-type(2)>div {
-    width: 32%;
+.update-profile-personal > div:nth-of-type(1) > div:nth-of-type(3) {
+    flex: 0.5;
 }
 
 .update-profile-personal-feilds {
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem;
     width: 100%;
     align-items: center;
 }
 
-/* .update-profile-personal-feilds>div {
-    width: 20%;
-} */
-.update-profile-personal-feilds>div:nth-of-type(2) {
-    width: 35%;
-}
-.update-profile-personal-feilds>div:nth-of-type(3){
-    width: 45%;
-    overflow: hidden;
-}
-.update-profile-personal-feilds .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
-    width: 100% !important;
+.update-profile-personal-feilds > div {
+    flex: 1;
 }
 
 .profile-img-picker {
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.profile-img-picker button {
-    width: 70%;
-    padding: 7px 10px;
-    font-weight: 700;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
 }
 
 .profile-img-picker img {
-    width: 50px;
-    height: 40px;
-    margin-right: 10px;
-    margin-left: 10px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
-.profile-img-picker svg {
-    transform: translateY(5px);
+.update-profile-academic-information {
+    width: 100%;
 }
 
-
-/* academic information  */
-.update-profile-academic-information{
-   width: 100%;
-}
-.update-profile-academic-information>div{
+.update-profile-academic-information > div {
     display: flex;
     width: 100%;
-    justify-content: space-between;
-}
-.update-profile-academic-information>div>div{
-    width: 23%;
-    margin: 20px;
+    gap: 1.5rem;
 }
 
-
-
-/* description  */
+.update-profile-academic-information > div > div {
+    flex: 1;
+}
 
 .update-profile-description {
     width: 100%;
 }
-.update-profile-description>div{
-    width: 94%;
-    margin: 10px 3%;
+
+.update-profile-description > div {
+    width: 100%;
 }
 
+.update-profile-section h2 {
+    padding-left: 1rem;
+    border-left: 4px solid #1976d2;
+    margin-bottom: 1.5rem;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: #1f2937;
+}
 
+.update-profile-section p {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    color: #4b5563;
+}
 
+@media (max-width: 1000px) {
+    .update-profile-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .update-profile-section h3,
+    .update-profile-section h4 {
+        font-size: 1.2rem;
+    }
+    
+    .update-profile-section p {
+        font-size: 0.9rem;
+    }
+}
 
-/* submit btn  */
+@media (max-width: 768px) {
+    .update-profile-section {
+        width: 95%;
+        margin: 2rem auto;
+    }
 
-#update-profile-submit-btn{
-    color: #0A5EB0;
-    font-weight: 700;
-    border: 2px solid #0A5EB0;
-    margin-bottom: 20px;
+    .update-profile-section > form {
+        padding: 1.5rem;
+    }
+
+    .update-profile-personal > div,
+    .update-profile-personal-feilds,
+    .update-profile-academic-information > div {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .update-profile-personal .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+    .update-profile-personal .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+        width: 100%;
+    }
+
+    .profile-img-picker {
+        flex-direction: column;
+        text-align: center;
+    }
 }

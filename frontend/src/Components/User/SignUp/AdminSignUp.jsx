@@ -1,5 +1,5 @@
 import "./AdminSignUp.css"
-import { useState, useEffect, Fragment } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -17,29 +17,80 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom"
-import { adminSignup } from "../../../Actions/userActions"
-import Loading from "../../Loaders/Loading"
-import axios from "axios";
-import { BACKENDURL } from "../../Functionalities/functionalites"
-const axiosInstance = axios.create({
-    baseURL: BACKENDURL,
-    withCredentials: true
-})
+import { useNavigate, useParams } from "react-router-dom";
+import { adminSignup } from "../../../Actions/userActions";
+import Loading from "../../Loaders/Loading";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  mail: Yup.string().email("Invalid email address").required("Required"),
+  username: Yup.string().required("Required"),
+  password: Yup.string().min(6, "Must be 6 characters or more").required("Required"),
+  passwordCon: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Required"),
+  firstname: Yup.string().required("Required"),
+  lastname: Yup.string().required("Required"),
+  personalMail: Yup.string().email("Invalid email address").required("Required"),
+  mobileNo: Yup.string().required("Required"),
+  gender: Yup.string().required("Required"),
+  department: Yup.string().required("Required"),
+  description: Yup.string().min(300, "Must be at least 300 characters").required("Required"),
+  DOB: Yup.date().required("Required")
+});
+
 export default function AdminSignUp() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [formData, setformData] = useState({})
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordCon, setShowPasswordCon] = useState(false);
-    const [profile, setProfile] = useState()
-    const [profilePrev, setProfilePrev] = useState("https://res.cloudinary.com/dmvxvzb5n/image/upload/v1721047699/Epic%20Essentials/pjlmvwy41tdhblpskhnj.png")
-    const { _id } = useParams()
-    const { loading, user } = useSelector(state => state.user)
+    const [profile, setProfile] = useState();
+    const [profilePrev, setProfilePrev] = useState("https://res.cloudinary.com/dmvxvzb5n/image/upload/v1721047699/Epic%20Essentials/pjlmvwy41tdhblpskhnj.png");
+    const { _id } = useParams();
+    const { loading, user } = useSelector(state => state.user);
+
+    const formik = useFormik({
+        initialValues: {
+            mail: "",
+            username: "",
+            password: "",
+            passwordCon: "",
+            firstname: "",
+            lastname: "",
+            personalMail: "",
+            mobileNo: "",
+            gender: "",
+            department: "",
+            description: "",
+            DOB: null
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            const fd = new FormData();
+            fd.append('mail', values.mail);
+            fd.append('username', values.username);
+            fd.append('password', values.password);
+            fd.append('firstname', values.firstname);
+            fd.append('lastname', values.lastname);
+            fd.append('personalMail', values.personalMail);
+            fd.append('mobileNo', values.mobileNo);
+            fd.append('gender', values.gender);
+            fd.append('DOB', dayjs(values.DOB).toISOString());
+            fd.append('description', values.description);
+            fd.append('department', values.department);
+            if (profile) {
+                fd.append('profile', profile);
+            }
+            dispatch(adminSignup(fd, _id));
+        },
+    });
+
     const genders = [
         { value: "male", label: "Male" },
         { value: "female", label: "Female" },
     ];
+
     const departments = [
         { value: "cse", label: "CSE" },
         { value: "ece", label: "ECE" },
@@ -48,71 +99,49 @@ export default function AdminSignUp() {
         { value: "mech", label: "Mechanical" },
         { value: "chem", label: "Chemical" },
     ];
-    const formSubmitHandler = (e) => {
-        e.preventDefault();
-        if (formData.password == formData.passwordCon) {
-            const fd = new FormData();
-            fd.append('mail', formData.mail);
-            fd.append('username', formData.username)
-            fd.append('password', formData.password);
-            fd.append('firstname', formData.firstname);
-            fd.append('lastname', formData.lastname);
-            fd.append('personalMail', formData.personalMail);
-            fd.append('mobileNo', formData.mobileNo);
-            fd.append('gender', formData.gender);
-            fd.append('DOB', dayjs(formData.DOB).toISOString());
-            fd.append('description', formData.description);
-            fd.append('department', formData.department);
-            if (profile) {
-                fd.append('profile', profile);
-            }
-            dispatch(adminSignup(fd, _id))
-        } else {
-            console.log("password not matches")
-        }
 
-    }
     if (user) {
-        navigate("/profile")
+        navigate("/profile");
     }
+
+    if (loading) return <Loading />;
+
     return (
         <main className="admin-signup-main">
-            <form onSubmit={formSubmitHandler} className="admin-signup-form">
-
-                <h2>Account Information </h2>
+            <form onSubmit={formik.handleSubmit} className="admin-signup-form">
+                <h2>Account Information</h2>
                 <div className="admin-signup-account-information">
                     <TextField
-                        required
-                        id="Mail"
+                        id="mail"
+                        name="mail"
                         label="Mail"
                         variant="outlined"
                         type="email"
-                        value={formData.mail}
-                        placeholder={`example@gmail.com`}
-                        onChange={(e) =>
-                            setformData(prev => ({ ...prev, mail: e.target.value }))
-                        }
+                        value={formik.values.mail}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.mail && Boolean(formik.errors.mail)}
+                        helperText={formik.touched.mail && formik.errors.mail}
+                        placeholder="example@gmail.com"
                     />
                     <div>
                         <TextField
-                            required
                             disabled
                             id="Role"
                             label="Role"
                             variant="outlined"
                             value="Admin"
                         />
-
                         <TextField
-                            required
+                            id="department"
+                            name="department"
                             select
                             label="Department"
-                            onChange={(e) =>
-                                setformData((prev) => ({
-                                    ...prev,
-                                    department: e.target.value,
-                                }))
-                            }
+                            value={formik.values.department}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.department && Boolean(formik.errors.department)}
+                            helperText={formik.touched.department && formik.errors.department}
                         >
                             {departments.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
@@ -121,117 +150,103 @@ export default function AdminSignUp() {
                             ))}
                         </TextField>
                     </div>
-
                 </div>
-
 
                 <h2>Login Credentials</h2>
                 <div className="admin-signup-credentials">
                     <TextField
-                        required
-                        id="UserName"
+                        id="username"
+                        name="username"
                         label="Username"
                         variant="outlined"
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                username: e.target.value,
-                            }))
-                        }
+                        value={formik.values.username}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.username && Boolean(formik.errors.username)}
+                        helperText={formik.touched.username && formik.errors.username}
                     />
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <FormControl variant="outlined">
+                        <InputLabel htmlFor="password">Password</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="password"
+                            name="password"
                             type={showPassword ? 'text' : 'password'}
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label={
-                                            showPassword ? 'hide the password' : 'display the password'
-                                        }
-                                        onClick={() => setShowPassword((show) => !show)}
+                                        onClick={() => setShowPassword(!showPassword)}
                                         edge="end"
                                     >
                                         {showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            onChange={(e) =>
-                                setformData((prev) => ({
-                                    ...prev,
-                                    passwordCon: e.target.value,
-                                }))
-                            }
                             label="Password"
                         />
                     </FormControl>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                    <FormControl variant="outlined">
+                        <InputLabel htmlFor="passwordCon">Confirm Password</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="passwordCon"
+                            name="passwordCon"
                             type={showPasswordCon ? 'text' : 'password'}
+                            value={formik.values.passwordCon}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.passwordCon && Boolean(formik.errors.passwordCon)}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label={
-                                            showPasswordCon ? 'hide the password' : 'display the password'
-                                        }
-                                        onClick={() => setShowPasswordCon((show) => !show)}
+                                        onClick={() => setShowPasswordCon(!showPasswordCon)}
                                         edge="end"
                                     >
                                         {showPasswordCon ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            onChange={(e) =>
-                                setformData((prev) => ({
-                                    ...prev,
-                                    password: e.target.value,
-                                }))
-                            }
-                            label="Password"
+                            label="Confirm Password"
                         />
                     </FormControl>
                 </div>
 
-
                 <h2>Personal Information</h2>
-                <div >
+                <div className="admin-signup-personal-information-div-1">
                     <TextField
-                        required
                         id="firstname"
+                        name="firstname"
                         label="First Name"
                         variant="outlined"
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                firstname: e.target.value,
-                            }))
-                        }
+                        value={formik.values.firstname}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+                        helperText={formik.touched.firstname && formik.errors.firstname}
                     />
                     <TextField
-                        required
                         id="lastname"
+                        name="lastname"
                         label="Last Name"
                         variant="outlined"
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                lastname: e.target.value,
-                            }))
-                        }
+                        value={formik.values.lastname}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+                        helperText={formik.touched.lastname && formik.errors.lastname}
                     />
                     <TextField
-                        required
+                        id="gender"
+                        name="gender"
                         select
                         label="Gender"
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                gender: e.target.value,
-                            }))
-                        }
+                        value={formik.values.gender}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.gender && Boolean(formik.errors.gender)}
+                        helperText={formik.touched.gender && formik.errors.gender}
                     >
                         {genders.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -240,46 +255,43 @@ export default function AdminSignUp() {
                         ))}
                     </TextField>
                 </div>
+
                 <div className="admin-signup-personal-infor-div2">
                     <TextField
-                        required
                         id="personalMail"
+                        name="personalMail"
                         label="Personal Mail"
                         variant="outlined"
                         type="email"
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                personalMail: e.target.value,
-                            }))
-                        }
+                        value={formik.values.personalMail}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.personalMail && Boolean(formik.errors.personalMail)}
+                        helperText={formik.touched.personalMail && formik.errors.personalMail}
                     />
                     <TextField
-                        required
-                        id="mobileno"
+                        id="mobileNo"
+                        name="mobileNo"
                         label="Mobile Number"
                         variant="outlined"
                         type="number"
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                mobileNo: e.target.value,
-                            }))
-                        }
+                        value={formik.values.mobileNo}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.mobileNo && Boolean(formik.errors.mobileNo)}
+                        helperText={formik.touched.mobileNo && formik.errors.mobileNo}
                     />
                 </div>
+
                 <div className="admin-signup-personal-infor-div3">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={["DatePicker"]}>
                             <DatePicker
                                 label="Date Of Birth"
-                                required
-                                onChange={(val) =>
-                                    setformData((prev) => ({
-                                        ...prev,
-                                        DOB: val,
-                                    }))
-                                }
+                                value={formik.values.DOB}
+                                onChange={(value) => formik.setFieldValue("DOB", value)}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.DOB && Boolean(formik.errors.DOB)}
                             />
                         </DemoContainer>
                     </LocalizationProvider>
@@ -290,7 +302,7 @@ export default function AdminSignUp() {
                             accept="image/*"
                             onChange={(e) => {
                                 const file = e.target.files[0];
-                                setProfile(file)
+                                setProfile(file);
                                 const reader = new FileReader();
                                 reader.onload = () => {
                                     if (reader.readyState === 2) {
@@ -298,31 +310,25 @@ export default function AdminSignUp() {
                                     }
                                 };
                                 reader.readAsDataURL(file);
-                            }
-                            }
+                            }}
                         />
                     </div>
                 </div>
 
-
                 <h2>Description</h2>
                 <div className="admin-signup-description">
                     <TextField
-                        required
                         id="description"
+                        name="description"
                         label="Description"
                         variant="outlined"
-                        minLength={300}
                         multiline
                         rows={4}
-                        error={formData.description && formData.description.length < 300}
-                        helperText={(formData.description && formData.description.length) < 300 ? "Description must be at least 300 characters" : ""}
-                        onChange={(e) =>
-                            setformData((prev) => ({
-                                ...prev,
-                                description: e.target.value,
-                            }))
-                        }
+                        value={formik.values.description}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.description && Boolean(formik.errors.description)}
+                        helperText={formik.touched.description && formik.errors.description}
                     />
                 </div>
 
@@ -339,5 +345,5 @@ export default function AdminSignUp() {
                 </div>
             </form>
         </main>
-    )
+    );
 }

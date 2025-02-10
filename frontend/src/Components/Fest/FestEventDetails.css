@@ -1,21 +1,34 @@
+:root {
+    --primary-color: #0A5EB0;
+    --secondary-color: #1E90FF;
+    --background-light-blue: #e9f4ff;
+    --background-soft-blue: #ecf1f5;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --white: #ffffff;
+}
+
 .fest-evennt-details-main {
     min-height: 80vh;
 }
 
-.fest-evennt-details-main>section:not(:nth-of-type(1)) {
+.fest-evennt-details-main > section:not(:nth-of-type(1)) {
     width: 96%;
     padding: 10px 2%;
 }
 
 .fest-evennt-details-main h2 {
     padding-left: 10px;
-    border-left: 5px solid #0A5EB0;
+    border-left: 5px solid var(--primary-color);
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
 }
 
-/* banner  */
-
 .fest-event-details-banner {
-    background-color: #e9f4ff;
+    background-color: var(--background-light-blue);
     background-image: url("https://res.cloudinary.com/delc5g3p5/image/upload/v1736399332/Clubs/tltkwwsqvu7gnyulxlsi.png");
     min-height: 40vh;
     width: 96%;
@@ -23,19 +36,23 @@
     display: flex;
     justify-content: space-evenly;
     object-fit: contain;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .fest-event-details-banner h1 {
     font-size: xx-large;
-    color: #0A5EB0;
+    color: var(--primary-color);
 }
 
-.fest-event-details-banner>div>div {
+.fest-event-details-banner > div > div {
     width: 96%;
     padding: 10px 2%;
     font-size: larger;
-    background-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 1px 1px 3px rgba(179, 179, 179, 0.6), -1px -1px 3px rgba(179, 179, 179, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     margin: 20px 10px;
@@ -65,14 +82,14 @@
     object-fit: cover;
 }
 
-.fest-event-banner-details-img>img:nth-of-type(2) {
+.fest-event-banner-details-img > img:nth-of-type(2) {
     position: absolute !important;
     width: 350px;
     height: 350px;
     transition: all ease-in-out 0.5s;
 }
 
-.fest-event-banner-details-img>img:nth-of-type(2):hover {
+.fest-event-banner-details-img > img:nth-of-type(2):hover {
     transform: rotate(-720deg);
 }
 
@@ -85,47 +102,63 @@
 .fest-event-registration-btn button {
     width: 30%;
     padding: 10px 15px;
-    background-color: hsl(210, 89%, 36%);
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     font-weight: 700;
-    transition: all ease-in 0.5s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .fest-event-registration-btn button:hover {
     cursor: pointer;
     opacity: 0.7;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transform: translateY(-2px);
 }
 
-/* event description section  */
-.fest-event-description-section>div {
+.fest-event-description-section > div {
     width: 90%;
     padding: 20px 5%;
-    background-color: #ecf1f5;
+    background-color: var(--background-soft-blue);
     font-size: large;
 }
-.fest-events-instrctions-pdf-btn{
-    background-color: #0A5EB0;
-    color: white;
 
+.fest-events-instrctions-pdf-btn {
+    background-color: var(--primary-color);
+    color: white;
     padding: 10px 15px;
     font-weight: 700;
     border: none;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.3s ease;
 }
-/* events-details  */
+
+.fest-events-instrctions-pdf-btn:hover {
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transform: translateY(-2px);
+}
+
 .fest-event-details-page-details {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-    background-color: #ecf1f5;
+    background-color: var(--background-soft-blue);
     padding: 20px;
+    gap: 10px;
 }
 
-.fest-event-details-page-details>div {
+.fest-event-details-page-details > div {
     width: 28%;
-    background-color: #e9f4ff;
+    background-color: var(--background-light-blue);
     padding: 10px;
-    box-shadow: 1px 1px 3px rgba(179, 179, 179, 0.6), -1px -1px 3px rgba(179, 179, 179, 0.6);
+    box-shadow: 0 3px 6px var(--shadow-color);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.fest-event-details-page-details > div:hover {
+    transform: scale(1.02);
 }
 
 .fest-event-details-page-details svg {
@@ -138,9 +171,8 @@
     font-size: large;
 }
 
-/* conducled clubs  */
 .fest-event-conducted-clubs {
-    background-color: #ecf1f5;
+    background-color: var(--background-soft-blue);
     padding: 20px;
     overflow: auto;
     display: flex;
@@ -148,58 +180,206 @@
     gap: 20px;
 }
 
-.fest-event-conducted-clubs>div {
+.fest-event-conducted-clubs > div {
     min-width: 30%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 4px solid white;
     padding-left: 10px;
+    background-color: var(--background-soft-blue);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
-.fest-event-conducted-clubs button{
+
+.fest-event-conducted-clubs button {
     background-color: white;
     border: none;
     padding: 10px;
     width: 50%;
     font-weight: 700;
     cursor: pointer;
-    color: #0A5EB0;
+    color: var(--primary-color);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.3s ease;
 }
 
-/* prizes  */
-.fest-event-prizes{
+.fest-event-conducted-clubs button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.fest-event-prizes {
     display: flex;
     width: 96%;
-    background-color: #ecf1f5;
+    background-color: var(--background-soft-blue);
     padding: 10px 2%;
-    justify-content: space-between;
-    gap:20px
+    justify-content: space-evenly;
+    gap: 20px;
 }
-.fest-event-prizes>div{
+
+.fest-event-prizes > div {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
     width: 23%;
     border: 4px solid white;
+    background-color: var(--background-soft-blue);
+    box-shadow: 0 3px 6px var(--shadow-color);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
-.fest-event-prizes svg{
+
+.fest-event-prizes > div:hover {
+    transform: scale(1.05);
+}
+
+.fest-event-prizes svg {
     font-size: large;
     transform: translateY(4px);
 }
 
-/* fest event winner  */
-.fest-event-winner{
-    background-color: #ecf1f5;
+.fest-event-winner {
+    background-color: var(--background-soft-blue);
     width: 96%;
     padding: 10px 2%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
-.fest-event-winner>div{
+
+.fest-event-winner > div {
     border: 4px solid white;
     width: 25%;
     text-align: center;
     padding-bottom: 20px;
+    background-color: var(--background-soft-blue);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.fest-event-winner > div:hover {
+    transform: scale(1.03);
+}
+
+.fest-evennt-details-main h3,
+.fest-evennt-details-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+.fest-evennt-details-main p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .fest-evennt-details-main h2 {
+        font-size: 1.5rem;
+    }
+
+    .fest-evennt-details-main h3,
+    .fest-evennt-details-main h4 {
+        font-size: 1.1rem;
+    }
+
+    .fest-evennt-details-main p {
+        font-size: 0.9rem;
+    }
+
+    .fest-event-banner-details-img img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .fest-event-banner-details-img > img:nth-of-type(2) {
+        width: 230px;
+        height: 230px;
+    }
+
+    .fest-event-registration-btn button {
+        width: 50%;
+    }
+
+    .fest-event-conducted-clubs > div {
+        width: 40%;
+    }
+
+    .fest-event-prizes > div {
+        flex: 0 0 45% !important;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .fest-evennt-details-main h2 {
+        font-size: 1.2rem;
+    }
+
+    .fest-evennt-details-main h3 {
+        font-size: 1rem;
+    }
+
+    .fest-evennt-details-main p {
+        font-size: 0.8rem;
+    }
+
+    .fest-event-details-banner {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .fest-event-banner-details-img {
+        width: 90%;
+    }
+
+    .fest-event-banner-details-img > img:nth-of-type(2) {
+        display: none;
+    }
+
+    .fest-event-banner-details-img img {
+        width: 90%;
+        border-radius: 0px;
+        object-fit: contain;
+    }
+
+    .fest-event-banner-details-content {
+        width: 90%;
+        padding: 10px 0px;
+    }
+
+    .fest-event-details-page-details {
+        flex-direction: column;
+    }
+
+    .fest-event-details-page-details > div {
+        width: 90%;
+    }
+
+    .fest-event-conducted-clubs {
+        flex-direction: column;
+        max-height: 30vh;
+    }
+
+    .fest-event-conducted-clubs > div {
+        width: 90%;
+        align-items: center;
+    }
+
+    .fest-event-prizes {
+        width: 96%;
+        padding: 10px 2% !important;
+    }
+
+    .fest-event-prizes > div {
+        flex: 0 0 90% !important;
+    }
 }

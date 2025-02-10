@@ -72,7 +72,7 @@ export default function ClubDetails() {
                         }
                     </section>
 
-                    <section >
+                    <section className="club-details-main-content">
                         <div className="club-details-about-heading">
                             <img src={singleClub.logo.url} alt="club-logo" />
                             <h2>About {singleClub.name} {singleClub.members.includes(user ? user._id : null) && <span style={{ color: "Green" }}><FaRegRegistered /></span>}</h2>

@@ -129,24 +129,26 @@ export default function AdminAllClubs() {
                     </form>
                 </div>
                 <div className="admin-all-clubs-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={clubs && clubs.map((club, inx) => {
-                            return {
-                                name: club.name,
-                                coordinators: club.coordinators.length,
-                                members: club.members.length,
-                                edit: club._id,
-                                delete: club,
-                                id: inx + 1,
-                                createdAt: ConvertTime(club.createdAt).split(",")[0],
-                                open: club._id,
-                                allMembers: club._id
-                            }
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            rows={clubs && clubs.map((club, inx) => {
+                                return {
+                                    name: club.name,
+                                    coordinators: club.coordinators.length,
+                                    members: club.members.length,
+                                    edit: club._id,
+                                    delete: club,
+                                    id: inx + 1,
+                                    createdAt: ConvertTime(club.createdAt).split(",")[0],
+                                    open: club._id,
+                                    allMembers: club._id
+                                }
 
-                        })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
-                    />
+                            })}
+                            sx={{ minHeight: "60vh", backgroundColor: "white" }}
+                        />
+                    </div>
                     <div className="admin-all-club-download-btns">
                         <Button variant="contained" onClick={async () => {
                             try {

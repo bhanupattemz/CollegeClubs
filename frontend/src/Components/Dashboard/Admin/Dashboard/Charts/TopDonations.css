@@ -54,6 +54,9 @@
 }
 
 .top-donations-item > div:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     width: 70%;
     padding-left: 10px;
 }

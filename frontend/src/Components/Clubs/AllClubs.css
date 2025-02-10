@@ -243,10 +243,11 @@
     }
 }
 
-@media only screen and (max-width: 480px),
-(max-device-width: 480px) {
+@media only screen and (max-width: 600px),
+(max-device-width: 600px) {
     .allclubs-club-card {
-        width: 95%;
+        width: 90%;
+        padding-bottom: 15px;
     }
 
     .allclubs-club-img {
@@ -256,8 +257,8 @@
     }
 
     .allclubs-club-img img {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         margin: 10px 0px;
     }
 

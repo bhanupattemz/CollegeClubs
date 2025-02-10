@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetPaswordToken, setIsUpdateFalse } from "../../Actions/userActions"
 import LoadingButton from '@mui/lab/LoadingButton';
 import Loading from "../Loaders/Loading";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+
 
 export default function ForgotPassword() {
     const dispatch = useDispatch()
@@ -31,8 +33,8 @@ export default function ForgotPassword() {
     })
     return (
         <main className="forgot-password-main">
-            {sent ? <div>
-                <h1>Mail Sent, check your mail to reset password</h1>
+            {sent ? <div className="forgot-password-mail-send">
+                <h1><IoCheckmarkDoneCircleSharp />Mail Sent, check your mail to reset password</h1>
             </div> :
                 <form onSubmit={formSubmitHandler}>
                     <h1>Forgot Password</h1>

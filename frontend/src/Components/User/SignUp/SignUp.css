@@ -1,13 +1,14 @@
 .signup-main {
-    width: 100%;
-    margin: 10vh auto;
+    width: min(95%, 1200px);
+    margin: 5vh auto;
     display: flex;
     justify-content: center;
 }
 
 .signup-main h2 {
-    padding-left: 10px;
+    padding-left: 1rem;
     border-left: 5px solid #0A5EB0;
+    margin: 1.5rem 0;
 }
 
 .signup-main>form {
@@ -16,36 +17,43 @@
     justify-content: space-around;
     align-items: center;
     background-color: aliceblue;
-    padding: 20px 5%;
-    min-width: 60%;
+    padding: clamp(1rem, 5%, 2.5rem);
+    width: min(100%, 800px);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* verfication  */
 .verification {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 1rem;
 }
-.verification button{
-    width: 20%;
-    margin: 10px 0px;
+
+.verification button {
+    width: clamp(100px, 20%, 200px);
+    margin: 0.5rem 0;
 }
+
 .verification>div {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .verification .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    margin: 10px 0px;
-    width: 70%;
-}
-.verification>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    width: 35%;
+    flex: 1;
+    min-width: 250px;
+    margin: 0.5rem 0;
 }
 
-/* login credentials */
+.verification>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    flex: 1;
+    min-width: 200px;
+}
+
 .sigup-login-credentials {
     width: 100%;
 }
@@ -53,19 +61,18 @@
 .sigup-login-credentials>div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
     width: 100%;
-}
-.sigup-login-credentials .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    margin: 10px 0%;
-    width: 32%;
-}
-.sigup-login-credentials .css-4vvya4-MuiFormControl-root {
-    margin: 10px 0%;
-    width: 32%;
+    flex-wrap: wrap;
 }
 
-/* personal information  */
+.sigup-login-credentials .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.sigup-login-credentials .css-4vvya4-MuiFormControl-root {
+    flex: 1;
+    min-width: 250px;
+    margin: 0.5rem 0;
+}
+
 .signup-personal {
     width: 100%;
 }
@@ -73,73 +80,47 @@
 .signup-personal>div {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .signup-personal .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    margin: 10px 0px;
-}
-
-.signup-personal>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    width: 32% !important;
-}
-
-.signup-personal>div:nth-of-type(2) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
-    width: 49% !important;
-}
-
-
-.signup-personal>div:nth-of-type(1)>div:nth-of-type(3) {
-    width: 20%;
-}
-
-.signup-personal>div:nth-of-type(2)>div:nth-of-type(1) {
-    width: 70%;
+    margin: 0.5rem 0;
+    flex: 1;
+    min-width: 200px;
 }
 
 .signup-personal-feilds {
     display: flex;
-    justify-content: space-evenly;
+    gap: 1rem;
     width: 100%;
+    flex-wrap: wrap;
 }
 
-.signup-personal-feilds .css-10o2lyd-MuiStack-root>.MuiTextField-root{
-    width: 100%;
-    margin: 10px 0px;
+.signup-personal-feilds>div {
+    flex: 1;
+    min-width: 250px;
 }
 
+.signup-personal-feilds .css-10o2lyd-MuiStack-root>.MuiTextField-root {
+    width: 100%;
+    margin: 0.5rem 0;
+}
 
 .signup-img-picker {
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.signup-img-picker button {
-    width: 70%;
-    padding: 7px 10px;
-    font-weight: 700;
+    gap: 1rem;
+    padding: 1rem 0;
 }
 
 .signup-img-picker img {
     width: 50px;
-    height: 40px;
-    margin-right: 10px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
 }
-
-.signup-personal-feilds {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.signup-personal-feilds>div {
-    width: 45%;
-}
-
-/* academic information  */
-
 
 .signup-academic-information {
     width: 100%;
@@ -148,19 +129,48 @@
 .signup-academic-information>div {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .signup-academic-information>div>div {
-    width: 23%;
-    margin: 10px 0px;
+    flex: 1;
+    min-width: 200px;
+    margin: 0.5rem 0;
 }
 
+#signup-submit-btn {
+    width: min(300px, 60%);
+    margin: 2rem 0;
+    padding: 0.75rem;
+}
 
-/* button  */
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .signup-main {
+        margin: 2vh auto;
+    }
 
-#signup-submit-btn{
-    width: 60%;
-    margin: 20px 2%;
-    padding: 7px 10px;
+    .verification button {
+        width: 100%;
+    }
+
+    .signup-personal-feilds {
+        flex-direction: column;
+    }
+
+    #signup-submit-btn {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .signup-main>form {
+        padding: 1rem;
+    }
+
+    .signup-main h2 {
+        font-size: 1.25rem;
+    }
 }

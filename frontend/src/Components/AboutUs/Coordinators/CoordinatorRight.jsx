@@ -5,7 +5,7 @@ export default function CoordinatorRight({ name, description, imageUrl, typeText
         return
     }
     return (
-        <div className="coordinators-head">
+        <div className="coordinators-head coordinator-student-head">
             <div className="coordinators-head-content">
                 <h3>{name}</h3>
                 <h4>{typeText}</h4>

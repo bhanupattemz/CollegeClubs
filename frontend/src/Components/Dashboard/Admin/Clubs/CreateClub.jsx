@@ -435,7 +435,7 @@ export default function CreateClub() {
                                 )
                             }) : <div className="Upsert-club-now-data">Not selected any coordinator yet!</div>}
                         </div>
-                        <div>
+                        <div className="Upsert-club-data-grid">
                             <DataGrid
                                 columns={columns}
                                 loading={loading}

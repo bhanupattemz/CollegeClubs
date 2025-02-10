@@ -33,3 +33,57 @@
     cursor: pointer;
     opacity: 0.7;
 }
+
+.singe-announcement-card h2 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.singe-announcement-card p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .singe-announcement-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .singe-announcement-card p {
+        font-size: 0.9rem;
+    }
+
+    .single-announcement-btns button {
+        font-size: 0.9rem;
+    }
+
+    .singe-announcement-card {
+        width: 85% ;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .singe-announcement-card h2 {
+        font-size: 1rem;
+    }
+
+    .singe-announcement-card p {
+        font-size: 0.8rem;
+    }
+
+    .single-announcement-btns button {
+        font-size: 0.8rem;
+    }
+    .singe-announcement-card{
+        width: 75%;
+    }
+}

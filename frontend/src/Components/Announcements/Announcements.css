@@ -45,3 +45,26 @@
     font-weight: 700;
     font-size: xx-large;
 }
+
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .pdf-viewer-container canvas {
+        width: 90% !important;
+        height: 70vh !important;
+        object-fit: contain;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .announcement-pdf-viewer-section>button{
+        font-size: 0.8rem;
+    }
+    .pdf-viewer-btn button{
+        font-size: 1rem !important;
+        margin: 7px 14px;
+    }
+}
