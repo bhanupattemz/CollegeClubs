@@ -134,4 +134,85 @@
     font-size: 16px;
     line-height: 1.5;
     color: #333;
+    text-align: justify;
+}
+
+
+
+.messages-container h2,
+.email-container {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.2rem;
+}
+
+.messages-container p,
+.email-container {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+
+    .messages-container h2,
+    .email-container {
+        font-size: 1.1rem !important;
+    }
+
+    .messages-container p,
+    .email-container {
+        font-size: 0.9rem !important;
+    }
+
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .messages-container h2,
+    .email-container {
+        font-size: 1rem !important;
+    }
+
+    .messages-container p,
+    .email-container,
+    .email-body {
+        font-size: 0.8rem !important;
+    }
+
+    .message-card {
+        flex-direction: column;
+    }
+
+    .message-card>div:nth-of-type(2) {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .delete-button {
+        transform: translateY(0px);
+    }
+
+    .css-10d30g3-MuiPaper-root-MuiDialog-paper {
+        width: 98% !important;
+        margin: 10px 1% !important;
+    }
+    .css-10bxh4q-MuiDialogContent-root{
+        padding: 10px 5px !important;
+    }
+    .email-header{
+        flex-direction: column;
+        font-size: 0.9rem;
+    }
+    .email-subject{
+        font-size: 0.9rem;
+    }
+   
 }

@@ -40,7 +40,7 @@ export default function coordinatorClubs() {
             renderCell: (params) => {
                 if (params.value) {
                     return (
-                        <div  style={{ color: "grey", fontSize: "20px", cursor: "pointer" }} onClick={() => navigate(`/clubs/${params.value}`)}>
+                        <div style={{ color: "grey", fontSize: "20px", cursor: "pointer" }} onClick={() => navigate(`/clubs/${params.value}`)}>
                             <FaExternalLinkAlt />
                         </div>
                     )
@@ -79,25 +79,27 @@ export default function coordinatorClubs() {
                 </form>
             </div>
             <div className="coordinator-all-clubs-grid">
-                <DataGrid
-                    columns={columns}
-                    loading={loading}
-                    rows={clubs && clubs.map((club, inx) => {
-                        return {
-                            name: club.name,
-                            coordinators: club.coordinators.length,
-                            members: club.members.length,
-                            edit: club._id,
-                            delete: club,
-                            id: inx + 1,
-                            createdAt: ConvertTime(club.createdAt).split(",")[0],
-                            open: club._id,
-                            allMembers: club._id
-                        }
+                <div>
+                    <DataGrid
+                        columns={columns}
+                        loading={loading}
+                        rows={clubs && clubs.map((club, inx) => {
+                            return {
+                                name: club.name,
+                                coordinators: club.coordinators.length,
+                                members: club.members.length,
+                                edit: club._id,
+                                delete: club,
+                                id: inx + 1,
+                                createdAt: ConvertTime(club.createdAt).split(",")[0],
+                                open: club._id,
+                                allMembers: club._id
+                            }
 
-                    })}
-                    sx={{ minHeight: "60vh", backgroundColor: "" }}
-                />
+                        })}
+                        sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "1000px" }}
+                    />
+                </div>
                 <div className="coordinator-all-club-download-btns">
                     <XlsxButton filename="Clubs" data={
                         clubs && clubs.map((club, inx) => {

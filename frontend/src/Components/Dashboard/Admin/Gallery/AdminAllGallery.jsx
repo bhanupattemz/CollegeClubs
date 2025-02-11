@@ -102,22 +102,24 @@ export default function AdminAllGallery() {
                     </form>
                 </div>
                 <div className="admin-all-gallery-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={gallery && gallery.map((gallery, inx) => {
-                            return {
-                                name: gallery.occasion,
-                                edit: gallery._id,
-                                delete: gallery,
-                                id: inx + 1,
-                                date: ConvertTime(gallery.date).split(",")[0],
-                                captions: gallery.captions,
-                                club: gallery.club ? gallery.club : "Admin"
-                            }
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            rows={gallery && gallery.map((gallery, inx) => {
+                                return {
+                                    name: gallery.occasion,
+                                    edit: gallery._id,
+                                    delete: gallery,
+                                    id: inx + 1,
+                                    date: ConvertTime(gallery.date).split(",")[0],
+                                    captions: gallery.captions,
+                                    club: gallery.club ? gallery.club : "Admin"
+                                }
 
-                        })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
-                    />
+                            })}
+                            sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "700px" }}
+                        />
+                    </div>
                 </div>
             </section>}
         />

@@ -106,23 +106,25 @@ export default function CreateEvent() {
                                 </div>
                                 <Button variant="contained" type="submit">Declare</Button>
                             </div>
-                            <DataGrid
-                                columns={MemberColumns}
-                                loading={loading}
-                                rows={singleEvent.members && singleEvent.members.map((member, inx) => ({
-                                    name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
-                                    id: inx + 1,
-                                    admissionNo: member.admissionNo,
-                                    course: member.course,
-                                    skills: member.skills,
-                                    winner: member,
-                                    gender: member.personalInformation.gender,
-                                    mail: member.mail
-                                }))
-                                }
-                                getRowHeight={() => 'auto'}
-                                sx={{ minHeight: "40vh", backgroundColor: "white" }}
-                            />
+                            <div className="Upsert-event-winners-grid">
+                                <DataGrid
+                                    columns={MemberColumns}
+                                    loading={loading}
+                                    rows={singleEvent.members && singleEvent.members.map((member, inx) => ({
+                                        name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
+                                        id: inx + 1,
+                                        admissionNo: member.admissionNo,
+                                        course: member.course,
+                                        skills: member.skills,
+                                        winner: member,
+                                        gender: member.personalInformation.gender,
+                                        mail: member.mail
+                                    }))
+                                    }
+                                    getRowHeight={() => 'auto'}
+                                    sx={{ minHeight: "40vh", backgroundColor: "white", minWidth: "1000px" }}
+                                />
+                            </div>
                         </section>
                     </form>
                 }

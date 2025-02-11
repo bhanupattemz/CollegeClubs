@@ -16,10 +16,26 @@ import Loading from "../../../Loaders/Loading";
 import { adminUpdateUser } from "../../../../Actions/userActions"
 import { clearSuccess } from "../../../../Reducers/User/usersReducer"
 import { useSelector, useDispatch } from "react-redux"
+
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
 export default function UpdateUser() {
     const axiosInstance = axios.create({
         baseURL: BACKENDURL,
         withCredentials: true
+    });
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
     });
     const { success, loading: usersLoading } = useSelector(state => state.users)
     const dispatch = useDispatch()
@@ -129,7 +145,7 @@ export default function UpdateUser() {
     useEffect(() => {
         if (success) {
             dispatch(clearSuccess())
-            navigate("/admin/users") 
+            navigate("/admin/users")
         }
     }, [success])
 
@@ -166,7 +182,29 @@ export default function UpdateUser() {
                                 </LocalizationProvider>
                                 <div className="profile-img-picker">
                                     <img src={profilePrev} alt="profile-prev" />
-                                    <input type="file" accept="image/*" onChange={(e) => { const file = e.target.files[0]; setProfile(file); const reader = new FileReader(); reader.onload = () => { if (reader.readyState === 2) { setProfilePrev(reader.result); } }; reader.readAsDataURL(file); }} />
+                                    <Button
+                                        component="label"
+                                        variant="contained"
+                                        tabIndex={-1}
+                                        startIcon={<CloudUploadIcon />}
+                                    >
+                                        Upload files
+                                        <VisuallyHiddenInput
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => {
+                                                const file = e.target.files[0];
+                                                setProfile(file);
+                                                const reader = new FileReader();
+                                                reader.onload = () => {
+                                                    if (reader.readyState === 2) {
+                                                        setProfilePrev(reader.result);
+                                                    }
+                                                };
+                                                reader.readAsDataURL(file);
+                                            }}
+                                        />
+                                    </Button>
                                 </div>
                             </div>
 

@@ -97,25 +97,27 @@ export default function AdminAlldonations() {
                     </form>
                 </div>
                 <div className="admin-all-donations-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={donars && donars.map((donation, inx) => {
-                            return {
-                                name: donation.name,
-                                note: donation.note ? donation.note : "No Note",
-                                edit: donation._id,
-                                delete: donation,
-                                id: donation.paymentInfo ? donation.paymentInfo.paymentId : inx + 1,
-                                createdAt: ConvertTime(donation.createdAt).split(",")[0],
-                                amount: `₹${donation.amount}`,
-                                club: donation.club ? donation.club.name : "General",
-                                phone: donation.phone ? donation.phone : "Anonymous",
-                                mail: donation.mail
-                            }
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            rows={donars && donars.map((donation, inx) => {
+                                return {
+                                    name: donation.name,
+                                    note: donation.note ? donation.note : "No Note",
+                                    edit: donation._id,
+                                    delete: donation,
+                                    id: donation.paymentInfo ? donation.paymentInfo.paymentId : inx + 1,
+                                    createdAt: ConvertTime(donation.createdAt).split(",")[0],
+                                    amount: `₹${donation.amount}`,
+                                    club: donation.club ? donation.club.name : "General",
+                                    phone: donation.phone ? donation.phone : "Anonymous",
+                                    mail: donation.mail
+                                }
 
-                        })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
-                    />
+                            })}
+                            sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "1200px" }}
+                        />
+                    </div>
                     <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                         <XlsxButton filename={"Donations"}
                             data={donars && donars.map((donation, inx) => {

@@ -23,6 +23,7 @@
     border: none;
     color: white;
     width: 10%;
+    min-width: 80px;
     margin: 0px 2%;
     cursor: pointer;
 }
@@ -62,3 +63,7 @@
     border: 2px solid red;
 }
 
+.admin-all-fests-members-grid{
+    width: 100%;
+    overflow: auto;
+}

@@ -191,7 +191,7 @@ export default function CreateEvent() {
     if (loading || nextLoading) { return <AdminSetup current={"fests"} option={"update-event"} element={<Loading />} /> }
     return (
         <AdminSetup current={"fests"} option={"update-event"} element={
-            <section>
+            <section className="Upsert-fest-event-main-section">
                 <form onSubmit={formSubmitHandler}>
                     <section className="Upsert-fest-event-section-1">
                         <div className="Upsert-fest-event-basic-details">
@@ -487,7 +487,7 @@ export default function CreateEvent() {
                                 )
                             }) : <div className="Upsert-fest-event-now-data">Not selected any Club yet!</div>}
                         </div>
-                        <div>
+                        <div className="Upsert-fest-event-clubs-grid">
                             <DataGrid
                                 columns={columns}
                                 loading={clubLoading}

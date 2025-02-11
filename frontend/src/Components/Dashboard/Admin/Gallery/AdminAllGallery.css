@@ -61,3 +61,24 @@
     border: 2px solid red;
 }
 
+
+.admin-all-gallery-grid>div:nth-of-type(1) {
+    width: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-all-gallery-search button {
+        width: 20%;
+    }
+    .admin-all-gallery-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-all-gallery-download-btns{
+        flex-direction: column;
+    }
+}

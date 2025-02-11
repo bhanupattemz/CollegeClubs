@@ -197,7 +197,7 @@ export default function AdminAllpastMembers() {
                 <section>
                     {["student", "faculty"].includes(current) &&
                         <Box sx={{ width: "100%" }}>
-                            <div style={{ display: "flex", flexDirection: "column" }}>
+                            <div style={{ display: "flex", flexDirection: "column" }} className="admin-past-members-grid">
                                 <DataGrid
                                     columns={adminColumns}
                                     rows={current == "student" ? studentMembers.map((item, inx) => ({
@@ -222,14 +222,14 @@ export default function AdminAllpastMembers() {
                                     rowsPerPageOptions={[5, 10, 20]}
                                     sx={{ '& .MuiDataGrid-root': { fontSize: '16px' } }}
                                     loading={loading}
-                                    style={{ minHeight: "50vh", backgroundColor: "#ecf1f5" }}
+                                    style={{ minHeight: "50vh", backgroundColor: "#ecf1f5", minWidth: "1000px" }}
                                 />
                             </div>
                         </Box>
                     }
                     {current == "coordinator" &&
                         <Box sx={{ width: "100%" }}>
-                            <div style={{ display: "flex", flexDirection: "column" }}>
+                            <div style={{ display: "flex", flexDirection: "column" }} className="admin-past-members-grid">
                                 <DataGrid
                                     columns={coordinatorColumns}
                                     rows={coordinators.map((item, inx) => {
@@ -245,7 +245,7 @@ export default function AdminAllpastMembers() {
                                     sx={{ '& .MuiDataGrid-root': { fontSize: '16px' } }}
                                     loading={loading}
                                     getRowHeight={() => 'auto'}
-                                    style={{ minHeight: "50vh", backgroundColor: "#ecf1f5" }}
+                                    style={{ minHeight: "50vh", backgroundColor: "#ecf1f5", minWidth: "1200px" }}
 
                                 />
                             </div>

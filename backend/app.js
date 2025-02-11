@@ -88,9 +88,16 @@ app.use("/api/v1/certificates", CertificatesRouter)
 app.use("/api/v1/contact", ContactRouter)
 app.use("/api/v1", EnvRouter)
 
-app.use("*", (req, res, next) => {
+app.use("/api/v1/*", (req, res, next) => {
     next(new ExpressError("Page Not Found", 404))
 })
+
+
+app.use(Express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+});
 
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err

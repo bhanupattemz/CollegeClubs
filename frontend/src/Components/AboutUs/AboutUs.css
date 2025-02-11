@@ -1,5 +1,7 @@
 .aboutus-page-main {
     margin-bottom: 40px;
+    width: 100%;
+    overflow: auto;
 }
 
 .aboutus-page-banner-section {

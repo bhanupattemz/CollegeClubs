@@ -62,3 +62,25 @@
     border: 2px solid red;
 }
 
+
+
+.admin-all-letters-grid {
+    width: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-all-letters-search button {
+        width: 20%;
+    }
+    .admin-all-letter-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-all-letter-download-btns{
+        flex-direction: column;
+    }
+}

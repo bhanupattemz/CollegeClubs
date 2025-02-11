@@ -223,24 +223,26 @@ export default function AdminAllusers() {
                         </form>
                     </div>
                     <div className="admin-all-users-grid">
-                        <DataGrid
-                            columns={columns}
-                            rows={users && users.map((user, inx) => {
-                                return {
-                                    username: user.username,
-                                    mail: user.mail,
-                                    isblocked: user.isBlocked,
-                                    role: user.role,
-                                    edit: user._id,
-                                    id: inx + 1,
-                                    createdAt: ConvertTime(user.createdAt).split(",")[0],
-                                    block: user,
-                                    delete: user
-                                }
+                        <div>
+                            <DataGrid
+                                columns={columns}
+                                rows={users && users.map((user, inx) => {
+                                    return {
+                                        username: user.username,
+                                        mail: user.mail,
+                                        isblocked: user.isBlocked,
+                                        role: user.role,
+                                        edit: user._id,
+                                        id: inx + 1,
+                                        createdAt: ConvertTime(user.createdAt).split(",")[0],
+                                        block: user,
+                                        delete: user
+                                    }
 
-                            })}
-                            sx={{ minHeight: "60vh", backgroundColor: "" }}
-                        />
+                                })}
+                                sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "1200px" }}
+                            />
+                        </div>
                         <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                             <XlsxButton filename={`Users`}
                                 data={users && users.map((member, inx) => {

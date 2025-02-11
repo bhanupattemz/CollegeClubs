@@ -36,19 +36,6 @@ export default function AdminAllLetters() {
         },
         { field: "createdAt", headerName: "CreatedAt", flex: 0.2 },
         {
-            field: "open", headerName: "Open", flex: 0.1,
-            renderCell: (params) => {
-                if (params.value) {
-                    return (
-                        <div className="admin-all-events-link" onClick={() => navigate(`/admin/letters/${params.value}`)}>
-                            <FaExternalLinkAlt />
-                        </div>
-                    )
-
-                }
-            }
-        },
-        {
             field: "edit", headerName: "Edit", flex: 0.1,
             renderCell: (params) => {
                 if (params.value) {
@@ -128,12 +115,11 @@ export default function AdminAllLetters() {
                                 delete: letter,
                                 id: inx + 1,
                                 createdAt: ConvertTime(letter.date).split(",")[0],
-                                open: letter._id,
                                 visibility: letter.visibility
                             }
 
                         })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
+                        sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "700px" }}
                     />
                 </div>
             </section>}

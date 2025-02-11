@@ -88,24 +88,26 @@ export default function EventMembers() {
     }, [])
     return <AdminSetUp current={"events"} option={"members"} element={
         <section className="event-members" style={{ margin: "20px 0px" }}>
-            <DataGrid
-                columns={columns}
-                rows={members && members.map((member, inx) => {
-                    return {
-                        name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
-                        admissionNo: member.admissionNo.toUpperCase(),
-                        remove: member,
-                        id: inx + 1,
-                        mail: member.personalInformation.personalMail,
-                        mobileNo: member.personalInformation.mobileNo,
-                        gender: member.personalInformation.gender.toUpperCase(),
-                        course: member.course.toUpperCase(),
-                        branch: member.branch.toUpperCase(),
-                        academicYear: member.academicYear,
-                    }
-                })}
-                sx={{ minHeight: "60vh", backgroundColor: "" }}
-            />
+            <div className="event-members-data-grid">
+                <DataGrid
+                    columns={columns}
+                    rows={members && members.map((member, inx) => {
+                        return {
+                            name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
+                            admissionNo: member.admissionNo.toUpperCase(),
+                            remove: member,
+                            id: inx + 1,
+                            mail: member.personalInformation.personalMail,
+                            mobileNo: member.personalInformation.mobileNo,
+                            gender: member.personalInformation.gender.toUpperCase(),
+                            course: member.course.toUpperCase(),
+                            branch: member.branch.toUpperCase(),
+                            academicYear: member.academicYear,
+                        }
+                    })}
+                    sx={{ minHeight: "60vh", backgroundColor: "white" ,minWidth:"1000px"}}
+                />
+            </div>
             <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                 <XlsxButton filename={"Event_members"}
                     data={members && members.map((member, inx) => {

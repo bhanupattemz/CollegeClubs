@@ -1,6 +1,8 @@
 .loading-main {
-    min-height: 60vh;
-    margin-top: 30vh;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .loading-section {
@@ -8,36 +10,42 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 90%;
+    max-width: 600px;
 }
 
 .loading-logo-imgs {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 100%;
+    gap: 10px;
 }
 
 .loading-logo-imgs>img {
-    height: 100px;
+    height: 80px;
+    max-width: 100%;
     transition: all ease-in-out 0.7s;
     overflow: hidden;
 }
 
 .loading-move-container {
     background-color: #0A5EB0;
-    height: 20px;
-    margin-top: 20px;
+    height: 15px;
+    margin-top: 15px;
     transition: all ease-in-out 0.7s;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
     align-items: center;
+    width: 100%;
+    max-width: 400px;
 }
 
 .loading-move-container>div {
     width: 30%;
-    height: 17px;
+    height: 12px;
     background-color: white;
     animation-name: slide-bar;
     animation-duration: 2s;
@@ -47,14 +55,12 @@
 
 @keyframes slide-bar {
     from {
-        translate: -30vw 0;
+        translate: -50vw 0;
     }
-
     to {
-        translate: 30vw 0;
+        translate: 50vw 0;
     }
 }
-
 
 /* card loading  */
 .card-loading {
@@ -67,12 +73,46 @@
     0% {
         background-position: 0 50%;
     }
-
     50% {
         background-position: 100% 50%;
     }
-
     100% {
         background-position: 0 50%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .loading-logo-imgs>img {
+        height: 70px;
+    }
+    .loading-move-container {
+        height: 12px;
+    }
+    .loading-move-container>div {
+        height: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .loading-logo-imgs>img {
+        height: 60px;
+    }
+    .loading-move-container {
+        height: 10px;
+    }
+    .loading-move-container>div {
+        height: 8px;
+    }
+    .loading-move-container{
+        width: 90% !important;
+    }
+    @keyframes slide-bar {
+        from {
+            translate: -150vw 0;
+        }
+        to {
+            translate: 150vw 0;
+        }
     }
 }

@@ -80,7 +80,7 @@ export default function CreateFest() {
     }, [_id])
     if (loading) return <AdminSetUp current={"fests"} option={"update-fest"} element={<Loading />} />
     return (<AdminSetUp current={"fests"} option={"update-fest"} element={
-        <section>
+        <section className="Upsert-fest-main-section">
             <div style={{ backgroundImage: `url(${imgprev})` }} className="clubs-fest-main">
                 <h2>{formData.name ? formData.name : "Fest Name"}</h2>
                 <div>

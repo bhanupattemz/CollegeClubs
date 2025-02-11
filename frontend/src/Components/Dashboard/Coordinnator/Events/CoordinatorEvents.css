@@ -1,6 +1,7 @@
 /* main data  */
 .coordinator-events-section{
     width: 100%;
+    padding-bottom: 20px;
 }
 .coordinator-events-search{
     margin: 20px 0px;
@@ -23,6 +24,7 @@
     border: none;
     color: white;
     width: 10%;
+    min-width: 80px;
     margin: 0px 2%;
     cursor: pointer;
 }

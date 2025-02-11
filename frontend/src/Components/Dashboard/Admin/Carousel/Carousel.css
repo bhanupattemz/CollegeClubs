@@ -62,3 +62,23 @@
     border: 2px solid red;
 }
 
+.admin-all-carouselImgs-grid {
+    width: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-all-carouselImgs-search button {
+        width: 20%;
+    }
+    .admin-all-carouselImg-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-all-carouselImg-download-btns{
+        flex-direction: column;
+    }
+}

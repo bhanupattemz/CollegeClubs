@@ -18,7 +18,8 @@
     width: 22%;
     margin: 10px 0px;
 }
-.Upsert-book-form .upload-pdf-btn{
+
+.Upsert-book-form .upload-pdf-btn {
     width: 28%;
 }
 
@@ -43,4 +44,25 @@
 
 .Upsert-book-submit-btn:hover {
     opacity: 0.7;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-book-form {
+        width: 90%;
+    }
+
+    .upload-pdf-btn label {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-book-form>section{
+        flex-direction: column;
+    }
+    .Upsert-book-form>section>div{
+        width: 100% !important;
+    }
 }

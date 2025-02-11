@@ -1,6 +1,7 @@
 /* main data  */
 .admin-all-pastMembers-section{
     width: 100%;
+    padding-bottom: 20px;
 }
 .admin-all-pastMembers-search{
     margin: 20px 0px;
@@ -22,7 +23,7 @@
     background-color: #0A5EB0;
     border: none;
     color: white;
-    width: 10%;
+    width: 20%;
     margin: 0px 2%;
     cursor: pointer;
 }
@@ -66,4 +67,34 @@
 /* btns */
 .admin-past-members-btns{
     margin-bottom: 20px;
+}
+
+
+.admin-past-members-grid {
+    width: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-past-members-search button {
+        width: 20%;
+    }
+    .admin-past-member-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-past-member-download-btns{
+        flex-direction: column;
+    }
+    .admin-past-members-btns{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .admin-past-members-btns button{
+        width: 90%;
+    }
 }

@@ -1,6 +1,7 @@
 /* main data  */
 .admin-all-academicBooks-section{
     width: 100%;
+    padding-bottom: 20px
 }
 .admin-all-academicBooks-search{
     margin: 20px 0px;
@@ -62,3 +63,26 @@
     border: 2px solid red;
 }
 
+
+
+
+.admin-all-academicBooks-grid{
+    width: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-all-academicBooks-search button {
+        width: 20%;
+    }
+    .admin-all-academicBook-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-all-academicBook-download-btns{
+        flex-direction: column;
+    }
+}

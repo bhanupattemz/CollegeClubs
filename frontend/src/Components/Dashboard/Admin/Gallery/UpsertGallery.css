@@ -54,12 +54,14 @@
     justify-content: space-evenly;
     gap: 10px;
 }
-.create-club-images>div{
+
+.create-club-images>div {
     width: 20%;
     flex: 0 0 20%;
     position: relative;
 }
-.create-club-images{
+
+.create-club-images {
     overflow: auto;
 }
 
@@ -68,7 +70,8 @@
     object-fit: contain;
     height: 100px;
 }
-.Upsert-gallery-remove-icon{
+
+.Upsert-gallery-remove-icon {
     position: absolute;
     font-size: xx-large;
     z-index: 1;
@@ -78,8 +81,43 @@
 }
 
 /* btns  */
-.Upsert-gallery-submit-btn{
+.Upsert-gallery-submit-btn {
     width: 30%;
     margin: 20px 35% !important;
     font-weight: 700;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-gallery-form {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .create-club-images>div{
+        flex: 0 0 35%;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-gallery-form {
+        width: 94%;
+        margin: 20px auto;
+        padding: 10px 3%;
+    }
+    .Upsert-gallery-form>section {
+        flex-direction: column;
+    }
+
+    .Upsert-gallery-form>section>div {
+        width: 100% !important;
+    }
+
+    .Upsert-gallery-section-3>div>label {
+        font-size: 0.7rem;
+    }
+    .create-club-images>div{
+        flex: 0 0 50%;
+    }
 }

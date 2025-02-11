@@ -108,7 +108,7 @@ export default function AdminAllAdministrationTeams() {
                             }
 
                         })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
+                        sx={{ minHeight: "60vh", backgroundColor: "white",minWidth:"1000px" }}
                     />
                 </div>
             </section>}

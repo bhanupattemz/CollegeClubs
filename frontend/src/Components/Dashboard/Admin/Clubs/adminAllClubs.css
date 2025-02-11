@@ -91,4 +91,13 @@
     .admin-all-clubs-search button {
         width: 20%;
     }
+    .admin-all-club-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-all-club-download-btns{
+        flex-direction: column;
+    }
 }

@@ -40,7 +40,7 @@ export default function CreateEvent() {
         whiteSpace: 'nowrap',
         width: 1,
     });
-    
+
     const columns = [
         { field: "id", headerName: "Sl. No", flex: 0.1 },
         {
@@ -152,7 +152,7 @@ export default function CreateEvent() {
     if (loading) { return <CoordinatorSetup current={"events"} option={"update"} element={<Loading />} /> }
     return (
         <CoordinatorSetup current={"events"} option={"update"} element={
-            <section>
+            <section className="Upsert-event-main-section">
                 <form onSubmit={formSubmitHandler}>
                     <section className="Upsert-event-section-1">
                         <div className="Upsert-event-basic-details">
@@ -328,7 +328,7 @@ export default function CreateEvent() {
                                 )
                             }) : <div className="Upsert-event-now-data">Not selected any Club yet!</div>}
                         </div>
-                        <div>
+                        <div className="Upsert-event-clubs-grid">
                             <DataGrid
                                 columns={columns}
                                 loading={clubLoading}
@@ -343,11 +343,10 @@ export default function CreateEvent() {
                                 }))
                                 }
                                 getRowHeight={() => 'auto'}
-                                sx={{ minHeight: "40vh", backgroundColor: "white" }}
+                                sx={{ minHeight: "40vh", backgroundColor: "white", minWidth: "700px" }}
                             />
                         </div>
                     </section>
-                    {wantWinner && <Button onClick={() => navigate(`/admin/events/update/winner/${_id}`)}>Update Winners</Button>}
                     <button className="Upsert-event-submit-btn">Submit</button>
                 </form>
             </section>

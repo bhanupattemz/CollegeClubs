@@ -90,27 +90,29 @@ export default function EventMembers() {
     }, [singleFestEvent])
     return <AdminSetUp current={"fests"} option={"members"} element={
         <section className="event-members" style={{ margin: "20px 0px" }}>
-            <DataGrid
-                columns={columns}
-                loading={loading || festLoading}
-                rows={members && members.map((member, inx) => {
-                    return {
-                        name: member.name,
-                        college: member.college,
-                        remove: member,
-                        mail: member.mail,
-                        mobileNo: member.mobileNo,
-                        gender: member.gender.toUpperCase(),
-                        course: member.course.toUpperCase(),
-                        branch: member.branch.toUpperCase(),
-                        id: member.paymentInfo.paymentId,
-                        amount: member.paymentInfo.amount,
-                        status: member.paymentInfo.status.toUpperCase(),
-                        createdAt: ConvertTime(member.createdAt)
-                    }
-                })}
-                sx={{ minHeight: "60vh", backgroundColor: "" }}
-            />
+            <div style={{ width: "100%", overflow: "auto" }}>
+                <DataGrid
+                    columns={columns}
+                    loading={loading || festLoading}
+                    rows={members && members.map((member, inx) => {
+                        return {
+                            name: member.name,
+                            college: member.college,
+                            remove: member,
+                            mail: member.mail,
+                            mobileNo: member.mobileNo,
+                            gender: member.gender.toUpperCase(),
+                            course: member.course.toUpperCase(),
+                            branch: member.branch.toUpperCase(),
+                            id: member.paymentInfo.paymentId,
+                            amount: member.paymentInfo.amount,
+                            status: member.paymentInfo.status.toUpperCase(),
+                            createdAt: ConvertTime(member.createdAt)
+                        }
+                    })}
+                    sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "1000px" }}
+                />
+            </div>
             <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                 <XlsxButton filename={`${singleFestEvent?.name}_Members`}
                     data={members && members.map((member, inx) => {

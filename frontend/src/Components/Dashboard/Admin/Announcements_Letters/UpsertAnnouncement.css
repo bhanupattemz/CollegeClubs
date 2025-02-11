@@ -69,5 +69,28 @@
 .Upsert-ann-view-section {
     position: sticky;
     top: 0;
-    background-color: rgba(0,0,0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-ann-form{
+        width: 90%;
+    }
+    .upload-pdf-btn label{
+        font-size: 0.9rem;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-ann-section-1{
+        flex-direction: column;
+    }
+    .Upsert-ann-section-1>div{
+        width: 100% !important;
+    }
 }

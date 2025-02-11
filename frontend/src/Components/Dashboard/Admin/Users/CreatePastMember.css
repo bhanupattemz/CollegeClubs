@@ -59,12 +59,13 @@
     margin: 10px 0px;
     padding-top: 0px;
 }
+
 .create-past-member-row-4 .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
     width: 100%;
 }
 
 /* btns */
-.create-past-member-remove-btn{
+.create-past-member-remove-btn {
     color: red;
     font-size: larger;
     cursor: pointer;
@@ -75,7 +76,7 @@
     align-items: center;
 }
 
-.create-past-member-submit-btn{
+.create-past-member-submit-btn {
     width: 60%;
     padding: 10px 20px;
     margin: 20px 20%;
@@ -85,4 +86,34 @@
     color: white;
     font-size: large;
     font-weight: 700;
+}
+
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .create-past-member-section>form {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .create-past-member-row-1,
+    .create-past-member-row-2,
+    .create-past-member-row-3>div {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .create-past-member-row-1>div:nth-of-type(1),
+    .create-past-member-row-2>div,
+    .create-past-member-row-3>div>div {
+        width: 100% !important;
+    }
+
+    .create-past-member-row-1>div:not(:nth-of-type(1)) {
+        width: 47% !important;
+    }
 }

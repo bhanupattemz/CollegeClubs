@@ -17,6 +17,7 @@
     justify-content: space-between;
     margin: 10px 0px;
     align-items: center;
+    gap: 10px;
 }
 
 /* section1 */
@@ -40,4 +41,27 @@
 
 .Upsert-carousel-btn:hover {
     opacity: 0.7;
+}
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-carousel-form {
+        width: 90%;
+    }
+
+    .Upsert-carousel-form>section label {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-carousel-form>section {
+        flex-direction: column-reverse;
+    }
+
+    .Upsert-carousel-form>section>div {
+        width: 100% !important;
+    }
 }

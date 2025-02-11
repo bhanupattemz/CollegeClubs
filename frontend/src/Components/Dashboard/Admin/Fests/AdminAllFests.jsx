@@ -30,7 +30,7 @@ export default function AdminAllFests() {
     const [nextLoading, setNextLoading] = useState(false)
     const columns = [
         { field: "id", headerName: "Sl. No" },
-        { field: "name", headerName: "Fest Name", flex: 0.3 },
+        { field: "name", headerName: "Fest Name", flex: 0.2 },
         { field: "events", headerName: "Fest Events Count", flex: 0.1 },
         {
             field: "isActive", headerName: "Is Active", flex: 0.1,
@@ -154,23 +154,26 @@ export default function AdminAllFests() {
                     </form>
                 </div>
                 <div className="admin-all-fests-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={fests && fests.map((fest, inx) => {
-                            return {
-                                name: fest.name,
-                                edit: fest._id,
-                                delete: fest,
-                                events: fest.events.length,
-                                id: inx + 1,
-                                createdAt: ConvertTime(fest.createdAt).split(",")[0],
-                                isActive: fest.isactive,
-                                open: fest._id
-                            }
-                        })}
-                        loading={loading}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
-                    />
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            rows={fests && fests.map((fest, inx) => {
+                                return {
+                                    name: fest.name,
+                                    edit: fest._id,
+                                    delete: fest,
+                                    events: fest.events.length,
+                                    id: inx + 1,
+                                    createdAt: ConvertTime(fest.createdAt).split(",")[0],
+                                    isActive: fest.isactive,
+                                    open: fest._id
+                                }
+                            })}
+                            loading={loading}
+                            sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "1200px" }}
+                        />
+                    </div>
+
                     <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                         <XlsxButton filename={"Fests"}
                             data={fests && fests.map((fest, inx) => {

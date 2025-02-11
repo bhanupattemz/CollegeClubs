@@ -2,7 +2,7 @@ import "./Donations.css"
 import CoordinatorSetup from "../CoordinatorSetup"
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux"
-import { getCoordinatorDonars} from "../../../../Actions/donorsActions"
+import { getCoordinatorDonars } from "../../../../Actions/donorsActions"
 import { useEffect, useState } from "react";
 import Loading from "../../../Loaders/Loading"
 import { useNavigate, useLocation } from "react-router-dom"
@@ -25,16 +25,16 @@ export default function AdminAlldonations() {
         { field: "createdAt", headerName: "CreatedAt", flex: 0.2 },
         { field: "amount", headerName: "Amount", flex: 0.15 },
     ]
-  
+
     useEffect(() => {
         dispatch(getCoordinatorDonars(key))
     }, [])
 
     if (loading) {
-        return <CoordinatorSetup current={"donations"}  element={<Loading />} />
+        return <CoordinatorSetup current={"donations"} element={<Loading />} />
     }
     return (
-        <CoordinatorSetup current={"donations"}  element={
+        <CoordinatorSetup current={"donations"} element={
             <section className="coordinator-donations-section">
                 <div className="coordinator-donations-search">
                     <form onSubmit={(e) => {
@@ -47,23 +47,25 @@ export default function AdminAlldonations() {
                     </form>
                 </div>
                 <div className="coordinator-donations-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={donars && donars.map((donation, inx) => {
-                            return {
-                                name: donation.name,
-                                note: donation.note ? donation.note : "No Note",
-                                id: donation.paymentInfo ? donation.paymentInfo.paymentId : inx + 1,
-                                createdAt: ConvertTime(donation.createdAt).split(",")[0],
-                                amount: `₹${donation.amount}`,
-                                club: donation.club ? donation.club.name : "General",
-                                phone: donation.phone ? donation.phone : "Anonymous",
-                                mail: donation.mail
-                            }
+                    <div style={{ width: "100%", overflow: "auto" }}>
+                        <DataGrid
+                            columns={columns}
+                            rows={donars && donars.map((donation, inx) => {
+                                return {
+                                    name: donation.name,
+                                    note: donation.note ? donation.note : "No Note",
+                                    id: donation.paymentInfo ? donation.paymentInfo.paymentId : inx + 1,
+                                    createdAt: ConvertTime(donation.createdAt).split(",")[0],
+                                    amount: `₹${donation.amount}`,
+                                    club: donation.club ? donation.club.name : "General",
+                                    phone: donation.phone ? donation.phone : "Anonymous",
+                                    mail: donation.mail
+                                }
 
-                        })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
-                    />
+                            })}
+                            sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "1000px" }}
+                        />
+                    </div>
                     <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                         <XlsxButton filename={"Donations"}
                             data={donars && donars.map((donation, inx) => {

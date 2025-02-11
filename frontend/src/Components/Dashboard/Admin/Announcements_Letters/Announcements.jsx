@@ -105,22 +105,24 @@ export default function AdminAllAnnouncements() {
                     </form>
                 </div>
                 <div className="admin-all-announcements-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={announcements && announcements.map((Announcement, inx) => {
-                            return {
-                                name: Announcement.title,
-                                content: Announcement.content,
-                                edit: Announcement._id,
-                                delete: Announcement,
-                                id: inx + 1,
-                                createdAt: ConvertTime(Announcement.date).split(",")[0],
-                                visibility: Announcement.visibility
-                            }
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            rows={announcements && announcements.map((Announcement, inx) => {
+                                return {
+                                    name: Announcement.title,
+                                    content: Announcement.content,
+                                    edit: Announcement._id,
+                                    delete: Announcement,
+                                    id: inx + 1,
+                                    createdAt: ConvertTime(Announcement.date).split(",")[0],
+                                    visibility: Announcement.visibility
+                                }
 
-                        })}
-                        sx={{ minHeight: "60vh", backgroundColor: "" }}
-                    />
+                            })}
+                            sx={{ minHeight: "60vh", backgroundColor: "white", minWidth: "700px" }}
+                        />
+                    </div>
                 </div>
             </section>}
         />

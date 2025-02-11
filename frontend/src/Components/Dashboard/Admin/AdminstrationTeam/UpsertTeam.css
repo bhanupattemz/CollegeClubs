@@ -49,3 +49,37 @@
     color: white;
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-team-form {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .Upsert-team-section-1,
+    .Upsert-team-section-2,
+    .Upsert-team-section-4 {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .Upsert-team-section-1>div:nth-of-type(1),
+    .Upsert-team-section-2>div,
+    .Upsert-team-section-4>div {
+        width: 100% !important;
+    }
+
+    .Upsert-team-section-1>div:not(:nth-of-type(1)) {
+        width: 47% !important;
+    }
+    .Upsert-team-section-4 img{
+        width: 90%;
+        max-height: 30vh;
+        height: auto;
+    }
+}

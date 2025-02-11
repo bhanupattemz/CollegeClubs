@@ -141,24 +141,26 @@ export default function AdminAllFestEvents() {
                 </div>
 
                 <div className="admin-all-festEvents-grid">
-                    <DataGrid
-                        columns={columns}
-                        loading={loading}
-                        rows={festEvents?.map((festEvent, index) => ({
-                            id: index + 1,
-                            name: festEvent.name,
-                            conductedClub: festEvent.conductedClub.length,
-                            members: festEvent.members.length,
-                            edit: festEvent._id,
-                            delete: festEvent,
-                            createdAt: ConvertTime(festEvent.createdAt).split(",")[0],
-                            amount: festEvent.amount,
-                            open: festEvent._id,
-                            allMembers: festEvent._id,
-                            totalAmount: `₹${festEvent.members.length * festEvent.amount}`
-                        }))}
-                        sx={{ minHeight: "60vh", backgroundColor: "#fff" }}
-                    />
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            loading={loading}
+                            rows={festEvents?.map((festEvent, index) => ({
+                                id: index + 1,
+                                name: festEvent.name,
+                                conductedClub: festEvent.conductedClub.length,
+                                members: festEvent.members.length,
+                                edit: festEvent._id,
+                                delete: festEvent,
+                                createdAt: ConvertTime(festEvent.createdAt).split(",")[0],
+                                amount: festEvent.amount,
+                                open: festEvent._id,
+                                allMembers: festEvent._id,
+                                totalAmount: `₹${festEvent.members.length * festEvent.amount}`
+                            }))}
+                            sx={{ minHeight: "60vh", backgroundColor: "#fff", minWidth: "1200px" }}
+                        />
+                    </div>
                     <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                         <XlsxButton filename={"Fest_Events"}
                             data={festEvents?.map((festEvent, index) => ({

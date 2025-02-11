@@ -19,7 +19,6 @@ export default function AdminAllEvents() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { events, loading } = useSelector(state => state.events)
-    console.log(events)
     const columns = [
         { field: "id", headerName: "Sl. No" },
         { field: "name", headerName: "Event Name", flex: 0.2 },
@@ -132,25 +131,27 @@ export default function AdminAllEvents() {
                     </form>
                 </div>
                 <div className="admin-all-events-grid">
-                    <DataGrid
-                        columns={columns}
-                        rows={events && events.map((event, inx) => {
-                            return {
-                                name: event.name,
-                                conductedClub: event.conductedClub.length,
-                                members: event.members.length,
-                                edit: event._id,
-                                delete: event,
-                                id: inx + 1,
-                                createdAt: ConvertTime(event.createdAt).split(",")[0],
-                                isActive: event.isactive,
-                                open: event._id,
-                                allMembers: event._id
-                            }
+                    <div>
+                        <DataGrid
+                            columns={columns}
+                            rows={events && events.map((event, inx) => {
+                                return {
+                                    name: event.name,
+                                    conductedClub: event.conductedClub.length,
+                                    members: event.members.length,
+                                    edit: event._id,
+                                    delete: event,
+                                    id: inx + 1,
+                                    createdAt: ConvertTime(event.createdAt).split(",")[0],
+                                    isActive: event.isactive,
+                                    open: event._id,
+                                    allMembers: event._id
+                                }
 
-                        })}
-                        sx={{ height: "65vh", backgroundColor: "white" }}
-                    />
+                            })}
+                            sx={{ height: "65vh", backgroundColor: "white", minWidth: '1000px' }}
+                        />
+                    </div>
                     <div style={{ display: "flex", justifyContent: "flex-end", margin: "10px 0px" }}>
                         <XlsxButton filename={"Events"}
                             data={events && events.map((event, inx) => {

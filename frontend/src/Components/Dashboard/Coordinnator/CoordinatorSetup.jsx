@@ -9,7 +9,7 @@ import { MdEvent } from "react-icons/md";
 export default function CoordinatorSetup({ current, element, option }) {
     const sideBarRef = useRef(null)
     const mainRef = useRef(null)
-    const [open, setopen] = useState(false)
+    const [open, setopen] = useState(window.innerWidth < 600)
     const navigate = useNavigate()
     const closeBtnClickHandle = () => {
         if (mainRef.current && sideBarRef.current) {
@@ -19,9 +19,10 @@ export default function CoordinatorSetup({ current, element, option }) {
         }
     }
     const openBtnHandle = () => {
+        let w = window.innerWidth < 1000 ? window.innerWidth < 600 ? 80 : 25 : 20
         if (mainRef.current && sideBarRef.current) {
-            sideBarRef.current.style.width = "20%"
-            mainRef.current.style.width = "80%"
+            sideBarRef.current.style.width = `${w}%`
+            mainRef.current.style.width = `${w != 80 ? 100 - w : 100}%`
             setopen(false)
         }
     }

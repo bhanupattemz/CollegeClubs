@@ -119,7 +119,7 @@ export default function CreateEvent() {
     if (loading) { return <AdminSetup current={"events"} option={"create"} element={<Loading />} /> }
     return (
         <AdminSetup current={"events"} option={"create"} element={
-            <section>
+            <section className="Upsert-event-main-section">
                 <form onSubmit={formSubmitHandler}>
                     <section className="Upsert-event-section-1">
                         <div className="Upsert-event-basic-details">
@@ -298,7 +298,7 @@ export default function CreateEvent() {
                                 )
                             }) : <div className="Upsert-event-now-data">Not selected any Club yet!</div>}
                         </div>
-                        <div>
+                        <div className="Upsert-event-clubs-grid">
                             <DataGrid
                                 columns={columns}
                                 loading={clubLoading}
@@ -313,7 +313,7 @@ export default function CreateEvent() {
                                 }))
                                 }
                                 getRowHeight={() => 'auto'}
-                                sx={{ minHeight: "40vh", backgroundColor: "white" }}
+                                sx={{ minHeight: "40vh", backgroundColor: "white", minWidth: "700px" }}
                             />
                         </div>
                     </section>

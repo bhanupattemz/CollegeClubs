@@ -22,6 +22,7 @@
     background-color: #0A5EB0;
     border: none;
     color: white;
+    min-width: 80px;
     width: 10%;
     margin: 0px 2%;
     cursor: pointer;

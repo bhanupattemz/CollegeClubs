@@ -122,19 +122,34 @@
     color: #0A5EB0;
 }
 
-@keyframes options {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+
+
+
+.coordinator-setup-aside h2 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1.05rem;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
+.coordinator-setup-item-options>div {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .coordinator-setup-aside h2 {
+        font-size: 0.8rem;
+    }
+
+    .coordinator-setup-item-options>div {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+
     .coordinator-setup-aside {
         width: 25%;
     }
@@ -144,38 +159,26 @@
     }
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .coordinator-setup-aside h2 {
+        font-size: 1rem;
+    }
+
+    .coordinator-dashboard-main {
+        position: relative;
+    }
+
     .coordinator-setup-aside {
-        width: 30%;
+        width: 0%;
+        position: absolute;
+        z-index: 1;
     }
 
     .coordinator-setup-section {
-        width: 70%;
+        width: 100%;
     }
-
-    .coordinator-setup-aside h2 {
-        font-size: 16px;
-    }
-
-    .coordinator-setup-item-options>div {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 576px) {
-    .coordinator-setup-aside {
-        width: 40%;
-    }
-
-    .coordinator-setup-section {
-        width: 60%;
-    }
-
-    .coordinator-setup-aside h2 {
-        font-size: 14px;
-    }
-
-    .coordinator-setup-item-options>div {
-        font-size: 12px;
+    .Upsert-club-search-coordinators{
+        flex-direction: column;
     }
 }

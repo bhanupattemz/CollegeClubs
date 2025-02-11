@@ -89,25 +89,27 @@ export default function ClubMembers() {
     }, [])
     return <CoordinatorSetUp current={"clubs"} option={"members"} element={
         <section className="club-members">
-            <DataGrid
-                columns={columns}
-                loading={loading}
-                rows={members && members.map((member, inx) => {
-                    return {
-                        name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
-                        admissionNo: member.admissionNo.toUpperCase(),
-                        remove: member,
-                        id: inx + 1,
-                        mail: member.personalInformation.personalMail,
-                        mobileNo: member.personalInformation.mobileNo,
-                        gender: member.personalInformation.gender.toUpperCase(),
-                        academicYear: member.academicYear,
-                        course: member.course.toUpperCase(),
-                        branch: member.branch.toUpperCase(),
-                    }
-                })}
-                sx={{ minHeight: "60vh", backgroundColor: "" }}
-            />
+            <div className="coordinator-all-clubMembers-grid">
+                <DataGrid
+                    columns={columns}
+                    loading={loading}
+                    rows={members && members.map((member, inx) => {
+                        return {
+                            name: `${member.personalInformation.firstname} ${member.personalInformation.lastname}`,
+                            admissionNo: member.admissionNo.toUpperCase(),
+                            remove: member,
+                            id: inx + 1,
+                            mail: member.personalInformation.personalMail,
+                            mobileNo: member.personalInformation.mobileNo,
+                            gender: member.personalInformation.gender.toUpperCase(),
+                            academicYear: member.academicYear,
+                            course: member.course.toUpperCase(),
+                            branch: member.branch.toUpperCase(),
+                        }
+                    })}
+                    sx={{ minHeight: "60vh", backgroundColor: "white",minWidth:"1000px"}}
+                />
+            </div>
             <div className="club_members_download_btns">
                 <XlsxButton filename={`Club_Members`}
                     data={members && members.map((member, inx) => {
