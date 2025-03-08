@@ -1,0 +1,77 @@
+.Upsert-fest-main-section{
+    padding-bottom: 20px;
+}
+.Upsert-fest-form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 20px 5%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+.Upsert-fest-form>div:nth-of-type(1) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Upsert-fest-form>div .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(1) {
+    width: 49%;
+    margin: 10px 0px;
+}
+
+.Upsert-fest-form>div .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(2),
+.Upsert-fest-form>div>button {
+    width: 24%;
+}
+    
+.Upsert-fest-form>.css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.Upsert-fest-submit {
+    width: 60%;
+    padding: 7px 20px;
+    margin: 10px auto;
+    background-color: #0A5EB0;
+    border: 0px;
+    font-size: medium;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-fest-form{
+        width: 90%;
+        padding: 10px 2%;
+        flex-wrap: wrap;
+    }
+    .Upsert-fest-form>div:nth-of-type(1){
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .Upsert-fest-form>div .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(2){
+        width: 48%;
+    }
+    .Upsert-fest-form>div:nth-of-type(1)>label{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-fest-form>div .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(2),
+    .Upsert-fest-form>div .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(1){
+        width: 100%;
+    }
+
+}

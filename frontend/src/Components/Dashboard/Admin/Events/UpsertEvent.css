@@ -1,0 +1,300 @@
+.Upsert-event-main-section{
+    max-width: 100%;
+    overflow: auto;
+   padding-bottom: 20px;
+}
+.Upsert-event-main-section>form{
+    width: 100%;
+}
+.Upsert-event-section-1,
+.Upsert-event-section-2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+.Upsert-event-section-1>div,
+.Upsert-event-section-2>div {
+    width: 45%;
+    background-color: #ffffff;
+    padding: 20px 2%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Section 1*/
+.Upsert-event-basic-details h2,
+.Upsert-event-timings h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.Upsert-event-basic-details>div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Upsert-event-basic-details .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0;
+}
+
+/* Section 1*/
+.Upsert-event-timings>div>div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.Upsert-event-timings .css-v0pjtz-MuiStack-root>.MuiTextField-root,
+.css-v0pjtz-MuiStack-root>.MuiPickersTextField-root {
+    min-width: 0px;
+    width: 100%;
+}
+
+
+.Upsert-event-timings .css-v0pjtz-MuiStack-root {
+    width: 100%;
+    min-width: 0px;
+}
+
+/* Section 2 */
+.Upsert-event-venue h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.Upsert-event-venue>div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Upsert-event-venue .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.Upsert-event-img-file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.Upsert-event-img-file img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.Upsert-event-img-file label {
+    width: 100%;
+    text-align: center;
+}
+
+/* Section 3 */
+.Upsert-event-clubs {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.Upsert-event-club {
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: #555;
+}
+
+.Upsert-event-now-data {
+    color: #888;
+    font-style: italic;
+}
+
+.Upsert-event-search-clubs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.Upsert-event-search-clubs>div:nth-of-type(1) {
+    width: 70%;
+}
+
+.Upsert-event-search-clubs>div:nth-of-type(2) {
+    width: 25%;
+}
+
+.Upsert-event-search-clubs input {
+    width: 70%;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.Upsert-event-search-clubs .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 0;
+}
+
+/* DataGrid Styles */
+.DataGrid-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.DataGrid-container .MuiDataGrid-root {
+    border: none;
+}
+
+/* Submit Button */
+.Upsert-event-submit-btn {
+    width: 60%;
+    margin: 20px 20%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0A5EB0;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Upsert-event-submit-btn:hover {
+    background-color: #094a8a;
+}
+
+
+
+
+.Upsert-event-winner-view {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Upsert-event-winner-view>div {
+    width: 85%;
+}
+
+.Upsert-event-winners-grid{
+    width: 100%;
+    overflow: auto;
+}
+
+.Upsert-event-clubs-grid {
+    width: 100%;
+    overflow: auto;
+}
+.Upsert-event-main-section h2{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.6rem;
+    margin: 5px 0px;
+    border-bottom: 5px solid #0A5EB0;
+}
+
+.Upsert-event-winner-view-main-section h2{
+    text-align: center;
+    color: #0A5EB0;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-event-main-section h2,
+    .Upsert-event-winner-view-main-section h2{
+        font-size: 1.4rem;
+    }
+    .Upsert-event-section-1 {
+        flex-direction: column;
+    }
+
+    .Upsert-event-section-1>div {
+        width: 94%;
+    }
+
+    .Upsert-event-search-clubs input {
+        width: auto;
+    }
+
+
+    /* update winners  */
+    .Upsert-event-winner-view{
+        flex-direction: column;
+    }
+    
+    .Upsert-event-winner-view>div{
+        width: 96%;
+        padding: 20px 2%;
+    }
+    .Upsert-event-winner-view button{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-event-main-section h2,
+    .Upsert-event-winner-view-main-section h2{
+        font-size: 1.2rem;
+    }
+    .Upsert-event-section-2{
+        flex-direction: column;
+    }
+    
+    .Upsert-event-section-2>div {
+        width: 94%;
+    }
+    .Upsert-event-search-clubs{
+        flex-direction: column;
+    }
+    .Upsert-event-search-clubs>div{
+        width: 100% !important;
+    }
+    .Upsert-event-search-clubs input{
+        width: 96%;
+        margin-right: 0px;
+        padding: 10px 2%;
+    }
+    .Upsert-event-search-clubs button{
+        width: 100% !important;
+        margin-top: 10px;
+    }
+    .Upsert-event-timings>div>div{
+        flex-direction: column;
+    }
+}

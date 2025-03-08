@@ -1,0 +1,197 @@
+.admin-dashboard-main {
+    display: flex;
+    height: 85vh;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.admin-setup-aside {
+    width: 20%;
+    height: 85vh;
+    border-right: 5px solid #0A5EB0;
+    transition: all ease 0.5s;
+    overflow: auto;
+    background-color: white;
+}
+
+.admin-setup-aside>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-setup-aside>div:not(:nth-of-type(1)) {
+    margin-bottom: 10px;
+}
+
+.admin-setup-aside h2 {
+    width: 80%;
+    padding: 10px 5%;
+    margin: 0;
+    color: #0A5EB0;
+    font-size: 18px;
+    border-radius: 6px;
+    transition: all ease-in 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-setup-aside h2:hover {
+    background: linear-gradient(90deg, #0A5EB0, #327fcc, #659cd3, #8ebae6);
+    color: white;
+    cursor: pointer;
+}
+
+.admin-setup-logo {
+    width: 80%;
+    padding: 10px 18% 10px 2%;
+    background-color: rgba(144, 196, 248, 0.21);
+    position: sticky;
+    top: 0;
+}
+
+.admin-setup-section {
+    width: 80%;
+    height: 85vh;
+    overflow: auto;
+    padding: 20px;
+    background-color: #ecf1f5;
+    transition: all ease 0.5s;
+}
+
+.admin-close-btn,
+.admin-open-btn {
+    position: sticky;
+    z-index: 1;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: start !important;
+}
+
+.admin-close-btn button,
+.admin-open-btn button {
+    position: fixed;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    background-color: #0A5EB0;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.admin-close-btn button:hover,
+.admin-open-btn button:hover {
+    background-color: #083C6B;
+    transform: scale(1.1);
+}
+
+.admin-setup-item-options {
+    width: 90%;
+    background-color: #ecf1f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    animation: options 0.5s ease-in-out;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+.admin-setup-item-options>div {
+    font-weight: 600;
+    width: 80%;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.admin-setup-item-options>div:hover {
+    background-color: rgba(10, 94, 176, 0.1);
+    color: #0A5EB0;
+}
+
+@keyframes options {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+.admin-setup-aside h2 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1.05rem;
+}
+
+.admin-setup-item-options>div {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-setup-aside h2 {
+        font-size: 0.8rem;
+    }
+
+    .admin-setup-item-options>div {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+
+    .admin-setup-aside {
+        width: 25%;
+    }
+
+    .admin-setup-section {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-setup-aside h2 {
+        font-size: 1rem;
+    }
+
+    .admin-dashboard-main {
+        position: relative;
+    }
+
+    .admin-setup-aside {
+        width: 0%;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .admin-setup-section {
+        width: 100%;
+    }
+    .Upsert-club-search-coordinators{
+        flex-direction: column;
+    }
+}

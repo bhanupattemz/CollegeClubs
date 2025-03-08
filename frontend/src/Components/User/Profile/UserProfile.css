@@ -1,0 +1,296 @@
+.profile-main {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.profile-main>section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-main>section>section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px 0px;
+    background-color: rgba(124, 140, 144, 0.7);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* img section  */
+.profile-img-section {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0%;
+    align-items: center;
+}
+
+.profile-img-section>div:nth-of-type(1) {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(235, 240, 244, 0.9);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.profile-img-section img {
+    width: 100%;
+    max-height: 30vh;
+    object-fit: contain;
+    background-color: rgba(231, 231, 231, 0.9);
+
+}
+
+.profile-img-data {
+    width: 60%;
+    background-color: rgba(231, 231, 231, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile-username {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.profile-username h1 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.profile-img-data>span {
+    color: #0A5EB0;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.profile-img-data>div>p b {
+    color: #525252;
+    font-size: 16px;
+}
+
+.profile-ad-mail-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.profile-ad-mail-div>p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.profile-img-data svg {
+    font-size: 24px;
+    color: #0A5EB0;
+    margin-left: 10px;
+}
+
+.user-profile-btns {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.user-profile-btns>button {
+    padding: 10px 15px;
+    width: 22%;
+    font-weight: 700;
+    color: #0A5EB0;
+    border: 2px solid #0A5EB0;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.user-profile-btns>button:hover {
+    background-color: #0A5EB0;
+    color: white;
+    cursor: pointer;
+}
+
+.user-profile-btns>button:nth-of-type(4) {
+    background-color: red;
+    color: white;
+    border: 2px solid red;
+}
+
+.user-profile-btns>button:nth-of-type(4):hover {
+    background-color: darkred;
+    border-color: darkred;
+}
+
+/* user certificate pdf  */
+.user-data-pdf {
+    width: 100% !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    padding: 20px 0px;
+    margin: 0px !important;
+    border-radius: 10px;
+}
+
+.user-data-pdf>button {
+    background-color: red;
+    color: white;
+    font-weight: 700;
+    border: 0px;
+    position: fixed;
+    padding: 10px 15px;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.user-data-pdf>button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* delete user confirmation  */
+.delete-user-confirmation-popup h1 {
+    color: red;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.delete-user-confirmation-popup button:nth-of-type(2) {
+    background-color: #f5f5f5;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.delete-user-confirmation-popup button:nth-of-type(2):hover {
+    background-color: #ddd;
+}
+
+.delete-user-confirmation-popup button:nth-of-type(1) {
+    background-color: #f5f5f5;
+    color: red;
+    border: 2px solid red;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.delete-user-confirmation-popup button:nth-of-type(1):hover {
+    background-color: #ffcccc;
+}
+
+
+
+
+.profile-main h2,
+.profile-main h1 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.profile-main h3,
+.profile-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.profile-main p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+
+    .profile-main h2,
+    .profile-main h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-main h3,
+    .profile-main h4,
+    .user-data-options>span {
+        font-size: 1.2rem;
+    }
+
+    .profile-main p {
+        font-size: 0.9rem;
+    }
+
+    .profile-main>section>section {
+        width: 98%;
+    }
+
+    .profile-img-section img {
+        max-height: 25vh !important;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .profile-main h2,
+    .profile-main h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-main h3,
+    .user-data-options>span {
+        font-size: 1rem;
+    }
+
+    .profile-main p {
+        font-size: 0.8rem;
+    }
+
+    .profile-main {
+        padding: 10px;
+    }
+
+    .profile-img-section {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0px;
+    }
+
+    .profile-img-section>div:nth-of-type(1) {
+        width: 92%;
+    }
+
+    .profile-img-data {
+        width: 86%;
+        padding: 10px 3%;
+    }
+    .user-profile-btns{
+        flex-wrap: wrap;
+    }
+    .user-profile-btns>button{
+        width: 48%;
+        padding: 7px 14px;
+        font-size: 0.8rem;
+    }
+}

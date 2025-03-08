@@ -1,0 +1,96 @@
+.Upsert-ann-form {
+    width: 60%;
+    background-color: white;
+    margin: 20px auto;
+    padding: 20px 5%;
+}
+
+/* section1 */
+.Upsert-ann-section-1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Upsert-ann-section-1 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+    margin: 10px 0px;
+}
+
+.upload-pdf-btn {
+    width: 32%;
+    display: flex;
+    justify-content: center;
+}
+
+.upload-pdf-btn span {
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.upload-pdf-btn label {
+    width: 80% !important;
+}
+
+/* section2 */
+.Upsert-ann-section-2 {
+    width: 100%;
+}
+
+.Upsert-ann-section-2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+/* btn  */
+.Upsert-ann-btn {
+    width: 60%;
+    padding: 7px 20px;
+    background-color: #0A5EB0;
+    color: white;
+    border: 0px;
+    font-size: medium;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 10px 20%;
+    transition: all ease-in 0.5s;
+}
+
+.Upsert-ann-btn:hover {
+    opacity: 0.7;
+}
+
+/* pdf section  */
+.Upsert-ann-view-section {
+    position: sticky;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-ann-form{
+        width: 90%;
+    }
+    .upload-pdf-btn label{
+        font-size: 0.9rem;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-ann-section-1{
+        flex-direction: column;
+    }
+    .Upsert-ann-section-1>div{
+        width: 100% !important;
+    }
+}

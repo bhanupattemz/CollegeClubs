@@ -1,0 +1,89 @@
+.Create-donation-form {
+    width: 60%;
+    background-color: white;
+    padding: 20px 5%;
+    margin: 20px auto
+}
+
+.create-donation-section-1,
+.create-donation-section-3,
+.create-donation-section-4 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* section1 */
+.create-donation-section-1 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+    margin: 10px 0px;
+}
+
+/* section2 */
+.create-donation-section-2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+/* section 3 */
+.create-donation-section-3 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 49%;
+    margin: 10px 0px;
+}
+
+
+/* section4 */
+
+.create-donation-section-4 .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.create-donation-section-4 .css-10o2lyd-MuiStack-root {
+    width: 49%;
+    margin: 10px 0px;
+}
+
+.create-donation-section-4 .css-10o2lyd-MuiStack-root {
+    padding-top: 0px;
+}
+
+.create-donation-section-4 .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+}
+
+
+/* btn  */
+.create-donation-submit-btn {
+    width: 60%;
+    margin: 10px 20%;
+    padding: 10px 15px;
+    color: white;
+    font-weight: 700;
+    border: 0px;
+    background-color: #0A5EB0;
+    cursor: pointer;
+    transition: all ease-in 0.5s;
+}
+
+.create-donation-submit-btn:hover {
+    opacity: 0.7;
+}
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Create-donation-form {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .create-donation-section-1,
+    .create-donation-section-4 {
+        flex-direction: column;
+    }
+
+    .create-donation-section-1>div,
+    .create-donation-section-4>div {
+        width: 100% !important;
+    }
+}

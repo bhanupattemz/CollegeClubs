@@ -1,0 +1,463 @@
+.event-details-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.event-details-main>section:not(:nth-of-type(1)) {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+}
+
+.event-details-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.event-details-section h1 {
+    text-align: center;
+    color: #6C5CE7;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.event-registered-svg>svg {
+    font-size: 1.5rem;
+    transform: translateY(-5px);
+    color: #4CAF50;
+}
+
+.event-details-section p {
+    color: #555;
+    width: 90%;
+    padding: 20px 4%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+}
+
+.event-details-main h2 {
+    border-left: 5px solid #6C5CE7;
+    padding-left: 10px;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.event-details-left {
+    width: 90%;
+    background-color: #ffffff;
+    border: 10px solid #D9EAFD;
+    padding: 0px 250px 0px 50px;
+    transform: translateY(200px);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.event-details-right {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-details-right>div {
+    width: 400px;
+    height: 400px;
+    background-color: #6C5CE7;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all ease-in 0.2s;
+}
+
+.event-details-right img {
+    width: 80%;
+    transition: all ease-in 0.2s;
+}
+
+.event-details-right>div:hover {
+    transform: scale(1.02);
+}
+
+.event-details-apply-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.event-details-apply-btn>button {
+    background-color: #6C5CE7;
+    padding: 15px 30px;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.event-details-apply-btn>button:hover {
+    background-color: #5a4dcc;
+    transform: translateY(-2px);
+}
+
+.event-details-schedule {
+    width: 96%;
+    padding: 20px 2%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-details-schedule>div:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-details-schedule>div:nth-of-type(1) .timer {
+    justify-content: center;
+}
+
+.event-details-schedule h3 {
+    font-size: 1.5rem;
+    color: #6C5CE7;
+    margin-bottom: 10px;
+}
+
+.event-details-schedule li {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.event-details-schedule svg {
+    color: #6C5CE7;
+    margin-right: 10px;
+}
+
+.event-details-page-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.event-details-page-details>div {
+    flex: 0 0 42%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px 3%;
+    border-left: 5px solid #6C5CE7;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-details-page-details h3 {
+    color: #6C5CE7;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.event-details-organized-clubs {
+    width: 96%;
+    padding: 20px 2%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.event-details-club-scroll {
+    display: flex;
+    overflow: auto;
+    width: 100%;
+}
+
+.event-details-clubs-container {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.event-details-club {
+    flex: 0 0 28%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #D9EAFD;
+    padding: 15px 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-details-club img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.event-details-club div {
+    flex: 1;
+}
+
+.event-details-club button {
+    background-color: #6C5CE7;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.event-details-club button:hover {
+    background-color: #5a4dcc;
+}
+
+.event-details-club-scroll::-webkit-scrollbar {
+    display: none !important;
+}
+
+.event-details-clubs-section>div>button {
+    background-color: #6C5CE7;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.event-details-clubs-section>div>button:hover {
+    background-color: #5a4dcc;
+}
+
+.event-details-prize {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-details-prize>div {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    background-color: #D9EAFD;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-details-prize h3 {
+    color: #6C5CE7;
+    font-size: 1.3rem;
+    margin-right: 15px;
+}
+
+.event-details-prize p {
+    color: #555;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+
+.event-details-main h1 {
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.event-details-main h2 {
+    padding-left: 10px;
+    border-left: 5px solid #6C5CE7;
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.6rem;
+}
+
+.event-details-main h3,
+.event-details-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.event-details-main p,
+.event-details-schedule li {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+
+@media only screen and (max-width: 1100px),
+(max-device-width:1100px) {
+    .event-details-section {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .event-details-left {
+        width: 90%;
+        transform: translate(0px) !important;
+        padding: 25px 3%;
+    }
+
+    .event-details-right {
+        max-width: none;
+        width: 90%;
+        transform: translate(0px) !important;
+    }
+
+    .event-details-right>div {
+        width: 100%;
+        height: 50vh;
+        background-color: transparent;
+        border-radius: 10px;
+    }
+
+    .event-details-right>div img {
+        width: 100%;
+        max-height: 50vh;
+        object-fit: contain;
+    }
+
+
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .event-details-main h1 {
+        font-size: 1.6rem;
+    }
+
+    .event-details-main h2 {
+        font-size: 1.5rem;
+    }
+
+    .event-details-main h3,
+    .event-details-main h4 {
+        font-size: 1.2rem;
+    }
+
+    .event-details-main p,
+    .event-details-schedule li {
+        font-size: 0.9rem;
+    }
+
+    .event-details-clubs-section>div>button {
+        display: none;
+    }
+
+    .event-details-club {
+        flex: 0 0 40%;
+    }
+
+    .event-details-page-details>div {
+        flex: 0 0 92% !important;
+    }
+
+    .event-details-apply-btn {
+        margin: 0px;
+        margin-top: 20px !important;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .event-details-main h1 {
+        font-size: 1.2rem;
+    }
+
+    .event-details-main h2 {
+        font-size: 1rem;
+    }
+
+    .event-details-main h3 {
+        font-size: 0.9rem;
+    }
+
+    .event-details-main p,
+    .event-details-schedule li {
+        font-size: 0.8rem;
+    }
+
+    .event-details-left {
+        width: 88% !important;
+    }
+
+    .event-details-right {
+        width: 100%;
+    }
+
+    .event-details-right>div {
+        max-width: 100%;
+        height: 30vh;
+    }
+
+    .event-details-page-details {
+        flex-direction: column;
+    }
+
+    .event-details-clubs-container {
+        flex-direction: column;
+    }
+
+    .event-details-club {
+        flex: 1;
+    }
+
+    .event-details-organized-clubs {
+        max-height: 50vh;
+    }
+
+    .event-details-schedule {
+        width: 96%;
+    }
+
+    .event-details-main {
+        padding: 0px 10px;
+    }
+
+    .event-details-apply-btn>button {
+        font-size: 0.8rem;
+    }
+}

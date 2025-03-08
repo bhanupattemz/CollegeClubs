@@ -1,0 +1,176 @@
+.signup-main {
+    width: min(95%, 1200px);
+    margin: 5vh auto;
+    display: flex;
+    justify-content: center;
+}
+
+.signup-main h2 {
+    padding-left: 1rem;
+    border-left: 5px solid #0A5EB0;
+    margin: 1.5rem 0;
+}
+
+.signup-main>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: aliceblue;
+    padding: clamp(1rem, 5%, 2.5rem);
+    width: min(100%, 800px);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.verification {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+.verification button {
+    width: clamp(100px, 20%, 200px);
+    margin: 0.5rem 0;
+}
+
+.verification>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.verification .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    flex: 1;
+    min-width: 250px;
+    margin: 0.5rem 0;
+}
+
+.verification>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    flex: 1;
+    min-width: 200px;
+}
+
+.sigup-login-credentials {
+    width: 100%;
+}
+
+.sigup-login-credentials>div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.sigup-login-credentials .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.sigup-login-credentials .css-4vvya4-MuiFormControl-root {
+    flex: 1;
+    min-width: 250px;
+    margin: 0.5rem 0;
+}
+
+.signup-personal {
+    width: 100%;
+}
+
+.signup-personal>div {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.signup-personal .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    margin: 0.5rem 0;
+    flex: 1;
+    min-width: 200px;
+}
+
+.signup-personal-feilds {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.signup-personal-feilds>div {
+    flex: 1;
+    min-width: 250px;
+}
+
+.signup-personal-feilds .css-10o2lyd-MuiStack-root>.MuiTextField-root {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.signup-img-picker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.signup-img-picker img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.signup-academic-information {
+    width: 100%;
+}
+
+.signup-academic-information>div {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.signup-academic-information>div>div {
+    flex: 1;
+    min-width: 200px;
+    margin: 0.5rem 0;
+}
+
+#signup-submit-btn {
+    width: min(300px, 60%);
+    margin: 2rem 0;
+    padding: 0.75rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .signup-main {
+        margin: 2vh auto;
+    }
+
+    .verification button {
+        width: 100%;
+    }
+
+    .signup-personal-feilds {
+        flex-direction: column;
+    }
+
+    #signup-submit-btn {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .signup-main>form {
+        padding: 1rem;
+    }
+
+    .signup-main h2 {
+        font-size: 1.25rem;
+    }
+}

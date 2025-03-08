@@ -1,0 +1,135 @@
+.donation-form {
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8FAFC;
+    border-radius: 12px;
+    color: #4C585B;
+    padding: 25px;
+    box-shadow: 2px 2px 5px rgba(179, 179, 179, 0.5), -2px -2px 5px rgba(179, 179, 179, 0.5);
+    margin: auto;
+}
+
+.donation-form button {
+    width: 32%;
+    max-width: 250px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.donation-form button:hover {
+    background-color: #6c9cd0;
+}
+
+.donation-form>div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.donation-form .MuiFormControl-root {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.donation-form>div:nth-of-type(1) .MuiFormControl-root {
+    width: calc(33.33% - 10px);
+}
+
+.donation-form-amount {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.donation-form-amount .MuiFormControl-root {
+    width: 48%;
+}
+
+.donation-form-amount-btns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.donation-form-amount-btns>button {
+    width: 30%;
+    background-color: #007bff;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    color: white;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.donation-form-amount-btns>button:hover {
+    background-color: #5c7780;
+}
+
+.donation-form-checkBox-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+
+#donation-submit-btn {
+    width: 60% !important;
+    max-width: none;
+    background-color: green;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width: 1000px) {
+    .donation-form>div:nth-of-type(1) .MuiFormControl-root {
+        width: calc(50% - 10px);
+    }
+
+    .donation-form-amount .MuiFormControl-root {
+        width: 100%;
+    }
+
+    .donation-form-amount-btns>button {
+        width: 30%;
+        font-size: 0.9rem;
+        padding: 7px 14px;
+    }
+
+    #donation-submit-btn {
+        width: 80% !important;
+        font-size: 0.9rem;
+        padding: 7px 14px;
+    }
+}
+
+@media only screen and (max-width: 480px),
+(max-device-width: 480px) {
+    .donation-form>div:nth-of-type(1) .MuiFormControl-root {
+        width: 100%;
+    }
+
+    .donation-form-amount-btns {
+        gap: 10px;
+    }
+}

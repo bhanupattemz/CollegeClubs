@@ -1,0 +1,123 @@
+.Upsert-gallery-form {
+    width: 60%;
+    margin: 20px 15%;
+    padding: 20px 5%;
+    background-color: white;
+}
+
+.Upsert-gallery-form>section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* section 1 */
+.Upsert-gallery-section-1 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 49%;
+    margin: 10px 0px;
+}
+
+/* section2 */
+.Upsert-gallery-section-2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+/* section3 */
+.Upsert-gallery-section-3 {
+    align-items: center;
+    flex-direction: column;
+}
+
+.Upsert-gallery-section-3>div:nth-of-type(1) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Upsert-gallery-section-3 .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.Upsert-gallery-section-3 .css-1abvrni-MuiButtonBase-root-MuiButton-root {
+    width: 49%;
+    margin: 10px 0px;
+}
+
+/* images */
+.create-club-no-images,
+.create-club-images {
+    width: 98%;
+    border: 2px solid rgb(168, 167, 167);
+    border-radius: 5px;
+    padding: 10px 1%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.create-club-images>div {
+    width: 20%;
+    flex: 0 0 20%;
+    position: relative;
+}
+
+.create-club-images {
+    overflow: auto;
+}
+
+.create-club-images img {
+    width: 100%;
+    object-fit: contain;
+    height: 100px;
+}
+
+.Upsert-gallery-remove-icon {
+    position: absolute;
+    font-size: xx-large;
+    z-index: 1;
+    cursor: pointer;
+    color: red;
+    right: 10px;
+}
+
+/* btns  */
+.Upsert-gallery-submit-btn {
+    width: 30%;
+    margin: 20px 35% !important;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-gallery-form {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .create-club-images>div{
+        flex: 0 0 35%;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-gallery-form {
+        width: 94%;
+        margin: 20px auto;
+        padding: 10px 3%;
+    }
+    .Upsert-gallery-form>section {
+        flex-direction: column;
+    }
+
+    .Upsert-gallery-form>section>div {
+        width: 100% !important;
+    }
+
+    .Upsert-gallery-section-3>div>label {
+        font-size: 0.7rem;
+    }
+    .create-club-images>div{
+        flex: 0 0 50%;
+    }
+}

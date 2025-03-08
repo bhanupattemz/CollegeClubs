@@ -1,0 +1,89 @@
+.singe-announcement-card {
+    background-color: #D9EAFD;
+    width: 70%;
+    border: 5px solid #bedafb;
+    margin: 20px 0px;
+    padding: 20px;
+}
+
+.singe-announcement-card h2 {
+    margin: 0px;
+}
+
+.singe-announcement-card p {
+    font-size: large;
+    color: rgb(74, 74, 74);
+}
+
+.single-announcement-btns {
+    width: 100%;
+}
+
+.single-announcement-btns button {
+    margin-right: 10px;
+    padding: 7px 15px;
+    background-color: #0A5EB0;
+    color: white;
+    font-weight: 700;
+    border: none;
+    transition: all ease-out 0.5s;
+}
+
+.single-announcement-btns>button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.singe-announcement-card h2 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.singe-announcement-card p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .singe-announcement-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .singe-announcement-card p {
+        font-size: 0.9rem;
+    }
+
+    .single-announcement-btns button {
+        font-size: 0.9rem;
+    }
+
+    .singe-announcement-card {
+        width: 85% ;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .singe-announcement-card h2 {
+        font-size: 1rem;
+    }
+
+    .singe-announcement-card p {
+        font-size: 0.8rem;
+    }
+
+    .single-announcement-btns button {
+        font-size: 0.8rem;
+    }
+    .singe-announcement-card{
+        width: 75%;
+    }
+}

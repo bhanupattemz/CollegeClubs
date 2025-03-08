@@ -1,0 +1,11 @@
+.fest-events-sections{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-amount-heading{
+    font-size: large;
+    margin: 0px;
+    color: rgb(76, 255, 52);
+}

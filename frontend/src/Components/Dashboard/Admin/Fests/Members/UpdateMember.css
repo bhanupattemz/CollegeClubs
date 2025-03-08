@@ -1,0 +1,78 @@
+.fest-members-update-section {
+    width: 100%;
+    padding: 20px 0px;
+}
+
+.fest-members-update-form {
+    background-color: white;
+    width: 60%;
+    padding: 20px 5%;
+    margin: 20px auto;
+}
+
+.fest-members-update-form>div:nth-of-type(1),
+.fest-members-update-form>div:nth-of-type(2),
+.fest-members-update-select,
+.fest-members-update-form>div:nth-of-type(3) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* row1 */
+
+.fest-members-update-form>div:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 24%;
+    margin: 10px 0px;
+}
+
+/* row2 */
+
+.fest-members-update-form>div:nth-of-type(2)>div {
+    width: 49%;
+    margin: 10px 0px;
+}
+
+
+.fest-members-update-select .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+}
+
+/* row3 */
+.fest-members-update-form>div:nth-of-type(3) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+    margin: 10px 0px;
+}
+
+.fest-members-update-form button {
+    width: 50% !important;
+    margin: 0px 25%;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .fest-members-update-form {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .fest-members-update-form>div:nth-of-type(1),
+    .fest-members-update-form>div:nth-of-type(2),
+    .fest-members-update-select,
+    .fest-members-update-form>div:nth-of-type(3) {
+        flex-direction: column;
+    }
+
+    .fest-members-update-form>div:nth-of-type(1)>div,
+    .fest-members-update-form>div:nth-of-type(2)>div,
+    .fest-members-update-select>div,
+    .fest-members-update-form>div:nth-of-type(3)>div {
+        width: 100% !important;
+    }
+    .fest-members-update-select{
+        gap: 10px;
+    }
+}

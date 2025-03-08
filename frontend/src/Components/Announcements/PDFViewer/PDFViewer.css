@@ -1,0 +1,33 @@
+.pdf-viewer-container {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pdf-viewer-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pdf-viewer-btn p {
+    margin: 10px 2px;
+}
+
+.pdf-viewer-btn button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: larger;
+    margin: 10px 20px;
+    transition: all ease-out 0.5s;
+}
+.pdf-viewer-btn>button:hover{
+    cursor: pointer;
+    background-color: black;
+}
+.pdf-viewer-btn svg{
+    transform: translateY(2px);
+}

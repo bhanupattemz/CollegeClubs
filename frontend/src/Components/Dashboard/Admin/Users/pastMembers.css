@@ -1,0 +1,100 @@
+/* main data  */
+.admin-all-pastMembers-section{
+    width: 100%;
+    padding-bottom: 20px;
+}
+.admin-all-pastMembers-search{
+    margin: 20px 0px;
+    width: 100%;
+}
+.admin-all-pastMembers-search form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.admin-all-pastMembers-search input{
+    outline: none;
+    width: 60%;
+    padding: 7px 5px;
+    color: #4C585B;
+    border: 2px solid #D9EAFD;
+}
+.admin-all-pastMembers-search button{
+    background-color: #0A5EB0;
+    border: none;
+    color: white;
+    width: 20%;
+    margin: 0px 2%;
+    cursor: pointer;
+}
+
+/* functions  */
+.admin-all-pastMembers-edit,
+.admin-all-pastMembers-delete,
+.admin-all-pastMembers-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:20px;
+    color: grey;
+    cursor: pointer;
+}
+.admin-all-pastMembers-delete{
+    color: red;
+}
+
+/* delete pastMember popup  */
+
+.delete-pastMember-confirmation-popup h1 {
+    color: red;
+    font-size: large;
+}
+
+.delete-pastMember-confirmation-popup button:nth-of-type(2){
+    background-color: rgb(213, 213, 213);
+    color: black ;
+    border: 2px solid black ;
+}
+.delete-pastMember-confirmation-popup button:nth-of-type(1) {
+    background-color: rgb(213, 213, 213);
+    color: red ;
+    border: 2px solid red;
+}
+
+
+/* btns */
+.admin-past-members-btns{
+    margin-bottom: 20px;
+}
+
+
+.admin-past-members-grid {
+    width: 100%;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .admin-past-members-search button {
+        width: 20%;
+    }
+    .admin-past-member-download-btns{
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .admin-past-member-download-btns{
+        flex-direction: column;
+    }
+    .admin-past-members-btns{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .admin-past-members-btns button{
+        width: 90%;
+    }
+}

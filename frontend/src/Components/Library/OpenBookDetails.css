@@ -1,0 +1,237 @@
+.book-details-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 40px 20px;
+    background-color: #f5f7fa;
+}
+
+.book-details-section {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    gap: 40px;
+}
+
+.book-details-img {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.book-details-img img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.book-details-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.book-details-btns a {
+    width: 100%;
+    padding: 12px 20px;
+    text-align: center;
+    background-color: #0A5EB0;
+    color: white;
+    border: none;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.book-details-btns > a:hover {
+    background-color: #084a8a;
+    transform: translateY(-2px);
+}
+
+.book-details-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.book-details-container h1 {
+    padding: 10px 20px;
+    border-left: 5px solid #0A5EB0;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.book-details-container p {
+    padding: 10px;
+    font-size: 1.1rem;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+.book-details-author {
+    text-align: end;
+    font-size: 1.1rem;
+    margin: 15px 0;
+    color: #666;
+}
+
+.book-details-rating {
+    margin: 20px 0;
+}
+
+.MuiStack-root {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 15px;
+}
+
+.MuiStack-root > div > p {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #666;
+}
+
+.MuiStack-root > div > p > span {
+    margin-left: 10px;
+    color: #888;
+}
+
+.book-details-description {
+    margin: 25px 0;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.book-details-description h3 {
+    margin: 0 0 15px 0;
+    color: #0A5EB0;
+}
+
+.book-details-description p {
+    margin: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.book-details-publish {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.book-details-publish > div {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    border: 2px solid #e1e8ef;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.book-details-publish > div:hover {
+    border-color: #0A5EB0;
+    transform: translateY(-2px);
+}
+
+.book-details-publish h3 {
+    margin: 0 0 10px 0;
+    color: #0A5EB0;
+}
+
+.book-details-publish p {
+    margin: 0;
+    padding: 0;
+}
+
+.book-details-publish a {
+    color: #0A5EB0;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.book-details-publish a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1024px) {
+    .book-details-section {
+        width: 95%;
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .book-details-container h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .book-details-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-details-img {
+        width: 250px;
+    }
+
+    .book-details-container {
+        width: 100%;
+    }
+
+    .book-details-publish {
+        justify-content: center;
+    }
+
+    .book-details-publish > div {
+        min-width: 45%;
+    }
+    .book-details-container h1 {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .book-details-main {
+        padding: 20px 10px;
+    }
+
+    .book-details-section {
+        padding: 15px;
+    }
+
+    .book-details-container h1 {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+    }
+
+    .book-details-img {
+        width: 200px;
+    }
+
+    .book-details-publish > div {
+        min-width: 100%;
+    }
+    .book-details-container h1 {
+        font-size: 1.2rem;
+    }
+    .book-details-description p {
+        max-height: 200px;
+    }
+}

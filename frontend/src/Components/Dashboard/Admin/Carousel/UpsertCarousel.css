@@ -1,0 +1,67 @@
+.Upsert-carousel-form {
+    width: 60%;
+    background-color: white;
+    padding: 20px 5%;
+    margin: 20px auto;
+}
+
+.Upsert-carousel-form img {
+    width: 100%;
+    object-fit: contain;
+    max-height: 38vh;
+}
+
+.Upsert-carousel-form>section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    align-items: center;
+    gap: 10px;
+}
+
+/* section1 */
+.Upsert-carousel-form>section:nth-of-type(1) .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 37%;
+}
+
+/* btn  */
+.Upsert-carousel-btn {
+    width: 60%;
+    padding: 7px 20px;
+    background-color: #0A5EB0;
+    color: white;
+    border: 0px;
+    font-size: medium;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 10px 20%;
+    transition: all ease-in 0.5s;
+}
+
+.Upsert-carousel-btn:hover {
+    opacity: 0.7;
+}
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-carousel-form {
+        width: 90%;
+    }
+
+    .Upsert-carousel-form>section label {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-carousel-form>section {
+        flex-direction: column-reverse;
+    }
+
+    .Upsert-carousel-form>section>div {
+        width: 100% !important;
+    }
+}

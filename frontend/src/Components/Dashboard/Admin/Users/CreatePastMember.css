@@ -1,0 +1,119 @@
+.create-past-member-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+.create-past-member-section>form {
+    width: 60%;
+    padding: 30px 5%;
+    margin: 20px 0px;
+    background-color: white;
+}
+
+/* row-1 */
+.create-past-member-row-1,
+.create-past-member-row-2,
+.create-past-member-row-3>div,
+.create-past-member-row-4>div:nth-of-type(2) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-past-member-row-1 .css-1xp5r68-MuiFormControl-root-MuiTextField-root {
+    width: 32%;
+    margin: 10px 0px;
+}
+
+/* row-2 */
+
+.create-past-member-row-2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(1) {
+    width: 59%;
+}
+
+.create-past-member-row-2 .css-1xp5r68-MuiFormControl-root-MuiTextField-root:nth-of-type(2) {
+    width: 39%;
+}
+
+/* row 3 */
+.create-past-member-row-3>div .css-10o2lyd-MuiStack-root {
+    width: 49%;
+}
+
+.create-past-member-row-3 .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+}
+
+/* row 4 */
+.create-past-member-row-4 {
+    width: 100%;
+}
+
+.create-past-member-row-4>div .css-1xp5r68-MuiFormControl-root-MuiTextField-root,
+.create-past-member-row-4>div .css-10o2lyd-MuiStack-root {
+    width: 28%;
+    margin: 10px 0px;
+    padding-top: 0px;
+}
+
+.create-past-member-row-4 .css-1b1fjlj-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+}
+
+/* btns */
+.create-past-member-remove-btn {
+    color: red;
+    font-size: larger;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.create-past-member-submit-btn {
+    width: 60%;
+    padding: 10px 20px;
+    margin: 20px 20%;
+    background-color: #0A5EB0;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+    font-weight: 700;
+}
+
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .create-past-member-section>form {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+
+    .create-past-member-row-1,
+    .create-past-member-row-2,
+    .create-past-member-row-3>div {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .create-past-member-row-1>div:nth-of-type(1),
+    .create-past-member-row-2>div,
+    .create-past-member-row-3>div>div {
+        width: 100% !important;
+    }
+
+    .create-past-member-row-1>div:not(:nth-of-type(1)) {
+        width: 47% !important;
+    }
+}

@@ -1,0 +1,180 @@
+.past-members-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.past-members-main>section:not(:nth-of-type(1)) {
+    width: 96%;
+    margin-bottom: 20px;
+}
+
+.aboutus-past-team {
+    width: 96%;
+    margin: 30px 2%;
+}
+
+.aboutus-past-team>div {
+    background-color: #ecf1f5;
+    display: flex;
+}
+
+.aboutus-past-team h2 {
+    width: 30%;
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+}
+
+.past-administation-go-back-btn {
+    width: 70%;
+    justify-content: flex-end !important;
+}
+
+.past-administation-go-back-btn>button {
+    width: 20% !important;
+    justify-self: flex-end;
+}
+
+/* btns  */
+.past-member-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.past-member-btns button {
+    width: 28%;
+    font-weight: 700;
+    padding: 10px 15px;
+    margin: 0px 10px;
+    min-width: 20%;
+    transition: all ease-in 0.5s;
+}
+
+.past-member-btns button:hover {
+    cursor: pointer;
+    background-color: #0A5EB0;
+    color: white;
+    border: none;
+}
+
+
+.past-members-main h2 {
+    padding-left: 10px;
+    border-left: 5px solid #0A5EB0;
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.past-members-main h3,
+.past-members-main h4 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+
+.past-members-main p {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .past-members-main h2 {
+        font-size: 1.2rem;
+    }
+
+    .past-members-main h3,
+    .past-members-main h4 {
+        font-size: 1.2rem;
+    }
+
+    .past-members-main p {
+        font-size: 0.9rem;
+    }
+    .aboutus-past-team{
+        width: 98% !important;
+    }
+    .aboutus-past-team>div{
+        width: 100% !important;
+    }
+
+    .aboutus-past-team h2 {
+        width: 40%;
+    }
+    .past-administation-go-back-btn{
+        width: 60%;
+    }
+    .aboutus-past-team button {
+        width: 40% !important;
+        font-size: 0.9rem;
+    }
+
+    .past-member-btns button {
+        font-size: 0.9rem;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .past-members-main h2 {
+        font-size: 1rem;
+    }
+
+    .past-members-main h3 {
+        font-size: 1rem;
+    }
+
+    .past-members-main p {
+        font-size: 0.8rem;
+    }
+
+    .past-members-main button {
+        font-size: 0.8rem;
+    }
+
+    .past-member-btns {
+        justify-content: space-between;
+        gap: 5px;
+        text-align: center;
+    }
+
+    .past-member-btns button {
+        margin: 0px;
+        padding: 7px 10px;
+        width: 32%;
+    }
+
+    .past-members-main>section:not(:nth-of-type(1)) {
+       overflow: auto;
+    }
+
+    .past-members-main>section:not(:nth-of-type(1))>div {
+        min-width: 800px;
+    }
+    .aboutus-past-team h2 {
+        width: 60%;
+    }
+    .past-administation-go-back-btn{
+        width: 40%;
+    }
+    .aboutus-past-team {
+        width: 96%;
+    }
+
+    .aboutus-past-team button {
+        width: 90% !important;
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,320 @@
+
+.Upsert-club-form {
+    width: 98%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 1%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Upsert-club-form > section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Upsert-club-form h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.Upsert-club-now-data {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 20px 0;
+}
+
+.Upsert-club-close-icon {
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.Upsert-club-close-icon:hover {
+    color: darkred;
+}
+
+/* Section 1*/
+.Upsert-club-section-1 {
+    display: flex;
+    gap: 20px;
+}
+
+.Upsert-club-section-1 .MuiTextField-root {
+    flex: 1;
+}
+
+/* Section 2 */
+.Upsert-club-section-2 {
+    display: flex;
+    gap: 20px;
+}
+
+.Upsert-club-skills,
+.Upsert-club-location {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.Upsert-club-skills > div:nth-of-type(1) {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.Upsert-club-skills > div:nth-of-type(1) .MuiTextField-root {
+    flex: 1;
+}
+
+.Upsert-club-skills > div:nth-of-type(1) button {
+    flex-shrink: 0;
+}
+
+.Upsert-club-skills > div:nth-of-type(2) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.Upsert-club-skill-item {
+    padding: 8px 16px;
+    background-color: #e3f2fd;
+    border-radius: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Upsert-club-location > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Section 3*/
+.Upsert-club-section-3 > div:nth-of-type(1) {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.Upsert-club-section-3 .MuiTextField-root,
+.Upsert-club-section-3 .MuiStack-root {
+    flex: 1;
+    padding-top: 0px;
+}
+
+.Upsert-club-timings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.Upsert-club-timing-item {
+    padding: 8px 16px;
+    background-color: #e3f2fd;
+    border-radius: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Section 4*/
+.Upsert-club-section-4 .MuiTextField-root {
+    width: 100%;
+}
+
+/* Section 5*/
+.Upsert-club-section-5 {
+    display: flex;
+    gap: 20px;
+}
+
+.Upsert-club-section-5 > div {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.Upsert-club-logo-prev-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.Upsert-club-logo-file {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.Upsert-club-files {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Upsert-club-files .MuiButton-root {
+    width: 100%;
+}
+
+.Upsert-club-section-5 .css-10o2lyd-MuiStack-root,
+.Upsert-club-section-5 .css-1b1fjlj-MuiFormControl-root-MuiTextField-root{
+     width: 100%;
+}
+
+/* Section 6 */
+.Upsert-club-section-6 {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.Upsert-club-search-coordinators {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.Upsert-club-search-coordinators input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.Upsert-club-coordinators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.Upsert-club-coordinator {
+    padding: 8px 16px;
+    background-color: #e3f2fd;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Section 7*/
+.Upsert-club-section-7 {
+    text-align: center;
+}
+
+.Upsert-club-section-7 button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Upsert-club-section-7 button:hover {
+    background-color: #0056b3;
+}
+
+
+
+.Upsert-club-form h2 {
+    margin-top: 5px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.2rem;
+}
+
+.Upsert-club-form h3 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+}
+.Upsert-club-form button,
+.Upsert-club-form .css-1abvrni-MuiButtonBase-root-MuiButton-root {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+.Upsert-club-data-grid{
+    width: 100%;
+    overflow: auto;
+}
+.Upsert-club-data-grid>div{
+    min-width: 700px;
+}
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .Upsert-club-form h2 {
+        font-size: 1.1rem;
+    }
+    .Upsert-club-form h3 {
+        font-size: 1rem;
+    }
+    .Upsert-club-form button,
+    .Upsert-club-form .css-1abvrni-MuiButtonBase-root-MuiButton-root {
+        font-size: 0.9rem;
+    }
+    .Upsert-club-section-2{
+        flex-direction: column;
+    }
+    .Upsert-club-section-5{
+        flex-direction: column;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .Upsert-club-form h2 {
+        font-size: 0.9rem;
+    }
+
+    .Upsert-club-form h3 {
+        font-size: 0.8rem;
+    }
+    .Upsert-club-form button,
+    .Upsert-club-form .css-1abvrni-MuiButtonBase-root-MuiButton-root {
+        font-size: 0.9rem;
+    }
+    .Upsert-club-section-1{
+        flex-direction: column;
+    }
+    .Upsert-club-section-3>div:nth-of-type(1){
+        flex-direction: column;
+    }
+    .Upsert-club-logo-prev-img{
+        width: 50px;
+        height: 50px;
+    }
+}

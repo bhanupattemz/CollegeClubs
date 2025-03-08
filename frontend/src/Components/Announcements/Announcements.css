@@ -1,0 +1,70 @@
+.announcements-main {
+    background-color: #ecf1f5;
+    min-height: 80vh;
+}
+
+/* announcements section  */
+.announcements-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.announcement-pdf-viewer-section {
+    min-height: 80vh;
+    position: relative;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 0px;
+    z-index: 1;
+}
+
+.announcement-pdf-viewer-section>button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 7px 10px;
+    position: fixed;
+}
+
+.announcement-pdf-viewer-section>button:hover {
+    cursor: pointer;
+}
+
+/* headings */
+.announcement-heading {
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.announcement-heading h1 {
+    margin: 0px;
+    text-align: center;
+    font-weight: 700;
+    font-size: xx-large;
+}
+
+
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .pdf-viewer-container canvas {
+        width: 90% !important;
+        height: 70vh !important;
+        object-fit: contain;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .announcement-pdf-viewer-section>button{
+        font-size: 0.8rem;
+    }
+    .pdf-viewer-btn button{
+        font-size: 1rem !important;
+        margin: 7px 14px;
+    }
+}

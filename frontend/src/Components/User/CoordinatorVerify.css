@@ -1,0 +1,102 @@
+.coordinator-verify-main {
+    width: 70%;
+    margin: 15vh auto;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    background-color: rgba(199, 199, 199, 0.364);
+    padding: 20px 2%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.coordinator-verify-main>div {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coordinator-verify-main h1 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 2rem;
+    color: #1976d2;
+}
+
+.coordinator-verify-main form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 500px;
+}
+
+.coordinator-image {
+    width: 45%;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.coordinator-verify-main button {
+    width: min(200px, 100%);
+    padding: 0.75rem;
+    margin-top: 1rem;
+}
+
+.coordinator-verify-main h1 {
+    font-size: 2rem;
+}
+
+@media only screen and (max-width: 1000px),
+(max-device-width:1000px) {
+    .coordinator-verify-main h1 {
+        font-size: 1.4rem;
+    }
+
+    .coordinator-verify-main {
+        width: 90%;
+    }
+}
+
+
+@media only screen and (max-width: 600px),
+(max-device-width:600px) {
+    .coordinator-verify-main h1 {
+        font-size: 1.2rem;
+    }
+
+    .coordinator-verify-main {
+        flex-direction: column;
+        margin: 2vh auto;
+    }
+
+    .coordinator-image {
+        width: 100%;
+        max-height: 400px;
+    }
+
+    .coordinator-verify-main>div {
+        width: 100% !important;
+        min-width: 0px !important;
+    }
+
+    .coordinator-verify-main form {
+        max-width: 100%;
+    }
+
+    .coordinator-verify-main {
+        gap: 1rem;
+    }
+
+    .coordinator-image {
+        max-height: 300px;
+    }
+
+    .coordinator-verify-main button {
+        width: 100%;
+    }
+}

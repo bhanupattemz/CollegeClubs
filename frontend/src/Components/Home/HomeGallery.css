@@ -1,0 +1,52 @@
+.home-gallery-main {
+    padding: 20px;
+    text-align: center;
+}
+
+.home-gallery-main h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.home-gallery-imgs {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.masonry-grid {
+    display: flex;
+    margin-left: -15px;
+    width: auto;
+}
+
+.masonry-grid_column {
+    padding-left: 15px;
+    background-clip: padding-box;
+}
+
+.masonry-grid_column img {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.masonry-grid_column img:hover {
+    transform: scale(1.05);
+}
+
+.home-gallery-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #3FA2F6;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-gallery-btn:hover {
+    background-color: #5da6e5;
+}
