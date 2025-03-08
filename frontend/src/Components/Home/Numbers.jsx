@@ -54,12 +54,15 @@ export default function Numbers() {
             getscaNumber()
         }
     }, [])
+    if(!data || data.length==0){
+        return
+    }
     return (
         <div className="numbers-main" ref={numbersRef}>
             <div className="numbers-heading">
                 <h2>College Clubs by Numbers</h2>
             </div>
-            {loading && !data ? <div>Loading...</div> :
+            {loading ? <div>Loading...</div> :
                 <div className="numbers-items">
                     <div>
                         <FaGlobe />

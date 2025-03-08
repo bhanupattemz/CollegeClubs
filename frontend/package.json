@@ -30,7 +30,7 @@
     "components": "^0.1.0",
     "file-saver": "^2.0.5",
     "formik": "^2.4.6",
-    "pdfjs-dist": "^2.16.105",
+    "pdfjs-dist": "^4.10.38",
     "randomcolor": "^0.6.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.6",
@@ -51,7 +51,7 @@
     "react-timer-hook": "^3.0.8",
     "react-toastify": "^11.0.3",
     "react-youtube": "^10.1.0",
-    "redux": "^4.2.1",
+    "redux": "^5.0.1",
     "redux-devtools-extension": "^2.13.9",
     "xlsx": "^0.18.5",
     "yup": "^1.6.1"

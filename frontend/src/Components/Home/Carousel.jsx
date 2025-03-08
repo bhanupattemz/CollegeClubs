@@ -15,18 +15,20 @@ export default function Carousel() {
     const carouselRef = useRef(null);
     const { carouselImgs } = useSelector(state => state.carouselImgs);
     const [len, setLen] = useState(0);
+    const [isHovering, setIsHovering] = useState(false);
+    
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     useEffect(() => {
-        if (len > 0) {
+        if (len > 0 && !isHovering) {
             const intervalId = setInterval(() => {
                 setImgNo(no => (no + 1) % len);
             }, 5000);
             return () => clearInterval(intervalId);
         }
-    }, [len]);
+    }, [len, isHovering]);
 
     useEffect(() => {
         const wrapper = carouselRef.current;
@@ -53,6 +55,10 @@ export default function Carousel() {
         }
     };
 
+    const handleDotClick = (index) => {
+        setImgNo(index);
+    };
+
     useEffect(() => {
         if (!carouselImgs) {
             dispatch(getCarouselImgs());
@@ -69,7 +75,11 @@ export default function Carousel() {
     return (
         <section>
             {carouselImgs && carouselImgs.length > 0 && (
-                <section className="home-page-carousel">
+                <section 
+                    className="home-page-carousel"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                >
                     <div className="carousel-wrapper" ref={carouselRef}>
                         {carouselImgs.map((item, index) => (
                             <div
@@ -78,6 +88,7 @@ export default function Carousel() {
                                 style={{ opacity: imgNo === index ? 1 : 0 }}
                             >
                                 <img src={item.image.url} alt="carousel-image" />
+                                {item.title && <div className="carousel-caption">{item.title}</div>}
                             </div>
                         ))}
                     </div>
@@ -86,10 +97,11 @@ export default function Carousel() {
                             <div
                                 key={index}
                                 className={imgNo === index ? "active" : ""}
+                                onClick={() => handleDotClick(index)}
                             ></div>
                         ))}
                     </div>
-                    <div className="home-page-carousel-btn">
+                    <div className={`home-page-carousel-btn ${isHovering ? 'visible' : ''}`}>
                         <div
                             className="left-btn"
                             onClick={carouselLeftbtnHandler}
@@ -100,7 +112,7 @@ export default function Carousel() {
                         <div
                             onClick={() => {
                                 if (carouselImgs[imgNo]?.link) {
-                                    navigate(carouselImgs[imgNo].link!="undefined" ? carouselImgs[imgNo].link : "/");
+                                    navigate(carouselImgs[imgNo].link != "undefined" ? carouselImgs[imgNo].link : "/");
                                 }
                             }}
                             className="middle-carousel-anch"
@@ -112,6 +124,12 @@ export default function Carousel() {
                         >
                             <KeyboardArrowRightIcon />
                         </div>
+                    </div>
+                    <div className="carousel-progress">
+                        <div 
+                            className="carousel-progress-bar" 
+                            style={{ width: `${(imgNo + 1) / len * 100}%` }}
+                        ></div>
                     </div>
                 </section>
             )}
