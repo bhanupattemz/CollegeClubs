@@ -1,5 +1,5 @@
 import "../../Admin/Clubs/ClubMembers.css"
-import CoordinatorSetUp from "../CoordinatorSetUp"
+import CoordinatorSetUp from "../CoordinatorSetup"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
