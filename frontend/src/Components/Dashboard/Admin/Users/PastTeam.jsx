@@ -1,5 +1,5 @@
 import "./pastMembers.css"
-import "../../../AboutUs/pastMembers.css"
+import "../../../AboutUs/PastMembers.css"
 import AdminSetUp from "../AdminSetUp"
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography, Box } from "@mui/material";
