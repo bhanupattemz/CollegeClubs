@@ -17,8 +17,8 @@ export function ConvertTime(time) {
 }
 
 
-export const BACKENDURL = "http://localhost:8000/api/v1"
-// export const BACKENDURL = "/api/v1"
+// export const BACKENDURL = "http://localhost:8000/api/v1"
+export const BACKENDURL = "/api/v1"
 
 export function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
