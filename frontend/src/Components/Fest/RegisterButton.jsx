@@ -23,7 +23,7 @@ export default function RegisterButton({ event, formData, isAccept = false, setO
                 key: { razorpayKey },
                 amount: order.amount,
                 currency: order.currency,
-                name: "SCAJNTUACEA",
+                name: "CollegeClubs",
                 description: "Payment for Donate Clubs",
                 order_id: order.id,
                 handler: async (response) => {

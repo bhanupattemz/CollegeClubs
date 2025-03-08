@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "render-deploy": "npm install --include=dev --force && cd frontend && npm install --include=dev --force && npm run build",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

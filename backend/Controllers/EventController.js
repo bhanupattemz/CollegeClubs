@@ -403,6 +403,8 @@ module.exports.getEventMembers = WrapAsync(async (req, res) => {
 module.exports.eventWinner = WrapAsync(async (req, res) => {
     let data = req.body;
     const { _id } = req.params;
+    let { sendCertificate } = req.query
+    sendCertificate = sendCertificate == "true" ? true : false
     const positions = ["Principal", "Faculty-Coordinator", "Student-Coordinator"]
     let signImages = []
     for (let item of positions) {
@@ -438,51 +440,54 @@ module.exports.eventWinner = WrapAsync(async (req, res) => {
             mail: user.mail,
             academicYear: user.academicYear
         });
-        htmlContent.push(eventCertificate(winners[winners.length - 1], event.name, winners.length, signImages, user.academicYear, event.timings.starting));
+        sendCertificate && htmlContent.push(eventCertificate(winners[winners.length - 1], event.name, winners.length, signImages, user.academicYear, event.timings.starting));
     }
     event = await EventModel.findByIdAndUpdate(_id, { winner: winners }, { new: true, runValidators: true });
-    for (let i = 0; i < winners.length; i++) {
-        const winner = winners[i];
-        const htmldata = htmlContent[i];
-        const pdfBuffer = await createPDF(htmldata);
+    if (sendCertificate) {
+        for (let i = 0; i < winners.length; i++) {
+            const winner = winners[i];
+            const htmldata = htmlContent[i];
+            const pdfBuffer = await createPDF(htmldata);
 
-        const options = {
-            mail: winner.mail,
-            subject: `Winner of ${event.name}`,
-            text: `Congratulations! You are the winner of ${event.name}. Your certificate is attached.`,
-            message: `
-                <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; border-radius: 8px; color: #333;">
-                    <h2 style="font-size: 18px; color: #2c3e50; margin-bottom: 20px;">
-                        🎉 Congratulations on Winning <strong>${event.name}</strong>!
-                    </h2>
-                    <p style="font-size: 16px; color: #444444; line-height: 1.6;">
-                        We are thrilled to announce that you have emerged victorious in <strong>${event.name}</strong>! Your hard work and dedication have truly paid off.
-                    </p>
-                    <p style="font-size: 16px; color: #444444; line-height: 1.6;">
-                        As a token of your achievement, your official certificate has been attached to this email. Please feel free to download and share it with others to celebrate your success.
-                    </p>
-                    <p style="font-size: 14px; color: #777777; margin-top: 20px; line-height: 1.6;">
-                        Once again, congratulations from the entire team! Keep up the amazing work, and we look forward to your continued participation in future events.
-                    </p>
-                    <p style="font-size: 14px; color: #777777; line-height: 1.6;">
-                        Best regards,<br>
-                        The Event Organizing Team
-                    </p>
-                </div>
-            `,
-            attachments: [
-                {
-                    filename: `${winner.name}-certificate.pdf`,
-                    content: pdfBuffer,
-                    contentType: 'application/pdf'
-                },
-            ],
-        };
-        const mailData = await sendMail(options);
+            const options = {
+                mail: winner.mail,
+                subject: `Winner of ${event.name}`,
+                text: `Congratulations! You are the winner of ${event.name}. Your certificate is attached.`,
+                message: `
+                    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; border-radius: 8px; color: #333;">
+                        <h2 style="font-size: 18px; color: #2c3e50; margin-bottom: 20px;">
+                            🎉 Congratulations on Winning <strong>${event.name}</strong>!
+                        </h2>
+                        <p style="font-size: 16px; color: #444444; line-height: 1.6;">
+                            We are thrilled to announce that you have emerged victorious in <strong>${event.name}</strong>! Your hard work and dedication have truly paid off.
+                        </p>
+                        <p style="font-size: 16px; color: #444444; line-height: 1.6;">
+                            As a token of your achievement, your official certificate has been attached to this email. Please feel free to download and share it with others to celebrate your success.
+                        </p>
+                        <p style="font-size: 14px; color: #777777; margin-top: 20px; line-height: 1.6;">
+                            Once again, congratulations from the entire team! Keep up the amazing work, and we look forward to your continued participation in future events.
+                        </p>
+                        <p style="font-size: 14px; color: #777777; line-height: 1.6;">
+                            Best regards,<br>
+                            The Event Organizing Team
+                        </p>
+                    </div>
+                `,
+                attachments: [
+                    {
+                        filename: `${winner.name}-certificate.pdf`,
+                        content: pdfBuffer,
+                        contentType: 'application/pdf'
+                    },
+                ],
+            };
+            const mailData = await sendMail(options);
 
-        if (!mailData) {
-            console.error(`Error sending email to ${winner.name}:`, mailData);
+            if (!mailData) {
+                console.error(`Error sending email to ${winner.name}:`, mailData);
+            }
         }
+
     }
 
     res.status(200).json({

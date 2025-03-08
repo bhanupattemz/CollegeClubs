@@ -86,7 +86,7 @@ function ResponsiveAppBar() {
                 <Toolbar disableGutters sx={{ margin: "10px 0px" }}>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <img
-                            src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734195440/Clubs/lnczlvkkzy3cinwdxum5.png"
+                            src="https://res.cloudinary.com/dp6kibyv5/image/upload/v1740923272/clubs/lc6njqumvvhcygauu1ai.png"
                             alt="logo"
                             style={{ width: "250px", maxWidth: "100%" }}
                         />
@@ -126,7 +126,7 @@ function ResponsiveAppBar() {
                         </Menu>
                         <Box sx={{ margin: "10px auto" }}>
                             <img
-                                src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734195440/Clubs/lnczlvkkzy3cinwdxum5.png"
+                                src="https://res.cloudinary.com/dp6kibyv5/image/upload/v1740923272/clubs/lc6njqumvvhcygauu1ai.png"
                                 alt="logo"
                                 style={{ width: "250px", maxWidth: "80%" }}
                             />

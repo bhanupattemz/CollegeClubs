@@ -50,7 +50,7 @@ export default function AdminSetUp({ current, element, option }) {
             <main className="admin-dashboard-main">
                 <aside className="admin-setup-aside" ref={sideBarRef}>
                     <div className="admin-close-btn"> <button onClick={closeBtnClickHandle}><FaAngleLeft /></button></div>
-                    <img className="admin-setup-logo" src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734195440/Clubs/lnczlvkkzy3cinwdxum5.png" alt="sca-log" />
+                    <img className="admin-setup-logo" src="https://res.cloudinary.com/dp6kibyv5/image/upload/v1740923438/clubs/psngpqiwqt2aiid6l2at.png" alt="clubs-log" />
                     <div>
                         <h2
                             style={current == "dashboard" ? currentStyles : null}

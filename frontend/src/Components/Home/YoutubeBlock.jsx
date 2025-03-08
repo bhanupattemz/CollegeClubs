@@ -39,15 +39,24 @@ export default function YoutubeBlock() {
                 <h2>{!error ? "Our Latest Video" : "Our Youtube Video"}</h2>
                 <div className="youtube-container">
                     <div className="youtube-content">
-                        <h3>{video ? video.snippet.title : "JNTUA CEA | Highlights of Student Club Activities - Club AVs Compilation"}</h3>
+                        <h3>{video ? video.snippet.title : "Join College Clubs | Connect, Collaborate & Grow | Explore Events, Clubs & More! 🎓"}</h3>
                         <div className="youtube-description-p">
                             <h4>Description :</h4>
-                            <p>{video ? video.snippet.description : "Explore the vibrant and dynamic student life at JNTUA CEA through this exciting compilation of Club AVs! Each video offers a unique glimpse into the diverse activities, events, and initiatives organized by the various student clubs at JNTUA College of Engineering Anantapur."}</p>
+                            <p>{video ? video.snippet.description : `🎓 Welcome to College Clubs! 🚀
+💡 Discover, Connect, and Collaborate with students who share your passion and interests. Our platform, College Clubs, is designed to help students:
+
+✅ Create Clubs based on their interests (Music, Coding, Dance, etc.) 🎵💻💃
+✅ Join Clubs to connect with like-minded students 💬
+✅ Manage Events like workshops, competitions, and more 🎭📅
+✅ Share Announcements and keep members informed 📢
+✅ Showcase YouTube Videos from the college’s official YouTube Channel 🎥
+
+👉 Stay updated with the latest events, announcements, and activities happening around your college. This platform is built to enhance your college life experience by encouraging collaboration and networking.`}</p>
                         </div>
                     </div>
                     <div>
                         <div className="youtube-video-container">
-                            <YouTube videoId={video ? video.id.videoId : "vqzFFK962aw"} opts={opts} />
+                            <YouTube videoId={video ? video.id.videoId : "9AE7_9LDZ8w"} opts={opts} />
                         </div>
                     </div>
 

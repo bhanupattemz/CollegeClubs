@@ -3,7 +3,7 @@ const app = Express()
 const ExpressError = require('./Utils/ExpressError')
 require('dotenv').config()
 const cors = require("cors")
-
+const { deleteFromClodinary } = require("./functionalities")
 //passport && session requirements
 const UserModel = require("./Models/Users/UserModel")
 const passPort = require("passport")
@@ -96,10 +96,11 @@ app.use("/api/v1/*", (req, res, next) => {
 app.use(Express.static(path.join(__dirname, "../frontend/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
 });
 
 app.use((err, req, res, next) => {
+    
     const { statusCode = 500 } = err
     if (!err.message) err.message = "some thing wents Wrong";
     res.status(statusCode).json({

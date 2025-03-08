@@ -39,13 +39,13 @@ module.exports.genarateSignup = WrapAsync(async (req, res) => {
     let unverifiedUser = await UnverifiedUser.findOne({ mail })
     const options = {
         mail: mail,
-        subject: "SCA JNTUA CEA Mail Verification",
-        text: "SCA JNTUA CEA Mail Verification",
+        subject: "College Clubs Mail Verification",
+        text: "College Clubs Mail Verification",
         message: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <h2 style="color: #0A5EB0; text-align: center;">SCA JNTUA CEA Mail Verification</h2>
+                <h2 style="color: #0A5EB0; text-align: center;">College Clubs Mail Verification</h2>
                 <p>Dear User,</p>
-                <p>Thank you for signing up with <strong>SCA JNTUA CEA</strong>. Please use the OTP below to verify your email address:</p>
+                <p>Thank you for signing up with <strong>College Clubs</strong>. Please use the OTP below to verify your email address:</p>
                 <div style="text-align: center; margin: 20px 0;">
                     <span style="
                         display: inline-block;
@@ -59,7 +59,7 @@ module.exports.genarateSignup = WrapAsync(async (req, res) => {
                     ">${otp}</span>
                 </div>
                 <p>If you did not request this verification, please ignore this email or contact support.</p>
-                <p style="color: #555;">Best regards,<br>SCA JNTUA CEA Team</p>
+                <p style="color: #555;">Best regards,<br>College Clubs Team</p>
                 <hr style="border: 0; height: 1px; background: #eee; margin: 20px 0;">
                 <footer style="text-align: center; font-size: 12px; color: #aaa;">
                     This is an automated message. Please do not reply to this email.
@@ -521,7 +521,7 @@ module.exports.createPasswordToken = WrapAsync(async (req, res) => {
                         If you didn't request this, you can ignore this email, and your password will remain unchanged.
                     </p>
                     <p style="font-size: 14px; color: #777;">
-                        Best regards,<br>SCAJNTUACEA Team
+                        Best regards,<br>CollegeClubs Team
                     </p>
                 </div>
         `

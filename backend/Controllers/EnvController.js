@@ -9,7 +9,7 @@ const User = require("../Models/Users/UserModel")
 module.exports.latestYoutubeVideo = WrapAsync(async (req, res) => {
     try {
         const response = await axios.get(
-            `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=UCQWn-DoFCowb6LDxGzOUTFQ&part=snippet&order=date`
+            `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=UCOifAkyjMSNk0pXHS1Jshtg&part=snippet&order=date`
         );
         res.json({
             success: true,
@@ -42,7 +42,7 @@ module.exports.getRazorPayKey = WrapAsync(async (req, res) => {
     });
 })
 
-module.exports.getscajntuaByNumbers = WrapAsync(async (req, res) => {
+module.exports.getCollegeClubsByNumbers = WrapAsync(async (req, res) => {
     const clubs = await ClubsModel.find()
     const coordinators = await UserModel.find(({ role: "coordinator" }))
     const members = await UserModel.find()

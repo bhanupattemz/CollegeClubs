@@ -17,7 +17,7 @@ router.route("/razorpay/key")
     .get(EnvController.getRazorPayKey)
 
 router.route("/sca-numbers")
-    .get(EnvController.getscajntuaByNumbers)
+    .get(EnvController.getCollegeClubsByNumbers)
 
 router.route("/admin/numbers")
     .get(isLoggedIn, isAdmin, EnvController.getAdminNumbers)

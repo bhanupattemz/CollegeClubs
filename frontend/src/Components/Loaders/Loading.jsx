@@ -36,13 +36,13 @@ export default function Loading() {
                 <div className="loading-logo-imgs">
                     <img
                         ref={logoRef}
-                        src="https://res.cloudinary.com/delc5g3p5/image/upload/v1729762295/Clubs/n3eov9yrilskbwzr4006.png"
-                        alt="sca-logo"
+                        src="https://res.cloudinary.com/dp6kibyv5/image/upload/v1740923421/clubs/odfvvkdukokbdkmqfywe.png"
+                        alt="club-logo"
                     />
                     <img
                         ref={fullFormRef}
-                        src="https://res.cloudinary.com/delc5g3p5/image/upload/v1735549412/Clubs/vo0npfiuthetpd19prvt.png"
-                        alt="sca-full-form"
+                        src="https://res.cloudinary.com/dp6kibyv5/image/upload/v1741019799/clubs/lsfmtf2yot7akvvffp9v.png"
+                        alt="clubs-full-form"
                     />
                 </div>
                 <div ref={sliderRef} className="loading-move-container">

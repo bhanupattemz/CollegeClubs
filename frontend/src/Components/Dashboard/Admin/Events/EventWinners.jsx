@@ -9,6 +9,9 @@ import { setEventSuccessFalse, adminGetSingleEvent } from "../../../../Actions/E
 import Loading from "../../../Loaders/Loading"
 import { useNavigate, useParams } from "react-router";
 import dayjs from "dayjs"
+
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { BACKENDURL } from "../../../Functionalities/functionalites"
 export default function CreateEvent() {
@@ -16,6 +19,7 @@ export default function CreateEvent() {
         baseURL: BACKENDURL,
         withCredentials: true
     })
+    const [sendCertificate, setSendCertificate] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { _id } = useParams()
@@ -64,7 +68,7 @@ export default function CreateEvent() {
         e.preventDefault();
         setDataLoading(true)
         try {
-            const respounce = await axiosInstance.put(`/events/winner/${_id}`, formdata.winner)
+            const respounce = await axiosInstance.put(`/events/winner/${_id}?sendCertificate=${sendCertificate}`, formdata.winner)
             console.log(respounce.data)
             navigate('/admin/events')
         } catch (err) {
@@ -82,7 +86,10 @@ export default function CreateEvent() {
             setWinners(singleEvent.winner)
         }
     }, [success, singleEvent])
-
+    const sendCertificateOptions = [
+        { value: true, label: "Send" },
+        { value: false, label: "Not Send" },
+    ];
     useEffect(() => {
         if (_id) {
             dispatch(adminGetSingleEvent(_id))
@@ -94,8 +101,8 @@ export default function CreateEvent() {
             <section>
                 {singleEvent &&
                     <form onSubmit={formSubmitHandler}>
-                        <section>
-                            <h2>Winners</h2>
+                        <section className="Upsert-event-winner-view-main-section">
+                            <h2>{singleEvent.name} Winners</h2>
                             <div className="Upsert-event-winner-view">
                                 <div className="Upsert-event-clubs">
                                     {(winners && winners.length > 0) ? winners.map((item, inx) => {
@@ -105,6 +112,25 @@ export default function CreateEvent() {
                                     }) : <div className="Upsert-event-now-data">Winner Not Declared Yet!</div>}
                                 </div>
                                 <Button variant="contained" type="submit">Declare</Button>
+                            </div>
+                            <div>
+                                <TextField
+                                    required
+                                    select
+                                    label="Send Certificate"
+                                    fullWidth
+                                    value={sendCertificate}
+                                    onChange={(e) =>
+                                        setSendCertificate(e.target.value)
+                                    }
+                                    sx={{ marginBottom: "10px" }}
+                                >
+                                    {sendCertificateOptions.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
                             </div>
                             <div className="Upsert-event-winners-grid">
                                 <DataGrid

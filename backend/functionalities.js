@@ -101,11 +101,11 @@ module.exports.sendverifyCoordinatorMailOptions = async (user, club, _id) => {
 module.exports.adminGenerateMailOptions = async (mail, user, _id) => {
     return {
         mail: mail,
-        subject: "SCA JNTUA CEA Mail Verification",
-        text: `SCA JNTUA CEA Mail Verification\n\nYou have been referred by ${user.personalInformation.firstname} for the position of ${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}.\nPlease use the following link to create your account:\nhttp://localhost:8000/admin/signup/${_id}\n\nThis link will expire after 15 days. After verification, you will officially take on the role of ${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}.\n\nBest regards,\nThe SCA JNTUA CEA Team`,
+        subject: "College Clubs Mail Verification",
+        text: `College Clubs Mail Verification\n\nYou have been referred by ${user.personalInformation.firstname} for the position of ${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}.\nPlease use the following link to create your account:\nhttp://localhost:8000/admin/signup/${_id}\n\nThis link will expire after 15 days. After verification, you will officially take on the role of ${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}.\n\nBest regards,\nThe College Clubs Team`,
         message: `
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px; color: #333;">
-                <h2 style="color: #2c3e50;">SCA JNTUA CEA Mail Verification</h2>
+                <h2 style="color: #2c3e50;">College Clubs Mail Verification</h2>
                 <p>You have been referred by <strong>${user.personalInformation.firstname} ${user.personalInformation.lastname}</strong> for the position of <strong>${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}</strong>.</p>
                 <p>Please click the link below to complete your account setup:</p>
                 <a href="${process.env.FRONTEND_URL}/admin/signup/${_id}" 
@@ -113,7 +113,7 @@ module.exports.adminGenerateMailOptions = async (mail, user, _id) => {
                    Create Account
                 </a>
                 <p style="margin-top: 20px;">This link will expire after <strong>24 hours</strong>. Once verified, you will officially serve as a <strong>${user.workedAs === "studentCoordinator" ? "Student Coordinator" : "Faculty Coordinator"}</strong>.</p>
-                <p>Best regards,<br>The SCA JNTUA CEA Team</p>
+                <p>Best regards,<br>The College Clubs Team</p>
             </div>
         `
     }
@@ -124,7 +124,7 @@ module.exports.setUserBlockStatusMail = async (user, adminMessage) => {
     return {
         mail: user.mail,
         subject: `Account ${user.isBlocked ? "Blocked" : "Unblocked"} Notification`,
-        text: `Dear ${user.personalInformation.firstname},\n\nYour account has been ${user.isBlocked ? "blocked" : "unblocked"} by the admin.\n\nReason: ${adminMessage}\n\n${user.isBlocked ? "If you believe this is a mistake, please contact us." : "You now have full access to your account."}\n\nBest regards,\nSCA JNTUA CEA Team`,
+        text: `Dear ${user.personalInformation.firstname},\n\nYour account has been ${user.isBlocked ? "blocked" : "unblocked"} by the admin.\n\nReason: ${adminMessage}\n\n${user.isBlocked ? "If you believe this is a mistake, please contact us." : "You now have full access to your account."}\n\nBest regards,\nCollege Clubs Team`,
         message: `
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; border-radius: 8px; color: #333; border: 1px solid #ddd;">
                 <h2 style="color: ${user.isBlocked ? "#d9534f" : "#5cb85c"}; text-align: center;">
@@ -152,7 +152,7 @@ module.exports.setUserBlockStatusMail = async (user, adminMessage) => {
                 ` : ""}
                 <p style="font-size: 14px; color: #777; text-align: center; margin-top: 20px;">
                     Best regards,<br>
-                    <strong>SCA JNTUA CEA Team</strong>
+                    <strong>College Clubs Team</strong>
                 </p>
             </div>
         `
@@ -165,7 +165,7 @@ module.exports.adminDeleteUserOptions = async (user, adminMessage) => {
     return {
         mail: user.mail,
         subject: "Account Deletion Notification",
-        text: `Dear ${user.personalInformation.firstname},\n\nYour account has been deleted by the admin.\n\nReason: ${adminMessage}\n\nPlease note that your account and all associated data are permanently deleted and cannot be recovered.\n\nBest regards,\nSCA JNTUA CEA Team`,
+        text: `Dear ${user.personalInformation.firstname},\n\nYour account has been deleted by the admin.\n\nReason: ${adminMessage}\n\nPlease note that your account and all associated data are permanently deleted and cannot be recovered.\n\nBest regards,\nCollege Clubs Team`,
         message: `
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; border-radius: 8px; color: #333; border: 1px solid #ddd;">
                 <h2 style="color: #d9534f; text-align: center;">Account Deletion Notification</h2>
@@ -183,7 +183,7 @@ module.exports.adminDeleteUserOptions = async (user, adminMessage) => {
                 </p>
                 <p style="font-size: 14px; color: #777; text-align: center; margin-top: 20px;">
                     Best regards,<br>
-                    <strong>SCA JNTUA CEA Team</strong>
+                    <strong>College Clubs Team</strong>
                 </p>
             </div>
         `

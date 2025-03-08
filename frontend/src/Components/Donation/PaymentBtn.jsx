@@ -30,7 +30,7 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
                 key: { razorpayKey },
                 amount: order.amount,
                 currency: order.currency,
-                name: "SCAJNTUACEA",
+                name: "CollegeClubs",
                 description: "Payment for Donate Clubs",
                 order_id: order.id,
                 handler: async (response) => {
@@ -39,6 +39,7 @@ export default function PaymentButton({ formData, amount, anonymous, CaptchaValu
                         if (anonymous) {
                             memberData = { name: "anonymous", mail: "anonymous@gmail.com", amount, note: formData.note, club: formData.club }
                         } else {
+                            formData.club = formData.club == "General" ? undefined : formData.club
                             memberData = { ...formData, amount }
                         }
                         const result = await axiosInstance.post("/donars", {

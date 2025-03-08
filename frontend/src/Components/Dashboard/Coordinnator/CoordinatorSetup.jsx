@@ -39,7 +39,7 @@ export default function CoordinatorSetup({ current, element, option }) {
             <main className="coordinator-dashboard-main">
                 <aside className="coordinator-setup-aside" ref={sideBarRef}>
                     <div className="coordinator-close-btn"> <button onClick={closeBtnClickHandle}><FaAngleLeft /></button></div>
-                    <img className="coordinator-setup-logo" src="https://res.cloudinary.com/delc5g3p5/image/upload/v1734195440/Clubs/lnczlvkkzy3cinwdxum5.png" alt="sca-log" />
+                    <img className="coordinator-setup-logo" src="https://res.cloudinary.com/dp6kibyv5/image/upload/v1740923438/clubs/psngpqiwqt2aiid6l2at.png" alt="sca-log" />
                     <div>
                         <h2
                             style={current == "dashboard" ? currentStyles : null}

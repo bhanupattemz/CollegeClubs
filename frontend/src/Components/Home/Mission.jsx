@@ -13,7 +13,7 @@ export default function Mission({ isknowMore = true }) {
                     <div className="mission-content-left">
                         <h3>Our Mission</h3>
                         <p>
-                            At SCAJNTUACEA, we strive to create a dynamic and inclusive
+                            At CollegeClubs, we strive to create a dynamic and inclusive
                             community where students can explore their passions, develop
                             essential skills, and collaborate with like-minded individuals.
                             Our mission is to bridge the gap between academics and extracurriculars,
@@ -36,7 +36,7 @@ export default function Mission({ isknowMore = true }) {
                     <div className="mission-content-right">
                         <h3>Our Vision</h3>
                         <p>
-                            At SCAJNTUACEA, our vision is to nurture a community where every
+                            At CollegeClubs, our vision is to nurture a community where every
                             student is empowered to explore, innovate, and excel. We envision
                             a platform that seamlessly blends academic learning with real-world
                             experiences, allowing students to discover their true potential.

@@ -57,7 +57,7 @@ export default function Numbers() {
     return (
         <div className="numbers-main" ref={numbersRef}>
             <div className="numbers-heading">
-                <h2>SCA JNTUA CEA by Numbers</h2>
+                <h2>College Clubs by Numbers</h2>
             </div>
             {loading && !data ? <div>Loading...</div> :
                 <div className="numbers-items">

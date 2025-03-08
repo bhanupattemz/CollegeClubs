@@ -223,9 +223,19 @@
     border-bottom: 5px solid #0A5EB0;
 }
 
+.Upsert-event-winner-view-main-section h2{
+    text-align: center;
+    color: #0A5EB0;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8rem;
+}
 @media only screen and (max-width: 1000px),
 (max-device-width:1000px) {
-    .Upsert-event-main-section h2{
+    .Upsert-event-main-section h2,
+    .Upsert-event-winner-view-main-section h2{
         font-size: 1.4rem;
     }
     .Upsert-event-section-1 {
@@ -258,7 +268,8 @@
 
 @media only screen and (max-width: 600px),
 (max-device-width:600px) {
-    .Upsert-event-main-section h2{
+    .Upsert-event-main-section h2,
+    .Upsert-event-winner-view-main-section h2{
         font-size: 1.2rem;
     }
     .Upsert-event-section-2{

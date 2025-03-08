@@ -104,7 +104,7 @@ export default function ClubDetails() {
                                 <h3><FaLocationDot /> Location:</h3>
                                 <ul>
                                     <li><b>Venue Name:</b> cse Dept</li>
-                                    <li><b>Address:</b> JNTUA College of Engineering, Sir Mokshagundam Visvesvaraya Road, Anantapuramu, Andhra Pradesh - 515002</li>
+                                    <li><b>Address:</b> ABC College of Engineering, Sir Mokshagundam Visvesvaraya Road, Anantapuramu, Andhra Pradesh - 515002</li>
                                     <li><b>Landmark:</b> Near CSE</li>
                                 </ul>
                             </div>

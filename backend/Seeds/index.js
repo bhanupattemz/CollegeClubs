@@ -3,6 +3,7 @@ const EventModel = require("../Models/eventModel")
 const ClubModel = require("../Models/Clubs/clubsModel")
 const ClubGalleryModel = require("../Models/Clubs/clubGalleryModel")
 const mainGallery = require("../Models/galleryModel")
+const AdminModel = require("../Models/Users/adminModel")
 const connectDB = require("../config/mongoDB")
 connectDB()
 async function insertdata() {
@@ -51,6 +52,32 @@ async function insertdata() {
     await mainGallery.insertMany(gallery)
     console.log("completed")
 }
+async function createAdmin() {
+    data={
+        "mail": "bhanupattemz@gmail.com",
+        "username": "bhanupattemz",
+        "role": "admin",
+        "department": "cse",
+        "description": "Experienced teaching assistant with over 3 years of experience in computer science education. Specializing in database management systems and web development technologies. Consistently received positive feedback from students for clear explanations and approachable teaching style. Have contributed to curriculum development for introductory programming courses and organized coding workshops for first-year students.",
+        "workedAs": "studentCoordinator",
+        "personalInformation": {
+          "firstname": "Bhanu",
+          "lastname": "Pattem",
+          "profile": {
+            "public_id": "public",
+            "url": "https://res.cloudinary.com/dmvxvzb5n/image/upload/v1736253207/n0zy61tkc2syn7jbzffb.jpg"
+          },
+          "personalMail": "bhanupattemz@gmail.com",
+          "mobileNo": "8555860089",
+          "gender": "male",
+          "DOB": "1998-05-15T00:00:00.000Z"
+        }
+      }
+      let user=AdminModel(data)
+      await user.save()
+      console.log("completed")
 
-insertdata()
+}
+createAdmin()
+// insertdata()
 

@@ -123,7 +123,7 @@ export default function EventDetails() {
                                 <h3><FaLocationDot /> Venue </h3>
                                 <ul>
                                     <li><b>Venue Name:</b> {singleEvent.venue.venueName}</li>
-                                    <li><b>Address:</b> JNTUA College of Engineering, Sir Mokshagundam Visvesvaraya Road, Anantapuramu, Andhra Pradesh - 515002</li>
+                                    <li><b>Address:</b> ABC College of Engineering, Sir Mokshagundam Visvesvaraya Road, Anantapuramu, Andhra Pradesh - 515002</li>
                                     <li><b>Landmark:</b> {singleEvent.venue.landMark}</li>
                                 </ul>
                             </div>
