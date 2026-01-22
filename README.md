@@ -1,6 +1,6 @@
 # College Clubs – Student Club Management Platform
 
-This project is a responsive, full-stack platform designed to centralize and streamline the management of student organizations and their members within a college ecosystem. It provides administrators and club coordinators with robust tools to manage events, track resources, and enhance campus engagement.
+> This project is a responsive, full-stack platform designed to centralize and streamline the management of student organizations and their members within a college ecosystem. It provides administrators and club coordinators with robust tools to manage events, track resources, and enhance campus engagement.
 
 ![Project Banner](https://res.cloudinary.com/dp6kibyv5/image/upload/v1741008569/Clubs/eswtg26xrfxr4rnaer2x.png) 
 
@@ -26,7 +26,7 @@ This project is a responsive, full-stack platform designed to centralize and str
 ---
 
 ## Tech Stack
-- **Frontend:** React, HTML, CSS, JavaScript
+- **Frontend:** React, Redux, HTML, CSS, JavaScript
 - **Backend:** Node.js, Express.js 
 - **Database:** MongoDB 
 - **Deployment:** Render
